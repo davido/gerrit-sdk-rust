@@ -1,0 +1,32 @@
+module(
+    name = "gerrit_sdk_rust",
+    # Mirrors the Gerrit version (lowercased for Bzlmod semver), matching the crate
+    # version, the OpenAPI info.version, and the git tag.
+    version = "3.15.0-snapshot",
+)
+
+bazel_dep(name = "rules_rust", version = "0.74.0")
+
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(edition = "2021")
+use_repo(rust, "rust_toolchains")
+
+register_toolchains("@rust_toolchains//:all")
+
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+crate.from_cargo(
+    name = "crates",
+    cargo_lockfile = "//client:Cargo.lock",
+    # A crate_universe lockfile is required when this module is a dependency (consumers cannot
+    # repin across module boundaries). Regenerate with CARGO_BAZEL_REPIN=1.
+    lockfile = "//:cargo-bazel-lock.json",
+    manifests = ["//client:Cargo.toml"],
+    # The default rendering excludes this host, marking every crate incompatible; pin the triples.
+    supported_platform_triples = [
+        "x86_64-apple-darwin",
+        "aarch64-apple-darwin",
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu",
+    ],
+)
+use_repo(crate, "crates")
