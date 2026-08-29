@@ -15,62 +15,63 @@ use crate::{apis::ResponseContent, models};
 use super::{Error, configuration, ContentType};
 
 
-/// struct for typed errors of method [`delete_pluginkind_root`]
+/// struct for typed errors of method [`delete_plugins_plugin_id`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum DeletePluginkindRootError {
+pub enum DeletePluginsPluginIdError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`get_pluginkind_collection`]
+/// struct for typed errors of method [`get_plugins`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetPluginkindCollectionError {
+pub enum GetPluginsError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`get_pluginkind_root_status`]
+/// struct for typed errors of method [`get_plugins_plugin_id_status`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetPluginkindRootStatusError {
+pub enum GetPluginsPluginIdStatusError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`post_pluginkind_root_disable`]
+/// struct for typed errors of method [`post_plugins_plugin_id_disable`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum PostPluginkindRootDisableError {
+pub enum PostPluginsPluginIdDisableError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`post_pluginkind_root_enable`]
+/// struct for typed errors of method [`post_plugins_plugin_id_enable`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum PostPluginkindRootEnableError {
+pub enum PostPluginsPluginIdEnableError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`post_pluginkind_root_reload`]
+/// struct for typed errors of method [`post_plugins_plugin_id_reload`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum PostPluginkindRootReloadError {
+pub enum PostPluginsPluginIdReloadError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`put_pluginkind_root`]
+/// struct for typed errors of method [`put_plugins_plugin_id`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum PutPluginkindRootError {
+pub enum PutPluginsPluginIdError {
     DefaultResponse(models::PluginInfo),
     UnknownValue(serde_json::Value),
 }
 
 
-pub fn delete_pluginkind_root(configuration: &configuration::Configuration, plugin_kind_root: &str) -> Result<models::PluginInfo, Error<DeletePluginkindRootError>> {
+/// Disables a plugin on the Gerrit server.
+pub fn delete_plugins_plugin_id(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<DeletePluginsPluginIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_plugin_kind_root = plugin_kind_root;
+    let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/{PLUGIN_KIND_root}", configuration.base_path, PLUGIN_KIND_root=crate::apis::urlencode(p_path_plugin_kind_root));
+    let uri_str = format!("{}/plugins/{plugin_id}", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -102,14 +103,14 @@ pub fn delete_pluginkind_root(configuration: &configuration::Configuration, plug
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<DeletePluginkindRootError> = serde_json::from_str(&content).ok();
+        let entity: Option<DeletePluginsPluginIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn get_pluginkind_collection(configuration: &configuration::Configuration, plugin_kind_collection: &str, all: Option<bool>, limit: Option<i32>, r#match: Option<&str>, prefix: Option<&str>, r: Option<&str>, start: Option<i32>) -> Result<std::collections::HashMap<String, models::PluginInfo>, Error<GetPluginkindCollectionError>> {
+/// Lists the plugins installed on the Gerrit server. Only the enabled plugins are returned unless the all option is specified.
+pub fn get_plugins(configuration: &configuration::Configuration, all: Option<bool>, limit: Option<i32>, r#match: Option<&str>, prefix: Option<&str>, r: Option<&str>, start: Option<i32>) -> Result<std::collections::HashMap<String, models::PluginInfo>, Error<GetPluginsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_plugin_kind_collection = plugin_kind_collection;
     let p_query_all = all;
     let p_query_limit = limit;
     let p_query_match = r#match;
@@ -117,7 +118,7 @@ pub fn get_pluginkind_collection(configuration: &configuration::Configuration, p
     let p_query_r = r;
     let p_query_start = start;
 
-    let uri_str = format!("{}/{PLUGIN_KIND_collection}", configuration.base_path, PLUGIN_KIND_collection=crate::apis::urlencode(p_path_plugin_kind_collection));
+    let uri_str = format!("{}/plugins", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref param_value) = p_query_all {
@@ -167,16 +168,16 @@ pub fn get_pluginkind_collection(configuration: &configuration::Configuration, p
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<GetPluginkindCollectionError> = serde_json::from_str(&content).ok();
+        let entity: Option<GetPluginsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn get_pluginkind_root_status(configuration: &configuration::Configuration, plugin_kind_root: &str) -> Result<models::PluginInfo, Error<GetPluginkindRootStatusError>> {
+pub fn get_plugins_plugin_id_status(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<GetPluginsPluginIdStatusError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_plugin_kind_root = plugin_kind_root;
+    let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/{PLUGIN_KIND_root}/status", configuration.base_path, PLUGIN_KIND_root=crate::apis::urlencode(p_path_plugin_kind_root));
+    let uri_str = format!("{}/plugins/{plugin_id}/status", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -208,16 +209,16 @@ pub fn get_pluginkind_root_status(configuration: &configuration::Configuration, 
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<GetPluginkindRootStatusError> = serde_json::from_str(&content).ok();
+        let entity: Option<GetPluginsPluginIdStatusError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn post_pluginkind_root_disable(configuration: &configuration::Configuration, plugin_kind_root: &str) -> Result<models::PluginInfo, Error<PostPluginkindRootDisableError>> {
+pub fn post_plugins_plugin_id_disable(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdDisableError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_plugin_kind_root = plugin_kind_root;
+    let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/{PLUGIN_KIND_root}/disable", configuration.base_path, PLUGIN_KIND_root=crate::apis::urlencode(p_path_plugin_kind_root));
+    let uri_str = format!("{}/plugins/{plugin_id}/disable", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -249,16 +250,16 @@ pub fn post_pluginkind_root_disable(configuration: &configuration::Configuration
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<PostPluginkindRootDisableError> = serde_json::from_str(&content).ok();
+        let entity: Option<PostPluginsPluginIdDisableError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn post_pluginkind_root_enable(configuration: &configuration::Configuration, plugin_kind_root: &str) -> Result<models::PluginInfo, Error<PostPluginkindRootEnableError>> {
+pub fn post_plugins_plugin_id_enable(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdEnableError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_plugin_kind_root = plugin_kind_root;
+    let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/{PLUGIN_KIND_root}/enable", configuration.base_path, PLUGIN_KIND_root=crate::apis::urlencode(p_path_plugin_kind_root));
+    let uri_str = format!("{}/plugins/{plugin_id}/enable", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -290,16 +291,16 @@ pub fn post_pluginkind_root_enable(configuration: &configuration::Configuration,
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<PostPluginkindRootEnableError> = serde_json::from_str(&content).ok();
+        let entity: Option<PostPluginsPluginIdEnableError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn post_pluginkind_root_reload(configuration: &configuration::Configuration, plugin_kind_root: &str) -> Result<models::PluginInfo, Error<PostPluginkindRootReloadError>> {
+pub fn post_plugins_plugin_id_reload(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdReloadError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_plugin_kind_root = plugin_kind_root;
+    let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/{PLUGIN_KIND_root}/reload", configuration.base_path, PLUGIN_KIND_root=crate::apis::urlencode(p_path_plugin_kind_root));
+    let uri_str = format!("{}/plugins/{plugin_id}/reload", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -331,17 +332,18 @@ pub fn post_pluginkind_root_reload(configuration: &configuration::Configuration,
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<PostPluginkindRootReloadError> = serde_json::from_str(&content).ok();
+        let entity: Option<PostPluginsPluginIdReloadError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn put_pluginkind_root(configuration: &configuration::Configuration, plugin_kind_root: &str, install_plugin_input: Option<models::InstallPluginInput>) -> Result<models::PluginInfo, Error<PutPluginkindRootError>> {
+/// Installs a new plugin on the Gerrit server. If a plugin with the specified name already exists it is overwritten. Note: if the plugin provides its own name in the MANIFEST file, then the plugin name from the MANIFEST file has precedence over the \\{plugin-id\\} above.
+pub fn put_plugins_plugin_id(configuration: &configuration::Configuration, plugin_id: &str, install_plugin_input: Option<models::InstallPluginInput>) -> Result<models::PluginInfo, Error<PutPluginsPluginIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_plugin_kind_root = plugin_kind_root;
+    let p_path_plugin_id = plugin_id;
     let p_body_install_plugin_input = install_plugin_input;
 
-    let uri_str = format!("{}/{PLUGIN_KIND_root}", configuration.base_path, PLUGIN_KIND_root=crate::apis::urlencode(p_path_plugin_kind_root));
+    let uri_str = format!("{}/plugins/{plugin_id}", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -374,7 +376,7 @@ pub fn put_pluginkind_root(configuration: &configuration::Configuration, plugin_
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<PutPluginkindRootError> = serde_json::from_str(&content).ok();
+        let entity: Option<PutPluginsPluginIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

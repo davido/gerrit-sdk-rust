@@ -274,13 +274,13 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**put_groups_group_id_name**](docs/GroupsApi.md#put_groups_group_id_name) | **PUT** /groups/{group_id}/name | Rename Group
 *GroupsApi* | [**put_groups_group_id_options**](docs/GroupsApi.md#put_groups_group_id_options) | **PUT** /groups/{group_id}/options | Set Group Options
 *GroupsApi* | [**put_groups_group_id_owner**](docs/GroupsApi.md#put_groups_group_id_owner) | **PUT** /groups/{group_id}/owner | Set Group Owner
-*PluginsApi* | [**delete_pluginkind_root**](docs/PluginsApi.md#delete_pluginkind_root) | **DELETE** /{PLUGIN_KIND_root} | 
-*PluginsApi* | [**get_pluginkind_collection**](docs/PluginsApi.md#get_pluginkind_collection) | **GET** /{PLUGIN_KIND_collection} | 
-*PluginsApi* | [**get_pluginkind_root_status**](docs/PluginsApi.md#get_pluginkind_root_status) | **GET** /{PLUGIN_KIND_root}/status | 
-*PluginsApi* | [**post_pluginkind_root_disable**](docs/PluginsApi.md#post_pluginkind_root_disable) | **POST** /{PLUGIN_KIND_root}/disable | 
-*PluginsApi* | [**post_pluginkind_root_enable**](docs/PluginsApi.md#post_pluginkind_root_enable) | **POST** /{PLUGIN_KIND_root}/enable | 
-*PluginsApi* | [**post_pluginkind_root_reload**](docs/PluginsApi.md#post_pluginkind_root_reload) | **POST** /{PLUGIN_KIND_root}/reload | 
-*PluginsApi* | [**put_pluginkind_root**](docs/PluginsApi.md#put_pluginkind_root) | **PUT** /{PLUGIN_KIND_root} | 
+*PluginsApi* | [**delete_plugins_plugin_id**](docs/PluginsApi.md#delete_plugins_plugin_id) | **DELETE** /plugins/{plugin_id} | Disable Plugin
+*PluginsApi* | [**get_plugins**](docs/PluginsApi.md#get_plugins) | **GET** /plugins | List Plugins
+*PluginsApi* | [**get_plugins_plugin_id_status**](docs/PluginsApi.md#get_plugins_plugin_id_status) | **GET** /plugins/{plugin_id}/status | 
+*PluginsApi* | [**post_plugins_plugin_id_disable**](docs/PluginsApi.md#post_plugins_plugin_id_disable) | **POST** /plugins/{plugin_id}/disable | 
+*PluginsApi* | [**post_plugins_plugin_id_enable**](docs/PluginsApi.md#post_plugins_plugin_id_enable) | **POST** /plugins/{plugin_id}/enable | 
+*PluginsApi* | [**post_plugins_plugin_id_reload**](docs/PluginsApi.md#post_plugins_plugin_id_reload) | **POST** /plugins/{plugin_id}/reload | 
+*PluginsApi* | [**put_plugins_plugin_id**](docs/PluginsApi.md#put_plugins_plugin_id) | **PUT** /plugins/{plugin_id} | Install Plugin
 *ProjectsApi* | [**delete_projects_project_id_branches_branch_id**](docs/ProjectsApi.md#delete_projects_project_id_branches_branch_id) | **DELETE** /projects/{project_id}/branches/{branch_id} | Delete Branch
 *ProjectsApi* | [**delete_projects_project_id_dashboards_dashboard_id**](docs/ProjectsApi.md#delete_projects_project_id_dashboards_dashboard_id) | **DELETE** /projects/{project_id}/dashboards/{dashboard_id} | Delete Dashboard
 *ProjectsApi* | [**delete_projects_project_id_description**](docs/ProjectsApi.md#delete_projects_project_id_description) | **DELETE** /projects/{project_id}/description | Delete Project Description

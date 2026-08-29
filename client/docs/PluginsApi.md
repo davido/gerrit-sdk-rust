@@ -4,27 +4,29 @@ All URIs are relative to *https://gerrit-review.googlesource.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_pluginkind_root**](PluginsApi.md#delete_pluginkind_root) | **DELETE** /{PLUGIN_KIND_root} | 
-[**get_pluginkind_collection**](PluginsApi.md#get_pluginkind_collection) | **GET** /{PLUGIN_KIND_collection} | 
-[**get_pluginkind_root_status**](PluginsApi.md#get_pluginkind_root_status) | **GET** /{PLUGIN_KIND_root}/status | 
-[**post_pluginkind_root_disable**](PluginsApi.md#post_pluginkind_root_disable) | **POST** /{PLUGIN_KIND_root}/disable | 
-[**post_pluginkind_root_enable**](PluginsApi.md#post_pluginkind_root_enable) | **POST** /{PLUGIN_KIND_root}/enable | 
-[**post_pluginkind_root_reload**](PluginsApi.md#post_pluginkind_root_reload) | **POST** /{PLUGIN_KIND_root}/reload | 
-[**put_pluginkind_root**](PluginsApi.md#put_pluginkind_root) | **PUT** /{PLUGIN_KIND_root} | 
+[**delete_plugins_plugin_id**](PluginsApi.md#delete_plugins_plugin_id) | **DELETE** /plugins/{plugin_id} | Disable Plugin
+[**get_plugins**](PluginsApi.md#get_plugins) | **GET** /plugins | List Plugins
+[**get_plugins_plugin_id_status**](PluginsApi.md#get_plugins_plugin_id_status) | **GET** /plugins/{plugin_id}/status | 
+[**post_plugins_plugin_id_disable**](PluginsApi.md#post_plugins_plugin_id_disable) | **POST** /plugins/{plugin_id}/disable | 
+[**post_plugins_plugin_id_enable**](PluginsApi.md#post_plugins_plugin_id_enable) | **POST** /plugins/{plugin_id}/enable | 
+[**post_plugins_plugin_id_reload**](PluginsApi.md#post_plugins_plugin_id_reload) | **POST** /plugins/{plugin_id}/reload | 
+[**put_plugins_plugin_id**](PluginsApi.md#put_plugins_plugin_id) | **PUT** /plugins/{plugin_id} | Install Plugin
 
 
 
-## delete_pluginkind_root
+## delete_plugins_plugin_id
 
-> models::PluginInfo delete_pluginkind_root(plugin_kind_root)
+> models::PluginInfo delete_plugins_plugin_id(plugin_id)
+Disable Plugin
 
+Disables a plugin on the Gerrit server.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**plugin_kind_root** | **String** |  | [required] |
+**plugin_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -42,17 +44,18 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## get_pluginkind_collection
+## get_plugins
 
-> std::collections::HashMap<String, models::PluginInfo> get_pluginkind_collection(plugin_kind_collection, all, limit, r#match, prefix, r, start)
+> std::collections::HashMap<String, models::PluginInfo> get_plugins(all, limit, r#match, prefix, r, start)
+List Plugins
 
+Lists the plugins installed on the Gerrit server. Only the enabled plugins are returned unless the all option is specified.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**plugin_kind_collection** | **String** |  | [required] |
 **all** | Option<**bool**> |  |  |
 **limit** | Option<**i32**> |  |  |
 **r#match** | Option<**String**> |  |  |
@@ -76,9 +79,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## get_pluginkind_root_status
+## get_plugins_plugin_id_status
 
-> models::PluginInfo get_pluginkind_root_status(plugin_kind_root)
+> models::PluginInfo get_plugins_plugin_id_status(plugin_id)
 
 
 ### Parameters
@@ -86,7 +89,7 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**plugin_kind_root** | **String** |  | [required] |
+**plugin_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -104,9 +107,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## post_pluginkind_root_disable
+## post_plugins_plugin_id_disable
 
-> models::PluginInfo post_pluginkind_root_disable(plugin_kind_root)
+> models::PluginInfo post_plugins_plugin_id_disable(plugin_id)
 
 
 ### Parameters
@@ -114,7 +117,7 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**plugin_kind_root** | **String** |  | [required] |
+**plugin_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -132,9 +135,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## post_pluginkind_root_enable
+## post_plugins_plugin_id_enable
 
-> models::PluginInfo post_pluginkind_root_enable(plugin_kind_root)
+> models::PluginInfo post_plugins_plugin_id_enable(plugin_id)
 
 
 ### Parameters
@@ -142,7 +145,7 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**plugin_kind_root** | **String** |  | [required] |
+**plugin_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -160,9 +163,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## post_pluginkind_root_reload
+## post_plugins_plugin_id_reload
 
-> models::PluginInfo post_pluginkind_root_reload(plugin_kind_root)
+> models::PluginInfo post_plugins_plugin_id_reload(plugin_id)
 
 
 ### Parameters
@@ -170,7 +173,7 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**plugin_kind_root** | **String** |  | [required] |
+**plugin_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -188,17 +191,19 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## put_pluginkind_root
+## put_plugins_plugin_id
 
-> models::PluginInfo put_pluginkind_root(plugin_kind_root, install_plugin_input)
+> models::PluginInfo put_plugins_plugin_id(plugin_id, install_plugin_input)
+Install Plugin
 
+Installs a new plugin on the Gerrit server. If a plugin with the specified name already exists it is overwritten. Note: if the plugin provides its own name in the MANIFEST file, then the plugin name from the MANIFEST file has precedence over the \\{plugin-id\\} above.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**plugin_kind_root** | **String** |  | [required] |
+**plugin_id** | **String** |  | [required] |
 **install_plugin_input** | Option<[**InstallPluginInput**](InstallPluginInput.md)> |  |  |
 
 ### Return type
