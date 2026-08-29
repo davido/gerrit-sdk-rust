@@ -1,41 +1,16 @@
 #!/usr/bin/env bash
-# Post-generation patches over the openapi-generator rust output. Each patch asserts its anchor is
-# present before and (for deterministic edits) gone after, so any drift in openapi-generator output
-# fails loudly instead of silently skipping a fix.
+# Post-generation patches over the openapi-generator rust output (perl-free). The source
+# edits live in postprocess.py; fix-query-collision.py repoints the lowercase-o query
+# block in colliding functions. Every edit asserts its anchor so generator drift fails
+# loudly instead of silently skipping a fix.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-cd "$HERE/client"
 
-# count occurrences of a fixed string across the api sources (tolerates zero under `set -o pipefail`)
-count() { { grep -rF "$1" src/apis/*.rs 2>/dev/null || true; } | wc -l | tr -d ' '; }
-die() { echo "ERROR: $*" >&2; exit 1; }
+# The hand-written, tested XSSI module. generate.sh regenerates client/src wholesale, so
+# copy the canonical copy back in before postprocess.py declares and calls it.
+cp "$HERE/xssi.rs" "$HERE/client/src/xssi.rs"
 
-# --- Patch 1: case-colliding query params O (scalar) and o (array) ------------------------------
-[ "$(count 'let p_query_o = o2;')" -ge 1 ] || die "O/o collision anchor 'let p_query_o = o2;' missing"
-perl -0pi -e 's/let p_query_o = o2;/let p_query_o2 = o2;/g' src/apis/*.rs
-[ "$(count 'let p_query_o = o2;')" -eq 0 ] || die "O/o rename left occurrences"
-python3 "$HERE/fix-query-collision.py"   # repoints the lowercase-o block; asserts an exact count itself
+python3 "$HERE/postprocess.py"        # O/o rename, binary body, XSSI call + lib.rs, native-tls
+python3 "$HERE/fix-query-collision.py"  # repoints the lowercase-o block in colliding functions
 
-# --- Patch 2: binary request body (Option<PathBuf>) -> read file, propagate IO error ------------
-[ "$(count 'req_builder = req_builder.body(p_body_body);')" -ge 1 ] || die "binary-body anchor missing"
-perl -0pi -e 's/req_builder = req_builder\.body\(p_body_body\);/if let Some(p) = p_body_body { req_builder = req_builder.body(std::fs::read(p)?); }/g' src/apis/*.rs
-[ "$(count 'req_builder = req_builder.body(p_body_body);')" -eq 0 ] || die "binary-body patch incomplete"
-
-# --- Patch 3: strip Gerrit's )]}'"'"' XSSI guard before JSON parsing (not expressible in OpenAPI) -
-n_text=$(count 'let content = resp.text()?;')
-[ "$n_text" -ge 1 ] || die "response-text anchor missing"
-perl -0pi -e 's/^([ \t]*)(let content = resp\.text\(\)\?;)/$1$2\n$1let content = match content.strip_prefix(")]}\x27\\n") { Some(s) => s.to_string(), None => content };/mg' src/apis/*.rs
-[ "$(count 'strip_prefix')" -eq "$n_text" ] || die "XSSI strip count mismatch (expected $n_text)"
-
-# License is now sourced upstream: Gerrit's spec carries info.license (Apache-2.0), which
-# openapi-generator emits into Cargo.toml -- no downstream patch needed. Assert it landed.
-grep -qE '^license = "Apache-2.0"$' Cargo.toml || die "expected Apache-2.0 license from the spec's info.license"
-
-# --- Patch 4: enable reqwest native-tls directly ------------------------------------------------
-# openapi-generator emits the reqwest dep with `default-features = false`, which turns off its TLS
-# backend; without re-enabling one, HTTPS requests have no TLS and fail. Enable native-tls directly.
-grep -qF 'features = ["json", "blocking", "multipart", "query", "form"]' Cargo.toml || die "reqwest features anchor missing"
-perl -0pi -e 's/(features = \["json", "blocking", "multipart", "query", "form")\]/$1, "native-tls"]/' Cargo.toml
-grep -qF '"form", "native-tls"' Cargo.toml || die "native-tls not added to reqwest"
-
-echo "post-gen patches applied (O/o collision, binary body, XSSI, native-tls; license comes from the spec)"
+echo "post-gen patches applied (O/o collision, binary body, XSSI via xssi.rs, native-tls; license from the spec)"

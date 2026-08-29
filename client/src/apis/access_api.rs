@@ -57,7 +57,7 @@ pub fn get_access(configuration: &configuration::Configuration, project: Option<
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::ProjectAccessInfo&gt;`"))),
@@ -65,7 +65,7 @@ pub fn get_access(configuration: &configuration::Configuration, project: Option<
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetAccessError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }

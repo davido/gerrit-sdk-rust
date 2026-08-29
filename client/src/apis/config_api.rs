@@ -322,7 +322,7 @@ pub fn delete_config_server_tasks_task_id(configuration: &configuration::Configu
         Ok(())
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<DeleteConfigServerTasksTaskIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -363,7 +363,7 @@ pub fn get_config_server_caches(configuration: &configuration::Configuration, fo
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -371,7 +371,7 @@ pub fn get_config_server_caches(configuration: &configuration::Configuration, fo
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerCachesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -405,7 +405,7 @@ pub fn get_config_server_caches_cache_id(configuration: &configuration::Configur
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CacheInfo`"))),
@@ -413,7 +413,7 @@ pub fn get_config_server_caches_cache_id(configuration: &configuration::Configur
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerCachesCacheIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -445,7 +445,7 @@ pub fn get_config_server_capabilities(configuration: &configuration::Configurati
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::CapabilityInfo&gt;`"))),
@@ -453,7 +453,7 @@ pub fn get_config_server_capabilities(configuration: &configuration::Configurati
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerCapabilitiesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -490,7 +490,7 @@ pub fn get_config_server_experiments(configuration: &configuration::Configuratio
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::ExperimentInfo&gt;`"))),
@@ -498,7 +498,7 @@ pub fn get_config_server_experiments(configuration: &configuration::Configuratio
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerExperimentsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -531,7 +531,7 @@ pub fn get_config_server_experiments_experiment_id(configuration: &configuration
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::ExperimentInfo`"))),
@@ -539,7 +539,7 @@ pub fn get_config_server_experiments_experiment_id(configuration: &configuration
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerExperimentsExperimentIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -571,7 +571,7 @@ pub fn get_config_server_indexes(configuration: &configuration::Configuration, )
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -579,7 +579,7 @@ pub fn get_config_server_indexes(configuration: &configuration::Configuration, )
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerIndexesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -613,7 +613,7 @@ pub fn get_config_server_indexes_index_id(configuration: &configuration::Configu
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -621,7 +621,7 @@ pub fn get_config_server_indexes_index_id(configuration: &configuration::Configu
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerIndexesIndexIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -655,7 +655,7 @@ pub fn get_config_server_indexes_index_id_versions(configuration: &configuration
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, serde_json::Value&gt;`"))),
@@ -663,7 +663,7 @@ pub fn get_config_server_indexes_index_id_versions(configuration: &configuration
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerIndexesIndexIdVersionsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -698,7 +698,7 @@ pub fn get_config_server_indexes_index_id_versions_index_version_id(configuratio
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -706,7 +706,7 @@ pub fn get_config_server_indexes_index_id_versions_index_version_id(configuratio
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerIndexesIndexIdVersionsIndexVersionIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -738,7 +738,7 @@ pub fn get_config_server_info(configuration: &configuration::Configuration, ) ->
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::ServerInfo`"))),
@@ -746,7 +746,7 @@ pub fn get_config_server_info(configuration: &configuration::Configuration, ) ->
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerInfoError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -778,7 +778,7 @@ pub fn get_config_server_labels(configuration: &configuration::Configuration, ) 
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::LabelDefinitionInfo&gt;`"))),
@@ -786,7 +786,7 @@ pub fn get_config_server_labels(configuration: &configuration::Configuration, ) 
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerLabelsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -818,7 +818,7 @@ pub fn get_config_server_preferences(configuration: &configuration::Configuratio
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GeneralPreferencesInfo`"))),
@@ -826,7 +826,7 @@ pub fn get_config_server_preferences(configuration: &configuration::Configuratio
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerPreferencesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -858,7 +858,7 @@ pub fn get_config_server_preferences_diff(configuration: &configuration::Configu
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::DiffPreferencesInfo`"))),
@@ -866,7 +866,7 @@ pub fn get_config_server_preferences_diff(configuration: &configuration::Configu
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerPreferencesDiffError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -898,7 +898,7 @@ pub fn get_config_server_preferences_edit(configuration: &configuration::Configu
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::EditPreferencesInfo`"))),
@@ -906,7 +906,7 @@ pub fn get_config_server_preferences_edit(configuration: &configuration::Configu
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerPreferencesEditError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -938,7 +938,7 @@ pub fn get_config_server_submit_requirements(configuration: &configuration::Conf
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::SubmitRequirementInfo&gt;`"))),
@@ -946,7 +946,7 @@ pub fn get_config_server_submit_requirements(configuration: &configuration::Conf
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerSubmitRequirementsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -983,7 +983,7 @@ pub fn get_config_server_summary(configuration: &configuration::Configuration, j
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::SummaryInfo`"))),
@@ -991,7 +991,7 @@ pub fn get_config_server_summary(configuration: &configuration::Configuration, j
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerSummaryError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1023,7 +1023,7 @@ pub fn get_config_server_tasks(configuration: &configuration::Configuration, ) -
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::TaskInfo&gt;`"))),
@@ -1031,7 +1031,7 @@ pub fn get_config_server_tasks(configuration: &configuration::Configuration, ) -
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerTasksError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1065,7 +1065,7 @@ pub fn get_config_server_tasks_task_id(configuration: &configuration::Configurat
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::TaskInfo`"))),
@@ -1073,7 +1073,7 @@ pub fn get_config_server_tasks_task_id(configuration: &configuration::Configurat
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerTasksTaskIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1105,7 +1105,7 @@ pub fn get_config_server_top_menus(configuration: &configuration::Configuration,
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::MenuEntry&gt;`"))),
@@ -1113,7 +1113,7 @@ pub fn get_config_server_top_menus(configuration: &configuration::Configuration,
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerTopMenusError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1150,7 +1150,7 @@ pub fn get_config_server_version(configuration: &configuration::Configuration, v
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1158,7 +1158,7 @@ pub fn get_config_server_version(configuration: &configuration::Configuration, v
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerVersionError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1193,7 +1193,7 @@ pub fn post_config_server_caches(configuration: &configuration::Configuration, p
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -1201,7 +1201,7 @@ pub fn post_config_server_caches(configuration: &configuration::Configuration, p
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerCachesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1235,7 +1235,7 @@ pub fn post_config_server_caches_cache_id_flush(configuration: &configuration::C
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -1243,7 +1243,7 @@ pub fn post_config_server_caches_cache_id_flush(configuration: &configuration::C
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerCachesCacheIdFlushError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1278,7 +1278,7 @@ pub fn post_config_server_check_consistency(configuration: &configuration::Confi
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::ConsistencyCheckInfo`"))),
@@ -1286,7 +1286,7 @@ pub fn post_config_server_check_consistency(configuration: &configuration::Confi
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerCheckConsistencyError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1320,7 +1320,7 @@ pub fn post_config_server_cleanup_changes(configuration: &configuration::Configu
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1328,7 +1328,7 @@ pub fn post_config_server_cleanup_changes(configuration: &configuration::Configu
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerCleanupChangesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1359,7 +1359,7 @@ pub fn post_config_server_cleanup_draft_comments(configuration: &configuration::
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1367,7 +1367,7 @@ pub fn post_config_server_cleanup_draft_comments(configuration: &configuration::
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerCleanupDraftCommentsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1399,7 +1399,7 @@ pub fn post_config_server_deactivate_stale_accounts(configuration: &configuratio
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1407,7 +1407,7 @@ pub fn post_config_server_deactivate_stale_accounts(configuration: &configuratio
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerDeactivateStaleAccountsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1441,7 +1441,7 @@ pub fn post_config_server_index_changes(configuration: &configuration::Configura
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -1449,7 +1449,7 @@ pub fn post_config_server_index_changes(configuration: &configuration::Configura
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerIndexChangesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1479,7 +1479,7 @@ pub fn post_config_server_indexes_index_id_flush(configuration: &configuration::
         Ok(())
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerIndexesIndexIdFlushError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1515,7 +1515,7 @@ pub fn post_config_server_indexes_index_id_snapshot(configuration: &configuratio
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1523,7 +1523,7 @@ pub fn post_config_server_indexes_index_id_snapshot(configuration: &configuratio
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerIndexesIndexIdSnapshotError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1560,7 +1560,7 @@ pub fn post_config_server_indexes_index_id_versions_index_version_id_reindex(con
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1568,7 +1568,7 @@ pub fn post_config_server_indexes_index_id_versions_index_version_id_reindex(con
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerIndexesIndexIdVersionsIndexVersionIdReindexError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1605,7 +1605,7 @@ pub fn post_config_server_indexes_index_id_versions_index_version_id_snapshot(co
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1613,7 +1613,7 @@ pub fn post_config_server_indexes_index_id_versions_index_version_id_snapshot(co
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerIndexesIndexIdVersionsIndexVersionIdSnapshotError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1647,7 +1647,7 @@ pub fn post_config_server_passwords_to_tokens(configuration: &configuration::Con
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1655,7 +1655,7 @@ pub fn post_config_server_passwords_to_tokens(configuration: &configuration::Con
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerPasswordsToTokensError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1689,7 +1689,7 @@ pub fn post_config_server_reduce_token_lifetime(configuration: &configuration::C
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1697,7 +1697,7 @@ pub fn post_config_server_reduce_token_lifetime(configuration: &configuration::C
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerReduceTokenLifetimeError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1729,7 +1729,7 @@ pub fn post_config_server_reload(configuration: &configuration::Configuration, )
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, Vec&lt;models::ConfigUpdateEntryInfo&gt;&gt;`"))),
@@ -1737,7 +1737,7 @@ pub fn post_config_server_reload(configuration: &configuration::Configuration, )
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerReloadError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1771,7 +1771,7 @@ pub fn post_config_server_snapshot_indexes(configuration: &configuration::Config
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -1779,7 +1779,7 @@ pub fn post_config_server_snapshot_indexes(configuration: &configuration::Config
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostConfigServerSnapshotIndexesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1810,7 +1810,7 @@ pub fn put_config_server_email_confirm(configuration: &configuration::Configurat
         Ok(())
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutConfigServerEmailConfirmError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1845,7 +1845,7 @@ pub fn put_config_server_preferences(configuration: &configuration::Configuratio
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GeneralPreferencesInfo`"))),
@@ -1853,7 +1853,7 @@ pub fn put_config_server_preferences(configuration: &configuration::Configuratio
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutConfigServerPreferencesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1888,7 +1888,7 @@ pub fn put_config_server_preferences_diff(configuration: &configuration::Configu
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::DiffPreferencesInfo`"))),
@@ -1896,7 +1896,7 @@ pub fn put_config_server_preferences_diff(configuration: &configuration::Configu
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutConfigServerPreferencesDiffError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1931,7 +1931,7 @@ pub fn put_config_server_preferences_edit(configuration: &configuration::Configu
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::EditPreferencesInfo`"))),
@@ -1939,7 +1939,7 @@ pub fn put_config_server_preferences_edit(configuration: &configuration::Configu
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutConfigServerPreferencesEditError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }

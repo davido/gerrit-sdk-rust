@@ -260,7 +260,7 @@ pub fn delete_groups_group_id(configuration: &configuration::Configuration, grou
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -268,7 +268,7 @@ pub fn delete_groups_group_id(configuration: &configuration::Configuration, grou
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<DeleteGroupsGroupIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -302,7 +302,7 @@ pub fn delete_groups_group_id_description(configuration: &configuration::Configu
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -310,7 +310,7 @@ pub fn delete_groups_group_id_description(configuration: &configuration::Configu
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<DeleteGroupsGroupIdDescriptionError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -345,7 +345,7 @@ pub fn delete_groups_group_id_groups_subgroup_id(configuration: &configuration::
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -353,7 +353,7 @@ pub fn delete_groups_group_id_groups_subgroup_id(configuration: &configuration::
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<DeleteGroupsGroupIdGroupsSubgroupIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -388,7 +388,7 @@ pub fn delete_groups_group_id_members_member_id(configuration: &configuration::C
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -396,7 +396,7 @@ pub fn delete_groups_group_id_members_member_id(configuration: &configuration::C
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<DeleteGroupsGroupIdMembersMemberIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -428,7 +428,7 @@ pub fn get_groups(configuration: &configuration::Configuration, ) -> Result<serd
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
@@ -436,7 +436,7 @@ pub fn get_groups(configuration: &configuration::Configuration, ) -> Result<serd
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -470,7 +470,7 @@ pub fn get_groups_group_id(configuration: &configuration::Configuration, group_i
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupInfo`"))),
@@ -478,7 +478,7 @@ pub fn get_groups_group_id(configuration: &configuration::Configuration, group_i
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -512,7 +512,7 @@ pub fn get_groups_group_id_description(configuration: &configuration::Configurat
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -520,7 +520,7 @@ pub fn get_groups_group_id_description(configuration: &configuration::Configurat
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdDescriptionError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -554,7 +554,7 @@ pub fn get_groups_group_id_detail(configuration: &configuration::Configuration, 
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupInfo`"))),
@@ -562,7 +562,7 @@ pub fn get_groups_group_id_detail(configuration: &configuration::Configuration, 
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdDetailError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -596,7 +596,7 @@ pub fn get_groups_group_id_groups(configuration: &configuration::Configuration, 
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::GroupInfo&gt;`"))),
@@ -604,7 +604,7 @@ pub fn get_groups_group_id_groups(configuration: &configuration::Configuration, 
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdGroupsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -639,7 +639,7 @@ pub fn get_groups_group_id_groups_subgroup_id(configuration: &configuration::Con
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupInfo`"))),
@@ -647,7 +647,7 @@ pub fn get_groups_group_id_groups_subgroup_id(configuration: &configuration::Con
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdGroupsSubgroupIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -681,7 +681,7 @@ pub fn get_groups_group_id_log_audit(configuration: &configuration::Configuratio
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::GroupAuditEventInfo&gt;`"))),
@@ -689,7 +689,7 @@ pub fn get_groups_group_id_log_audit(configuration: &configuration::Configuratio
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdLogAuditError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -727,7 +727,7 @@ pub fn get_groups_group_id_members(configuration: &configuration::Configuration,
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::AccountInfo&gt;`"))),
@@ -735,7 +735,7 @@ pub fn get_groups_group_id_members(configuration: &configuration::Configuration,
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdMembersError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -770,7 +770,7 @@ pub fn get_groups_group_id_members_member_id(configuration: &configuration::Conf
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AccountInfo`"))),
@@ -778,7 +778,7 @@ pub fn get_groups_group_id_members_member_id(configuration: &configuration::Conf
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdMembersMemberIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -812,7 +812,7 @@ pub fn get_groups_group_id_name(configuration: &configuration::Configuration, gr
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -820,7 +820,7 @@ pub fn get_groups_group_id_name(configuration: &configuration::Configuration, gr
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdNameError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -854,7 +854,7 @@ pub fn get_groups_group_id_options(configuration: &configuration::Configuration,
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupOptionsInfo`"))),
@@ -862,7 +862,7 @@ pub fn get_groups_group_id_options(configuration: &configuration::Configuration,
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdOptionsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -896,7 +896,7 @@ pub fn get_groups_group_id_owner(configuration: &configuration::Configuration, g
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupInfo`"))),
@@ -904,7 +904,7 @@ pub fn get_groups_group_id_owner(configuration: &configuration::Configuration, g
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetGroupsGroupIdOwnerError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -940,7 +940,7 @@ pub fn post_groups_group_id_groups(configuration: &configuration::Configuration,
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::GroupInfo&gt;`"))),
@@ -948,7 +948,7 @@ pub fn post_groups_group_id_groups(configuration: &configuration::Configuration,
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostGroupsGroupIdGroupsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -984,7 +984,7 @@ pub fn post_groups_group_id_groups_add(configuration: &configuration::Configurat
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::GroupInfo&gt;`"))),
@@ -992,7 +992,7 @@ pub fn post_groups_group_id_groups_add(configuration: &configuration::Configurat
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostGroupsGroupIdGroupsAddError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1024,7 +1024,7 @@ pub fn post_groups_group_id_groups_delete(configuration: &configuration::Configu
         Ok(())
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostGroupsGroupIdGroupsDeleteError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1054,7 +1054,7 @@ pub fn post_groups_group_id_index(configuration: &configuration::Configuration, 
         Ok(())
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostGroupsGroupIdIndexError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1090,7 +1090,7 @@ pub fn post_groups_group_id_members(configuration: &configuration::Configuration
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::AccountInfo&gt;`"))),
@@ -1098,7 +1098,7 @@ pub fn post_groups_group_id_members(configuration: &configuration::Configuration
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostGroupsGroupIdMembersError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1134,7 +1134,7 @@ pub fn post_groups_group_id_members_add(configuration: &configuration::Configura
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::AccountInfo&gt;`"))),
@@ -1142,7 +1142,7 @@ pub fn post_groups_group_id_members_add(configuration: &configuration::Configura
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostGroupsGroupIdMembersAddError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1174,7 +1174,7 @@ pub fn post_groups_group_id_members_delete(configuration: &configuration::Config
         Ok(())
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostGroupsGroupIdMembersDeleteError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1210,7 +1210,7 @@ pub fn put_groups_group_id(configuration: &configuration::Configuration, group_i
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupInfo`"))),
@@ -1218,7 +1218,7 @@ pub fn put_groups_group_id(configuration: &configuration::Configuration, group_i
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutGroupsGroupIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1254,7 +1254,7 @@ pub fn put_groups_group_id_description(configuration: &configuration::Configurat
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -1262,7 +1262,7 @@ pub fn put_groups_group_id_description(configuration: &configuration::Configurat
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutGroupsGroupIdDescriptionError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1299,7 +1299,7 @@ pub fn put_groups_group_id_groups_subgroup_id(configuration: &configuration::Con
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupInfo`"))),
@@ -1307,7 +1307,7 @@ pub fn put_groups_group_id_groups_subgroup_id(configuration: &configuration::Con
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutGroupsGroupIdGroupsSubgroupIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1344,7 +1344,7 @@ pub fn put_groups_group_id_members_member_id(configuration: &configuration::Conf
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::AccountInfo`"))),
@@ -1352,7 +1352,7 @@ pub fn put_groups_group_id_members_member_id(configuration: &configuration::Conf
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutGroupsGroupIdMembersMemberIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1388,7 +1388,7 @@ pub fn put_groups_group_id_name(configuration: &configuration::Configuration, gr
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
@@ -1396,7 +1396,7 @@ pub fn put_groups_group_id_name(configuration: &configuration::Configuration, gr
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutGroupsGroupIdNameError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1432,7 +1432,7 @@ pub fn put_groups_group_id_options(configuration: &configuration::Configuration,
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupOptionsInfo`"))),
@@ -1440,7 +1440,7 @@ pub fn put_groups_group_id_options(configuration: &configuration::Configuration,
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutGroupsGroupIdOptionsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
@@ -1476,7 +1476,7 @@ pub fn put_groups_group_id_owner(configuration: &configuration::Configuration, g
 
     if !status.is_client_error() && !status.is_server_error() {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GroupInfo`"))),
@@ -1484,7 +1484,7 @@ pub fn put_groups_group_id_owner(configuration: &configuration::Configuration, g
         }
     } else {
         let content = resp.text()?;
-        let content = match content.strip_prefix(")]}'\n") { Some(s) => s.to_string(), None => content };
+        let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PutGroupsGroupIdOwnerError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }

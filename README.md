@@ -8,13 +8,13 @@ so the client never drifts from the server.
 ## The pipeline (end to end)
 
 ```
-  gerrit6                     gerrit-sdk-rust
+  gerrit                     gerrit-sdk-rust
   (emit the spec)      -->    (this repo: the SDK + examples/)
   parse-only OpenAPI          openapi-generator + 4 post-gen patches (cargo);
   emitter                     examples/ call a live Gerrit
 ```
 
-1. **gerrit6 emits the spec.** A parse-only emitter (`java/com/google/gerrit/openapi/**`)
+1. **gerrit emits the spec.** A parse-only emitter (`java/com/google/gerrit/openapi/**`)
    reads the server's REST bindings via the javac Compiler Tree API — no running
    server, no reflection — and writes an OpenAPI 3.1 JSON.
 2. **This repo pins that spec.** `rest-api-openapi.json` is a checked-in snapshot of
