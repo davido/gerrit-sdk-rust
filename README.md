@@ -1,87 +1,135 @@
 # gerrit-sdk-rust
 
-A **generated Rust SDK** for the Gerrit Code Review REST API, produced from
-Gerrit's statically generated **OpenAPI 3.1** document
-(`//tools/openapi:openapi_json` in the Gerrit tree).
+A **generated Rust SDK** for the Gerrit Code Review REST API (the `gerrit_client`
+crate), produced from Gerrit's statically generated **OpenAPI 3.1** document. No
+hand-written request/response types: every operation and model comes from the spec,
+so the client never drifts from the server.
 
-**Version:** this SDK is generated from **Gerrit 3.15.0-SNAPSHOT** and tagged
-`v3.15.0-SNAPSHOT` — the tag mirrors the Gerrit version, so consumers pin the
-exact server generation they target.
+## The pipeline (end to end)
 
-This is the *library* half of a two-repo pair:
+```
+  gerrit6                     gerrit-sdk-rust                gerrit-sdk-rust-client
+  (emit the spec)      -->    (this repo: the SDK)    -->    (consume the SDK)
+  parse-only OpenAPI          openapi-generator + 4          cargo git-dep by tag,
+  emitter, Bazel target       post-gen patches, cargo/Bazel  live calls, 2 demos
+```
 
-- **`gerrit-sdk-rust`** (this repo) — the generated client SDK (`gerrit_client`).
-- **`gerrit-sdk-rust-client`** — an example consumer that fetches this SDK from
-  GitHub and calls a real Gerrit.
+1. **gerrit6 emits the spec.** A parse-only emitter (`java/com/google/gerrit/openapi/**`)
+   reads the server's REST bindings via the javac Compiler Tree API — no running
+   server, no reflection — and writes an OpenAPI 3.1 JSON. Bazel target:
+   `//tools/openapi:openapi_json`.
+2. **This repo pins that spec.** `rest-api-openapi.json` is a checked-in snapshot of
+   that target's output (`bazel cquery --output=files //tools/openapi:openapi_json`).
+   Its `info.version` / `info.license` / `servers` come straight from the emitter.
+3. **`generate.sh` generates the crate.** openapi-generator (rust, reqwest/blocking)
+   turns the spec into `client/src/{apis,models}`, then `postprocess.sh` applies four
+   narrow patches (below).
+4. **A consumer reuses it by tag.** `gerrit-sdk-rust-client` fetches this crate as a
+   cargo git dependency pinned to the tag, and calls a live Gerrit — see
+   [Use it from a consumer](#use-it-from-a-consumer).
 
-The whole point: **no hand-written request/response types**. All 240 endpoints
-and 275 models come from the spec, so the client never drifts from the server.
+The whole story demonstrates feasibility for Gerrit issue
+[40011133](https://issues.gerritcodereview.com/issues/40011133) ("Consider using
+Swagger from OpenApi for REST API").
 
-## What's generated
+## Version
 
-- `client/` — the `gerrit_client` crate: `models/` (275 DTO schemas) + `apis/`
-  (9 tag modules covering 240 operations), a reqwest (blocking) transport.
+Generated from **Gerrit 3.15.0-SNAPSHOT** and tagged **`v3.15.0-SNAPSHOT`** — the tag
+mirrors the Gerrit version, so consumers pin the exact server generation they target.
+The git tag, the OpenAPI `info.version`, and the crate version are all aligned.
 
-## Where the spec comes from
+## What's in this repo
 
-`rest-api-openapi.json` is Gerrit's own OpenAPI 3.1 document. This checked-in copy
-is a **pinned snapshot** built from the Gerrit tree
-(`bazel cquery --output=files //tools/openapi:openapi_json`). Once Gerrit serves
-the spec upstream, refresh it straight from a running instance — e.g. a plugin's
-served document:
+- `client/` — the `gerrit_client` crate: **325 operations** across **8 API modules**
+  (`apis/`) and **274 generated model types** (`models/`), over a reqwest (blocking)
+  transport. Buildable with **cargo and Bazel**.
+- `rest-api-openapi.json` — the pinned spec snapshot (step 2 above).
+- `generate.sh`, `postprocess.sh`, `fix-query-collision.py` — the generation pipeline.
+
+## Regenerate
+
+```bash
+./generate.sh [path-or-url]      # default: ./rest-api-openapi.json
+```
+
+The crate version is derived from the spec's `info.version` — no hardcode. Pass a URL
+to refetch the spec from a running Gerrit before generating (e.g. a plugin's served
+document):
 
 ```bash
 ./generate.sh https://<host>/plugins/<name>/Documentation/rest-api-openapi.json
 ```
 
-The SDK is never hand-maintained: to track a new Gerrit version, refetch the spec
-and regenerate.
-
-## Regenerate
-
-```bash
-./generate.sh [path-or-url]     # default: ./rest-api-openapi.json
-```
-
-Pipeline = **`openapi-generator` → post-gen patches** (`postprocess.sh`). No spec
-preprocessing: the one spec-fidelity bug the experiment found (timestamps) is now
-fixed upstream in Gerrit's emitter (`format: gerrit-timestamp`, not `date-time`),
-so the spec is consumed as-is.
+The SDK is never hand-maintained: to track a new Gerrit version, refetch the spec and
+regenerate. The spec is consumed **as-is** — the fidelity bugs the experiment found
+(timestamp format, schema naming) were fixed *upstream* in Gerrit's emitter, not
+patched here.
 
 ## The post-generation patches (`postprocess.sh`)
 
-Four narrow fixes over the generator output, each guarded by a match-count
-assertion (a drift in openapi-generator output fails the build):
+Four narrow fixes over the generator output, each guarded by a match-count assertion
+(a drift in openapi-generator output fails the build):
 
 1. **Case-colliding query params `O` (scalar) and `o` (array)** — openapi-generator
-   lowers both to one `p_query_o` local, so the array shadows the scalar and both
-   are serialized from the array (wrong requests that still compile). Fix: rename
-   the array binding to `p_query_o2` and repoint the lowercase-`o` block at it, only
-   inside colliding functions (standalone `fix-query-collision.py`); `O` then
-   serializes the scalar.
-2. **Binary request body** — one upload body typed `Option<PathBuf>` isn't a
-   reqwest `Body`; now `std::fs::read(p)?` — reads the file and propagates the IO
-   error (not a silent empty upload).
-3. **Gerrit XSSI guard** — every Gerrit JSON body starts with `)]}'` on its own
-   line, stripped before parsing. **Genuinely not expressible in OpenAPI** — the
-   one irreducible Gerrit-specific step.
+   lowers both to one `p_query_o` local, so the array shadows the scalar and both are
+   serialized from the array (wrong requests that still compile). Fix: rename the array
+   binding to `p_query_o2` and repoint the lowercase-`o` block at it, only inside
+   colliding functions (standalone `fix-query-collision.py`); `O` then serializes the
+   scalar.
+2. **Binary request body** — one upload body typed `Option<PathBuf>` isn't a reqwest
+   `Body`; now `std::fs::read(p)?` — reads the file and propagates the IO error (not a
+   silent empty upload).
+3. **Gerrit XSSI guard** — every Gerrit JSON body starts with `)]}'` on its own line,
+   stripped before parsing. **Genuinely not expressible in OpenAPI** — the one
+   irreducible Gerrit-specific step.
 4. **reqwest `native-tls`** — enabled on the dep directly, because Bazel /
-   crate_universe doesn't turn on the crate's `default` feature (so TLS would be
-   off and reqwest marked incompatible).
+   crate_universe doesn't turn on the crate's `default` feature (so TLS would be off and
+   reqwest marked incompatible).
 
-(1) and (2) are upstream openapi-generator rough edges; (3) is Gerrit protocol;
-(4) is packaging. The metadata that used to need patching — license, version, and
-server order — now comes straight from the spec's `info.license` /
-`info.version` / `servers` (fixed *upstream* in Gerrit's emitter), so `postprocess.sh`
-only **asserts** it landed rather than editing it. The timestamp and schema-name
-issues were likewise fixed upstream, so they need no downstream patch.
+(1) and (2) are upstream openapi-generator rough edges; (3) is Gerrit protocol; (4) is
+packaging. The metadata that used to need patching — license, version, server order —
+now comes straight from the spec's `info.license` / `info.version` / `servers` (fixed
+*upstream* in the emitter), so `postprocess.sh` only **asserts** it landed.
+
+## Build
+
+```bash
+# cargo
+cd client && cargo build
+
+# Bazel (rules_rust + crate_universe; checked-in cargo-bazel-lock.json)
+bazel build //client:gerrit_client
+```
+
+## Use it from a consumer
+
+**Cargo** — a git dependency pinned to the tag (no crates.io):
+
+```toml
+[dependencies]
+gerrit_client = { git = "https://github.com/davido/gerrit-sdk-rust.git", package = "gerrit_client", tag = "v3.15.0-SNAPSHOT" }
+```
+
+```rust
+use gerrit_client::apis::changes_api;
+use gerrit_client::apis::configuration::Configuration;
+
+let cfg = Configuration::new(); // defaults to the public, anonymous base URL
+let change = changes_api::get_changes_change_id(&cfg, "621763", None, None, None)?;
+println!("{}", change.subject.unwrap_or_default());
+```
+
+**Bazel** — `git_override` on the same tag, then `all_crate_deps()`.
+
+A full worked example (two demos: an anonymous GET rendering a Web-UI-style change
+summary, and an authenticated POST) lives in
+[`davido/gerrit-sdk-rust-client`](https://github.com/davido/gerrit-sdk-rust-client).
 
 ## Status
 
 Prototype demonstrating feasibility for Gerrit issue
-[40011133](https://issues.gerritcodereview.com/issues/40011133) ("Consider using
-Swagger from OpenApi for REST API").
+[40011133](https://issues.gerritcodereview.com/issues/40011133).
 
 ## License
 
-Apache 2.0.
+Apache 2.0. See [LICENSE.txt](LICENSE.txt).
