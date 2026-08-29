@@ -32,9 +32,8 @@ perl -0pi -e 's/^([ \t]*)(let content = resp\.text\(\)\?;)/$1$2\n$1let content =
 grep -qE '^license = "Apache-2.0"$' Cargo.toml || die "expected Apache-2.0 license from the spec's info.license"
 
 # --- Patch 4: enable reqwest native-tls directly ------------------------------------------------
-# Bazel/crate_universe does not turn on the crate's `default = ["native-tls"]`, so without this
-# reqwest builds with no TLS backend and is marked incompatible. Enabling it on the dep directly
-# makes both cargo and Bazel resolve a TLS backend.
+# openapi-generator emits the reqwest dep with `default-features = false`, which turns off its TLS
+# backend; without re-enabling one, HTTPS requests have no TLS and fail. Enable native-tls directly.
 grep -qF 'features = ["json", "blocking", "multipart", "query", "form"]' Cargo.toml || die "reqwest features anchor missing"
 perl -0pi -e 's/(features = \["json", "blocking", "multipart", "query", "form")\]/$1, "native-tls"]/' Cargo.toml
 grep -qF '"form", "native-tls"' Cargo.toml || die "native-tls not added to reqwest"

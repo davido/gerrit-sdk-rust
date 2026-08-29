@@ -8,25 +8,25 @@ so the client never drifts from the server.
 ## The pipeline (end to end)
 
 ```
-  gerrit6                     gerrit-sdk-rust                gerrit-sdk-rust-client
-  (emit the spec)      -->    (this repo: the SDK)    -->    (consume the SDK)
-  parse-only OpenAPI          openapi-generator + 4          cargo git-dep by tag,
-  emitter, Bazel target       post-gen patches, cargo/Bazel  live calls, 2 demos
+  gerrit6                     gerrit-sdk-rust
+  (emit the spec)      -->    (this repo: the SDK + examples/)
+  parse-only OpenAPI          openapi-generator + 4 post-gen patches (cargo);
+  emitter                     examples/ call a live Gerrit
 ```
 
 1. **gerrit6 emits the spec.** A parse-only emitter (`java/com/google/gerrit/openapi/**`)
    reads the server's REST bindings via the javac Compiler Tree API — no running
-   server, no reflection — and writes an OpenAPI 3.1 JSON. Bazel target:
-   `//tools/openapi:openapi_json`.
+   server, no reflection — and writes an OpenAPI 3.1 JSON.
 2. **This repo pins that spec.** `rest-api-openapi.json` is a checked-in snapshot of
-   that target's output (`bazel cquery --output=files //tools/openapi:openapi_json`).
-   Its `info.version` / `info.license` / `servers` come straight from the emitter.
+   that emitter's output. Its `info.version` / `info.license` / `servers` come straight
+   from the emitter.
 3. **`generate.sh` generates the crate.** openapi-generator (rust, reqwest/blocking)
    turns the spec into `client/src/{apis,models}`, then `postprocess.sh` applies four
    narrow patches (below).
-4. **A consumer reuses it by tag.** `gerrit-sdk-rust-client` fetches this crate as a
-   cargo git dependency pinned to the tag, and calls a live Gerrit — see
-   [Use it from a consumer](#use-it-from-a-consumer).
+4. **The in-repo `examples/` consume it.** `examples/get-change-detail` (anonymous GET
+   → a colored, Web-UI-style summary) and `examples/post-comment` (authenticated POST)
+   build against the local crate and call a live Gerrit — see [Use it](#use-it).
+   External consumers instead pin the git tag.
 
 The whole story demonstrates feasibility for Gerrit issue
 [40011133](https://issues.gerritcodereview.com/issues/40011133) ("Consider using
@@ -42,7 +42,10 @@ The git tag, the OpenAPI `info.version`, and the crate version are all aligned.
 
 - `client/` — the `gerrit_client` crate: **325 operations** across **8 API modules**
   (`apis/`) and **274 generated model types** (`models/`), over a reqwest (blocking)
-  transport. Buildable with **cargo and Bazel**.
+  transport. Built with **cargo**.
+- `examples/` — runnable examples (`gerrit-sdk-examples`): `get-change-detail`
+  (anonymous GET → colored, Web-UI-style summary) and `post-comment` (authenticated
+  POST), building against the in-repo crate.
 - `rest-api-openapi.json` — the pinned spec snapshot (step 2 above).
 - `generate.sh`, `postprocess.sh`, `fix-query-collision.py` — the generation pipeline.
 
@@ -82,9 +85,9 @@ Four narrow fixes over the generator output, each guarded by a match-count asser
 3. **Gerrit XSSI guard** — every Gerrit JSON body starts with `)]}'` on its own line,
    stripped before parsing. **Genuinely not expressible in OpenAPI** — the one
    irreducible Gerrit-specific step.
-4. **reqwest `native-tls`** — enabled on the dep directly, because Bazel /
-   crate_universe doesn't turn on the crate's `default` feature (so TLS would be off and
-   reqwest marked incompatible).
+4. **reqwest `native-tls`** — openapi-generator emits the reqwest dep with
+   `default-features = false`, which turns off its TLS backend; this re-enables one so
+   HTTPS requests work.
 
 (1) and (2) are upstream openapi-generator rough edges; (3) is Gerrit protocol; (4) is
 packaging. The metadata that used to need patching — license, version, server order —
@@ -94,16 +97,28 @@ now comes straight from the spec's `info.license` / `info.version` / `servers` (
 ## Build
 
 ```bash
-# cargo
 cd client && cargo build
-
-# Bazel (rules_rust + crate_universe; checked-in cargo-bazel-lock.json)
-bazel build //client:gerrit_client
 ```
 
-## Use it from a consumer
+## Use it
 
-**Cargo** — a git dependency pinned to the tag (no crates.io):
+### Run the examples — local, no publish needed
+
+The examples build against the in-repo crate, so they hit a live Gerrit with nothing
+published:
+
+```bash
+cargo run -p gerrit-sdk-examples --bin get-change-detail -- --change 621763
+
+# authenticated POST -- run ONLY against a local dev Gerrit:
+cargo run -p gerrit-sdk-examples --bin post-comment -- \
+  --url http://localhost:8080 --user admin --token <http-password> \
+  --change 1 --comment "Reviewed via the generated Rust SDK"
+```
+
+### From your own crate — external
+
+A git dependency pinned to the tag (no crates.io):
 
 ```toml
 [dependencies]
@@ -118,12 +133,6 @@ let cfg = Configuration::new(); // defaults to the public, anonymous base URL
 let change = changes_api::get_changes_change_id(&cfg, "621763", None, None, None)?;
 println!("{}", change.subject.unwrap_or_default());
 ```
-
-**Bazel** — `git_override` on the same tag, then `all_crate_deps()`.
-
-A full worked example (two demos: an anonymous GET rendering a Web-UI-style change
-summary, and an authenticated POST) lives in
-[`davido/gerrit-sdk-rust-client`](https://github.com/davido/gerrit-sdk-rust-client).
 
 ## Status
 

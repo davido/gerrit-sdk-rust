@@ -1,7 +1,4 @@
 # Rust build output
 target/
 
-# Bazel symlinks
-/bazel-*
-
 .DS_Store

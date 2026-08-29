@@ -253,6 +253,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "gerrit-sdk-examples"
+version = "0.1.0"
+dependencies = [
+ "gerrit_client",
+]
+
+[[package]]
 name = "gerrit_client"
 version = "3.15.0-snapshot"
 dependencies = [

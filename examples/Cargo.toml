@@ -1,0 +1,13 @@
+[package]
+name = "gerrit-sdk-examples"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Runnable examples for the generated Gerrit Rust SDK (gerrit_client)."
+publish = false
+
+[dependencies]
+# The in-repo SDK crate, by path -- the examples build against the local source, so
+# they run against a live Gerrit with nothing published. External consumers instead
+# pin the git tag (see the README).
+gerrit_client = { path = "../client" }
