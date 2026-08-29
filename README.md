@@ -116,6 +116,19 @@ cargo run -p gerrit-sdk-examples --bin post-comment -- \
   --change 1 --comment "Reviewed via the generated Rust SDK"
 ```
 
+### Run an example from GitHub — no clone
+
+Install the example binary straight from the tag, then run it:
+
+```bash
+cargo install --git https://github.com/davido/gerrit-sdk-rust.git \
+  --tag v3.15.0-SNAPSHOT --bin get-change-detail gerrit-sdk-examples
+get-change-detail --change 622261        # installed to ~/.cargo/bin
+```
+
+The first run is a **cold build** (a minute or two): cargo clones the repo and compiles
+the whole generated crate and its dependency tree from source — it is not hung.
+
 ### From your own crate — external
 
 A git dependency pinned to the tag (no crates.io):
