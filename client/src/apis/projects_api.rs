@@ -62,7 +62,7 @@ pub enum DeleteProjectsProjectIdTagsTagIdError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetProjectsError {
-    DefaultResponse(serde_json::Value),
+    DefaultResponse(models::GetProjectsDefaultResponse),
     UnknownValue(serde_json::Value),
 }
 
@@ -94,11 +94,17 @@ pub enum GetProjectsProjectIdBranchesBranchIdError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`get_projects_project_id_branches_branch_id_files`]
+/// struct for typed errors of method [`get_projects_project_id_branches_branch_id_files_file_id_content`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetProjectsProjectIdBranchesBranchIdFilesError {
-    DefaultResponse(serde_json::Value),
+pub enum GetProjectsProjectIdBranchesBranchIdFilesFileIdContentError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_projects_project_id_branches_branch_id_files_file_id_diff`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetProjectsProjectIdBranchesBranchIdFilesFileIdDiffError {
     UnknownValue(serde_json::Value),
 }
 
@@ -148,14 +154,6 @@ pub enum GetProjectsProjectIdChildrenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetProjectsProjectIdChildrenChildProjectIdError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`get_projects_project_id_commits`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum GetProjectsProjectIdCommitsError {
-    DefaultResponse(serde_json::Value),
     UnknownValue(serde_json::Value),
 }
 
@@ -729,11 +727,71 @@ pub fn delete_projects_project_id_tags_tag_id(configuration: &configuration::Con
 }
 
 /// Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
-pub fn get_projects(configuration: &configuration::Configuration, ) -> Result<serde_json::Value, Error<GetProjectsError>> {
+pub fn get_projects(configuration: &configuration::Configuration, all: Option<bool>, description: Option<bool>, format: Option<&str>, has_acl_for: Option<&str>, limit: Option<i32>, r#match: Option<&str>, prefix: Option<&str>, query: Option<&str>, r: Option<&str>, show_branch: Option<Vec<String>>, start: Option<i32>, state: Option<&str>, tree: Option<bool>, r#type: Option<&str>) -> Result<models::GetProjectsDefaultResponse, Error<GetProjectsError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_query_all = all;
+    let p_query_description = description;
+    let p_query_format = format;
+    let p_query_has_acl_for = has_acl_for;
+    let p_query_limit = limit;
+    let p_query_match = r#match;
+    let p_query_prefix = prefix;
+    let p_query_query = query;
+    let p_query_r = r;
+    let p_query_show_branch = show_branch;
+    let p_query_start = start;
+    let p_query_state = state;
+    let p_query_tree = tree;
+    let p_query_type = r#type;
 
     let uri_str = format!("{}/projects", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_query_all {
+        req_builder = req_builder.query(&[("all", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_description {
+        req_builder = req_builder.query(&[("description", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_format {
+        req_builder = req_builder.query(&[("format", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_has_acl_for {
+        req_builder = req_builder.query(&[("has-acl-for", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_limit {
+        req_builder = req_builder.query(&[("limit", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_match {
+        req_builder = req_builder.query(&[("match", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_prefix {
+        req_builder = req_builder.query(&[("prefix", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_query {
+        req_builder = req_builder.query(&[("query", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_r {
+        req_builder = req_builder.query(&[("r", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_show_branch {
+        req_builder = match "multi" {
+            "multi" => req_builder.query(&param_value.into_iter().map(|p| ("show-branch".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => req_builder.query(&[("show-branch", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
+    }
+    if let Some(ref param_value) = p_query_start {
+        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_state {
+        req_builder = req_builder.query(&[("state", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_tree {
+        req_builder = req_builder.query(&[("tree", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_type {
+        req_builder = req_builder.query(&[("type", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -757,8 +815,8 @@ pub fn get_projects(configuration: &configuration::Configuration, ) -> Result<se
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetProjectsDefaultResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetProjectsDefaultResponse`")))),
         }
     } else {
         let content = resp.text()?;
@@ -957,14 +1015,59 @@ pub fn get_projects_project_id_branches_branch_id(configuration: &configuration:
     }
 }
 
-pub fn get_projects_project_id_branches_branch_id_files(configuration: &configuration::Configuration, project_id: &str, branch_id: &str) -> Result<serde_json::Value, Error<GetProjectsProjectIdBranchesBranchIdFilesError>> {
+/// Gets the content of a file from the HEAD revision of a certain branch.
+pub fn get_projects_project_id_branches_branch_id_files_file_id_content(configuration: &configuration::Configuration, project_id: &str, branch_id: &str, file_id: &str) -> Result<reqwest::blocking::Response, Error<GetProjectsProjectIdBranchesBranchIdFilesFileIdContentError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;
     let p_path_branch_id = branch_id;
+    let p_path_file_id = file_id;
 
-    let uri_str = format!("{}/projects/{project_id}/branches/{branch_id}/files", configuration.base_path, project_id=crate::apis::urlencode(p_path_project_id), branch_id=crate::apis::urlencode(p_path_branch_id));
+    let uri_str = format!("{}/projects/{project_id}/branches/{branch_id}/files/{file_id}/content", configuration.base_path, project_id=crate::apis::urlencode(p_path_project_id), branch_id=crate::apis::urlencode(p_path_branch_id), file_id=crate::apis::urlencode(p_path_file_id));
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        Ok(resp)
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetProjectsProjectIdBranchesBranchIdFilesFileIdContentError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+pub fn get_projects_project_id_branches_branch_id_files_file_id_diff(configuration: &configuration::Configuration, project_id: &str, branch_id: &str, file_id: &str, base: Option<&str>, intraline: Option<bool>, whitespace: Option<&str>) -> Result<models::DiffInfo, Error<GetProjectsProjectIdBranchesBranchIdFilesFileIdDiffError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_project_id = project_id;
+    let p_path_branch_id = branch_id;
+    let p_path_file_id = file_id;
+    let p_query_base = base;
+    let p_query_intraline = intraline;
+    let p_query_whitespace = whitespace;
+
+    let uri_str = format!("{}/projects/{project_id}/branches/{branch_id}/files/{file_id}/diff", configuration.base_path, project_id=crate::apis::urlencode(p_path_project_id), branch_id=crate::apis::urlencode(p_path_branch_id), file_id=crate::apis::urlencode(p_path_file_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref param_value) = p_query_base {
+        req_builder = req_builder.query(&[("base", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_intraline {
+        req_builder = req_builder.query(&[("intraline", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_whitespace {
+        req_builder = req_builder.query(&[("whitespace", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -988,13 +1091,13 @@ pub fn get_projects_project_id_branches_branch_id_files(configuration: &configur
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::DiffInfo`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::DiffInfo`")))),
         }
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<GetProjectsProjectIdBranchesBranchIdFilesError> = serde_json::from_str(&content).ok();
+        let entity: Option<GetProjectsProjectIdBranchesBranchIdFilesFileIdDiffError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -1352,47 +1455,6 @@ pub fn get_projects_project_id_children_child_project_id(configuration: &configu
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetProjectsProjectIdChildrenChildProjectIdError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-pub fn get_projects_project_id_commits(configuration: &configuration::Configuration, project_id: &str) -> Result<serde_json::Value, Error<GetProjectsProjectIdCommitsError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_project_id = project_id;
-
-    let uri_str = format!("{}/projects/{project_id}/commits", configuration.base_path, project_id=crate::apis::urlencode(p_path_project_id));
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref auth_conf) = configuration.basic_auth {
-        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req)?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text()?;
-        let content = crate::xssi::strip(&content).to_string();
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
-        }
-    } else {
-        let content = resp.text()?;
-        let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<GetProjectsProjectIdCommitsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

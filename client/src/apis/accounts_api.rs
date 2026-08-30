@@ -38,6 +38,13 @@ pub enum DeleteAccountsAccountIdEmailsEmailIdError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`delete_accounts_account_id_gpgkeys_gpg_key_id`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteAccountsAccountIdGpgkeysGpgKeyIdError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`delete_accounts_account_id_name`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -160,6 +167,20 @@ pub enum GetAccountsAccountIdExternalIdsError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`get_accounts_account_id_gpgkeys`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAccountsAccountIdGpgkeysError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_accounts_account_id_gpgkeys_gpg_key_id`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAccountsAccountIdGpgkeysGpgKeyIdError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`get_accounts_account_id_groups`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -171,6 +192,13 @@ pub enum GetAccountsAccountIdGroupsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetAccountsAccountIdNameError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_accounts_account_id_oauthtoken`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAccountsAccountIdOauthtokenError {
     UnknownValue(serde_json::Value),
 }
 
@@ -263,6 +291,13 @@ pub enum PostAccountsAccountIdDraftsDeleteError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PostAccountsAccountIdExternalIdsDeleteError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`post_accounts_account_id_gpgkeys`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostAccountsAccountIdGpgkeysError {
     UnknownValue(serde_json::Value),
 }
 
@@ -528,6 +563,37 @@ pub fn delete_accounts_account_id_emails_email_id(configuration: &configuration:
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<DeleteAccountsAccountIdEmailsEmailIdError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Deletes a GPG key of a user.
+pub fn delete_accounts_account_id_gpgkeys_gpg_key_id(configuration: &configuration::Configuration, account_id: &str, gpg_key_id: &str) -> Result<(), Error<DeleteAccountsAccountIdGpgkeysGpgKeyIdError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_account_id = account_id;
+    let p_path_gpg_key_id = gpg_key_id;
+
+    let uri_str = format!("{}/accounts/{account_id}/gpgkeys/{gpg_key_id}", configuration.base_path, account_id=crate::apis::urlencode(p_path_account_id), gpg_key_id=crate::apis::urlencode(p_path_gpg_key_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        Ok(())
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<DeleteAccountsAccountIdGpgkeysGpgKeyIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -1252,6 +1318,91 @@ pub fn get_accounts_account_id_external_ids(configuration: &configuration::Confi
     }
 }
 
+/// Returns the GPG keys of an account.
+pub fn get_accounts_account_id_gpgkeys(configuration: &configuration::Configuration, account_id: &str) -> Result<std::collections::HashMap<String, models::GpgKeyInfo>, Error<GetAccountsAccountIdGpgkeysError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_account_id = account_id;
+
+    let uri_str = format!("{}/accounts/{account_id}/gpgkeys", configuration.base_path, account_id=crate::apis::urlencode(p_path_account_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::GpgKeyInfo&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::GpgKeyInfo&gt;`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetAccountsAccountIdGpgkeysError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Retrieves a GPG key of a user.
+pub fn get_accounts_account_id_gpgkeys_gpg_key_id(configuration: &configuration::Configuration, account_id: &str, gpg_key_id: &str) -> Result<models::GpgKeyInfo, Error<GetAccountsAccountIdGpgkeysGpgKeyIdError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_account_id = account_id;
+    let p_path_gpg_key_id = gpg_key_id;
+
+    let uri_str = format!("{}/accounts/{account_id}/gpgkeys/{gpg_key_id}", configuration.base_path, account_id=crate::apis::urlencode(p_path_account_id), gpg_key_id=crate::apis::urlencode(p_path_gpg_key_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GpgKeyInfo`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GpgKeyInfo`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetAccountsAccountIdGpgkeysGpgKeyIdError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
 /// Lists all groups that contain the specified user as a member.
 pub fn get_accounts_account_id_groups(configuration: &configuration::Configuration, account_id: &str) -> Result<Vec<models::GroupInfo>, Error<GetAccountsAccountIdGroupsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
@@ -1332,6 +1483,48 @@ pub fn get_accounts_account_id_name(configuration: &configuration::Configuration
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetAccountsAccountIdNameError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Returns a previously obtained OAuth access token.
+pub fn get_accounts_account_id_oauthtoken(configuration: &configuration::Configuration, account_id: &str) -> Result<models::OAuthTokenInfo, Error<GetAccountsAccountIdOauthtokenError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_account_id = account_id;
+
+    let uri_str = format!("{}/accounts/{account_id}/oauthtoken", configuration.base_path, account_id=crate::apis::urlencode(p_path_account_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::OAuthTokenInfo`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::OAuthTokenInfo`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetAccountsAccountIdOauthtokenError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -1871,6 +2064,50 @@ pub fn post_accounts_account_id_external_ids_delete(configuration: &configuratio
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostAccountsAccountIdExternalIdsDeleteError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Add or delete one or more GPG keys for a user.
+pub fn post_accounts_account_id_gpgkeys(configuration: &configuration::Configuration, account_id: &str, gpg_keys_input: Option<models::GpgKeysInput>) -> Result<std::collections::HashMap<String, models::GpgKeyInfo>, Error<PostAccountsAccountIdGpgkeysError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_account_id = account_id;
+    let p_body_gpg_keys_input = gpg_keys_input;
+
+    let uri_str = format!("{}/accounts/{account_id}/gpgkeys", configuration.base_path, account_id=crate::apis::urlencode(p_path_account_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+    req_builder = req_builder.json(&p_body_gpg_keys_input);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::GpgKeyInfo&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::GpgKeyInfo&gt;`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<PostAccountsAccountIdGpgkeysError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

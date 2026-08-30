@@ -15,7 +15,8 @@ Method | HTTP request | Description
 [**get_projects_project_id_access**](ProjectsApi.md#get_projects_project_id_access) | **GET** /projects/{project_id}/access | List Access Rights for Project
 [**get_projects_project_id_branches**](ProjectsApi.md#get_projects_project_id_branches) | **GET** /projects/{project_id}/branches | List branches
 [**get_projects_project_id_branches_branch_id**](ProjectsApi.md#get_projects_project_id_branches_branch_id) | **GET** /projects/{project_id}/branches/{branch_id} | Get Branch
-[**get_projects_project_id_branches_branch_id_files**](ProjectsApi.md#get_projects_project_id_branches_branch_id_files) | **GET** /projects/{project_id}/branches/{branch_id}/files | 
+[**get_projects_project_id_branches_branch_id_files_file_id_content**](ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_content) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/content | Get Content
+[**get_projects_project_id_branches_branch_id_files_file_id_diff**](ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_diff) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/diff | 
 [**get_projects_project_id_branches_branch_id_mergeable**](ProjectsApi.md#get_projects_project_id_branches_branch_id_mergeable) | **GET** /projects/{project_id}/branches/{branch_id}/mergeable | Get Mergeable Information
 [**get_projects_project_id_branches_branch_id_reflog**](ProjectsApi.md#get_projects_project_id_branches_branch_id_reflog) | **GET** /projects/{project_id}/branches/{branch_id}/reflog | Get Reflog
 [**get_projects_project_id_branches_branch_id_suggest_reviewers**](ProjectsApi.md#get_projects_project_id_branches_branch_id_suggest_reviewers) | **GET** /projects/{project_id}/branches/{branch_id}/suggest_reviewers | Suggest Reviewers
@@ -23,7 +24,6 @@ Method | HTTP request | Description
 [**get_projects_project_id_check_access**](ProjectsApi.md#get_projects_project_id_check_access) | **GET** /projects/{project_id}/check.access | Check Access
 [**get_projects_project_id_children**](ProjectsApi.md#get_projects_project_id_children) | **GET** /projects/{project_id}/children | List Child Projects
 [**get_projects_project_id_children_child_project_id**](ProjectsApi.md#get_projects_project_id_children_child_project_id) | **GET** /projects/{project_id}/children/{child_project_id} | Get Child Project
-[**get_projects_project_id_commits**](ProjectsApi.md#get_projects_project_id_commits) | **GET** /projects/{project_id}/commits | 
 [**get_projects_project_id_commits_commit_id**](ProjectsApi.md#get_projects_project_id_commits_commit_id) | **GET** /projects/{project_id}/commits/{commit_id} | Get Commit
 [**get_projects_project_id_commits_commit_id_diff**](ProjectsApi.md#get_projects_project_id_commits_commit_id_diff) | **GET** /projects/{project_id}/commits/{commit_id}/diff | Diff Between Commits
 [**get_projects_project_id_commits_commit_id_files**](ProjectsApi.md#get_projects_project_id_commits_commit_id_files) | **GET** /projects/{project_id}/commits/{commit_id}/files | List Files
@@ -264,18 +264,34 @@ Name | Type | Description  | Required | Notes
 
 ## get_projects
 
-> serde_json::Value get_projects()
+> models::GetProjectsDefaultResponse get_projects(all, description, format, has_acl_for, limit, r#match, prefix, query, r, show_branch, start, state, tree, r#type)
 List projects
 
 Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**all** | Option<**bool**> |  |  |
+**description** | Option<**bool**> |  |  |
+**format** | Option<**String**> |  |  |
+**has_acl_for** | Option<**String**> |  |  |
+**limit** | Option<**i32**> |  |  |
+**r#match** | Option<**String**> |  |  |
+**prefix** | Option<**String**> |  |  |
+**query** | Option<**String**> |  |  |
+**r** | Option<**String**> |  |  |
+**show_branch** | Option<[**Vec<String>**](String.md)> |  |  |
+**start** | Option<**i32**> |  |  |
+**state** | Option<**String**> |  |  |
+**tree** | Option<**bool**> |  |  |
+**r#type** | Option<**String**> |  |  |
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**models::GetProjectsDefaultResponse**](getProjects_default_response.md)
 
 ### Authorization
 
@@ -415,9 +431,41 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## get_projects_project_id_branches_branch_id_files
+## get_projects_project_id_branches_branch_id_files_file_id_content
 
-> serde_json::Value get_projects_project_id_branches_branch_id_files(project_id, branch_id)
+> std::path::PathBuf get_projects_project_id_branches_branch_id_files_file_id_content(project_id, branch_id, file_id)
+Get Content
+
+Gets the content of a file from the HEAD revision of a certain branch.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**project_id** | **String** |  | [required] |
+**branch_id** | **String** |  | [required] |
+**file_id** | **String** |  | [required] |
+
+### Return type
+
+[**std::path::PathBuf**](std::path::PathBuf.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_projects_project_id_branches_branch_id_files_file_id_diff
+
+> models::DiffInfo get_projects_project_id_branches_branch_id_files_file_id_diff(project_id, branch_id, file_id, base, intraline, whitespace)
 
 
 ### Parameters
@@ -427,10 +475,14 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **project_id** | **String** |  | [required] |
 **branch_id** | **String** |  | [required] |
+**file_id** | **String** |  | [required] |
+**base** | Option<**String**> |  |  |
+**intraline** | Option<**bool**> |  |  |
+**whitespace** | Option<**String**> |  |  |
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**models::DiffInfo**](DiffInfo.md)
 
 ### Authorization
 
@@ -661,34 +713,6 @@ Name | Type | Description  | Required | Notes
 ### Return type
 
 [**models::ProjectInfo**](ProjectInfo.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## get_projects_project_id_commits
-
-> serde_json::Value get_projects_project_id_commits(project_id)
-
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**project_id** | **String** |  | [required] |
-
-### Return type
-
-[**serde_json::Value**](serde_json::Value.md)
 
 ### Authorization
 

@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**delete_accounts_account_id**](AccountsApi.md#delete_accounts_account_id) | **DELETE** /accounts/{account_id} | Delete Account
 [**delete_accounts_account_id_active**](AccountsApi.md#delete_accounts_account_id_active) | **DELETE** /accounts/{account_id}/active | Delete Active
 [**delete_accounts_account_id_emails_email_id**](AccountsApi.md#delete_accounts_account_id_emails_email_id) | **DELETE** /accounts/{account_id}/emails/{email_id} | Delete Account Email
+[**delete_accounts_account_id_gpgkeys_gpg_key_id**](AccountsApi.md#delete_accounts_account_id_gpgkeys_gpg_key_id) | **DELETE** /accounts/{account_id}/gpgkeys/{gpg_key_id} | Delete GPG Key
 [**delete_accounts_account_id_name**](AccountsApi.md#delete_accounts_account_id_name) | **DELETE** /accounts/{account_id}/name | Delete Account Name
 [**delete_accounts_account_id_password_http**](AccountsApi.md#delete_accounts_account_id_password_http) | **DELETE** /accounts/{account_id}/password.http | Delete HTTP Password
 [**delete_accounts_account_id_sshkeys_ssh_key_id**](AccountsApi.md#delete_accounts_account_id_sshkeys_ssh_key_id) | **DELETE** /accounts/{account_id}/sshkeys/{ssh_key_id} | Delete SSH Key
@@ -24,8 +25,11 @@ Method | HTTP request | Description
 [**get_accounts_account_id_emails**](AccountsApi.md#get_accounts_account_id_emails) | **GET** /accounts/{account_id}/emails | List Account Emails
 [**get_accounts_account_id_emails_email_id**](AccountsApi.md#get_accounts_account_id_emails_email_id) | **GET** /accounts/{account_id}/emails/{email_id} | Get Account Email
 [**get_accounts_account_id_external_ids**](AccountsApi.md#get_accounts_account_id_external_ids) | **GET** /accounts/{account_id}/external.ids | Get Account External IDs
+[**get_accounts_account_id_gpgkeys**](AccountsApi.md#get_accounts_account_id_gpgkeys) | **GET** /accounts/{account_id}/gpgkeys | List GPG Keys
+[**get_accounts_account_id_gpgkeys_gpg_key_id**](AccountsApi.md#get_accounts_account_id_gpgkeys_gpg_key_id) | **GET** /accounts/{account_id}/gpgkeys/{gpg_key_id} | Get GPG Key
 [**get_accounts_account_id_groups**](AccountsApi.md#get_accounts_account_id_groups) | **GET** /accounts/{account_id}/groups | List Groups
 [**get_accounts_account_id_name**](AccountsApi.md#get_accounts_account_id_name) | **GET** /accounts/{account_id}/name | Get Account Name
+[**get_accounts_account_id_oauthtoken**](AccountsApi.md#get_accounts_account_id_oauthtoken) | **GET** /accounts/{account_id}/oauthtoken | Get OAuth Access Token
 [**get_accounts_account_id_preferences**](AccountsApi.md#get_accounts_account_id_preferences) | **GET** /accounts/{account_id}/preferences | Get User Preferences
 [**get_accounts_account_id_preferences_diff**](AccountsApi.md#get_accounts_account_id_preferences_diff) | **GET** /accounts/{account_id}/preferences.diff | Get Diff Preferences
 [**get_accounts_account_id_preferences_edit**](AccountsApi.md#get_accounts_account_id_preferences_edit) | **GET** /accounts/{account_id}/preferences.edit | Get Edit Preferences
@@ -39,6 +43,7 @@ Method | HTTP request | Description
 [**get_accounts_account_id_watched_projects**](AccountsApi.md#get_accounts_account_id_watched_projects) | **GET** /accounts/{account_id}/watched.projects | Get Watched Projects
 [**post_accounts_account_id_drafts_delete**](AccountsApi.md#post_accounts_account_id_drafts_delete) | **POST** /accounts/{account_id}/drafts:delete | Delete Draft Comments
 [**post_accounts_account_id_external_ids_delete**](AccountsApi.md#post_accounts_account_id_external_ids_delete) | **POST** /accounts/{account_id}/external.ids:delete | Delete Account External IDs
+[**post_accounts_account_id_gpgkeys**](AccountsApi.md#post_accounts_account_id_gpgkeys) | **POST** /accounts/{account_id}/gpgkeys | Add/Delete GPG Keys
 [**post_accounts_account_id_index**](AccountsApi.md#post_accounts_account_id_index) | **POST** /accounts/{account_id}/index | Index Account
 [**post_accounts_account_id_sshkeys**](AccountsApi.md#post_accounts_account_id_sshkeys) | **POST** /accounts/{account_id}/sshkeys | Add SSH Key
 [**post_accounts_account_id_watched_projects**](AccountsApi.md#post_accounts_account_id_watched_projects) | **POST** /accounts/{account_id}/watched.projects | Add/Update a List of Watched Project Entities
@@ -149,6 +154,37 @@ Name | Type | Description  | Required | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## delete_accounts_account_id_gpgkeys_gpg_key_id
+
+> delete_accounts_account_id_gpgkeys_gpg_key_id(account_id, gpg_key_id)
+Delete GPG Key
+
+Deletes a GPG key of a user.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**account_id** | **String** |  | [required] |
+**gpg_key_id** | **String** |  | [required] |
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -675,6 +711,67 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
+## get_accounts_account_id_gpgkeys
+
+> std::collections::HashMap<String, models::GpgKeyInfo> get_accounts_account_id_gpgkeys(account_id)
+List GPG Keys
+
+Returns the GPG keys of an account.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**account_id** | **String** |  | [required] |
+
+### Return type
+
+[**std::collections::HashMap<String, models::GpgKeyInfo>**](GpgKeyInfo.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_accounts_account_id_gpgkeys_gpg_key_id
+
+> models::GpgKeyInfo get_accounts_account_id_gpgkeys_gpg_key_id(account_id, gpg_key_id)
+Get GPG Key
+
+Retrieves a GPG key of a user.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**account_id** | **String** |  | [required] |
+**gpg_key_id** | **String** |  | [required] |
+
+### Return type
+
+[**models::GpgKeyInfo**](GpgKeyInfo.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
 ## get_accounts_account_id_groups
 
 > Vec<models::GroupInfo> get_accounts_account_id_groups(account_id)
@@ -722,6 +819,36 @@ Name | Type | Description  | Required | Notes
 ### Return type
 
 **String**
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_accounts_account_id_oauthtoken
+
+> models::OAuthTokenInfo get_accounts_account_id_oauthtoken(account_id)
+Get OAuth Access Token
+
+Returns a previously obtained OAuth access token.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**account_id** | **String** |  | [required] |
+
+### Return type
+
+[**models::OAuthTokenInfo**](OAuthTokenInfo.md)
 
 ### Authorization
 
@@ -1124,6 +1251,37 @@ Name | Type | Description  | Required | Notes
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## post_accounts_account_id_gpgkeys
+
+> std::collections::HashMap<String, models::GpgKeyInfo> post_accounts_account_id_gpgkeys(account_id, gpg_keys_input)
+Add/Delete GPG Keys
+
+Add or delete one or more GPG keys for a user.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**account_id** | **String** |  | [required] |
+**gpg_keys_input** | Option<[**GpgKeysInput**](GpgKeysInput.md)> |  |  |
+
+### Return type
+
+[**std::collections::HashMap<String, models::GpgKeyInfo>**](GpgKeyInfo.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

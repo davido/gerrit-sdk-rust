@@ -66,6 +66,20 @@ pub enum DeleteChangesChangeIdPrivateError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`delete_changes_change_id_reviewers_reviewer_id`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteChangesChangeIdReviewersReviewerIdError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`delete_changes_change_id_reviewers_reviewer_id_votes_vote_id`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteChangesChangeIdReviewersReviewerIdVotesVoteIdError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`delete_changes_change_id_revisions_revision_id_comments_comment_id`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -284,11 +298,17 @@ pub enum GetChangesChangeIdReviewersError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`get_changes_change_id_revisions`]
+/// struct for typed errors of method [`get_changes_change_id_reviewers_reviewer_id`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetChangesChangeIdRevisionsError {
-    DefaultResponse(serde_json::Value),
+pub enum GetChangesChangeIdReviewersReviewerIdError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_changes_change_id_reviewers_reviewer_id_votes`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetChangesChangeIdReviewersReviewerIdVotesError {
     UnknownValue(serde_json::Value),
 }
 
@@ -387,14 +407,6 @@ pub enum GetChangesChangeIdRevisionsRevisionIdFilesFileIdDiffError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetChangesChangeIdRevisionsRevisionIdFilesFileIdDownloadError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`get_changes_change_id_revisions_revision_id_fixes`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum GetChangesChangeIdRevisionsRevisionIdFixesError {
-    DefaultResponse(serde_json::Value),
     UnknownValue(serde_json::Value),
 }
 
@@ -709,6 +721,28 @@ pub enum PostChangesChangeIdRevertError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PostChangesChangeIdRevertSubmissionError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`post_changes_change_id_reviewers`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostChangesChangeIdReviewersError {
+    DefaultResponse(models::ReviewerResult),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`post_changes_change_id_reviewers_reviewer_id_delete`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostChangesChangeIdReviewersReviewerIdDeleteError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`post_changes_change_id_reviewers_reviewer_id_votes_vote_id_delete`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostChangesChangeIdReviewersReviewerIdVotesVoteIdDeleteError {
     UnknownValue(serde_json::Value),
 }
 
@@ -1119,6 +1153,69 @@ pub fn delete_changes_change_id_private(configuration: &configuration::Configura
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<DeleteChangesChangeIdPrivateError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// 'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/delete' --
+pub fn delete_changes_change_id_reviewers_reviewer_id(configuration: &configuration::Configuration, change_id: &str, reviewer_id: &str) -> Result<(), Error<DeleteChangesChangeIdReviewersReviewerIdError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_change_id = change_id;
+    let p_path_reviewer_id = reviewer_id;
+
+    let uri_str = format!("{}/changes/{change_id}/reviewers/{reviewer_id}", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id), reviewer_id=crate::apis::urlencode(p_path_reviewer_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        Ok(())
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<DeleteChangesChangeIdReviewersReviewerIdError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// 'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/votes/\\{label-id\\}/delete' --
+pub fn delete_changes_change_id_reviewers_reviewer_id_votes_vote_id(configuration: &configuration::Configuration, change_id: &str, reviewer_id: &str, vote_id: &str) -> Result<(), Error<DeleteChangesChangeIdReviewersReviewerIdVotesVoteIdError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_change_id = change_id;
+    let p_path_reviewer_id = reviewer_id;
+    let p_path_vote_id = vote_id;
+
+    let uri_str = format!("{}/changes/{change_id}/reviewers/{reviewer_id}/votes/{vote_id}", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id), reviewer_id=crate::apis::urlencode(p_path_reviewer_id), vote_id=crate::apis::urlencode(p_path_vote_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        Ok(())
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<DeleteChangesChangeIdReviewersReviewerIdVotesVoteIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -2481,11 +2578,13 @@ pub fn get_changes_change_id_reviewers(configuration: &configuration::Configurat
     }
 }
 
-pub fn get_changes_change_id_revisions(configuration: &configuration::Configuration, change_id: &str) -> Result<serde_json::Value, Error<GetChangesChangeIdRevisionsError>> {
+/// Retrieves a reviewer of a change.
+pub fn get_changes_change_id_reviewers_reviewer_id(configuration: &configuration::Configuration, change_id: &str, reviewer_id: &str) -> Result<Vec<models::ReviewerInfo>, Error<GetChangesChangeIdReviewersReviewerIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
+    let p_path_reviewer_id = reviewer_id;
 
-    let uri_str = format!("{}/changes/{change_id}/revisions", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id));
+    let uri_str = format!("{}/changes/{change_id}/reviewers/{reviewer_id}", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id), reviewer_id=crate::apis::urlencode(p_path_reviewer_id));
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -2511,13 +2610,56 @@ pub fn get_changes_change_id_revisions(configuration: &configuration::Configurat
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::ReviewerInfo&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `Vec&lt;models::ReviewerInfo&gt;`")))),
         }
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<GetChangesChangeIdRevisionsError> = serde_json::from_str(&content).ok();
+        let entity: Option<GetChangesChangeIdReviewersReviewerIdError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Lists the votes for a specific reviewer of the change.
+pub fn get_changes_change_id_reviewers_reviewer_id_votes(configuration: &configuration::Configuration, change_id: &str, reviewer_id: &str) -> Result<std::collections::HashMap<String, i32>, Error<GetChangesChangeIdReviewersReviewerIdVotesError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_change_id = change_id;
+    let p_path_reviewer_id = reviewer_id;
+
+    let uri_str = format!("{}/changes/{change_id}/reviewers/{reviewer_id}/votes", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id), reviewer_id=crate::apis::urlencode(p_path_reviewer_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, i32&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `std::collections::HashMap&lt;String, i32&gt;`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetChangesChangeIdReviewersReviewerIdVotesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -2907,7 +3049,7 @@ pub fn get_changes_change_id_revisions_revision_id_drafts_draft_comment_id(confi
 }
 
 /// Lists the files that were added, modified, or deleted in a revision.
-pub fn get_changes_change_id_revisions_revision_id_files(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, base: Option<&str>, parent: Option<i32>, q: Option<&str>, reviewed: Option<bool>) -> Result<serde_json::Value, Error<GetChangesChangeIdRevisionsRevisionIdFilesError>> {
+pub fn get_changes_change_id_revisions_revision_id_files(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, base: Option<&str>, parent: Option<i32>, q: Option<&str>, reviewed: Option<bool>) -> Result<std::collections::HashMap<String, models::CommonFileInfo>, Error<GetChangesChangeIdRevisionsRevisionIdFilesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
     let p_path_revision_id = revision_id;
@@ -2954,8 +3096,8 @@ pub fn get_changes_change_id_revisions_revision_id_files(configuration: &configu
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::CommonFileInfo&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::CommonFileInfo&gt;`")))),
         }
     } else {
         let content = resp.text()?;
@@ -3149,48 +3291,6 @@ pub fn get_changes_change_id_revisions_revision_id_files_file_id_download(config
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetChangesChangeIdRevisionsRevisionIdFilesFileIdDownloadError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-pub fn get_changes_change_id_revisions_revision_id_fixes(configuration: &configuration::Configuration, change_id: &str, revision_id: &str) -> Result<serde_json::Value, Error<GetChangesChangeIdRevisionsRevisionIdFixesError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_change_id = change_id;
-    let p_path_revision_id = revision_id;
-
-    let uri_str = format!("{}/changes/{change_id}/revisions/{revision_id}/fixes", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id), revision_id=crate::apis::urlencode(p_path_revision_id));
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref auth_conf) = configuration.basic_auth {
-        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req)?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text()?;
-        let content = crate::xssi::strip(&content).to_string();
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
-        }
-    } else {
-        let content = resp.text()?;
-        let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<GetChangesChangeIdRevisionsRevisionIdFixesError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -5102,6 +5202,117 @@ pub fn post_changes_change_id_revert_submission(configuration: &configuration::C
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostChangesChangeIdRevertSubmissionError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Adds one user or all members of one group as reviewer to the change.
+pub fn post_changes_change_id_reviewers(configuration: &configuration::Configuration, change_id: &str, reviewer_input: Option<models::ReviewerInput>) -> Result<models::ReviewerResult, Error<PostChangesChangeIdReviewersError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_change_id = change_id;
+    let p_body_reviewer_input = reviewer_input;
+
+    let uri_str = format!("{}/changes/{change_id}/reviewers", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+    req_builder = req_builder.json(&p_body_reviewer_input);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::ReviewerResult`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::ReviewerResult`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<PostChangesChangeIdReviewersError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Deletes a reviewer from a change. Deleting a reviewer also removes that user from the attention set.
+pub fn post_changes_change_id_reviewers_reviewer_id_delete(configuration: &configuration::Configuration, change_id: &str, reviewer_id: &str, delete_reviewer_input: Option<models::DeleteReviewerInput>) -> Result<(), Error<PostChangesChangeIdReviewersReviewerIdDeleteError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_change_id = change_id;
+    let p_path_reviewer_id = reviewer_id;
+    let p_body_delete_reviewer_input = delete_reviewer_input;
+
+    let uri_str = format!("{}/changes/{change_id}/reviewers/{reviewer_id}/delete", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id), reviewer_id=crate::apis::urlencode(p_path_reviewer_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+    req_builder = req_builder.json(&p_body_delete_reviewer_input);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        Ok(())
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<PostChangesChangeIdReviewersReviewerIdDeleteError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Deletes a single vote from a change. Note, that even when the last vote of a reviewer is removed the reviewer itself is still listed on the change.
+pub fn post_changes_change_id_reviewers_reviewer_id_votes_vote_id_delete(configuration: &configuration::Configuration, change_id: &str, reviewer_id: &str, vote_id: &str, delete_vote_input: Option<models::DeleteVoteInput>) -> Result<(), Error<PostChangesChangeIdReviewersReviewerIdVotesVoteIdDeleteError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_change_id = change_id;
+    let p_path_reviewer_id = reviewer_id;
+    let p_path_vote_id = vote_id;
+    let p_body_delete_vote_input = delete_vote_input;
+
+    let uri_str = format!("{}/changes/{change_id}/reviewers/{reviewer_id}/votes/{vote_id}/delete", configuration.base_path, change_id=crate::apis::urlencode(p_path_change_id), reviewer_id=crate::apis::urlencode(p_path_reviewer_id), vote_id=crate::apis::urlencode(p_path_vote_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+    req_builder = req_builder.json(&p_body_delete_vote_input);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        Ok(())
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<PostChangesChangeIdReviewersReviewerIdVotesVoteIdDeleteError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

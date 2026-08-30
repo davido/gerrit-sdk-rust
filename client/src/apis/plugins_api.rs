@@ -29,31 +29,31 @@ pub enum GetPluginsError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`get_plugins_plugin_id_status`]
+/// struct for typed errors of method [`get_plugins_plugin_id_gerrit_status`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetPluginsPluginIdStatusError {
+pub enum GetPluginsPluginIdGerritStatusError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`post_plugins_plugin_id_disable`]
+/// struct for typed errors of method [`post_plugins_plugin_id_gerrit_disable`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum PostPluginsPluginIdDisableError {
+pub enum PostPluginsPluginIdGerritDisableError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`post_plugins_plugin_id_enable`]
+/// struct for typed errors of method [`post_plugins_plugin_id_gerrit_enable`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum PostPluginsPluginIdEnableError {
+pub enum PostPluginsPluginIdGerritEnableError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`post_plugins_plugin_id_reload`]
+/// struct for typed errors of method [`post_plugins_plugin_id_gerrit_reload`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum PostPluginsPluginIdReloadError {
+pub enum PostPluginsPluginIdGerritReloadError {
     UnknownValue(serde_json::Value),
 }
 
@@ -173,11 +173,12 @@ pub fn get_plugins(configuration: &configuration::Configuration, all: Option<boo
     }
 }
 
-pub fn get_plugins_plugin_id_status(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<GetPluginsPluginIdStatusError>> {
+/// Retrieves the status of a plugin on the Gerrit server.
+pub fn get_plugins_plugin_id_gerrit_status(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<GetPluginsPluginIdGerritStatusError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/plugins/{plugin_id}/status", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
+    let uri_str = format!("{}/plugins/{plugin_id}/gerrit~status", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -209,16 +210,16 @@ pub fn get_plugins_plugin_id_status(configuration: &configuration::Configuration
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<GetPluginsPluginIdStatusError> = serde_json::from_str(&content).ok();
+        let entity: Option<GetPluginsPluginIdGerritStatusError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn post_plugins_plugin_id_disable(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdDisableError>> {
+pub fn post_plugins_plugin_id_gerrit_disable(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdGerritDisableError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/plugins/{plugin_id}/disable", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
+    let uri_str = format!("{}/plugins/{plugin_id}/gerrit~disable", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -250,16 +251,17 @@ pub fn post_plugins_plugin_id_disable(configuration: &configuration::Configurati
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<PostPluginsPluginIdDisableError> = serde_json::from_str(&content).ok();
+        let entity: Option<PostPluginsPluginIdGerritDisableError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn post_plugins_plugin_id_enable(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdEnableError>> {
+/// Enables a plugin on the Gerrit server.
+pub fn post_plugins_plugin_id_gerrit_enable(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdGerritEnableError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/plugins/{plugin_id}/enable", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
+    let uri_str = format!("{}/plugins/{plugin_id}/gerrit~enable", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -291,16 +293,17 @@ pub fn post_plugins_plugin_id_enable(configuration: &configuration::Configuratio
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<PostPluginsPluginIdEnableError> = serde_json::from_str(&content).ok();
+        let entity: Option<PostPluginsPluginIdGerritEnableError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub fn post_plugins_plugin_id_reload(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdReloadError>> {
+/// Reloads a plugin on the Gerrit server.
+pub fn post_plugins_plugin_id_gerrit_reload(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdGerritReloadError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_plugin_id = plugin_id;
 
-    let uri_str = format!("{}/plugins/{plugin_id}/reload", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
+    let uri_str = format!("{}/plugins/{plugin_id}/gerrit~reload", configuration.base_path, plugin_id=crate::apis::urlencode(p_path_plugin_id));
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -332,7 +335,7 @@ pub fn post_plugins_plugin_id_reload(configuration: &configuration::Configuratio
     } else {
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<PostPluginsPluginIdReloadError> = serde_json::from_str(&content).ok();
+        let entity: Option<PostPluginsPluginIdGerritReloadError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

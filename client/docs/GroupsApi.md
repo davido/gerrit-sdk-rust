@@ -161,18 +161,34 @@ Name | Type | Description  | Required | Notes
 
 ## get_groups
 
-> serde_json::Value get_groups()
+> models::GetGroupsDefaultResponse get_groups(o, group, limit, r#match, o2, owned, owned_by, project, query, regex, start, suggest, user, visible_to_all)
 List groups
 
 Lists the internal groups visible to the caller.
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**o** | Option<**String**> |  |  |
+**group** | Option<[**Vec<String>**](String.md)> |  |  |
+**limit** | Option<**i32**> |  |  |
+**r#match** | Option<**String**> |  |  |
+**o2** | Option<[**Vec<String>**](String.md)> |  |  |
+**owned** | Option<**bool**> |  |  |
+**owned_by** | Option<**String**> |  |  |
+**project** | Option<[**Vec<String>**](String.md)> |  |  |
+**query** | Option<**String**> |  |  |
+**regex** | Option<**String**> |  |  |
+**start** | Option<**i32**> |  |  |
+**suggest** | Option<**String**> |  |  |
+**user** | Option<**String**> |  |  |
+**visible_to_all** | Option<**bool**> |  |  |
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**models::GetGroupsDefaultResponse**](getGroups_default_response.md)
 
 ### Authorization
 

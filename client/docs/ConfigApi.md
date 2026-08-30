@@ -16,6 +16,8 @@ Method | HTTP request | Description
 [**get_config_server_indexes_index_id_versions_index_version_id**](ConfigApi.md#get_config_server_indexes_index_id_versions_index_version_id) | **GET** /config/server/indexes/{index_id}/versions/{index_version_id} | Get Index Version
 [**get_config_server_info**](ConfigApi.md#get_config_server_info) | **GET** /config/server/info | Get server info
 [**get_config_server_labels**](ConfigApi.md#get_config_server_labels) | **GET** /config/server/labels | List Global Labels
+[**get_config_server_metrics**](ConfigApi.md#get_config_server_metrics) | **GET** /config/server/metrics | 
+[**get_config_server_metrics_metric_id**](ConfigApi.md#get_config_server_metrics_metric_id) | **GET** /config/server/metrics/{metric_id} | 
 [**get_config_server_preferences**](ConfigApi.md#get_config_server_preferences) | **GET** /config/server/preferences | Get Default User Preferences
 [**get_config_server_preferences_diff**](ConfigApi.md#get_config_server_preferences_diff) | **GET** /config/server/preferences.diff | Get Default Diff Preferences
 [**get_config_server_preferences_edit**](ConfigApi.md#get_config_server_preferences_edit) | **GET** /config/server/preferences.edit | Get Default Edit Preferences
@@ -79,7 +81,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_config_server_caches
 
-> serde_json::Value get_config_server_caches(format, include_diskstats)
+> models::GetConfigServerCaches200Response get_config_server_caches(format, include_diskstats)
 List Caches
 
 Lists the caches of the server. Caches defined by plugins are included.
@@ -94,7 +96,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**models::GetConfigServerCaches200Response**](getConfigServerCaches_200_response.md)
 
 ### Authorization
 
@@ -103,7 +105,7 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -225,7 +227,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_config_server_indexes
 
-> serde_json::Value get_config_server_indexes()
+> Vec<models::GetConfigServerIndexes200ResponseInner> get_config_server_indexes()
 List Indexes
 
 Lists the indexes used by Gerrit. It provides details about the index versions, which index version is used to search and which versions are written to.
@@ -236,7 +238,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**Vec<models::GetConfigServerIndexes200ResponseInner>**](getConfigServerIndexes_200_response_inner.md)
 
 ### Authorization
 
@@ -382,6 +384,64 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**Vec<models::LabelDefinitionInfo>**](LabelDefinitionInfo.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_config_server_metrics
+
+> std::collections::HashMap<String, models::MetricJson> get_config_server_metrics(data_only, prefix)
+
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**data_only** | Option<**bool**> |  |  |
+**prefix** | Option<[**Vec<String>**](String.md)> |  |  |
+
+### Return type
+
+[**std::collections::HashMap<String, models::MetricJson>**](MetricJson.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_config_server_metrics_metric_id
+
+> models::MetricJson get_config_server_metrics_metric_id(metric_id, data_only)
+
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**metric_id** | **String** |  | [required] |
+**data_only** | Option<**bool**> |  |  |
+
+### Return type
+
+[**models::MetricJson**](MetricJson.md)
 
 ### Authorization
 
@@ -619,7 +679,7 @@ This endpoint does not need any parameter.
 
 ## get_config_server_version
 
-> serde_json::Value get_config_server_version(verbose)
+> models::GetConfigServerVersion200Response get_config_server_version(verbose)
 Get version
 
 Returns the version of the Gerrit server.
@@ -633,7 +693,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**models::GetConfigServerVersion200Response**](getConfigServerVersion_200_response.md)
 
 ### Authorization
 

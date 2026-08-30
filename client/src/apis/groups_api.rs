@@ -49,7 +49,7 @@ pub enum DeleteGroupsGroupIdMembersMemberIdError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGroupsError {
-    DefaultResponse(serde_json::Value),
+    DefaultResponse(models::GetGroupsDefaultResponse),
     UnknownValue(serde_json::Value),
 }
 
@@ -403,11 +403,77 @@ pub fn delete_groups_group_id_members_member_id(configuration: &configuration::C
 }
 
 /// Lists the internal groups visible to the caller.
-pub fn get_groups(configuration: &configuration::Configuration, ) -> Result<serde_json::Value, Error<GetGroupsError>> {
+pub fn get_groups(configuration: &configuration::Configuration, o: Option<&str>, group: Option<Vec<String>>, limit: Option<i32>, r#match: Option<&str>, o2: Option<Vec<String>>, owned: Option<bool>, owned_by: Option<&str>, project: Option<Vec<String>>, query: Option<&str>, regex: Option<&str>, start: Option<i32>, suggest: Option<&str>, user: Option<&str>, visible_to_all: Option<bool>) -> Result<models::GetGroupsDefaultResponse, Error<GetGroupsError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_query_o = o;
+    let p_query_group = group;
+    let p_query_limit = limit;
+    let p_query_match = r#match;
+    let p_query_o2 = o2;
+    let p_query_owned = owned;
+    let p_query_owned_by = owned_by;
+    let p_query_project = project;
+    let p_query_query = query;
+    let p_query_regex = regex;
+    let p_query_start = start;
+    let p_query_suggest = suggest;
+    let p_query_user = user;
+    let p_query_visible_to_all = visible_to_all;
 
     let uri_str = format!("{}/groups", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_query_o {
+        req_builder = req_builder.query(&[("O", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_group {
+        req_builder = match "multi" {
+            "multi" => req_builder.query(&param_value.into_iter().map(|p| ("group".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => req_builder.query(&[("group", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
+    }
+    if let Some(ref param_value) = p_query_limit {
+        req_builder = req_builder.query(&[("limit", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_match {
+        req_builder = req_builder.query(&[("match", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_o2 {
+        req_builder = match "multi" {
+            "multi" => req_builder.query(&param_value.into_iter().map(|p| ("o".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => req_builder.query(&[("o", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
+    }
+    if let Some(ref param_value) = p_query_owned {
+        req_builder = req_builder.query(&[("owned", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_owned_by {
+        req_builder = req_builder.query(&[("owned-by", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_project {
+        req_builder = match "multi" {
+            "multi" => req_builder.query(&param_value.into_iter().map(|p| ("project".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => req_builder.query(&[("project", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
+    }
+    if let Some(ref param_value) = p_query_query {
+        req_builder = req_builder.query(&[("query", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_regex {
+        req_builder = req_builder.query(&[("regex", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_start {
+        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_suggest {
+        req_builder = req_builder.query(&[("suggest", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_user {
+        req_builder = req_builder.query(&[("user", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_visible_to_all {
+        req_builder = req_builder.query(&[("visible-to-all", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -431,8 +497,8 @@ pub fn get_groups(configuration: &configuration::Configuration, ) -> Result<serd
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetGroupsDefaultResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetGroupsDefaultResponse`")))),
         }
     } else {
         let content = resp.text()?;

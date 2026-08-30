@@ -6,10 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_plugins_plugin_id**](PluginsApi.md#delete_plugins_plugin_id) | **DELETE** /plugins/{plugin_id} | Disable Plugin
 [**get_plugins**](PluginsApi.md#get_plugins) | **GET** /plugins | List Plugins
-[**get_plugins_plugin_id_status**](PluginsApi.md#get_plugins_plugin_id_status) | **GET** /plugins/{plugin_id}/status | 
-[**post_plugins_plugin_id_disable**](PluginsApi.md#post_plugins_plugin_id_disable) | **POST** /plugins/{plugin_id}/disable | 
-[**post_plugins_plugin_id_enable**](PluginsApi.md#post_plugins_plugin_id_enable) | **POST** /plugins/{plugin_id}/enable | 
-[**post_plugins_plugin_id_reload**](PluginsApi.md#post_plugins_plugin_id_reload) | **POST** /plugins/{plugin_id}/reload | 
+[**get_plugins_plugin_id_gerrit_status**](PluginsApi.md#get_plugins_plugin_id_gerrit_status) | **GET** /plugins/{plugin_id}/gerrit~status | Get Plugin Status
+[**post_plugins_plugin_id_gerrit_disable**](PluginsApi.md#post_plugins_plugin_id_gerrit_disable) | **POST** /plugins/{plugin_id}/gerrit~disable | Disable Plugin
+[**post_plugins_plugin_id_gerrit_enable**](PluginsApi.md#post_plugins_plugin_id_gerrit_enable) | **POST** /plugins/{plugin_id}/gerrit~enable | Enable Plugin
+[**post_plugins_plugin_id_gerrit_reload**](PluginsApi.md#post_plugins_plugin_id_gerrit_reload) | **POST** /plugins/{plugin_id}/gerrit~reload | Reload Plugin
 [**put_plugins_plugin_id**](PluginsApi.md#put_plugins_plugin_id) | **PUT** /plugins/{plugin_id} | Install Plugin
 
 
@@ -79,38 +79,12 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## get_plugins_plugin_id_status
+## get_plugins_plugin_id_gerrit_status
 
-> models::PluginInfo get_plugins_plugin_id_status(plugin_id)
+> models::PluginInfo get_plugins_plugin_id_gerrit_status(plugin_id)
+Get Plugin Status
 
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**plugin_id** | **String** |  | [required] |
-
-### Return type
-
-[**models::PluginInfo**](PluginInfo.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## post_plugins_plugin_id_disable
-
-> models::PluginInfo post_plugins_plugin_id_disable(plugin_id)
-
+Retrieves the status of a plugin on the Gerrit server.
 
 ### Parameters
 
@@ -135,10 +109,10 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## post_plugins_plugin_id_enable
+## post_plugins_plugin_id_gerrit_disable
 
-> models::PluginInfo post_plugins_plugin_id_enable(plugin_id)
-
+> models::PluginInfo post_plugins_plugin_id_gerrit_disable(plugin_id)
+Disable Plugin
 
 ### Parameters
 
@@ -163,10 +137,42 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## post_plugins_plugin_id_reload
+## post_plugins_plugin_id_gerrit_enable
 
-> models::PluginInfo post_plugins_plugin_id_reload(plugin_id)
+> models::PluginInfo post_plugins_plugin_id_gerrit_enable(plugin_id)
+Enable Plugin
 
+Enables a plugin on the Gerrit server.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**plugin_id** | **String** |  | [required] |
+
+### Return type
+
+[**models::PluginInfo**](PluginInfo.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## post_plugins_plugin_id_gerrit_reload
+
+> models::PluginInfo post_plugins_plugin_id_gerrit_reload(plugin_id)
+Reload Plugin
+
+Reloads a plugin on the Gerrit server.
 
 ### Parameters
 

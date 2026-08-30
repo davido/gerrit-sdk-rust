@@ -99,6 +99,20 @@ pub enum GetConfigServerLabelsError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`get_config_server_metrics`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetConfigServerMetricsError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_config_server_metrics_metric_id`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetConfigServerMetricsMetricIdError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`get_config_server_preferences`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -329,7 +343,7 @@ pub fn delete_config_server_tasks_task_id(configuration: &configuration::Configu
 }
 
 /// Lists the caches of the server. Caches defined by plugins are included.
-pub fn get_config_server_caches(configuration: &configuration::Configuration, format: Option<&str>, include_diskstats: Option<bool>) -> Result<serde_json::Value, Error<GetConfigServerCachesError>> {
+pub fn get_config_server_caches(configuration: &configuration::Configuration, format: Option<&str>, include_diskstats: Option<bool>) -> Result<models::GetConfigServerCaches200Response, Error<GetConfigServerCachesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_format = format;
     let p_query_include_diskstats = include_diskstats;
@@ -366,8 +380,8 @@ pub fn get_config_server_caches(configuration: &configuration::Configuration, fo
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetConfigServerCaches200Response`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetConfigServerCaches200Response`")))),
         }
     } else {
         let content = resp.text()?;
@@ -546,7 +560,7 @@ pub fn get_config_server_experiments_experiment_id(configuration: &configuration
 }
 
 /// Lists the indexes used by Gerrit. It provides details about the index versions, which index version is used to search and which versions are written to.
-pub fn get_config_server_indexes(configuration: &configuration::Configuration, ) -> Result<serde_json::Value, Error<GetConfigServerIndexesError>> {
+pub fn get_config_server_indexes(configuration: &configuration::Configuration, ) -> Result<Vec<models::GetConfigServerIndexes200ResponseInner>, Error<GetConfigServerIndexesError>> {
 
     let uri_str = format!("{}/config/server/indexes", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -574,8 +588,8 @@ pub fn get_config_server_indexes(configuration: &configuration::Configuration, )
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::GetConfigServerIndexes200ResponseInner&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `Vec&lt;models::GetConfigServerIndexes200ResponseInner&gt;`")))),
         }
     } else {
         let content = resp.text()?;
@@ -788,6 +802,102 @@ pub fn get_config_server_labels(configuration: &configuration::Configuration, ) 
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<GetConfigServerLabelsError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+pub fn get_config_server_metrics(configuration: &configuration::Configuration, data_only: Option<bool>, prefix: Option<Vec<String>>) -> Result<std::collections::HashMap<String, models::MetricJson>, Error<GetConfigServerMetricsError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_query_data_only = data_only;
+    let p_query_prefix = prefix;
+
+    let uri_str = format!("{}/config/server/metrics", configuration.base_path);
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref param_value) = p_query_data_only {
+        req_builder = req_builder.query(&[("data-only", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_prefix {
+        req_builder = match "multi" {
+            "multi" => req_builder.query(&param_value.into_iter().map(|p| ("prefix".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => req_builder.query(&[("prefix", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
+    }
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::MetricJson&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::MetricJson&gt;`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetConfigServerMetricsError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+pub fn get_config_server_metrics_metric_id(configuration: &configuration::Configuration, metric_id: &str, data_only: Option<bool>) -> Result<models::MetricJson, Error<GetConfigServerMetricsMetricIdError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_metric_id = metric_id;
+    let p_query_data_only = data_only;
+
+    let uri_str = format!("{}/config/server/metrics/{metric_id}", configuration.base_path, metric_id=crate::apis::urlencode(p_path_metric_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref param_value) = p_query_data_only {
+        req_builder = req_builder.query(&[("data-only", &param_value.to_string())]);
+    }
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::MetricJson`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::MetricJson`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetConfigServerMetricsMetricIdError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -1120,7 +1230,7 @@ pub fn get_config_server_top_menus(configuration: &configuration::Configuration,
 }
 
 /// Returns the version of the Gerrit server.
-pub fn get_config_server_version(configuration: &configuration::Configuration, verbose: Option<bool>) -> Result<serde_json::Value, Error<GetConfigServerVersionError>> {
+pub fn get_config_server_version(configuration: &configuration::Configuration, verbose: Option<bool>) -> Result<models::GetConfigServerVersion200Response, Error<GetConfigServerVersionError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_verbose = verbose;
 
@@ -1153,8 +1263,8 @@ pub fn get_config_server_version(configuration: &configuration::Configuration, v
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetConfigServerVersion200Response`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetConfigServerVersion200Response`")))),
         }
     } else {
         let content = resp.text()?;

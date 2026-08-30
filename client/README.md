@@ -30,6 +30,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**delete_accounts_account_id**](docs/AccountsApi.md#delete_accounts_account_id) | **DELETE** /accounts/{account_id} | Delete Account
 *AccountsApi* | [**delete_accounts_account_id_active**](docs/AccountsApi.md#delete_accounts_account_id_active) | **DELETE** /accounts/{account_id}/active | Delete Active
 *AccountsApi* | [**delete_accounts_account_id_emails_email_id**](docs/AccountsApi.md#delete_accounts_account_id_emails_email_id) | **DELETE** /accounts/{account_id}/emails/{email_id} | Delete Account Email
+*AccountsApi* | [**delete_accounts_account_id_gpgkeys_gpg_key_id**](docs/AccountsApi.md#delete_accounts_account_id_gpgkeys_gpg_key_id) | **DELETE** /accounts/{account_id}/gpgkeys/{gpg_key_id} | Delete GPG Key
 *AccountsApi* | [**delete_accounts_account_id_name**](docs/AccountsApi.md#delete_accounts_account_id_name) | **DELETE** /accounts/{account_id}/name | Delete Account Name
 *AccountsApi* | [**delete_accounts_account_id_password_http**](docs/AccountsApi.md#delete_accounts_account_id_password_http) | **DELETE** /accounts/{account_id}/password.http | Delete HTTP Password
 *AccountsApi* | [**delete_accounts_account_id_sshkeys_ssh_key_id**](docs/AccountsApi.md#delete_accounts_account_id_sshkeys_ssh_key_id) | **DELETE** /accounts/{account_id}/sshkeys/{ssh_key_id} | Delete SSH Key
@@ -47,8 +48,11 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**get_accounts_account_id_emails**](docs/AccountsApi.md#get_accounts_account_id_emails) | **GET** /accounts/{account_id}/emails | List Account Emails
 *AccountsApi* | [**get_accounts_account_id_emails_email_id**](docs/AccountsApi.md#get_accounts_account_id_emails_email_id) | **GET** /accounts/{account_id}/emails/{email_id} | Get Account Email
 *AccountsApi* | [**get_accounts_account_id_external_ids**](docs/AccountsApi.md#get_accounts_account_id_external_ids) | **GET** /accounts/{account_id}/external.ids | Get Account External IDs
+*AccountsApi* | [**get_accounts_account_id_gpgkeys**](docs/AccountsApi.md#get_accounts_account_id_gpgkeys) | **GET** /accounts/{account_id}/gpgkeys | List GPG Keys
+*AccountsApi* | [**get_accounts_account_id_gpgkeys_gpg_key_id**](docs/AccountsApi.md#get_accounts_account_id_gpgkeys_gpg_key_id) | **GET** /accounts/{account_id}/gpgkeys/{gpg_key_id} | Get GPG Key
 *AccountsApi* | [**get_accounts_account_id_groups**](docs/AccountsApi.md#get_accounts_account_id_groups) | **GET** /accounts/{account_id}/groups | List Groups
 *AccountsApi* | [**get_accounts_account_id_name**](docs/AccountsApi.md#get_accounts_account_id_name) | **GET** /accounts/{account_id}/name | Get Account Name
+*AccountsApi* | [**get_accounts_account_id_oauthtoken**](docs/AccountsApi.md#get_accounts_account_id_oauthtoken) | **GET** /accounts/{account_id}/oauthtoken | Get OAuth Access Token
 *AccountsApi* | [**get_accounts_account_id_preferences**](docs/AccountsApi.md#get_accounts_account_id_preferences) | **GET** /accounts/{account_id}/preferences | Get User Preferences
 *AccountsApi* | [**get_accounts_account_id_preferences_diff**](docs/AccountsApi.md#get_accounts_account_id_preferences_diff) | **GET** /accounts/{account_id}/preferences.diff | Get Diff Preferences
 *AccountsApi* | [**get_accounts_account_id_preferences_edit**](docs/AccountsApi.md#get_accounts_account_id_preferences_edit) | **GET** /accounts/{account_id}/preferences.edit | Get Edit Preferences
@@ -62,6 +66,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**get_accounts_account_id_watched_projects**](docs/AccountsApi.md#get_accounts_account_id_watched_projects) | **GET** /accounts/{account_id}/watched.projects | Get Watched Projects
 *AccountsApi* | [**post_accounts_account_id_drafts_delete**](docs/AccountsApi.md#post_accounts_account_id_drafts_delete) | **POST** /accounts/{account_id}/drafts:delete | Delete Draft Comments
 *AccountsApi* | [**post_accounts_account_id_external_ids_delete**](docs/AccountsApi.md#post_accounts_account_id_external_ids_delete) | **POST** /accounts/{account_id}/external.ids:delete | Delete Account External IDs
+*AccountsApi* | [**post_accounts_account_id_gpgkeys**](docs/AccountsApi.md#post_accounts_account_id_gpgkeys) | **POST** /accounts/{account_id}/gpgkeys | Add/Delete GPG Keys
 *AccountsApi* | [**post_accounts_account_id_index**](docs/AccountsApi.md#post_accounts_account_id_index) | **POST** /accounts/{account_id}/index | Index Account
 *AccountsApi* | [**post_accounts_account_id_sshkeys**](docs/AccountsApi.md#post_accounts_account_id_sshkeys) | **POST** /accounts/{account_id}/sshkeys | Add SSH Key
 *AccountsApi* | [**post_accounts_account_id_watched_projects**](docs/AccountsApi.md#post_accounts_account_id_watched_projects) | **POST** /accounts/{account_id}/watched.projects | Add/Update a List of Watched Project Entities
@@ -89,6 +94,8 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**delete_changes_change_id_flows_flow_id**](docs/ChangesApi.md#delete_changes_change_id_flows_flow_id) | **DELETE** /changes/{change_id}/flows/{flow_id} | Delete Flow
 *ChangesApi* | [**delete_changes_change_id_messages_change_message_id**](docs/ChangesApi.md#delete_changes_change_id_messages_change_message_id) | **DELETE** /changes/{change_id}/messages/{change_message_id} | Delete Change Message
 *ChangesApi* | [**delete_changes_change_id_private**](docs/ChangesApi.md#delete_changes_change_id_private) | **DELETE** /changes/{change_id}/private | Unmark Private
+*ChangesApi* | [**delete_changes_change_id_reviewers_reviewer_id**](docs/ChangesApi.md#delete_changes_change_id_reviewers_reviewer_id) | **DELETE** /changes/{change_id}/reviewers/{reviewer_id} | Delete Reviewer
+*ChangesApi* | [**delete_changes_change_id_reviewers_reviewer_id_votes_vote_id**](docs/ChangesApi.md#delete_changes_change_id_reviewers_reviewer_id_votes_vote_id) | **DELETE** /changes/{change_id}/reviewers/{reviewer_id}/votes/{vote_id} | Delete Vote
 *ChangesApi* | [**delete_changes_change_id_revisions_revision_id_comments_comment_id**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_comments_comment_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/comments/{comment_id} | Delete Comment
 *ChangesApi* | [**delete_changes_change_id_revisions_revision_id_drafts_draft_comment_id**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_drafts_draft_comment_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/drafts/{draft_comment_id} | Delete Draft
 *ChangesApi* | [**delete_changes_change_id_revisions_revision_id_files_file_id_reviewed**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_files_file_id_reviewed) | **DELETE** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/reviewed | Delete Reviewed
@@ -120,7 +127,8 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**get_changes_change_id_pure_revert**](docs/ChangesApi.md#get_changes_change_id_pure_revert) | **GET** /changes/{change_id}/pure_revert | Get Pure Revert
 *ChangesApi* | [**get_changes_change_id_query**](docs/ChangesApi.md#get_changes_change_id_query) | **GET** /changes/{change_id}/query | Evaluate Change Query Expression
 *ChangesApi* | [**get_changes_change_id_reviewers**](docs/ChangesApi.md#get_changes_change_id_reviewers) | **GET** /changes/{change_id}/reviewers | List reviewers
-*ChangesApi* | [**get_changes_change_id_revisions**](docs/ChangesApi.md#get_changes_change_id_revisions) | **GET** /changes/{change_id}/revisions | 
+*ChangesApi* | [**get_changes_change_id_reviewers_reviewer_id**](docs/ChangesApi.md#get_changes_change_id_reviewers_reviewer_id) | **GET** /changes/{change_id}/reviewers/{reviewer_id} | Get Reviewer
+*ChangesApi* | [**get_changes_change_id_reviewers_reviewer_id_votes**](docs/ChangesApi.md#get_changes_change_id_reviewers_reviewer_id_votes) | **GET** /changes/{change_id}/reviewers/{reviewer_id}/votes | List Votes
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id) | **GET** /changes/{change_id}/revisions/{revision_id} | Get Revision
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_actions**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_actions) | **GET** /changes/{change_id}/revisions/{revision_id}/actions | Get Revision Actions
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_archive**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_archive) | **GET** /changes/{change_id}/revisions/{revision_id}/archive | 
@@ -135,7 +143,6 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_files_file_id_content**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_files_file_id_content) | **GET** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/content | Get Content
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_files_file_id_diff**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_files_file_id_diff) | **GET** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/diff | Get Diff
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_files_file_id_download**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_files_file_id_download) | **GET** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/download | Download Content
-*ChangesApi* | [**get_changes_change_id_revisions_revision_id_fixes**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_fixes) | **GET** /changes/{change_id}/revisions/{revision_id}/fixes | 
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_fixes_fix_id_preview**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_fixes_fix_id_preview) | **GET** /changes/{change_id}/revisions/{revision_id}/fixes/{fix_id}/preview | Preview Stored Fix
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_mergeable**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_mergeable) | **GET** /changes/{change_id}/revisions/{revision_id}/mergeable | Get mergeable
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_mergelist**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_mergelist) | **GET** /changes/{change_id}/revisions/{revision_id}/mergelist | Get Merge List
@@ -180,6 +187,9 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**post_changes_change_id_restore**](docs/ChangesApi.md#post_changes_change_id_restore) | **POST** /changes/{change_id}/restore | Restore change
 *ChangesApi* | [**post_changes_change_id_revert**](docs/ChangesApi.md#post_changes_change_id_revert) | **POST** /changes/{change_id}/revert | Revert Change
 *ChangesApi* | [**post_changes_change_id_revert_submission**](docs/ChangesApi.md#post_changes_change_id_revert_submission) | **POST** /changes/{change_id}/revert_submission | Revert Submission
+*ChangesApi* | [**post_changes_change_id_reviewers**](docs/ChangesApi.md#post_changes_change_id_reviewers) | **POST** /changes/{change_id}/reviewers | Add Reviewer
+*ChangesApi* | [**post_changes_change_id_reviewers_reviewer_id_delete**](docs/ChangesApi.md#post_changes_change_id_reviewers_reviewer_id_delete) | **POST** /changes/{change_id}/reviewers/{reviewer_id}/delete | Delete Reviewer
+*ChangesApi* | [**post_changes_change_id_reviewers_reviewer_id_votes_vote_id_delete**](docs/ChangesApi.md#post_changes_change_id_reviewers_reviewer_id_votes_vote_id_delete) | **POST** /changes/{change_id}/reviewers/{reviewer_id}/votes/{vote_id}/delete | Delete Vote
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_cherrypick**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_cherrypick) | **POST** /changes/{change_id}/revisions/{revision_id}/cherrypick | Cherry-pick revision
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_comments_comment_id_delete**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_comments_comment_id_delete) | **POST** /changes/{change_id}/revisions/{revision_id}/comments/{comment_id}/delete | Delete Comment
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_fix_apply**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_fix_apply) | **POST** /changes/{change_id}/revisions/{revision_id}/fix:apply | Apply Provided Fix
@@ -216,6 +226,8 @@ Class | Method | HTTP request | Description
 *ConfigApi* | [**get_config_server_indexes_index_id_versions_index_version_id**](docs/ConfigApi.md#get_config_server_indexes_index_id_versions_index_version_id) | **GET** /config/server/indexes/{index_id}/versions/{index_version_id} | Get Index Version
 *ConfigApi* | [**get_config_server_info**](docs/ConfigApi.md#get_config_server_info) | **GET** /config/server/info | Get server info
 *ConfigApi* | [**get_config_server_labels**](docs/ConfigApi.md#get_config_server_labels) | **GET** /config/server/labels | List Global Labels
+*ConfigApi* | [**get_config_server_metrics**](docs/ConfigApi.md#get_config_server_metrics) | **GET** /config/server/metrics | 
+*ConfigApi* | [**get_config_server_metrics_metric_id**](docs/ConfigApi.md#get_config_server_metrics_metric_id) | **GET** /config/server/metrics/{metric_id} | 
 *ConfigApi* | [**get_config_server_preferences**](docs/ConfigApi.md#get_config_server_preferences) | **GET** /config/server/preferences | Get Default User Preferences
 *ConfigApi* | [**get_config_server_preferences_diff**](docs/ConfigApi.md#get_config_server_preferences_diff) | **GET** /config/server/preferences.diff | Get Default Diff Preferences
 *ConfigApi* | [**get_config_server_preferences_edit**](docs/ConfigApi.md#get_config_server_preferences_edit) | **GET** /config/server/preferences.edit | Get Default Edit Preferences
@@ -276,10 +288,10 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**put_groups_group_id_owner**](docs/GroupsApi.md#put_groups_group_id_owner) | **PUT** /groups/{group_id}/owner | Set Group Owner
 *PluginsApi* | [**delete_plugins_plugin_id**](docs/PluginsApi.md#delete_plugins_plugin_id) | **DELETE** /plugins/{plugin_id} | Disable Plugin
 *PluginsApi* | [**get_plugins**](docs/PluginsApi.md#get_plugins) | **GET** /plugins | List Plugins
-*PluginsApi* | [**get_plugins_plugin_id_status**](docs/PluginsApi.md#get_plugins_plugin_id_status) | **GET** /plugins/{plugin_id}/status | 
-*PluginsApi* | [**post_plugins_plugin_id_disable**](docs/PluginsApi.md#post_plugins_plugin_id_disable) | **POST** /plugins/{plugin_id}/disable | 
-*PluginsApi* | [**post_plugins_plugin_id_enable**](docs/PluginsApi.md#post_plugins_plugin_id_enable) | **POST** /plugins/{plugin_id}/enable | 
-*PluginsApi* | [**post_plugins_plugin_id_reload**](docs/PluginsApi.md#post_plugins_plugin_id_reload) | **POST** /plugins/{plugin_id}/reload | 
+*PluginsApi* | [**get_plugins_plugin_id_gerrit_status**](docs/PluginsApi.md#get_plugins_plugin_id_gerrit_status) | **GET** /plugins/{plugin_id}/gerrit~status | Get Plugin Status
+*PluginsApi* | [**post_plugins_plugin_id_gerrit_disable**](docs/PluginsApi.md#post_plugins_plugin_id_gerrit_disable) | **POST** /plugins/{plugin_id}/gerrit~disable | Disable Plugin
+*PluginsApi* | [**post_plugins_plugin_id_gerrit_enable**](docs/PluginsApi.md#post_plugins_plugin_id_gerrit_enable) | **POST** /plugins/{plugin_id}/gerrit~enable | Enable Plugin
+*PluginsApi* | [**post_plugins_plugin_id_gerrit_reload**](docs/PluginsApi.md#post_plugins_plugin_id_gerrit_reload) | **POST** /plugins/{plugin_id}/gerrit~reload | Reload Plugin
 *PluginsApi* | [**put_plugins_plugin_id**](docs/PluginsApi.md#put_plugins_plugin_id) | **PUT** /plugins/{plugin_id} | Install Plugin
 *ProjectsApi* | [**delete_projects_project_id_branches_branch_id**](docs/ProjectsApi.md#delete_projects_project_id_branches_branch_id) | **DELETE** /projects/{project_id}/branches/{branch_id} | Delete Branch
 *ProjectsApi* | [**delete_projects_project_id_dashboards_dashboard_id**](docs/ProjectsApi.md#delete_projects_project_id_dashboards_dashboard_id) | **DELETE** /projects/{project_id}/dashboards/{dashboard_id} | Delete Dashboard
@@ -292,7 +304,8 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**get_projects_project_id_access**](docs/ProjectsApi.md#get_projects_project_id_access) | **GET** /projects/{project_id}/access | List Access Rights for Project
 *ProjectsApi* | [**get_projects_project_id_branches**](docs/ProjectsApi.md#get_projects_project_id_branches) | **GET** /projects/{project_id}/branches | List branches
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id) | **GET** /projects/{project_id}/branches/{branch_id} | Get Branch
-*ProjectsApi* | [**get_projects_project_id_branches_branch_id_files**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_files) | **GET** /projects/{project_id}/branches/{branch_id}/files | 
+*ProjectsApi* | [**get_projects_project_id_branches_branch_id_files_file_id_content**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_content) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/content | Get Content
+*ProjectsApi* | [**get_projects_project_id_branches_branch_id_files_file_id_diff**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_diff) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/diff | 
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id_mergeable**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_mergeable) | **GET** /projects/{project_id}/branches/{branch_id}/mergeable | Get Mergeable Information
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id_reflog**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_reflog) | **GET** /projects/{project_id}/branches/{branch_id}/reflog | Get Reflog
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id_suggest_reviewers**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_suggest_reviewers) | **GET** /projects/{project_id}/branches/{branch_id}/suggest_reviewers | Suggest Reviewers
@@ -300,7 +313,6 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**get_projects_project_id_check_access**](docs/ProjectsApi.md#get_projects_project_id_check_access) | **GET** /projects/{project_id}/check.access | Check Access
 *ProjectsApi* | [**get_projects_project_id_children**](docs/ProjectsApi.md#get_projects_project_id_children) | **GET** /projects/{project_id}/children | List Child Projects
 *ProjectsApi* | [**get_projects_project_id_children_child_project_id**](docs/ProjectsApi.md#get_projects_project_id_children_child_project_id) | **GET** /projects/{project_id}/children/{child_project_id} | Get Child Project
-*ProjectsApi* | [**get_projects_project_id_commits**](docs/ProjectsApi.md#get_projects_project_id_commits) | **GET** /projects/{project_id}/commits | 
 *ProjectsApi* | [**get_projects_project_id_commits_commit_id**](docs/ProjectsApi.md#get_projects_project_id_commits_commit_id) | **GET** /projects/{project_id}/commits/{commit_id} | Get Commit
 *ProjectsApi* | [**get_projects_project_id_commits_commit_id_diff**](docs/ProjectsApi.md#get_projects_project_id_commits_commit_id_diff) | **GET** /projects/{project_id}/commits/{commit_id}/diff | Diff Between Commits
 *ProjectsApi* | [**get_projects_project_id_commits_commit_id_files**](docs/ProjectsApi.md#get_projects_project_id_commits_commit_id_files) | **GET** /projects/{project_id}/commits/{commit_id}/files | List Files
@@ -469,6 +481,7 @@ Class | Method | HTTP request | Description
  - [EvaluateChangeQueryExpressionResultInfo](docs/EvaluateChangeQueryExpressionResultInfo.md)
  - [ExperimentInfo](docs/ExperimentInfo.md)
  - [FetchInfo](docs/FetchInfo.md)
+ - [FieldJson](docs/FieldJson.md)
  - [FileChange](docs/FileChange.md)
  - [FileContentInput](docs/FileContentInput.md)
  - [FileMeta](docs/FileMeta.md)
@@ -486,11 +499,19 @@ Class | Method | HTTP request | Description
  - [GarbageCollectInput](docs/GarbageCollectInput.md)
  - [GeneralPreferencesInfo](docs/GeneralPreferencesInfo.md)
  - [GerritInfo](docs/GerritInfo.md)
+ - [GetConfigServerCaches200Response](docs/GetConfigServerCaches200Response.md)
+ - [GetConfigServerIndexes200ResponseInner](docs/GetConfigServerIndexes200ResponseInner.md)
+ - [GetConfigServerIndexes200ResponseInnerVersionsValue](docs/GetConfigServerIndexes200ResponseInnerVersionsValue.md)
+ - [GetConfigServerVersion200Response](docs/GetConfigServerVersion200Response.md)
+ - [GetConfigServerVersion200ResponseOneOf](docs/GetConfigServerVersion200ResponseOneOf.md)
+ - [GetGroupsDefaultResponse](docs/GetGroupsDefaultResponse.md)
  - [GetMetaFileInfo](docs/GetMetaFileInfo.md)
+ - [GetProjectsDefaultResponse](docs/GetProjectsDefaultResponse.md)
  - [GitBasicAuthPolicy](docs/GitBasicAuthPolicy.md)
  - [GitPerson](docs/GitPerson.md)
  - [GpgKeyInfo](docs/GpgKeyInfo.md)
  - [GpgKeyInfoStatus](docs/GpgKeyInfoStatus.md)
+ - [GpgKeysInput](docs/GpgKeysInput.md)
  - [GroupAuditEventInfo](docs/GroupAuditEventInfo.md)
  - [GroupBaseInfo](docs/GroupBaseInfo.md)
  - [GroupInfo](docs/GroupInfo.md)
@@ -528,6 +549,7 @@ Class | Method | HTTP request | Description
  - [MergePatchSetInput](docs/MergePatchSetInput.md)
  - [MergeableInfo](docs/MergeableInfo.md)
  - [MetadataInfo](docs/MetadataInfo.md)
+ - [MetricJson](docs/MetricJson.md)
  - [MigrateLabelFunctionsToSubmitRequirementStatus](docs/MigrateLabelFunctionsToSubmitRequirementStatus.md)
  - [MigrateLabelsInfo](docs/MigrateLabelsInfo.md)
  - [MigrateLabelsReviewInfo](docs/MigrateLabelsReviewInfo.md)
@@ -537,6 +559,7 @@ Class | Method | HTTP request | Description
  - [NoMergeBaseReason](docs/NoMergeBaseReason.md)
  - [NotifyHandling](docs/NotifyHandling.md)
  - [NotifyInfo](docs/NotifyInfo.md)
+ - [OAuthTokenInfo](docs/OAuthTokenInfo.md)
  - [Operation](docs/Operation.md)
  - [OwnerInput](docs/OwnerInput.md)
  - [ParentInfo](docs/ParentInfo.md)

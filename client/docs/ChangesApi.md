@@ -11,6 +11,8 @@ Method | HTTP request | Description
 [**delete_changes_change_id_flows_flow_id**](ChangesApi.md#delete_changes_change_id_flows_flow_id) | **DELETE** /changes/{change_id}/flows/{flow_id} | Delete Flow
 [**delete_changes_change_id_messages_change_message_id**](ChangesApi.md#delete_changes_change_id_messages_change_message_id) | **DELETE** /changes/{change_id}/messages/{change_message_id} | Delete Change Message
 [**delete_changes_change_id_private**](ChangesApi.md#delete_changes_change_id_private) | **DELETE** /changes/{change_id}/private | Unmark Private
+[**delete_changes_change_id_reviewers_reviewer_id**](ChangesApi.md#delete_changes_change_id_reviewers_reviewer_id) | **DELETE** /changes/{change_id}/reviewers/{reviewer_id} | Delete Reviewer
+[**delete_changes_change_id_reviewers_reviewer_id_votes_vote_id**](ChangesApi.md#delete_changes_change_id_reviewers_reviewer_id_votes_vote_id) | **DELETE** /changes/{change_id}/reviewers/{reviewer_id}/votes/{vote_id} | Delete Vote
 [**delete_changes_change_id_revisions_revision_id_comments_comment_id**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_comments_comment_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/comments/{comment_id} | Delete Comment
 [**delete_changes_change_id_revisions_revision_id_drafts_draft_comment_id**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_drafts_draft_comment_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/drafts/{draft_comment_id} | Delete Draft
 [**delete_changes_change_id_revisions_revision_id_files_file_id_reviewed**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_files_file_id_reviewed) | **DELETE** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/reviewed | Delete Reviewed
@@ -42,7 +44,8 @@ Method | HTTP request | Description
 [**get_changes_change_id_pure_revert**](ChangesApi.md#get_changes_change_id_pure_revert) | **GET** /changes/{change_id}/pure_revert | Get Pure Revert
 [**get_changes_change_id_query**](ChangesApi.md#get_changes_change_id_query) | **GET** /changes/{change_id}/query | Evaluate Change Query Expression
 [**get_changes_change_id_reviewers**](ChangesApi.md#get_changes_change_id_reviewers) | **GET** /changes/{change_id}/reviewers | List reviewers
-[**get_changes_change_id_revisions**](ChangesApi.md#get_changes_change_id_revisions) | **GET** /changes/{change_id}/revisions | 
+[**get_changes_change_id_reviewers_reviewer_id**](ChangesApi.md#get_changes_change_id_reviewers_reviewer_id) | **GET** /changes/{change_id}/reviewers/{reviewer_id} | Get Reviewer
+[**get_changes_change_id_reviewers_reviewer_id_votes**](ChangesApi.md#get_changes_change_id_reviewers_reviewer_id_votes) | **GET** /changes/{change_id}/reviewers/{reviewer_id}/votes | List Votes
 [**get_changes_change_id_revisions_revision_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id) | **GET** /changes/{change_id}/revisions/{revision_id} | Get Revision
 [**get_changes_change_id_revisions_revision_id_actions**](ChangesApi.md#get_changes_change_id_revisions_revision_id_actions) | **GET** /changes/{change_id}/revisions/{revision_id}/actions | Get Revision Actions
 [**get_changes_change_id_revisions_revision_id_archive**](ChangesApi.md#get_changes_change_id_revisions_revision_id_archive) | **GET** /changes/{change_id}/revisions/{revision_id}/archive | 
@@ -57,7 +60,6 @@ Method | HTTP request | Description
 [**get_changes_change_id_revisions_revision_id_files_file_id_content**](ChangesApi.md#get_changes_change_id_revisions_revision_id_files_file_id_content) | **GET** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/content | Get Content
 [**get_changes_change_id_revisions_revision_id_files_file_id_diff**](ChangesApi.md#get_changes_change_id_revisions_revision_id_files_file_id_diff) | **GET** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/diff | Get Diff
 [**get_changes_change_id_revisions_revision_id_files_file_id_download**](ChangesApi.md#get_changes_change_id_revisions_revision_id_files_file_id_download) | **GET** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/download | Download Content
-[**get_changes_change_id_revisions_revision_id_fixes**](ChangesApi.md#get_changes_change_id_revisions_revision_id_fixes) | **GET** /changes/{change_id}/revisions/{revision_id}/fixes | 
 [**get_changes_change_id_revisions_revision_id_fixes_fix_id_preview**](ChangesApi.md#get_changes_change_id_revisions_revision_id_fixes_fix_id_preview) | **GET** /changes/{change_id}/revisions/{revision_id}/fixes/{fix_id}/preview | Preview Stored Fix
 [**get_changes_change_id_revisions_revision_id_mergeable**](ChangesApi.md#get_changes_change_id_revisions_revision_id_mergeable) | **GET** /changes/{change_id}/revisions/{revision_id}/mergeable | Get mergeable
 [**get_changes_change_id_revisions_revision_id_mergelist**](ChangesApi.md#get_changes_change_id_revisions_revision_id_mergelist) | **GET** /changes/{change_id}/revisions/{revision_id}/mergelist | Get Merge List
@@ -102,6 +104,9 @@ Method | HTTP request | Description
 [**post_changes_change_id_restore**](ChangesApi.md#post_changes_change_id_restore) | **POST** /changes/{change_id}/restore | Restore change
 [**post_changes_change_id_revert**](ChangesApi.md#post_changes_change_id_revert) | **POST** /changes/{change_id}/revert | Revert Change
 [**post_changes_change_id_revert_submission**](ChangesApi.md#post_changes_change_id_revert_submission) | **POST** /changes/{change_id}/revert_submission | Revert Submission
+[**post_changes_change_id_reviewers**](ChangesApi.md#post_changes_change_id_reviewers) | **POST** /changes/{change_id}/reviewers | Add Reviewer
+[**post_changes_change_id_reviewers_reviewer_id_delete**](ChangesApi.md#post_changes_change_id_reviewers_reviewer_id_delete) | **POST** /changes/{change_id}/reviewers/{reviewer_id}/delete | Delete Reviewer
+[**post_changes_change_id_reviewers_reviewer_id_votes_vote_id_delete**](ChangesApi.md#post_changes_change_id_reviewers_reviewer_id_votes_vote_id_delete) | **POST** /changes/{change_id}/reviewers/{reviewer_id}/votes/{vote_id}/delete | Delete Vote
 [**post_changes_change_id_revisions_revision_id_cherrypick**](ChangesApi.md#post_changes_change_id_revisions_revision_id_cherrypick) | **POST** /changes/{change_id}/revisions/{revision_id}/cherrypick | Cherry-pick revision
 [**post_changes_change_id_revisions_revision_id_comments_comment_id_delete**](ChangesApi.md#post_changes_change_id_revisions_revision_id_comments_comment_id_delete) | **POST** /changes/{change_id}/revisions/{revision_id}/comments/{comment_id}/delete | Delete Comment
 [**post_changes_change_id_revisions_revision_id_fix_apply**](ChangesApi.md#post_changes_change_id_revisions_revision_id_fix_apply) | **POST** /changes/{change_id}/revisions/{revision_id}/fix:apply | Apply Provided Fix
@@ -326,6 +331,69 @@ Marks the change to be non-private. Note users can only unmark own private chang
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **change_id** | **String** |  | [required] |
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## delete_changes_change_id_reviewers_reviewer_id
+
+> delete_changes_change_id_reviewers_reviewer_id(change_id, reviewer_id)
+Delete Reviewer
+
+'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/delete' --
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**change_id** | **String** |  | [required] |
+**reviewer_id** | **String** |  | [required] |
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## delete_changes_change_id_reviewers_reviewer_id_votes_vote_id
+
+> delete_changes_change_id_reviewers_reviewer_id_votes_vote_id(change_id, reviewer_id, vote_id)
+Delete Vote
+
+'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/votes/\\{label-id\\}/delete' --
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**change_id** | **String** |  | [required] |
+**reviewer_id** | **String** |  | [required] |
+**vote_id** | **String** |  | [required] |
 
 ### Return type
 
@@ -1306,10 +1374,12 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## get_changes_change_id_revisions
+## get_changes_change_id_reviewers_reviewer_id
 
-> serde_json::Value get_changes_change_id_revisions(change_id)
+> Vec<models::ReviewerInfo> get_changes_change_id_reviewers_reviewer_id(change_id, reviewer_id)
+Get Reviewer
 
+Retrieves a reviewer of a change.
 
 ### Parameters
 
@@ -1317,10 +1387,42 @@ Name | Type | Description  | Required | Notes
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **change_id** | **String** |  | [required] |
+**reviewer_id** | **String** |  | [required] |
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**Vec<models::ReviewerInfo>**](ReviewerInfo.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_changes_change_id_reviewers_reviewer_id_votes
+
+> std::collections::HashMap<String, i32> get_changes_change_id_reviewers_reviewer_id_votes(change_id, reviewer_id)
+List Votes
+
+Lists the votes for a specific reviewer of the change.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**change_id** | **String** |  | [required] |
+**reviewer_id** | **String** |  | [required] |
+
+### Return type
+
+**std::collections::HashMap<String, i32>**
 
 ### Authorization
 
@@ -1617,7 +1719,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_changes_change_id_revisions_revision_id_files
 
-> serde_json::Value get_changes_change_id_revisions_revision_id_files(change_id, revision_id, base, parent, q, reviewed)
+> std::collections::HashMap<String, models::CommonFileInfo> get_changes_change_id_revisions_revision_id_files(change_id, revision_id, base, parent, q, reviewed)
 List files
 
 Lists the files that were added, modified, or deleted in a revision.
@@ -1636,7 +1738,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**std::collections::HashMap<String, models::CommonFileInfo>**](CommonFileInfo.md)
 
 ### Authorization
 
@@ -1783,35 +1885,6 @@ Name | Type | Description  | Required | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/octet-stream
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## get_changes_change_id_revisions_revision_id_fixes
-
-> serde_json::Value get_changes_change_id_revisions_revision_id_fixes(change_id, revision_id)
-
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**change_id** | **String** |  | [required] |
-**revision_id** | **String** |  | [required] |
-
-### Return type
-
-[**serde_json::Value**](serde_json::Value.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3180,6 +3253,102 @@ Name | Type | Description  | Required | Notes
 
 - **Content-Type**: application/json, application/x-www-form-urlencoded, text/plain
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## post_changes_change_id_reviewers
+
+> models::ReviewerResult post_changes_change_id_reviewers(change_id, reviewer_input)
+Add Reviewer
+
+Adds one user or all members of one group as reviewer to the change.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**change_id** | **String** |  | [required] |
+**reviewer_input** | Option<[**ReviewerInput**](ReviewerInput.md)> |  |  |
+
+### Return type
+
+[**models::ReviewerResult**](ReviewerResult.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded, text/plain
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## post_changes_change_id_reviewers_reviewer_id_delete
+
+> post_changes_change_id_reviewers_reviewer_id_delete(change_id, reviewer_id, delete_reviewer_input)
+Delete Reviewer
+
+Deletes a reviewer from a change. Deleting a reviewer also removes that user from the attention set.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**change_id** | **String** |  | [required] |
+**reviewer_id** | **String** |  | [required] |
+**delete_reviewer_input** | Option<[**DeleteReviewerInput**](DeleteReviewerInput.md)> |  |  |
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## post_changes_change_id_reviewers_reviewer_id_votes_vote_id_delete
+
+> post_changes_change_id_reviewers_reviewer_id_votes_vote_id_delete(change_id, reviewer_id, vote_id, delete_vote_input)
+Delete Vote
+
+Deletes a single vote from a change. Note, that even when the last vote of a reviewer is removed the reviewer itself is still listed on the change.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**change_id** | **String** |  | [required] |
+**reviewer_id** | **String** |  | [required] |
+**vote_id** | **String** |  | [required] |
+**delete_vote_input** | Option<[**DeleteVoteInput**](DeleteVoteInput.md)> |  |  |
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded, text/plain
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
