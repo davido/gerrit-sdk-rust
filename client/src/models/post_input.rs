@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PostInput {
+    /// Path to file to restore.
     #[serde(rename = "restore_path", skip_serializing_if = "Option::is_none")]
     pub restore_path: Option<String>,
+    /// Old path to file to rename.
     #[serde(rename = "old_path", skip_serializing_if = "Option::is_none")]
     pub old_path: Option<String>,
+    /// New path to file to rename.
     #[serde(rename = "new_path", skip_serializing_if = "Option::is_none")]
     pub new_path: Option<String>,
 }

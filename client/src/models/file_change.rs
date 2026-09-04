@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FileChange {
+    /// The new file content, base64-encoded, for a create or update. For a 120000 (symlink) entry, the decoded content is the symlink target path.
     #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
     pub content: Option<String>,
+    /// The file mode in octal format (100644 regular file, 100755 executable, 120000 symlink). If not set, new files are created as 100644 and existing files keep their mode.
     #[serde(rename = "file_mode", skip_serializing_if = "Option::is_none")]
     pub file_mode: Option<i32>,
+    /// If true, deletes the file at this path.
     #[serde(rename = "delete", skip_serializing_if = "Option::is_none")]
     pub delete: Option<bool>,
+    /// Source path to rename from. The file at rename_from is moved to this entry's path.
     #[serde(rename = "rename_from", skip_serializing_if = "Option::is_none")]
     pub rename_from: Option<String>,
 }

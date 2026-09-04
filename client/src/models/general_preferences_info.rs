@@ -13,58 +13,85 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GeneralPreferencesInfo {
+    /// The number of changes to show on each page. Allowed values are 10, 25, 50, 100.
     #[serde(rename = "changes_per_page", skip_serializing_if = "Option::is_none")]
     pub changes_per_page: Option<i32>,
+    /// The type of download URL the user prefers to use. May be any key from the schemes map in DownloadInfo.
     #[serde(rename = "download_scheme", skip_serializing_if = "Option::is_none")]
     pub download_scheme: Option<String>,
+    /// Which theme to use. Allowed values are AUTO or DARK or LIGHT.
     #[serde(rename = "theme", skip_serializing_if = "Option::is_none")]
     pub theme: Option<models::Theme>,
+    /// The format to display the date in. Allowed values are STD, US, ISO, EURO, UK.
     #[serde(rename = "date_format", skip_serializing_if = "Option::is_none")]
     pub date_format: Option<models::DateFormat>,
+    /// The format to display the time in. Allowed values are HHMM_12, HHMM_24.
     #[serde(rename = "time_format", skip_serializing_if = "Option::is_none")]
     pub time_format: Option<models::TimeFormat>,
+    /// Whether to expand diffs inline instead of opening as separate page (Gerrit web app UI only).
     #[serde(rename = "expand_inline_diffs", skip_serializing_if = "Option::is_none")]
     pub expand_inline_diffs: Option<bool>,
+    /// Whether to show relative dates in the changes table.
     #[serde(rename = "relative_date_in_change_table", skip_serializing_if = "Option::is_none")]
     pub relative_date_in_change_table: Option<bool>,
+    /// The type of diff view to show. Allowed values are SIDE_BY_SIDE, UNIFIED_DIFF.
     #[serde(rename = "diff_view", skip_serializing_if = "Option::is_none")]
     pub diff_view: Option<models::DiffView>,
+    /// Whether to show the change sizes as colored bars in the change table.
     #[serde(rename = "size_bar_in_change_table", skip_serializing_if = "Option::is_none")]
     pub size_bar_in_change_table: Option<bool>,
+    /// Whether to show change number in the change table.
     #[serde(rename = "legacycid_in_change_table", skip_serializing_if = "Option::is_none")]
     pub legacycid_in_change_table: Option<bool>,
+    /// Whether to mute common path prefixes in file names in the file table.
     #[serde(rename = "mute_common_path_prefixes", skip_serializing_if = "Option::is_none")]
     pub mute_common_path_prefixes: Option<bool>,
+    /// Whether to insert Signed-off-by footer in changes created with the inline edit feature.
     #[serde(rename = "signed_off_by", skip_serializing_if = "Option::is_none")]
     pub signed_off_by: Option<bool>,
+    /// The type of email strategy to use. On ENABLED, the user will receive emails from Gerrit. On CC_ON_OWN_COMMENTS the user will also receive emails for their own comments. On ATTENTION_SET_ONLY, on emails about changes, the user will receive emails only if they are in the attention set of that change.
     #[serde(rename = "email_strategy", skip_serializing_if = "Option::is_none")]
     pub email_strategy: Option<models::EmailStrategy>,
+    /// The format to use for outgoing email. Allowed values are PLAINTEXT and HTML_PLAINTEXT.
     #[serde(rename = "email_format", skip_serializing_if = "Option::is_none")]
     pub email_format: Option<models::EmailFormat>,
+    /// The base which should be pre-selected in the 'Diff Against' drop-down list when the change screen is opened for a merge commit. Allowed values are AUTO_MERGE and FIRST_PARENT.
     #[serde(rename = "default_base_for_merges", skip_serializing_if = "Option::is_none")]
     pub default_base_for_merges: Option<models::DefaultBase>,
+    /// Whether to publish draft comments on push by default.
     #[serde(rename = "publish_comments_on_push", skip_serializing_if = "Option::is_none")]
     pub publish_comments_on_push: Option<bool>,
+    /// Whether to disable all keyboard shortcuts.
     #[serde(rename = "disable_keyboard_shortcuts", skip_serializing_if = "Option::is_none")]
     pub disable_keyboard_shortcuts: Option<bool>,
+    /// Whether to disable token highlighting on hover.
     #[serde(rename = "disable_token_highlighting", skip_serializing_if = "Option::is_none")]
     pub disable_token_highlighting: Option<bool>,
+    /// Whether to set work-in-progress on push or on create changes online by default.
     #[serde(rename = "work_in_progress_by_default", skip_serializing_if = "Option::is_none")]
     pub work_in_progress_by_default: Option<bool>,
+    /// The menu items of the MY top menu as a list of TopMenuItemInfo entities.
     #[serde(rename = "my", skip_serializing_if = "Option::is_none")]
     pub my: Option<Vec<models::MenuItem>>,
+    /// The columns to display in the change table (Gerrit web app UI only). The default is empty, which will default columns as determined by the frontend.
     #[serde(rename = "change_table", skip_serializing_if = "Option::is_none")]
     pub change_table: Option<Vec<String>>,
+    /// Whether to prompt user to enable browser notification in browser.
     #[serde(rename = "allow_browser_notifications", skip_serializing_if = "Option::is_none")]
     pub allow_browser_notifications: Option<bool>,
+    /// Whether to receive suggested code while writing comments. This feature needs a plugin implementation.
     #[serde(rename = "allow_suggest_code_while_commenting", skip_serializing_if = "Option::is_none")]
     pub allow_suggest_code_while_commenting: Option<bool>,
+    /// Whether to receive autocompletions while writing comments. This feature needs a plugin implementation.
     #[serde(rename = "allow_autocompleting_comments", skip_serializing_if = "Option::is_none")]
     pub allow_autocompleting_comments: Option<bool>,
+    /// The name of the AI model selected for the AI chat. This feature needs a plugin implementation.
     #[serde(rename = "ai_chat_selected_model", skip_serializing_if = "Option::is_none")]
     pub ai_chat_selected_model: Option<String>,
+    /// A comma-separated list of label names that limits which label columns are shown in the change table. If empty, all labels are shown.
     #[serde(rename = "label_filter", skip_serializing_if = "Option::is_none")]
     pub label_filter: Option<String>,
+    /// String indicating which sidebar should be open on the diff page. Set to \"NONE\" if no sidebars should be open. Plugin-supplied sidebars will be prefixed with \"plugin-\".
     #[serde(rename = "diff_page_sidebar", skip_serializing_if = "Option::is_none")]
     pub diff_page_sidebar: Option<String>,
 }

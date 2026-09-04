@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthInfo {
+    /// The authentication type that is configured on the server; see auth.type.
     #[serde(rename = "auth_type", skip_serializing_if = "Option::is_none")]
     pub auth_type: Option<models::AuthType>,
     /// Whether contributor agreements are required.

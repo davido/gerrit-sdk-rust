@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReviewResult {
+    /// Map of labels to values after the review was posted. Null if any reviewer additions were rejected.
     #[serde(rename = "labels", skip_serializing_if = "Option::is_none")]
     pub labels: Option<std::collections::HashMap<String, i32>>,
+    /// Map of account or group identifier to ReviewerResult representing the outcome of adding/removing a reviewer. Absent if no reviewer additions were requested.
     #[serde(rename = "reviewers", skip_serializing_if = "Option::is_none")]
     pub reviewers: Option<std::collections::HashMap<String, models::ReviewerResult>>,
+    /// If true, the change was moved from WIP to ready for review as a result of this action. Not set if false.
     #[serde(rename = "ready", skip_serializing_if = "Option::is_none")]
     pub ready: Option<bool>,
+    /// Error message for non-200 responses.
     #[serde(rename = "error", skip_serializing_if = "Option::is_none")]
     pub error: Option<String>,
+    /// Post-update change information.
     #[serde(rename = "change_info", skip_serializing_if = "Option::is_none")]
     pub change_info: Option<Box<models::ChangeInfo>>,
 }

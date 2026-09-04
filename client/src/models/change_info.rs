@@ -171,6 +171,7 @@ pub struct ChangeInfo {
     /// A list of ProblemInfo entities describing potential problems with this change. Only set if CHECK is set.
     #[serde(rename = "problems", skip_serializing_if = "Option::is_none")]
     pub problems: Option<Vec<models::ProblemInfo>>,
+    /// Plugin-provided information about the change, as a list of PluginDefinedInfo entities. Only present if a plugin contributes data.
     #[serde(rename = "plugins", skip_serializing_if = "Option::is_none")]
     pub plugins: Option<Vec<models::PluginDefinedInfo>>,
     /// A list of TrackingIdInfo entities describing references to external tracking systems. Only set if tracking ids are requested.

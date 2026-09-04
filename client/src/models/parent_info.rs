@@ -33,7 +33,7 @@ pub struct ParentInfo {
     pub patch_set_number: Option<i32>,
     /// If the parent commit is a patch-set of another gerrit change, this field will hold the change status of the parent change. Otherwise, will be null.
     #[serde(rename = "change_status", skip_serializing_if = "Option::is_none")]
-    pub change_status: Option<String>,
+    pub change_status: Option<models::ChangeStatus>,
 }
 
 impl ParentInfo {

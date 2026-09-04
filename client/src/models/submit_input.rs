@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SubmitInput {
+    /// Deprecated and no longer used. Kept for backwards compatibility.
     #[serde(rename = "wait_for_merge", skip_serializing_if = "Option::is_none")]
     pub wait_for_merge: Option<bool>,
     /// If set, submit the change on behalf of the given user. The value may take any format accepted by the accounts REST API. Using this option requires Submit (On Behalf Of) permission on the branch.

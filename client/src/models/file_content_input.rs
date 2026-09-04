@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FileContentInput {
+    /// The new content of the file, sent as the raw request body. If not set, an empty file is created or the existing content is cleared.
     #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
     pub content: Option<serde_json::Value>,
     /// The file content as a base-64 encoded data URI. If no content is provided, an empty is created or if an existing file is updated the file content is removed so that the file becomes empty. The content must be a SHA1 if the file mode is 160000 (gitlink).

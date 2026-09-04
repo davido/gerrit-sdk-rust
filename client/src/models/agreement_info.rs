@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AgreementInfo {
+    /// The unique name of the contributor agreement.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The description of the contributor agreement.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// The URL of the contributor agreement.
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
+    /// The group to which a user that signs the contributor agreement online is added automatically as a GroupInfo entity. If not set, users cannot sign the contributor agreement online.
     #[serde(rename = "auto_verify_group", skip_serializing_if = "Option::is_none")]
     pub auto_verify_group: Option<Box<models::GroupInfo>>,
 }

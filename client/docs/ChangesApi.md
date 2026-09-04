@@ -48,7 +48,7 @@ Method | HTTP request | Description
 [**get_changes_change_id_reviewers_reviewer_id_votes**](ChangesApi.md#get_changes_change_id_reviewers_reviewer_id_votes) | **GET** /changes/{change_id}/reviewers/{reviewer_id}/votes | List Votes
 [**get_changes_change_id_revisions_revision_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id) | **GET** /changes/{change_id}/revisions/{revision_id} | Get Revision
 [**get_changes_change_id_revisions_revision_id_actions**](ChangesApi.md#get_changes_change_id_revisions_revision_id_actions) | **GET** /changes/{change_id}/revisions/{revision_id}/actions | Get Revision Actions
-[**get_changes_change_id_revisions_revision_id_archive**](ChangesApi.md#get_changes_change_id_revisions_revision_id_archive) | **GET** /changes/{change_id}/revisions/{revision_id}/archive | 
+[**get_changes_change_id_revisions_revision_id_archive**](ChangesApi.md#get_changes_change_id_revisions_revision_id_archive) | **GET** /changes/{change_id}/revisions/{revision_id}/archive | Get Archive
 [**get_changes_change_id_revisions_revision_id_comments**](ChangesApi.md#get_changes_change_id_revisions_revision_id_comments) | **GET** /changes/{change_id}/revisions/{revision_id}/comments | List revision comments
 [**get_changes_change_id_revisions_revision_id_comments_comment_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id_comments_comment_id) | **GET** /changes/{change_id}/revisions/{revision_id}/comments/{comment_id} | Get Comment
 [**get_changes_change_id_revisions_revision_id_commit**](ChangesApi.md#get_changes_change_id_revisions_revision_id_commit) | **GET** /changes/{change_id}/revisions/{revision_id}/commit | Get commit
@@ -71,10 +71,10 @@ Method | HTTP request | Description
 [**get_changes_change_id_revisions_revision_id_reviewers**](ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers | List Revision Reviewers
 [**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | 
 [**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes**](ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes | List Revision Votes
-[**get_changes_change_id_revisions_revision_id_robotcomments**](ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments | 
-[**get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments/{robot_comment_id} | 
+[**get_changes_change_id_revisions_revision_id_robotcomments**](ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments | List Robot Comments
+[**get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments/{robot_comment_id} | Get Robot Comment
 [**get_changes_change_id_revisions_revision_id_submit_type**](ChangesApi.md#get_changes_change_id_revisions_revision_id_submit_type) | **GET** /changes/{change_id}/revisions/{revision_id}/submit_type | Get Submit Type
-[**get_changes_change_id_robotcomments**](ChangesApi.md#get_changes_change_id_robotcomments) | **GET** /changes/{change_id}/robotcomments | 
+[**get_changes_change_id_robotcomments**](ChangesApi.md#get_changes_change_id_robotcomments) | **GET** /changes/{change_id}/robotcomments | List Change Robot Comments
 [**get_changes_change_id_submitted_together**](ChangesApi.md#get_changes_change_id_submitted_together) | **GET** /changes/{change_id}/submitted_together | Changes Submitted Together
 [**get_changes_change_id_suggest_reviewers**](ChangesApi.md#get_changes_change_id_suggest_reviewers) | **GET** /changes/{change_id}/suggest_reviewers | Suggest Reviewers
 [**get_changes_change_id_topic**](ChangesApi.md#get_changes_change_id_topic) | **GET** /changes/{change_id}/topic | Get Topic
@@ -1501,7 +1501,9 @@ Name | Type | Description  | Required | Notes
 ## get_changes_change_id_revisions_revision_id_archive
 
 > std::path::PathBuf get_changes_change_id_revisions_revision_id_archive(change_id, revision_id, format)
+Get Archive
 
+Retrieves an archive of the files in a revision.
 
 ### Parameters
 
@@ -2244,7 +2246,9 @@ Name | Type | Description  | Required | Notes
 ## get_changes_change_id_revisions_revision_id_robotcomments
 
 > std::collections::HashMap<String, Vec<models::RobotCommentInfo>> get_changes_change_id_revisions_revision_id_robotcomments(change_id, revision_id)
+List Robot Comments
 
+Lists the robot comments of a revision.
 
 ### Parameters
 
@@ -2273,7 +2277,9 @@ Name | Type | Description  | Required | Notes
 ## get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id
 
 > models::RobotCommentInfo get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id(change_id, revision_id, robot_comment_id)
+Get Robot Comment
 
+Retrieves a robot comment of a revision.
 
 ### Parameters
 
@@ -2334,7 +2340,9 @@ Name | Type | Description  | Required | Notes
 ## get_changes_change_id_robotcomments
 
 > std::collections::HashMap<String, Vec<models::RobotCommentInfo>> get_changes_change_id_robotcomments(change_id)
+List Change Robot Comments
 
+Lists the robot comments of all revisions of the change.
 
 ### Parameters
 

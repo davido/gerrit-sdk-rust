@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CommentInput {
+    /// Whether to include the source lines around the comment as context in the response.
     #[serde(rename = "enable_context", skip_serializing_if = "Option::is_none")]
     pub enable_context: Option<bool>,
 }

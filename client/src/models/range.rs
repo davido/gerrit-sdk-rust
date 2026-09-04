@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Range {
+    /// The start line number of the range. (1-based)
     #[serde(rename = "start_line", skip_serializing_if = "Option::is_none")]
     pub start_line: Option<i32>,
+    /// The character position in the start line. (0-based)
     #[serde(rename = "start_character", skip_serializing_if = "Option::is_none")]
     pub start_character: Option<i32>,
+    /// The end line number of the range. (1-based)
     #[serde(rename = "end_line", skip_serializing_if = "Option::is_none")]
     pub end_line: Option<i32>,
+    /// The character position in the end line. (0-based)
     #[serde(rename = "end_character", skip_serializing_if = "Option::is_none")]
     pub end_character: Option<i32>,
 }

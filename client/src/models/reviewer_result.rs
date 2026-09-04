@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReviewerResult {
+    /// Value of the reviewer field from ReviewerInput set while adding the reviewer.
     #[serde(rename = "input", skip_serializing_if = "Option::is_none")]
     pub input: Option<String>,
+    /// Error message explaining why the reviewer could not be added. + If a group was specified in the input and an error is returned, it means that none of the members were added as reviewer.
     #[serde(rename = "error", skip_serializing_if = "Option::is_none")]
     pub error: Option<String>,
+    /// Whether adding the reviewer requires confirmation.
     #[serde(rename = "confirm", skip_serializing_if = "Option::is_none")]
     pub confirm: Option<bool>,
+    /// The newly added reviewers as a list of ReviewerInfo entities.
     #[serde(rename = "reviewers", skip_serializing_if = "Option::is_none")]
     pub reviewers: Option<Vec<models::ReviewerInfo>>,
+    /// The newly CCed accounts as a list of AccountInfo entities. This field will only appear if the requested state for the reviewer was CC.
     #[serde(rename = "ccs", skip_serializing_if = "Option::is_none")]
     pub ccs: Option<Vec<models::AccountInfo>>,
+    /// The newly removed accounts as a list of AccountInfo entities. This field will only appear if the requested state for the reviewer was REMOVED.
     #[serde(rename = "removed", skip_serializing_if = "Option::is_none")]
     pub removed: Option<Box<models::AccountInfo>>,
 }

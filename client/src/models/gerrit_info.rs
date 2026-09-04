@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GerritInfo {
+    /// The name of the All-Projects root project.
     #[serde(rename = "all_projects", skip_serializing_if = "Option::is_none")]
     pub all_projects: Option<String>,
+    /// The name of the All-Users project, in which per-user data such as account preferences and watched projects is stored.
     #[serde(rename = "all_users", skip_serializing_if = "Option::is_none")]
     pub all_users: Option<String>,
     /// Whether documentation search is available.
@@ -29,6 +31,7 @@ pub struct GerritInfo {
     /// URL to report bugs.
     #[serde(rename = "report_bug_url", skip_serializing_if = "Option::is_none")]
     pub report_bug_url: Option<String>,
+    /// The name of the configured primary web link (gerrit.primaryWeblinkName), if one is set.
     #[serde(rename = "primary_weblink_name", skip_serializing_if = "Option::is_none")]
     pub primary_weblink_name: Option<String>,
     /// Short identifier for this Gerrit installation.

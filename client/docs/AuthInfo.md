@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_type** | Option<[**models::AuthType**](AuthType.md)> |  | [optional]
+**auth_type** | Option<[**models::AuthType**](AuthType.md)> | The authentication type that is configured on the server; see auth.type. | [optional]
 **use_contributor_agreements** | Option<**bool**> | Whether contributor agreements are required. | [optional]
 **contributor_agreements** | Option<[**Vec<models::AgreementInfo>**](AgreementInfo.md)> | List of contributor agreements as ContributorAgreementInfo entities. | [optional]
 **editable_account_fields** | Option<[**Vec<models::AccountFieldName>**](AccountFieldName.md)> | List of account fields that are editable. Possible values are FULL_NAME, USER_NAME and REGISTER_NEW_EMAIL. | [optional]

@@ -58,8 +58,10 @@ pub struct DiffPreferencesInfo {
     /// If true the line numbers are hidden.
     #[serde(rename = "hide_line_numbers", skip_serializing_if = "Option::is_none")]
     pub hide_line_numbers: Option<bool>,
+    /// Whether the whole file should be rendered instead of only the changed parts.
     #[serde(rename = "render_entire_file", skip_serializing_if = "Option::is_none")]
     pub render_entire_file: Option<bool>,
+    /// Whether empty panes should be hidden. The left pane is empty when a file was added; the right pane is empty when a file was deleted.
     #[serde(rename = "hide_empty_pane", skip_serializing_if = "Option::is_none")]
     pub hide_empty_pane: Option<bool>,
     /// Whether matching brackets should be highlighted.
@@ -68,6 +70,7 @@ pub struct DiffPreferencesInfo {
     /// Whether to enable line wrapping or not.
     #[serde(rename = "line_wrapping", skip_serializing_if = "Option::is_none")]
     pub line_wrapping: Option<bool>,
+    /// The responsive-rendering mode of the diff view. Allowed values are NONE, SHRINK_ONLY and FULL_RESPONSIVE.
     #[serde(rename = "responsive_mode", skip_serializing_if = "Option::is_none")]
     pub responsive_mode: Option<models::ResponsiveMode>,
     /// Whether whitespace changes should be ignored and if yes, which whitespace changes should be ignored. + Allowed values are IGNORE_NONE, IGNORE_TRAILING, IGNORE_LEADING_AND_TRAILING, IGNORE_ALL.
@@ -79,6 +82,7 @@ pub struct DiffPreferencesInfo {
     /// Whether deleted files should be skipped on file switch.
     #[serde(rename = "skip_deleted", skip_serializing_if = "Option::is_none")]
     pub skip_deleted: Option<bool>,
+    /// Whether files without changes are skipped when switching between files.
     #[serde(rename = "skip_unchanged", skip_serializing_if = "Option::is_none")]
     pub skip_unchanged: Option<bool>,
     /// Whether uncommented files should be skipped on file switch.

@@ -13,18 +13,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TestSubmitRuleInfo {
+    /// OK, the change can be submitted. + NOT_READY, additional labels are required before submit. + CLOSED, closed changes cannot be submitted. + RULE_ERROR, rule code failed with an error.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
+    /// When status is RULE_ERROR this message provides some text describing the failure of the rule predicate.
     #[serde(rename = "error_message", skip_serializing_if = "Option::is_none")]
     pub error_message: Option<String>,
+    /// Map of labels that are approved; an AccountInfo identifies the voter chosen by the rule.
     #[serde(rename = "ok", skip_serializing_if = "Option::is_none")]
     pub ok: Option<std::collections::HashMap<String, models::AccountInfo>>,
+    /// Map of labels that are preventing submit; AccountInfo identifies voter.
     #[serde(rename = "reject", skip_serializing_if = "Option::is_none")]
     pub reject: Option<std::collections::HashMap<String, models::AccountInfo>>,
+    /// Map of labels that need to be given to submit. The value is currently an empty object.
     #[serde(rename = "need", skip_serializing_if = "Option::is_none")]
     pub need: Option<std::collections::HashMap<String, serde_json::Value>>,
+    /// Map of labels that can be used, but do not affect submit. AccountInfo identifies voter, if the label has been applied.
     #[serde(rename = "may", skip_serializing_if = "Option::is_none")]
     pub may: Option<std::collections::HashMap<String, models::AccountInfo>>,
+    /// Map of labels that should have been in need but cannot be used by any user because of access restrictions. The value is currently an empty object.
     #[serde(rename = "impossible", skip_serializing_if = "Option::is_none")]
     pub impossible: Option<std::collections::HashMap<String, serde_json::Value>>,
 }

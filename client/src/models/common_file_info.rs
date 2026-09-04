@@ -13,26 +13,37 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CommonFileInfo {
+    /// The status of the file (\"A\"=Added, \"D\"=Deleted, \"R\"=Renamed, \"C\"=Copied, \"W\"=Rewritten). + Not set if the file was Modified (\"M\").
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
+    /// File mode in octal (e.g. 100644) at the old commit. The first three digits indicate the file type and the last three digits contain the file permission bits. For added files, this field will not be present.
     #[serde(rename = "old_mode", skip_serializing_if = "Option::is_none")]
     pub old_mode: Option<i32>,
+    /// File mode in octal (e.g. 100644) at the new commit. The first three digits indicate the file type and the last three digits contain the file permission bits. For deleted files, this field will not be present.
     #[serde(rename = "new_mode", skip_serializing_if = "Option::is_none")]
     pub new_mode: Option<i32>,
+    /// SHA-1 of the file content at the old commit. For added files, this field will not be present.
     #[serde(rename = "old_sha", skip_serializing_if = "Option::is_none")]
     pub old_sha: Option<String>,
+    /// SHA-1 of the file content at the new commit. For deleted files, this field will not be present.
     #[serde(rename = "new_sha", skip_serializing_if = "Option::is_none")]
     pub new_sha: Option<String>,
+    /// Whether the file is binary.
     #[serde(rename = "binary", skip_serializing_if = "Option::is_none")]
     pub binary: Option<bool>,
+    /// The old file path. + Only set if the file was renamed or copied.
     #[serde(rename = "old_path", skip_serializing_if = "Option::is_none")]
     pub old_path: Option<String>,
+    /// Number of inserted lines. + Not set for binary files or if no lines were inserted. + An empty last line is not included in the count and hence this number can differ by one from details provided in DiffInfo.
     #[serde(rename = "lines_inserted", skip_serializing_if = "Option::is_none")]
     pub lines_inserted: Option<i32>,
+    /// Number of deleted lines. + Not set for binary files or if no lines were deleted. + An empty last line is not included in the count and hence this number can differ by one from details provided in DiffInfo.
     #[serde(rename = "lines_deleted", skip_serializing_if = "Option::is_none")]
     pub lines_deleted: Option<i32>,
+    /// Number of bytes by which the file size increased/decreased.
     #[serde(rename = "size_delta", skip_serializing_if = "Option::is_none")]
     pub size_delta: Option<i32>,
+    /// File size in bytes.
     #[serde(rename = "size", skip_serializing_if = "Option::is_none")]
     pub size: Option<i32>,
     #[serde(rename = "diffs_too_expensive_to_compute", skip_serializing_if = "Option::is_none")]

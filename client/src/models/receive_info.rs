@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReceiveInfo {
+    /// Whether signed push validation support is enabled on the server; see the global configuration for details.
     #[serde(rename = "enable_signed_push", skip_serializing_if = "Option::is_none")]
     pub enable_signed_push: Option<bool>,
 }

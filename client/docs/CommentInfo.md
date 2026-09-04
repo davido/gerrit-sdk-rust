@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **message** | Option<**String**> | The comment message. | [optional]
 **commit_id** | Option<**String**> | Hex commit SHA-1 (40 characters string) of the commit of the patchset to which this comment applies. | [optional]
 **fix_suggestions** | Option<[**Vec<models::FixSuggestionInfo>**](FixSuggestionInfo.md)> | Suggested fixes for this comment as a list of FixSuggestionInfo entities. | [optional]
-**is_ai** | Option<**bool**> |  | [optional]
+**is_ai** | Option<**bool**> | Whether the comment was created by an AI agent. Not set if false. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

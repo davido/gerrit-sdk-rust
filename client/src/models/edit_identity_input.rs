@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EditIdentityInput {
+    /// The name of the author/committer. If not specified, the existing name will be used.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The email of the author/committer. If not specified, the existing email will be used.
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
+    /// Type of the identity being edited. Must be either AUTHOR or COMMITTER.
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<models::ChangeEditIdentityType>,
 }

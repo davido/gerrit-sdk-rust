@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CleanupChangesInput {
+    /// Abandon all changes that weren't updated in the timespan given here
     #[serde(rename = "after", skip_serializing_if = "Option::is_none")]
     pub after: Option<String>,
+    /// Whether to also abandon changes that are mergeable
     #[serde(rename = "if_mergeable", skip_serializing_if = "Option::is_none")]
     pub if_mergeable: Option<bool>,
+    /// Message to post to changes abandoned by the cleanup
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
+    /// Additional query predicates appended to the base cleanup query. Can be used to limit the batch size, exclude changes, or both, e.g. age:4w limit:100 -project:some/repo -hashtag:keep-alive. By default unset.
     #[serde(rename = "query", skip_serializing_if = "Option::is_none")]
     pub query: Option<String>,
 }

@@ -13,20 +13,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ContentEntry {
+    /// Content in the file on both sides (unchanged).
     #[serde(rename = "ab", skip_serializing_if = "Option::is_none")]
     pub ab: Option<Vec<String>>,
+    /// Content only in the file on side A (deleted in B).
     #[serde(rename = "a", skip_serializing_if = "Option::is_none")]
     pub a: Option<Vec<String>>,
+    /// Content only in the file on side B (added in B).
     #[serde(rename = "b", skip_serializing_if = "Option::is_none")]
     pub b: Option<Vec<String>>,
+    /// Text sections deleted from side A as a DiffIntralineInfo entity.
     #[serde(rename = "edit_a", skip_serializing_if = "Option::is_none")]
     pub edit_a: Option<Vec<Vec<i32>>>,
+    /// Text sections inserted in side B as a DiffIntralineInfo entity.
     #[serde(rename = "edit_b", skip_serializing_if = "Option::is_none")]
     pub edit_b: Option<Vec<Vec<i32>>>,
+    /// Indicates whether this entry was introduced by a rebase.
     #[serde(rename = "due_to_rebase", skip_serializing_if = "Option::is_none")]
     pub due_to_rebase: Option<bool>,
+    /// Set to true if the region is common according to the requested ignore-whitespace parameter, but a and b contain differing amounts of whitespace. When present and true a and b are used instead of ab.
     #[serde(rename = "common", skip_serializing_if = "Option::is_none")]
     pub common: Option<bool>,
+    /// count of lines skipped on both sides when the file is too large to include all common lines.
     #[serde(rename = "skip", skip_serializing_if = "Option::is_none")]
     pub skip: Option<i32>,
 }

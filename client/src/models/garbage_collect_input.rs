@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GarbageCollectInput {
+    /// Whether progress information should be shown.
     #[serde(rename = "show_progress", skip_serializing_if = "Option::is_none")]
     pub show_progress: Option<bool>,
+    /// Whether an aggressive garbage collection should be done.
     #[serde(rename = "aggressive", skip_serializing_if = "Option::is_none")]
     pub aggressive: Option<bool>,
+    /// Whether the garbage collection should run asynchronously.
     #[serde(rename = "async", skip_serializing_if = "Option::is_none")]
     pub r#async: Option<bool>,
 }

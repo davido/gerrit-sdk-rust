@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BranchInfo {
+    /// Actions the caller might be able to perform on this branch, as a map of action name to ActionInfo entities.
     #[serde(rename = "actions", skip_serializing_if = "Option::is_none")]
     pub actions: Option<std::collections::HashMap<String, models::ActionInfo>>,
     /// Links to the branch in external sites as a list of WebLinkInfo entries.

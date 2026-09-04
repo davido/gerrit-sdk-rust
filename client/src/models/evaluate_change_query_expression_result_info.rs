@@ -22,6 +22,7 @@ pub struct EvaluateChangeQueryExpressionResultInfo {
     /// List of failing leaf atoms (atoms that do not match the change).
     #[serde(rename = "failing_atoms", skip_serializing_if = "Option::is_none")]
     pub failing_atoms: Option<Vec<String>>,
+    /// Explanations for why atoms pass or fail. Explanations are only available for a few atoms, for most atoms no explanation is provided. Not set if none of the atoms has an explanation.
     #[serde(rename = "atom_explanations", skip_serializing_if = "Option::is_none")]
     pub atom_explanations: Option<std::collections::HashMap<String, String>>,
 }

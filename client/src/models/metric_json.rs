@@ -13,54 +13,79 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MetricJson {
+    /// The description of the metric.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// The unit of measurement of the recorded values.
     #[serde(rename = "unit", skip_serializing_if = "Option::is_none")]
     pub unit: Option<String>,
+    /// Whether the metric reports a single constant value.
     #[serde(rename = "constant", skip_serializing_if = "Option::is_none")]
     pub constant: Option<bool>,
+    /// Whether the metric reports a rate.
     #[serde(rename = "rate", skip_serializing_if = "Option::is_none")]
     pub rate: Option<bool>,
+    /// Whether the metric is a gauge that reports an instantaneous value.
     #[serde(rename = "gauge", skip_serializing_if = "Option::is_none")]
     pub gauge: Option<bool>,
+    /// Whether the metric accumulates over time.
     #[serde(rename = "cumulative", skip_serializing_if = "Option::is_none")]
     pub cumulative: Option<bool>,
+    /// The number of recorded events.
     #[serde(rename = "count", skip_serializing_if = "Option::is_none")]
     pub count: Option<i32>,
+    /// The current value, for constant metrics and gauges.
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<serde_json::Value>,
+    /// The one-minute moving average rate.
     #[serde(rename = "rate_1m", skip_serializing_if = "Option::is_none")]
     pub rate_1m: Option<f64>,
+    /// The five-minute moving average rate.
     #[serde(rename = "rate_5m", skip_serializing_if = "Option::is_none")]
     pub rate_5m: Option<f64>,
+    /// The fifteen-minute moving average rate.
     #[serde(rename = "rate_15m", skip_serializing_if = "Option::is_none")]
     pub rate_15m: Option<f64>,
+    /// The mean rate since the metric was registered.
     #[serde(rename = "rate_mean", skip_serializing_if = "Option::is_none")]
     pub rate_mean: Option<f64>,
+    /// The median (50th percentile) of the recorded values.
     #[serde(rename = "p50", skip_serializing_if = "Option::is_none")]
     pub p50: Option<f64>,
+    /// The 75th percentile of the recorded values.
     #[serde(rename = "p75", skip_serializing_if = "Option::is_none")]
     pub p75: Option<f64>,
+    /// The 95th percentile of the recorded values.
     #[serde(rename = "p95", skip_serializing_if = "Option::is_none")]
     pub p95: Option<f64>,
+    /// The 98th percentile of the recorded values.
     #[serde(rename = "p98", skip_serializing_if = "Option::is_none")]
     pub p98: Option<f64>,
+    /// The 99th percentile of the recorded values.
     #[serde(rename = "p99", skip_serializing_if = "Option::is_none")]
     pub p99: Option<f64>,
+    /// The 99.9th percentile of the recorded values.
     #[serde(rename = "p99_9", skip_serializing_if = "Option::is_none")]
     pub p99_9: Option<f64>,
+    /// The minimum recorded value.
     #[serde(rename = "min", skip_serializing_if = "Option::is_none")]
     pub min: Option<f64>,
+    /// The average of the recorded values.
     #[serde(rename = "avg", skip_serializing_if = "Option::is_none")]
     pub avg: Option<f64>,
+    /// The maximum recorded value.
     #[serde(rename = "max", skip_serializing_if = "Option::is_none")]
     pub max: Option<f64>,
+    /// The sum of the recorded values.
     #[serde(rename = "sum", skip_serializing_if = "Option::is_none")]
     pub sum: Option<f64>,
+    /// The standard deviation of the recorded values.
     #[serde(rename = "std_dev", skip_serializing_if = "Option::is_none")]
     pub std_dev: Option<f64>,
+    /// The fields of the metric as a list of FieldJson entities.
     #[serde(rename = "fields", skip_serializing_if = "Option::is_none")]
     pub fields: Option<Vec<models::FieldJson>>,
+    /// The per-field-value breakdown of the metric, as a map of field values to the recorded value for that combination.
     #[serde(rename = "buckets", skip_serializing_if = "Option::is_none")]
     pub buckets: Option<std::collections::HashMap<String, serde_json::Value>>,
 }

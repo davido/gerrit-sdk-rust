@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AutoCloseableChangesCheckResult {
+    /// Changes that can be auto-closed as list of ChangeInfo entities. For each returned ChangeInfo entity the problems field is populated that includes details about the detected issues. If fix in the AutoCloseableChangesCheckInput was set to true, status and outcome in ProblemInfo are populated.
     #[serde(rename = "auto_closeable_changes", skip_serializing_if = "Option::is_none")]
     pub auto_closeable_changes: Option<Vec<models::ChangeInfo>>,
 }

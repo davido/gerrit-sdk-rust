@@ -46,6 +46,7 @@ pub struct ConfigInfo {
     /// InheritedBooleanInfo that tells whether all new changes are set as work-in-progress by default.
     #[serde(rename = "work_in_progress_by_default", skip_serializing_if = "Option::is_none")]
     pub work_in_progress_by_default: Option<Box<models::InheritedBooleanInfo>>,
+    /// InheritedBooleanInfo that tells whether reviewers and CCs that do not have a Gerrit account can be added to a change by their email address.
     #[serde(rename = "enable_reviewer_by_email", skip_serializing_if = "Option::is_none")]
     pub enable_reviewer_by_email: Option<Box<models::InheritedBooleanInfo>>,
     /// InheritedBooleanInfo that indicates whether a change's author date will be changed to match its submitter date upon submit.
@@ -78,6 +79,7 @@ pub struct ConfigInfo {
     /// Map with the comment link configurations of the project. The name of the comment link configuration is mapped to a CommentlinkInfo entity.
     #[serde(rename = "commentlinks", skip_serializing_if = "Option::is_none")]
     pub commentlinks: Option<std::collections::HashMap<String, models::CommentLinkInfo>>,
+    /// Views that are shown as extension panels, as a map of panel section name to the list of panel names configured for the project.
     #[serde(rename = "extension_panel_names", skip_serializing_if = "Option::is_none")]
     pub extension_panel_names: Option<std::collections::HashMap<String, Vec<String>>>,
 }

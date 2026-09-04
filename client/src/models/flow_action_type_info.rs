@@ -16,6 +16,7 @@ pub struct FlowActionTypeInfo {
     /// The name of the action.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// Placeholder text shown for the action's parameters in the UI.
     #[serde(rename = "parameters_placeholder", skip_serializing_if = "Option::is_none")]
     pub parameters_placeholder: Option<String>,
 }

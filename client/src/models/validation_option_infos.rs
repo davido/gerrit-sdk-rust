@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ValidationOptionInfos {
+    /// The list of all possible validation options.
     #[serde(rename = "validation_options", skip_serializing_if = "Option::is_none")]
     pub validation_options: Option<Vec<models::ValidationOptionInfo>>,
 }

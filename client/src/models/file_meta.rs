@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FileMeta {
+    /// The name of the file.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The content type of the file. For the commit message and merge list the value is text/x-gerrit-commit-message and text/x-gerrit-merge-list respectively. For git links the value is x-git/gitlink. For symlinks the value is x-git/symlink. For regular files the value is the file mime type (e.g.
     #[serde(rename = "content_type", skip_serializing_if = "Option::is_none")]
     pub content_type: Option<String>,
+    /// The total number of lines in the file.
     #[serde(rename = "lines", skip_serializing_if = "Option::is_none")]
     pub lines: Option<i32>,
+    /// Links to the file in external sites as a list of WebLinkInfo entries.
     #[serde(rename = "web_links", skip_serializing_if = "Option::is_none")]
     pub web_links: Option<Vec<models::WebLinkInfo>>,
 }

@@ -806,6 +806,7 @@ pub fn get_config_server_labels(configuration: &configuration::Configuration, ) 
     }
 }
 
+/// Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
 pub fn get_config_server_metrics(configuration: &configuration::Configuration, data_only: Option<bool>, prefix: Option<Vec<String>>) -> Result<std::collections::HashMap<String, models::MetricJson>, Error<GetConfigServerMetricsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_data_only = data_only;
@@ -857,6 +858,7 @@ pub fn get_config_server_metrics(configuration: &configuration::Configuration, d
     }
 }
 
+/// Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
 pub fn get_config_server_metrics_metric_id(configuration: &configuration::Configuration, metric_id: &str, data_only: Option<bool>) -> Result<models::MetricJson, Error<GetConfigServerMetricsMetricIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_metric_id = metric_id;

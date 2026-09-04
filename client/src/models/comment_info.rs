@@ -67,6 +67,7 @@ pub struct CommentInfo {
     /// Suggested fixes for this comment as a list of FixSuggestionInfo entities.
     #[serde(rename = "fix_suggestions", skip_serializing_if = "Option::is_none")]
     pub fix_suggestions: Option<Vec<models::FixSuggestionInfo>>,
+    /// Whether the comment was created by an AI agent. Not set if false.
     #[serde(rename = "is_ai", skip_serializing_if = "Option::is_none")]
     pub is_ai: Option<bool>,
 }

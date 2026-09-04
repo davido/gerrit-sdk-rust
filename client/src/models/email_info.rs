@@ -19,6 +19,7 @@ pub struct EmailInfo {
     /// Whether this is the preferred email address of the user.
     #[serde(rename = "preferred", skip_serializing_if = "Option::is_none")]
     pub preferred: Option<bool>,
+    /// Whether this email address is the one used to display the user's avatar.
     #[serde(rename = "avatar", skip_serializing_if = "Option::is_none")]
     pub avatar: Option<bool>,
     /// Set true if the user must confirm control of the email address by following a verification link before Gerrit will permit use of this address.

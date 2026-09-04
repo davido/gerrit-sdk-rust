@@ -16,28 +16,40 @@ pub struct AccountDetailInfo {
     /// The timestamp of when the account was registered.
     #[serde(rename = "registered_on", skip_serializing_if = "Option::is_none")]
     pub registered_on: Option<String>,
+    /// The numeric ID of the account.
     #[serde(rename = "_account_id", skip_serializing_if = "Option::is_none")]
     pub _account_id: Option<i32>,
+    /// The full name of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The display name of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.
     #[serde(rename = "display_name", skip_serializing_if = "Option::is_none")]
     pub display_name: Option<String>,
+    /// The email address the user prefers to be contacted through. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and options DETAILS and ALL_EMAILS for account queries.
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
+    /// A list of the secondary email addresses of the user. + Only set for account queries when the ALL_EMAILS option or the suggest parameter is set. + Secondary emails are only included if the calling user has the Modify Account, and hence is allowed to see secondary emails of other users.
     #[serde(rename = "secondary_emails", skip_serializing_if = "Option::is_none")]
     pub secondary_emails: Option<Vec<String>>,
+    /// The username of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.
     #[serde(rename = "username", skip_serializing_if = "Option::is_none")]
     pub username: Option<String>,
+    /// List of AvatarInfo + entities that provide information about avatar images of the account.
     #[serde(rename = "avatars", skip_serializing_if = "Option::is_none")]
     pub avatars: Option<Vec<models::AvatarInfo>>,
+    /// Whether the query would deliver more results if not limited. + Only set on the last account that is returned.
     #[serde(rename = "_more_accounts", skip_serializing_if = "Option::is_none")]
     pub _more_accounts: Option<bool>,
+    /// Status message of the account.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
+    /// Whether the account is inactive.
     #[serde(rename = "inactive", skip_serializing_if = "Option::is_none")]
     pub inactive: Option<bool>,
+    /// Whether the account is deleted. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS
     #[serde(rename = "deleted", skip_serializing_if = "Option::is_none")]
     pub deleted: Option<bool>,
+    /// List of additional tags that this account has. The only + current tag an account can have is SERVICE_USER. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS
     #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
     pub tags: Option<Vec<String>>,
 }

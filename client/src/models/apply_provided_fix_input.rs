@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApplyProvidedFixInput {
+    /// The replacements that make up the fix, as a list of FixReplacementInfo entities.
     #[serde(rename = "fix_replacement_infos", skip_serializing_if = "Option::is_none")]
     pub fix_replacement_infos: Option<Vec<models::FixReplacementInfo>>,
+    /// Number of the patch set the fix was originally computed against.
     #[serde(rename = "original_patchset_for_fix", skip_serializing_if = "Option::is_none")]
     pub original_patchset_for_fix: Option<i32>,
 }

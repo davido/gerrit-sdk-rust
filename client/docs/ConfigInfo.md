@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **reject_implicit_merges** | Option<[**models::InheritedBooleanInfo**](InheritedBooleanInfo.md)> | InheritedBooleanInfo that tells whether implicit merges should be rejected on changes pushed to or submitted in the project. | [optional]
 **private_by_default** | Option<[**models::InheritedBooleanInfo**](InheritedBooleanInfo.md)> | InheritedBooleanInfo that tells whether all new changes are set as private by default. | [optional]
 **work_in_progress_by_default** | Option<[**models::InheritedBooleanInfo**](InheritedBooleanInfo.md)> | InheritedBooleanInfo that tells whether all new changes are set as work-in-progress by default. | [optional]
-**enable_reviewer_by_email** | Option<[**models::InheritedBooleanInfo**](InheritedBooleanInfo.md)> |  | [optional]
+**enable_reviewer_by_email** | Option<[**models::InheritedBooleanInfo**](InheritedBooleanInfo.md)> | InheritedBooleanInfo that tells whether reviewers and CCs that do not have a Gerrit account can be added to a change by their email address. | [optional]
 **match_author_to_committer_date** | Option<[**models::InheritedBooleanInfo**](InheritedBooleanInfo.md)> | InheritedBooleanInfo that indicates whether a change's author date will be changed to match its submitter date upon submit. | [optional]
 **reject_empty_commit** | Option<[**models::InheritedBooleanInfo**](InheritedBooleanInfo.md)> | InheritedBooleanInfo that tells whether empty commits should be rejected when a change is merged. ActionInfo entities. | [optional]
 **skip_adding_author_and_committer_as_reviewers** | Option<[**models::InheritedBooleanInfo**](InheritedBooleanInfo.md)> | Whether to skip adding the Git commit author and committer as reviewers for a new change. | [optional]
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **plugin_config** | Option<**std::collections::HashMap<String, std::collections::HashMap<String, models::ConfigParameterInfo>>**> | Plugin configuration as map which maps the plugin name to a map of parameter names to ConfigParameterInfo entities. Only filled for users who have read access to refs/meta/config. | [optional]
 **actions** | Option<[**std::collections::HashMap<String, models::ActionInfo>**](ActionInfo.md)> | Actions the caller might be able to perform on this project. The information is a map of view names to | [optional]
 **commentlinks** | Option<[**std::collections::HashMap<String, models::CommentLinkInfo>**](CommentLinkInfo.md)> | Map with the comment link configurations of the project. The name of the comment link configuration is mapped to a CommentlinkInfo entity. | [optional]
-**extension_panel_names** | Option<[**std::collections::HashMap<String, Vec<String>>**](Vec.md)> |  | [optional]
+**extension_panel_names** | Option<[**std::collections::HashMap<String, Vec<String>>**](Vec.md)> | Views that are shown as extension panels, as a map of panel section name to the list of panel names configured for the project. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

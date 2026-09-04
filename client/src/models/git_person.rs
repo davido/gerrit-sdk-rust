@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GitPerson {
+    /// The name of the author/committer.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The email address of the author/committer.
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
+    /// The timestamp of when this identity was constructed.
     #[serde(rename = "date", skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// The timezone offset from UTC of when this identity was constructed.
     #[serde(rename = "tz", skip_serializing_if = "Option::is_none")]
     pub tz: Option<i32>,
 }

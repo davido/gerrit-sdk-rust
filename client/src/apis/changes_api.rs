@@ -2750,6 +2750,7 @@ pub fn get_changes_change_id_revisions_revision_id_actions(configuration: &confi
     }
 }
 
+/// Retrieves an archive of the files in a revision.
 pub fn get_changes_change_id_revisions_revision_id_archive(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, format: Option<&str>) -> Result<reqwest::blocking::Response, Error<GetChangesChangeIdRevisionsRevisionIdArchiveError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -3801,6 +3802,7 @@ pub fn get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes(c
     }
 }
 
+/// Lists the robot comments of a revision.
 pub fn get_changes_change_id_revisions_revision_id_robotcomments(configuration: &configuration::Configuration, change_id: &str, revision_id: &str) -> Result<std::collections::HashMap<String, Vec<models::RobotCommentInfo>>, Error<GetChangesChangeIdRevisionsRevisionIdRobotcommentsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -3843,6 +3845,7 @@ pub fn get_changes_change_id_revisions_revision_id_robotcomments(configuration: 
     }
 }
 
+/// Retrieves a robot comment of a revision.
 pub fn get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, robot_comment_id: &str) -> Result<models::RobotCommentInfo, Error<GetChangesChangeIdRevisionsRevisionIdRobotcommentsRobotCommentIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -3929,6 +3932,7 @@ pub fn get_changes_change_id_revisions_revision_id_submit_type(configuration: &c
     }
 }
 
+/// Lists the robot comments of all revisions of the change.
 pub fn get_changes_change_id_robotcomments(configuration: &configuration::Configuration, change_id: &str) -> Result<std::collections::HashMap<String, Vec<models::RobotCommentInfo>>, Error<GetChangesChangeIdRobotcommentsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;

@@ -16,8 +16,8 @@ Method | HTTP request | Description
 [**get_config_server_indexes_index_id_versions_index_version_id**](ConfigApi.md#get_config_server_indexes_index_id_versions_index_version_id) | **GET** /config/server/indexes/{index_id}/versions/{index_version_id} | Get Index Version
 [**get_config_server_info**](ConfigApi.md#get_config_server_info) | **GET** /config/server/info | Get server info
 [**get_config_server_labels**](ConfigApi.md#get_config_server_labels) | **GET** /config/server/labels | List Global Labels
-[**get_config_server_metrics**](ConfigApi.md#get_config_server_metrics) | **GET** /config/server/metrics | 
-[**get_config_server_metrics_metric_id**](ConfigApi.md#get_config_server_metrics_metric_id) | **GET** /config/server/metrics/{metric_id} | 
+[**get_config_server_metrics**](ConfigApi.md#get_config_server_metrics) | **GET** /config/server/metrics | List Metrics
+[**get_config_server_metrics_metric_id**](ConfigApi.md#get_config_server_metrics_metric_id) | **GET** /config/server/metrics/{metric_id} | Get Metric
 [**get_config_server_preferences**](ConfigApi.md#get_config_server_preferences) | **GET** /config/server/preferences | Get Default User Preferences
 [**get_config_server_preferences_diff**](ConfigApi.md#get_config_server_preferences_diff) | **GET** /config/server/preferences.diff | Get Default Diff Preferences
 [**get_config_server_preferences_edit**](ConfigApi.md#get_config_server_preferences_edit) | **GET** /config/server/preferences.edit | Get Default Edit Preferences
@@ -400,7 +400,9 @@ This endpoint does not need any parameter.
 ## get_config_server_metrics
 
 > std::collections::HashMap<String, models::MetricJson> get_config_server_metrics(data_only, prefix)
+List Metrics
 
+Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
 
 ### Parameters
 
@@ -429,7 +431,9 @@ Name | Type | Description  | Required | Notes
 ## get_config_server_metrics_metric_id
 
 > models::MetricJson get_config_server_metrics_metric_id(metric_id, data_only)
+Get Metric
 
+Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
 
 ### Parameters
 

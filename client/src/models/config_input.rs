@@ -31,24 +31,31 @@ pub struct ConfigInput {
     /// Whether a valid Change-Id footer in any commit uploaded for review is required. This does not apply to commits pushed directly to a branch or tag. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated. This property is deprecated and will be removed in a future release.
     #[serde(rename = "require_change_id", skip_serializing_if = "Option::is_none")]
     pub require_change_id: Option<models::InheritableBoolean>,
+    /// Whether signed push validation is enabled on the project. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "enable_signed_push", skip_serializing_if = "Option::is_none")]
     pub enable_signed_push: Option<models::InheritableBoolean>,
+    /// Whether signed push validation is required on the project. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "require_signed_push", skip_serializing_if = "Option::is_none")]
     pub require_signed_push: Option<models::InheritableBoolean>,
     /// Whether a check for implicit merges will be performed when changes are pushed for review or submitted. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "reject_implicit_merges", skip_serializing_if = "Option::is_none")]
     pub reject_implicit_merges: Option<models::InheritableBoolean>,
+    /// Whether all new changes in the project are set to private by default. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "private_by_default", skip_serializing_if = "Option::is_none")]
     pub private_by_default: Option<models::InheritableBoolean>,
+    /// Whether all new changes in the project are set to work-in-progress by default. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "work_in_progress_by_default", skip_serializing_if = "Option::is_none")]
     pub work_in_progress_by_default: Option<models::InheritableBoolean>,
+    /// Whether reviewers and CCs that do not have a Gerrit account can be added to a change by their email address. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "enable_reviewer_by_email", skip_serializing_if = "Option::is_none")]
     pub enable_reviewer_by_email: Option<models::InheritableBoolean>,
+    /// Whether a change's author date is changed to match its submit date when the change is submitted. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "match_author_to_committer_date", skip_serializing_if = "Option::is_none")]
     pub match_author_to_committer_date: Option<models::InheritableBoolean>,
     /// Whether empty commits should be rejected when a change is merged. Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "reject_empty_commit", skip_serializing_if = "Option::is_none")]
     pub reject_empty_commit: Option<models::InheritableBoolean>,
+    /// Whether to skip adding the Git commit author and committer as reviewers of a new change. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "skip_adding_author_and_committer_as_reviewers", skip_serializing_if = "Option::is_none")]
     pub skip_adding_author_and_committer_as_reviewers: Option<models::InheritableBoolean>,
     /// The max object size limit of this project as a MaxObjectSizeLimitInfo entity. + If set to 0, the max object size limit is removed. + If not set, this setting is not updated.
@@ -63,8 +70,10 @@ pub struct ConfigInput {
     /// Plugin configuration values as map which maps the plugin name to a map of parameter names to values.
     #[serde(rename = "plugin_config_values", skip_serializing_if = "Option::is_none")]
     pub plugin_config_values: Option<std::collections::HashMap<String, std::collections::HashMap<String, models::ConfigValue>>>,
+    /// Map of commentlink names to CommentLinkInput entities to add or update on the project. If the given commentlink already exists, it will be updated with the given values, otherwise it will be created. If the value is null, that entry is deleted.
     #[serde(rename = "comment_links", skip_serializing_if = "Option::is_none")]
     pub comment_links: Option<std::collections::HashMap<String, models::CommentLinkInput>>,
+    /// A commit message for this change.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
 }

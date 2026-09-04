@@ -131,7 +131,7 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**get_changes_change_id_reviewers_reviewer_id_votes**](docs/ChangesApi.md#get_changes_change_id_reviewers_reviewer_id_votes) | **GET** /changes/{change_id}/reviewers/{reviewer_id}/votes | List Votes
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id) | **GET** /changes/{change_id}/revisions/{revision_id} | Get Revision
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_actions**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_actions) | **GET** /changes/{change_id}/revisions/{revision_id}/actions | Get Revision Actions
-*ChangesApi* | [**get_changes_change_id_revisions_revision_id_archive**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_archive) | **GET** /changes/{change_id}/revisions/{revision_id}/archive | 
+*ChangesApi* | [**get_changes_change_id_revisions_revision_id_archive**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_archive) | **GET** /changes/{change_id}/revisions/{revision_id}/archive | Get Archive
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_comments**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_comments) | **GET** /changes/{change_id}/revisions/{revision_id}/comments | List revision comments
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_comments_comment_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_comments_comment_id) | **GET** /changes/{change_id}/revisions/{revision_id}/comments/{comment_id} | Get Comment
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_commit**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_commit) | **GET** /changes/{change_id}/revisions/{revision_id}/commit | Get commit
@@ -154,10 +154,10 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_reviewers**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers | List Revision Reviewers
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | 
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes | List Revision Votes
-*ChangesApi* | [**get_changes_change_id_revisions_revision_id_robotcomments**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments | 
-*ChangesApi* | [**get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments/{robot_comment_id} | 
+*ChangesApi* | [**get_changes_change_id_revisions_revision_id_robotcomments**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments | List Robot Comments
+*ChangesApi* | [**get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments/{robot_comment_id} | Get Robot Comment
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_submit_type**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_submit_type) | **GET** /changes/{change_id}/revisions/{revision_id}/submit_type | Get Submit Type
-*ChangesApi* | [**get_changes_change_id_robotcomments**](docs/ChangesApi.md#get_changes_change_id_robotcomments) | **GET** /changes/{change_id}/robotcomments | 
+*ChangesApi* | [**get_changes_change_id_robotcomments**](docs/ChangesApi.md#get_changes_change_id_robotcomments) | **GET** /changes/{change_id}/robotcomments | List Change Robot Comments
 *ChangesApi* | [**get_changes_change_id_submitted_together**](docs/ChangesApi.md#get_changes_change_id_submitted_together) | **GET** /changes/{change_id}/submitted_together | Changes Submitted Together
 *ChangesApi* | [**get_changes_change_id_suggest_reviewers**](docs/ChangesApi.md#get_changes_change_id_suggest_reviewers) | **GET** /changes/{change_id}/suggest_reviewers | Suggest Reviewers
 *ChangesApi* | [**get_changes_change_id_topic**](docs/ChangesApi.md#get_changes_change_id_topic) | **GET** /changes/{change_id}/topic | Get Topic
@@ -226,8 +226,8 @@ Class | Method | HTTP request | Description
 *ConfigApi* | [**get_config_server_indexes_index_id_versions_index_version_id**](docs/ConfigApi.md#get_config_server_indexes_index_id_versions_index_version_id) | **GET** /config/server/indexes/{index_id}/versions/{index_version_id} | Get Index Version
 *ConfigApi* | [**get_config_server_info**](docs/ConfigApi.md#get_config_server_info) | **GET** /config/server/info | Get server info
 *ConfigApi* | [**get_config_server_labels**](docs/ConfigApi.md#get_config_server_labels) | **GET** /config/server/labels | List Global Labels
-*ConfigApi* | [**get_config_server_metrics**](docs/ConfigApi.md#get_config_server_metrics) | **GET** /config/server/metrics | 
-*ConfigApi* | [**get_config_server_metrics_metric_id**](docs/ConfigApi.md#get_config_server_metrics_metric_id) | **GET** /config/server/metrics/{metric_id} | 
+*ConfigApi* | [**get_config_server_metrics**](docs/ConfigApi.md#get_config_server_metrics) | **GET** /config/server/metrics | List Metrics
+*ConfigApi* | [**get_config_server_metrics_metric_id**](docs/ConfigApi.md#get_config_server_metrics_metric_id) | **GET** /config/server/metrics/{metric_id} | Get Metric
 *ConfigApi* | [**get_config_server_preferences**](docs/ConfigApi.md#get_config_server_preferences) | **GET** /config/server/preferences | Get Default User Preferences
 *ConfigApi* | [**get_config_server_preferences_diff**](docs/ConfigApi.md#get_config_server_preferences_diff) | **GET** /config/server/preferences.diff | Get Default Diff Preferences
 *ConfigApi* | [**get_config_server_preferences_edit**](docs/ConfigApi.md#get_config_server_preferences_edit) | **GET** /config/server/preferences.edit | Get Default Edit Preferences
