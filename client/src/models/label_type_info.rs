@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LabelTypeInfo {
+    /// Map of the available values to their description.
     #[serde(rename = "values", skip_serializing_if = "Option::is_none")]
     pub values: Option<std::collections::HashMap<String, String>>,
+    /// The default value of this label.
     #[serde(rename = "default_value", skip_serializing_if = "Option::is_none")]
     pub default_value: Option<i32>,
 }

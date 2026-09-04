@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FlowInfo {
+    /// The universally unique identifier that identifies the flow.
     #[serde(rename = "uuid", skip_serializing_if = "Option::is_none")]
     pub uuid: Option<String>,
+    /// The owner of the flow as an AccountInfo entity.
     #[serde(rename = "owner", skip_serializing_if = "Option::is_none")]
     pub owner: Option<Box<models::AccountInfo>>,
+    /// The timestamp of when the flow was created.
     #[serde(rename = "created", skip_serializing_if = "Option::is_none")]
     pub created: Option<String>,
+    /// The stages of this flow as a list of FlowStageInfo entities (sorted by execution order).
     #[serde(rename = "stages", skip_serializing_if = "Option::is_none")]
     pub stages: Option<Vec<models::FlowStageInfo>>,
+    /// The timestamp of when the flow was last evaluated. Not set if the flow has not been evaluated yet.
     #[serde(rename = "last_evaluated", skip_serializing_if = "Option::is_none")]
     pub last_evaluated: Option<String>,
 }

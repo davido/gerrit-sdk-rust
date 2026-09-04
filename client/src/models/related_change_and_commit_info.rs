@@ -13,22 +13,31 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RelatedChangeAndCommitInfo {
+    /// The project of the change or commit.
     #[serde(rename = "project", skip_serializing_if = "Option::is_none")]
     pub project: Option<String>,
+    /// The Change-Id of the change.
     #[serde(rename = "change_id", skip_serializing_if = "Option::is_none")]
     pub change_id: Option<String>,
+    /// The commit as a CommitInfo entity.
     #[serde(rename = "commit", skip_serializing_if = "Option::is_none")]
     pub commit: Option<Box<models::CommitInfo>>,
+    /// The change number.
     #[serde(rename = "_change_number", skip_serializing_if = "Option::is_none")]
     pub _change_number: Option<i32>,
+    /// The revision number.
     #[serde(rename = "_revision_number", skip_serializing_if = "Option::is_none")]
     pub _revision_number: Option<i32>,
+    /// The current revision number.
     #[serde(rename = "_current_revision_number", skip_serializing_if = "Option::is_none")]
     pub _current_revision_number: Option<i32>,
+    /// The status of the change. The status of the change is one of (NEW, MERGED, ABANDONED).
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
+    /// Boolean indicating whether the change is submittable. + Only populated if requested.
     #[serde(rename = "submittable", skip_serializing_if = "Option::is_none")]
     pub submittable: Option<bool>,
+    /// Boolean indicating whether the change is work in progress.
     #[serde(rename = "work_in_progress", skip_serializing_if = "Option::is_none")]
     pub work_in_progress: Option<bool>,
 }

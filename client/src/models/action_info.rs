@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ActionInfo {
+    /// HTTP method to use with the action. Most actions use POST, PUT or DELETE to cause state changes.
     #[serde(rename = "method", skip_serializing_if = "Option::is_none")]
     pub method: Option<String>,
+    /// Short title to display to a user describing the action. In the Gerrit web interface the label is used as the text on the button presented in the UI.
     #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
     pub label: Option<String>,
+    /// Longer text to display describing the action. In a web UI this should be the title attribute of the element, displaying when the user hovers the mouse.
     #[serde(rename = "title", skip_serializing_if = "Option::is_none")]
     pub title: Option<String>,
+    /// If true the action is permitted at this time and the caller is likely allowed to execute it. This may change if state is updated at the server or permissions are modified. Not present if false.
     #[serde(rename = "enabled", skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
+    /// Optional list of enabled options. + See the list of suppported options below.
     #[serde(rename = "enabled_options", skip_serializing_if = "Option::is_none")]
     pub enabled_options: Option<Vec<String>>,
 }

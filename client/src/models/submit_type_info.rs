@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SubmitTypeInfo {
+    /// The effective submit type value. Never INHERIT.
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<models::SubmitType>,
+    /// The configured value, can be one of the submit types, or INHERIT to inherit from the parent project.
     #[serde(rename = "configured_value", skip_serializing_if = "Option::is_none")]
     pub configured_value: Option<models::SubmitType>,
+    /// The effective value that would be inherited from the parent. Never INHERIT.
     #[serde(rename = "inherited_value", skip_serializing_if = "Option::is_none")]
     pub inherited_value: Option<models::SubmitType>,
 }

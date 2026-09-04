@@ -13,12 +13,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EmailInfo {
+    /// The email address.
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
+    /// Whether this is the preferred email address of the user.
     #[serde(rename = "preferred", skip_serializing_if = "Option::is_none")]
     pub preferred: Option<bool>,
     #[serde(rename = "avatar", skip_serializing_if = "Option::is_none")]
     pub avatar: Option<bool>,
+    /// Set true if the user must confirm control of the email address by following a verification link before Gerrit will permit use of this address.
     #[serde(rename = "pending_confirmation", skip_serializing_if = "Option::is_none")]
     pub pending_confirmation: Option<bool>,
 }

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FixReplacementInfo {
+    /// The path of the file which should be modified. Any file in the repository may be modified. The commit message can be modified via the magic file /COMMIT_MSG though only the part below the generated header of that magic file can be modified.
     #[serde(rename = "path", skip_serializing_if = "Option::is_none")]
     pub path: Option<String>,
+    /// A CommentRange indicating which content of the file should be replaced. Lines in the file are assumed to be separated by the line feed character.
     #[serde(rename = "range", skip_serializing_if = "Option::is_none")]
     pub range: Option<Box<models::Range>>,
+    /// The content which should be used instead of the current one.
     #[serde(rename = "replacement", skip_serializing_if = "Option::is_none")]
     pub replacement: Option<String>,
 }

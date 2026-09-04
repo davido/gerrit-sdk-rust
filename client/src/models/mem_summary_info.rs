@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MemSummaryInfo {
+    /// The total size of the memory. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).
     #[serde(rename = "total", skip_serializing_if = "Option::is_none")]
     pub total: Option<String>,
+    /// The size of used memory. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).
     #[serde(rename = "used", skip_serializing_if = "Option::is_none")]
     pub used: Option<String>,
+    /// The size of free memory. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).
     #[serde(rename = "free", skip_serializing_if = "Option::is_none")]
     pub free: Option<String>,
+    /// The size of memory used for JGit buffers. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).
     #[serde(rename = "buffers", skip_serializing_if = "Option::is_none")]
     pub buffers: Option<String>,
+    /// The maximal memory size. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).
     #[serde(rename = "max", skip_serializing_if = "Option::is_none")]
     pub max: Option<String>,
+    /// The number of open files.
     #[serde(rename = "open_files", skip_serializing_if = "Option::is_none")]
     pub open_files: Option<i32>,
 }

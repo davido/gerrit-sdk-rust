@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**problems** | Option<[**Vec<models::ConsistencyProblemInfo>**](ConsistencyProblemInfo.md)> |  | [optional]
+**problems** | Option<[**Vec<models::ConsistencyProblemInfo>**](ConsistencyProblemInfo.md)> | A list of ConsistencyProblemInfo entities. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

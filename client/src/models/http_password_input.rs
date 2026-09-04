@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct HttpPasswordInput {
+    /// The new HTTP password. Only Gerrit administrators may set the HTTP password directly. + If empty or not set and generate is false or not set, the HTTP password is deleted.
     #[serde(rename = "http_password", skip_serializing_if = "Option::is_none")]
     pub http_password: Option<String>,
+    /// Whether a new HTTP password should be generated
     #[serde(rename = "generate", skip_serializing_if = "Option::is_none")]
     pub generate: Option<bool>,
 }

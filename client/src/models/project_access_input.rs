@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProjectAccessInput {
+    /// A map of deductions to be applied to the project access, mapping refs to AccessSectionInfo entities.
     #[serde(rename = "remove", skip_serializing_if = "Option::is_none")]
     pub remove: Option<std::collections::HashMap<String, models::AccessSectionInfo>>,
+    /// A map of additions to be applied to the project access, mapping refs to AccessSectionInfo entities.
     #[serde(rename = "add", skip_serializing_if = "Option::is_none")]
     pub add: Option<std::collections::HashMap<String, models::AccessSectionInfo>>,
+    /// A new parent for the project to inherit from. Changing the parent project requires administrative privileges.
     #[serde(rename = "parent", skip_serializing_if = "Option::is_none")]
     pub parent: Option<String>,
+    /// A commit message for this change.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
 }

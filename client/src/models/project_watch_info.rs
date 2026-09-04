@@ -13,20 +13,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProjectWatchInfo {
+    /// The name of the project.
     #[serde(rename = "project", skip_serializing_if = "Option::is_none")]
     pub project: Option<String>,
+    /// A filter string to be applied to the project.
     #[serde(rename = "filter", skip_serializing_if = "Option::is_none")]
     pub filter: Option<String>,
+    /// An error message when project is for example hidden or deleted.
     #[serde(rename = "problem", skip_serializing_if = "Option::is_none")]
     pub problem: Option<String>,
+    /// Notify on new changes.
     #[serde(rename = "notify_new_changes", skip_serializing_if = "Option::is_none")]
     pub notify_new_changes: Option<bool>,
+    /// Notify on new patch sets.
     #[serde(rename = "notify_new_patch_sets", skip_serializing_if = "Option::is_none")]
     pub notify_new_patch_sets: Option<bool>,
+    /// Notify on comments.
     #[serde(rename = "notify_all_comments", skip_serializing_if = "Option::is_none")]
     pub notify_all_comments: Option<bool>,
+    /// Notify on submitted changes.
     #[serde(rename = "notify_submitted_changes", skip_serializing_if = "Option::is_none")]
     pub notify_submitted_changes: Option<bool>,
+    /// Notify on abandoned changes.
     #[serde(rename = "notify_abandoned_changes", skip_serializing_if = "Option::is_none")]
     pub notify_abandoned_changes: Option<bool>,
 }

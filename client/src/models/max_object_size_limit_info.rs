@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MaxObjectSizeLimitInfo {
+    /// The effective value in bytes of the max object size limit. + Not set if there is no limit for the object size.
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<String>,
+    /// The max object size limit that is configured on the project as a formatted string. + Not set if there is no limit for the object size configured on project level.
     #[serde(rename = "configured_value", skip_serializing_if = "Option::is_none")]
     pub configured_value: Option<String>,
+    /// A string describing whether the value was inherited or overridden from the parent project or global config. + Not set if not inherited or overridden.
     #[serde(rename = "summary", skip_serializing_if = "Option::is_none")]
     pub summary: Option<String>,
 }

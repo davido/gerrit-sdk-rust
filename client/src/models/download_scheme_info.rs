@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DownloadSchemeInfo {
+    /// The URL of the download scheme, where '${project}' is used as placeholder for the project name.
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
+    /// An optional description of how the scheme works and maybe comparing it to other schemes, explaining the pros and cons of each option.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// Whether this download scheme requires authentication.
     #[serde(rename = "is_auth_required", skip_serializing_if = "Option::is_none")]
     pub is_auth_required: Option<bool>,
+    /// Whether this download scheme supports authentication.
     #[serde(rename = "is_auth_supported", skip_serializing_if = "Option::is_none")]
     pub is_auth_supported: Option<bool>,
+    /// Download commands as a map which maps the command name to the download command. In the download command '${project}' is used as placeholder for the project name, and '${ref}' is used as placeholder for the (change) ref. Empty, if accessed anonymously and the download scheme requires authentication.
     #[serde(rename = "commands", skip_serializing_if = "Option::is_none")]
     pub commands: Option<std::collections::HashMap<String, String>>,
+    /// Clone commands as a map which maps the command name to the clone command. In the clone command '${project}' is used as placeholder for the project name and '${project-base-name}' as name for the project base name (e.g.
     #[serde(rename = "clone_commands", skip_serializing_if = "Option::is_none")]
     pub clone_commands: Option<std::collections::HashMap<String, String>>,
 }

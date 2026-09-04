@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MigrateLabelsInfo {
+    /// The status of the migration. Takes one of the following values: MIGRATED, HAS_PROLOG, PREVIOUSLY_MIGRATED, NO_CHANGE
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::SchemaMigrateLabelFunctionsToSubmitRequirementStatus>,
 }

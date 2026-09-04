@@ -13,20 +13,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountInput {
+    /// The user name. If provided, must match the user name from the URL.
     #[serde(rename = "username", skip_serializing_if = "Option::is_none")]
     pub username: Option<String>,
+    /// The full name of the user.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The display name of the user.
     #[serde(rename = "display_name", skip_serializing_if = "Option::is_none")]
     pub display_name: Option<String>,
+    /// The email address of the user.
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
+    /// The public SSH key of the user.
     #[serde(rename = "ssh_key", skip_serializing_if = "Option::is_none")]
     pub ssh_key: Option<String>,
+    /// The HTTP password of the user. (deprecated)
     #[serde(rename = "http_password", skip_serializing_if = "Option::is_none")]
     pub http_password: Option<String>,
+    /// A list of tokens in the form of AuthTokenInputs to assign to the user.
     #[serde(rename = "tokens", skip_serializing_if = "Option::is_none")]
     pub tokens: Option<Vec<models::AuthTokenInput>>,
+    /// A list of group IDs that identify the groups to which the user should be added.
     #[serde(rename = "groups", skip_serializing_if = "Option::is_none")]
     pub groups: Option<Vec<String>>,
 }

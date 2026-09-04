@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DeleteChangeMessageInput {
+    /// The reason why the change message should be deleted. + If set, the change message will be replaced with \"Change message removed by: name\\nReason: reason\", or just \"Change message removed by: name.\" if not set.
     #[serde(rename = "reason", skip_serializing_if = "Option::is_none")]
     pub reason: Option<String>,
 }

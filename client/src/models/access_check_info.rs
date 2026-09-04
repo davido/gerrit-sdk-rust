@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccessCheckInfo {
+    /// A clarifying message if status is not 200.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
+    /// The HTTP status code for the access. 200 means success and 403 means denied.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<i32>,
+    /// Debug logs that may help to understand why a permission is denied or allowed.
     #[serde(rename = "debug_logs", skip_serializing_if = "Option::is_none")]
     pub debug_logs: Option<Vec<String>>,
 }

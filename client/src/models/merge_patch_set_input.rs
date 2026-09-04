@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MergePatchSetInput {
+    /// The new subject for the change, if not specified, will reuse the current patch set's subject
     #[serde(rename = "subject", skip_serializing_if = "Option::is_none")]
     pub subject: Option<String>,
+    /// Use the current patch set's first parent as the merge tip when set to true.
     #[serde(rename = "inherit_parent", skip_serializing_if = "Option::is_none")]
     pub inherit_parent: Option<bool>,
+    /// A \\{change-id\\} that identifies a change. When inherit_parent is false, the merge tip will be the current patch set of the base_change if it's set. Otherwise, the current branch tip of the destination branch will be used.
     #[serde(rename = "base_change", skip_serializing_if = "Option::is_none")]
     pub base_change: Option<String>,
+    /// The detail of the source commit for merge as a MergeInput entity.
     #[serde(rename = "merge", skip_serializing_if = "Option::is_none")]
     pub merge: Option<Box<models::MergeInput>>,
+    /// The author of the commit to create. Must be an AccountInput entity with at least the name and email fields set. The caller needs \"Forge Author\" permission when using this field. This field does not affect the owner or the committer of the change, which will continue to use the identity of the caller.
     #[serde(rename = "author", skip_serializing_if = "Option::is_none")]
     pub author: Option<Box<models::AccountInput>>,
+    /// Map with key-value pairs that are forwarded as options to the commit validation listeners (e.g. can be used to skip certain validations). Which validation options are supported depends on the installed commit validation listeners.
     #[serde(rename = "validation_options", skip_serializing_if = "Option::is_none")]
     pub validation_options: Option<std::collections::HashMap<String, String>>,
 }

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GroupAuditEventInfo {
+    /// The event type, can be: ADD_USER, REMOVE_USER, ADD_GROUP or REMOVE_GROUP. ADD_USER: A user was added as member to the group. REMOVE_USER: A user member was removed from the group. ADD_GROUP: A group was included as member in the group. REMOVE_GROUP: An included group was removed from the group.
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<models::Type>,
+    /// The user that did the add/remove as detailed AccountInfo entity.
     #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
     pub user: Option<Box<models::AccountInfo>>,
+    /// The timestamp of the event.
     #[serde(rename = "date", skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
 }

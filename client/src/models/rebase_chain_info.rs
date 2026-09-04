@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RebaseChainInfo {
+    /// List of the unsubmitted ancestors, as ChangeInfo entities. Includes both rebased changes, and previously up-to-date ancestors. The list is ordered by ancestry, where the oldest ancestor is the first.
     #[serde(rename = "rebased_changes", skip_serializing_if = "Option::is_none")]
     pub rebased_changes: Option<Vec<models::ChangeInfo>>,
+    /// Whether any of the rebased changes has conflicts due to rebasing.
     #[serde(rename = "contains_git_conflicts", skip_serializing_if = "Option::is_none")]
     pub contains_git_conflicts: Option<bool>,
 }

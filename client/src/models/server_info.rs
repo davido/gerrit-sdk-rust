@@ -13,36 +13,52 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ServerInfo {
+    /// Information about the configuration from the accounts section as AccountsConfigInfo entity.
     #[serde(rename = "accounts", skip_serializing_if = "Option::is_none")]
     pub accounts: Option<Box<models::AccountsInfo>>,
+    /// Information about the authentication configuration as AuthInfo entity.
     #[serde(rename = "auth", skip_serializing_if = "Option::is_none")]
     pub auth: Option<Box<models::AuthInfo>>,
+    /// Information about the configuration from the change section as ChangeConfigInfo entity.
     #[serde(rename = "change", skip_serializing_if = "Option::is_none")]
     pub change: Option<Box<models::ChangeConfigInfo>>,
+    /// Information about the configured download options as DownloadInfo entity. information about Gerrit
     #[serde(rename = "download", skip_serializing_if = "Option::is_none")]
     pub download: Option<Box<models::DownloadInfo>>,
+    /// Information about the configuration from the gerrit section as GerritInfo entity.
     #[serde(rename = "gerrit", skip_serializing_if = "Option::is_none")]
     pub gerrit: Option<Box<models::GerritInfo>>,
+    /// Information about the configuration from the groups section as GroupsConfigInfo entity.
     #[serde(rename = "groups", skip_serializing_if = "Option::is_none")]
     pub groups: Option<Box<models::GroupsInfo>>,
+    /// Whether the NoteDb storage backend is fully enabled.
     #[serde(rename = "note_db_enabled", skip_serializing_if = "Option::is_none")]
     pub note_db_enabled: Option<bool>,
+    /// Information about Gerrit extensions by plugins as PluginConfigInfo entity.
     #[serde(rename = "plugin", skip_serializing_if = "Option::is_none")]
     pub plugin: Option<Box<models::PluginConfigInfo>>,
+    /// Information about the configuration from the sshd section as SshdInfo entity. Not set if SSHD is disabled.
     #[serde(rename = "sshd", skip_serializing_if = "Option::is_none")]
     pub sshd: Option<serde_json::Value>,
+    /// Information about the configuration from the suggest section as SuggestInfo entity.
     #[serde(rename = "suggest", skip_serializing_if = "Option::is_none")]
     pub suggest: Option<Box<models::SuggestInfo>>,
+    /// Information about the configuration from the user section as UserConfigInfo entity.
     #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
     pub user: Option<Box<models::UserConfigInfo>>,
+    /// Information about the receive-pack configuration as a ReceiveInfo entity.
     #[serde(rename = "receive", skip_serializing_if = "Option::is_none")]
     pub receive: Option<Box<models::ReceiveInfo>>,
+    /// URL to a default Gerrit UI theme plugin, if available. Located in /static/gerrit-theme.js by default.
     #[serde(rename = "default_theme", skip_serializing_if = "Option::is_none")]
     pub default_theme: Option<String>,
+    /// The list of submit requirement names that should be displayed as separate columns in the dashboard. If empty, the default is to display all submit requirements that are applicable for changes appearing in the dashboard.
     #[serde(rename = "submit_requirement_dashboard_columns", skip_serializing_if = "Option::is_none")]
     pub submit_requirement_dashboard_columns: Option<Vec<String>>,
+    /// Whether to show all labels in the dashboard, even if they are not submit requirements.
     #[serde(rename = "dashboard_show_all_labels", skip_serializing_if = "Option::is_none")]
     pub dashboard_show_all_labels: Option<bool>,
+    /// Optional server metadata as a list of MetadataInfo entities. If and which metadata is provided depends on the Gerrit setup.
     #[serde(rename = "metadata", skip_serializing_if = "Option::is_none")]
     pub metadata: Option<Vec<models::MetadataInfo>>,
 }

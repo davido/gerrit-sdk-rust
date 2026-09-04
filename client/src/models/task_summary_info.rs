@@ -13,18 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TaskSummaryInfo {
+    /// Total number of current tasks.
     #[serde(rename = "total", skip_serializing_if = "Option::is_none")]
     pub total: Option<i32>,
     #[serde(rename = "stopping", skip_serializing_if = "Option::is_none")]
     pub stopping: Option<i32>,
+    /// Number of currently running tasks.
     #[serde(rename = "running", skip_serializing_if = "Option::is_none")]
     pub running: Option<i32>,
     #[serde(rename = "parked", skip_serializing_if = "Option::is_none")]
     pub parked: Option<i32>,
     #[serde(rename = "starting", skip_serializing_if = "Option::is_none")]
     pub starting: Option<i32>,
+    /// Number of currently ready tasks.
     #[serde(rename = "ready", skip_serializing_if = "Option::is_none")]
     pub ready: Option<i32>,
+    /// Number of currently sleeping tasks.
     #[serde(rename = "sleeping", skip_serializing_if = "Option::is_none")]
     pub sleeping: Option<i32>,
 }

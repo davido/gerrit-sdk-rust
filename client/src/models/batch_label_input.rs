@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BatchLabelInput {
+    /// Message that should be used to commit the label updates in the project.config file to the refs/meta/config branch.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
+    /// List of labels that should be deleted.
     #[serde(rename = "delete", skip_serializing_if = "Option::is_none")]
     pub delete: Option<Vec<String>>,
+    /// List of LabelDefinitionInput entities that describe labels that should be created.
     #[serde(rename = "create", skip_serializing_if = "Option::is_none")]
     pub create: Option<Vec<models::LabelDefinitionInput>>,
+    /// Map of label names to LabelDefinitionInput entities that describe the updates that should be done for the labels. The given inputs only need to set the properties that are being changed.
     #[serde(rename = "update", skip_serializing_if = "Option::is_none")]
     pub update: Option<std::collections::HashMap<String, models::LabelDefinitionInput>>,
 }

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FlowStageInfo {
+    /// The expression defining the condition and the action of this stage as a FlowExpressionInfo entity.
     #[serde(rename = "expression", skip_serializing_if = "Option::is_none")]
     pub expression: Option<Box<models::FlowExpressionInfo>>,
+    /// The state for this stage. Can be PENDING (the condition of the stage is not satisfied yet or the action has not been executed yet), DONE (the condition of the stage is satisfied and the action has been executed), FAILED (the stage has a non-recoverable error, e.g.
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::FlowStageState>,
+    /// Optional message for the stage.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
 }

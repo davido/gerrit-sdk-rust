@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DownloadInfo {
+    /// The supported download schemes as a map which maps the scheme name to a of DownloadSchemeInfo entity.
     #[serde(rename = "schemes", skip_serializing_if = "Option::is_none")]
     pub schemes: Option<std::collections::HashMap<String, models::DownloadSchemeInfo>>,
+    /// List of supported archive formats. Possible values are tgz, tar, tbz2 and txz.
     #[serde(rename = "archives", skip_serializing_if = "Option::is_none")]
     pub archives: Option<Vec<String>>,
 }

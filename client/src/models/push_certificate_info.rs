@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PushCertificateInfo {
+    /// Signed certificate payload and GPG signature block.
     #[serde(rename = "certificate", skip_serializing_if = "Option::is_none")]
     pub certificate: Option<String>,
+    /// Information about the key that signed the push, along with any problems found while checking the signature or the key itself, as a GpgKeyInfo entity.
     #[serde(rename = "key", skip_serializing_if = "Option::is_none")]
     pub key: Option<Box<models::GpgKeyInfo>>,
 }

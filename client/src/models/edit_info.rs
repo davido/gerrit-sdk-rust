@@ -13,18 +13,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EditInfo {
+    /// The commit of change edit as CommitInfo entity.
     #[serde(rename = "commit", skip_serializing_if = "Option::is_none")]
     pub commit: Option<Box<models::CommitInfo>>,
+    /// The patch set number of the patch set the change edit is based on.
     #[serde(rename = "base_patch_set_number", skip_serializing_if = "Option::is_none")]
     pub base_patch_set_number: Option<i32>,
+    /// The revision of the patch set the change edit is based on.
     #[serde(rename = "base_revision", skip_serializing_if = "Option::is_none")]
     pub base_revision: Option<String>,
+    /// The ref of the change edit.
     #[serde(rename = "ref", skip_serializing_if = "Option::is_none")]
     pub r#ref: Option<String>,
+    /// Information about how to fetch this patch set. The fetch information is provided as a map that maps the protocol name (\"git\", \"http\", \"ssh\") to FetchInfo entities.
     #[serde(rename = "fetch", skip_serializing_if = "Option::is_none")]
     pub fetch: Option<std::collections::HashMap<String, models::FetchInfo>>,
+    /// The files of the change edit as a map that maps the file names to FileInfo entities.
     #[serde(rename = "files", skip_serializing_if = "Option::is_none")]
     pub files: Option<std::collections::HashMap<String, models::CommonFileInfo>>,
+    /// Whether the change edit contains conflicts. + If true, some of the file contents of the change edit contain git conflict markers to indicate the conflicts. + Only set if this edit info is returned in response to a request that rebases the change edit and conflicts are allowed.
     #[serde(rename = "contains_git_conflicts", skip_serializing_if = "Option::is_none")]
     pub contains_git_conflicts: Option<bool>,
 }

@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SshKeyInfo {
+    /// The sequence number of the SSH key.
     #[serde(rename = "seq", skip_serializing_if = "Option::is_none")]
     pub seq: Option<i32>,
+    /// The complete public SSH key.
     #[serde(rename = "ssh_public_key", skip_serializing_if = "Option::is_none")]
     pub ssh_public_key: Option<String>,
+    /// The encoded key.
     #[serde(rename = "encoded_key", skip_serializing_if = "Option::is_none")]
     pub encoded_key: Option<String>,
+    /// The algorithm of the SSH key.
     #[serde(rename = "algorithm", skip_serializing_if = "Option::is_none")]
     pub algorithm: Option<String>,
+    /// The comment of the SSH key.
     #[serde(rename = "comment", skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
+    /// Whether the SSH key is valid.
     #[serde(rename = "valid", skip_serializing_if = "Option::is_none")]
     pub valid: Option<bool>,
 }

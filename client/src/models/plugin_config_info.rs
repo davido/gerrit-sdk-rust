@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PluginConfigInfo {
+    /// Whether an avatar provider is registered.
     #[serde(rename = "has_avatars", skip_serializing_if = "Option::is_none")]
     pub has_avatars: Option<bool>,
+    /// A list of relative paths (strings). Each path points to a frontend plugin that should be loaded, e.g. plugins/codemirror_editor/static/codemirror_editor.js.
     #[serde(rename = "js_resource_paths", skip_serializing_if = "Option::is_none")]
     pub js_resource_paths: Option<Vec<String>>,
 }

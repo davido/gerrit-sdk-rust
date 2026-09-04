@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ConsistencyCheckInfo {
+    /// The result of running the account consistency check as a CheckAccountsResultInfo entity.
     #[serde(rename = "check_accounts_result", skip_serializing_if = "Option::is_none")]
     pub check_accounts_result: Option<Box<models::CheckAccountsResultInfo>>,
+    /// The result of running the account external ID consistency check as a CheckAccountExternalIdsResultInfo entity.
     #[serde(rename = "check_account_external_ids_result", skip_serializing_if = "Option::is_none")]
     pub check_account_external_ids_result: Option<Box<models::CheckAccountExternalIdsResultInfo>>,
+    /// The result of running the group consistency check as a CheckGroupsResultInfo entity.
     #[serde(rename = "check_groups_result", skip_serializing_if = "Option::is_none")]
     pub check_groups_result: Option<Box<models::CheckGroupsResultInfo>>,
 }

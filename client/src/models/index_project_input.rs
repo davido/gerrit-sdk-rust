@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct IndexProjectInput {
+    /// If children should be indexed recursively.
     #[serde(rename = "index_children", skip_serializing_if = "Option::is_none")]
     pub index_children: Option<bool>,
+    /// If projects should be indexed asynchronously.
     #[serde(rename = "async", skip_serializing_if = "Option::is_none")]
     pub r#async: Option<bool>,
 }

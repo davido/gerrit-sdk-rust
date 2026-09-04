@@ -13,28 +13,40 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProjectAccessInfo {
+    /// The revision of the refs/meta/config branch from which the access rights were loaded.
     #[serde(rename = "revision", skip_serializing_if = "Option::is_none")]
     pub revision: Option<String>,
+    /// The parent project from which permissions are inherited as a ProjectInfo entity.
     #[serde(rename = "inherits_from", skip_serializing_if = "Option::is_none")]
     pub inherits_from: Option<Box<models::ProjectInfo>>,
+    /// The local access rights of the project as a map that maps the refs to AccessSectionInfo entities.
     #[serde(rename = "local", skip_serializing_if = "Option::is_none")]
     pub local: Option<std::collections::HashMap<String, models::AccessSectionInfo>>,
+    /// Whether the calling user owns this project.
     #[serde(rename = "is_owner", skip_serializing_if = "Option::is_none")]
     pub is_owner: Option<bool>,
+    /// The list of refs owned by the calling user.
     #[serde(rename = "owner_of", skip_serializing_if = "Option::is_none")]
     pub owner_of: Option<Vec<String>>,
+    /// Whether the calling user can upload to any ref.
     #[serde(rename = "can_upload", skip_serializing_if = "Option::is_none")]
     pub can_upload: Option<bool>,
+    /// Whether the calling user can add any ref.
     #[serde(rename = "can_add", skip_serializing_if = "Option::is_none")]
     pub can_add: Option<bool>,
+    /// Whether the calling user can add any tag ref.
     #[serde(rename = "can_add_tags", skip_serializing_if = "Option::is_none")]
     pub can_add_tags: Option<bool>,
+    /// Whether the calling user can see the refs/meta/config branch of the project.
     #[serde(rename = "config_visible", skip_serializing_if = "Option::is_none")]
     pub config_visible: Option<bool>,
+    /// Whether the calling user must create a change for updating project config. If true, all API requests which directly update project config are rejected.
     #[serde(rename = "require_change_for_config_update", skip_serializing_if = "Option::is_none")]
     pub require_change_for_config_update: Option<bool>,
+    /// A map of group UUID to GroupInfo objects, with names and URLs for the group UUIDs used in the local map. This will include names for groups that might be invisible to the caller.
     #[serde(rename = "groups", skip_serializing_if = "Option::is_none")]
     pub groups: Option<std::collections::HashMap<String, models::GroupInfo>>,
+    /// Links to the history of the configuration file governing this project's access rights as list of WebLinkInfo entities.
     #[serde(rename = "config_web_links", skip_serializing_if = "Option::is_none")]
     pub config_web_links: Option<Vec<models::WebLinkInfo>>,
 }

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct IncludedInInfo {
+    /// The list of branches this change was merged into. Each branch is listed without the 'refs/head/' prefix.
     #[serde(rename = "branches", skip_serializing_if = "Option::is_none")]
     pub branches: Option<Vec<String>>,
+    /// The list of tags this change was tagged with. Each tag is listed without the 'refs/tags/' prefix.
     #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
     pub tags: Option<Vec<String>>,
+    /// A map that maps a name to a list of external systems that include this change, e.g. a list of servers on which this change is deployed.
     #[serde(rename = "external", skip_serializing_if = "Option::is_none")]
     pub external: Option<std::collections::HashMap<String, Vec<String>>>,
 }

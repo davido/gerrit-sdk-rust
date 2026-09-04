@@ -264,7 +264,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_projects
 
-> models::GetProjectsDefaultResponse get_projects(all, description, format, has_acl_for, limit, r#match, prefix, query, r, show_branch, start, state, tree, r#type)
+> serde_json::Value get_projects(all, description, format, has_acl_for, limit, r#match, prefix, query, r, show_branch, start, state, tree, r#type)
 List projects
 
 Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
@@ -291,7 +291,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::GetProjectsDefaultResponse**](getProjects_default_response.md)
+[**serde_json::Value**](serde_json::Value.md)
 
 ### Authorization
 

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MoveInput {
+    /// A message to be posted in this change's comments
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
+    /// Destination branch
     #[serde(rename = "destination_branch", skip_serializing_if = "Option::is_none")]
     pub destination_branch: Option<String>,
+    /// By default, only veto votes that are blocking the change from submission are moved to the destination branch. Using this option is only allowed for administrators, because it can affect the submission behaviour of the change (depending on the label access configuration and submissions rules).
     #[serde(rename = "keep_all_votes", skip_serializing_if = "Option::is_none")]
     pub keep_all_votes: Option<bool>,
 }

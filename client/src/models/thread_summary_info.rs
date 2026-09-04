@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ThreadSummaryInfo {
+    /// The number of available processors.
     #[serde(rename = "cpus", skip_serializing_if = "Option::is_none")]
     pub cpus: Option<i32>,
+    /// The total number of current threads.
     #[serde(rename = "threads", skip_serializing_if = "Option::is_none")]
     pub threads: Option<i32>,
+    /// Detailed thread counts as a map that maps a thread kind to a map that maps a thread state to the thread count.
     #[serde(rename = "counts", skip_serializing_if = "Option::is_none")]
     pub counts: Option<std::collections::HashMap<String, std::collections::HashMap<String, i32>>>,
 }

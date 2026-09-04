@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FetchInfo {
+    /// The URL of the project.
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
+    /// The ref of the patch set.
     #[serde(rename = "ref", skip_serializing_if = "Option::is_none")]
     pub r#ref: Option<String>,
+    /// The download commands for this patch set as a map that maps the command names to the commands. + Only set if download commands are requested.
     #[serde(rename = "commands", skip_serializing_if = "Option::is_none")]
     pub commands: Option<std::collections::HashMap<String, String>>,
 }

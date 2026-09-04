@@ -58,7 +58,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**get_accounts_account_id_preferences_edit**](docs/AccountsApi.md#get_accounts_account_id_preferences_edit) | **GET** /accounts/{account_id}/preferences.edit | Get Edit Preferences
 *AccountsApi* | [**get_accounts_account_id_sshkeys**](docs/AccountsApi.md#get_accounts_account_id_sshkeys) | **GET** /accounts/{account_id}/sshkeys | List SSH Keys
 *AccountsApi* | [**get_accounts_account_id_sshkeys_ssh_key_id**](docs/AccountsApi.md#get_accounts_account_id_sshkeys_ssh_key_id) | **GET** /accounts/{account_id}/sshkeys/{ssh_key_id} | Get SSH Key
-*AccountsApi* | [**get_accounts_account_id_starred_changes**](docs/AccountsApi.md#get_accounts_account_id_starred_changes) | **GET** /accounts/{account_id}/starred.changes | Get Changes With Default Star
+*AccountsApi* | [**get_accounts_account_id_starred_changes**](docs/AccountsApi.md#get_accounts_account_id_starred_changes) | **GET** /accounts/{account_id}/starred.changes | Get changes with default star
 *AccountsApi* | [**get_accounts_account_id_state**](docs/AccountsApi.md#get_accounts_account_id_state) | **GET** /accounts/{account_id}/state | Get Account State
 *AccountsApi* | [**get_accounts_account_id_status**](docs/AccountsApi.md#get_accounts_account_id_status) | **GET** /accounts/{account_id}/status | Get Account Status
 *AccountsApi* | [**get_accounts_account_id_tokens**](docs/AccountsApi.md#get_accounts_account_id_tokens) | **GET** /accounts/{account_id}/tokens | List Authentication Tokens
@@ -499,14 +499,9 @@ Class | Method | HTTP request | Description
  - [GarbageCollectInput](docs/GarbageCollectInput.md)
  - [GeneralPreferencesInfo](docs/GeneralPreferencesInfo.md)
  - [GerritInfo](docs/GerritInfo.md)
- - [GetConfigServerCaches200Response](docs/GetConfigServerCaches200Response.md)
  - [GetConfigServerIndexes200ResponseInner](docs/GetConfigServerIndexes200ResponseInner.md)
  - [GetConfigServerIndexes200ResponseInnerVersionsValue](docs/GetConfigServerIndexes200ResponseInnerVersionsValue.md)
- - [GetConfigServerVersion200Response](docs/GetConfigServerVersion200Response.md)
- - [GetConfigServerVersion200ResponseOneOf](docs/GetConfigServerVersion200ResponseOneOf.md)
- - [GetGroupsDefaultResponse](docs/GetGroupsDefaultResponse.md)
  - [GetMetaFileInfo](docs/GetMetaFileInfo.md)
- - [GetProjectsDefaultResponse](docs/GetProjectsDefaultResponse.md)
  - [GitBasicAuthPolicy](docs/GitBasicAuthPolicy.md)
  - [GitPerson](docs/GitPerson.md)
  - [GpgKeyInfo](docs/GpgKeyInfo.md)

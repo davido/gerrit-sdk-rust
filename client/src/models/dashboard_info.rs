@@ -13,26 +13,37 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DashboardInfo {
+    /// The ID of the dashboard. The ID has the format '<ref>:<path>', where ref and path are URL encoded.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The name of the project for which this dashboard is returned.
     #[serde(rename = "project", skip_serializing_if = "Option::is_none")]
     pub project: Option<String>,
+    /// The name of the project in which this dashboard is defined. This is different from project if the dashboard is inherited from a parent project.
     #[serde(rename = "defining_project", skip_serializing_if = "Option::is_none")]
     pub defining_project: Option<String>,
+    /// The name of the ref in which the dashboard is defined, without the refs/meta/dashboards/ prefix, which is common for all dashboard refs.
     #[serde(rename = "ref", skip_serializing_if = "Option::is_none")]
     pub r#ref: Option<String>,
+    /// The path of the file in which the dashboard is defined.
     #[serde(rename = "path", skip_serializing_if = "Option::is_none")]
     pub path: Option<String>,
+    /// The description of the dashboard.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// Subquery that applies to all sections in the dashboard. + Tokens such as ${project} are not resolved.
     #[serde(rename = "foreach", skip_serializing_if = "Option::is_none")]
     pub foreach: Option<String>,
+    /// The URL under which the dashboard can be opened in the Gerrit Web UI. + The URL is relative to the canonical web URL. + Tokens in the queries such as ${project} are resolved.
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
+    /// Whether this is the default dashboard of the project.
     #[serde(rename = "is_default", skip_serializing_if = "Option::is_none")]
     pub is_default: Option<bool>,
+    /// The title of the dashboard.
     #[serde(rename = "title", skip_serializing_if = "Option::is_none")]
     pub title: Option<String>,
+    /// The list of sections in the dashboard.
     #[serde(rename = "sections", skip_serializing_if = "Option::is_none")]
     pub sections: Option<Vec<models::DashboardSectionInfo>>,
 }

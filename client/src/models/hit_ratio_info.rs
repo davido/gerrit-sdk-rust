@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct HitRatioInfo {
+    /// Hit ratio for cache entries that are held in memory (0 \\<= value \\<= 100).
     #[serde(rename = "mem", skip_serializing_if = "Option::is_none")]
     pub mem: Option<i32>,
+    /// Hit ratio for cache entries that are held on disk (0 \\<= value \\<= 100). Only set for disk caches.
     #[serde(rename = "disk", skip_serializing_if = "Option::is_none")]
     pub disk: Option<i32>,
 }

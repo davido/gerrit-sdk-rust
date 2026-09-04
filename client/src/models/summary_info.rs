@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SummaryInfo {
+    /// Summary about current tasks as a TaskSummaryInfo entity.
     #[serde(rename = "task_summary", skip_serializing_if = "Option::is_none")]
     pub task_summary: Option<Box<models::TaskSummaryInfo>>,
+    /// Summary about current memory usage as a MemSummaryInfo entity.
     #[serde(rename = "mem_summary", skip_serializing_if = "Option::is_none")]
     pub mem_summary: Option<Box<models::MemSummaryInfo>>,
+    /// Summary about current threads as a ThreadSummaryInfo entity.
     #[serde(rename = "thread_summary", skip_serializing_if = "Option::is_none")]
     pub thread_summary: Option<Box<models::ThreadSummaryInfo>>,
+    /// Summary about the JVM JvmSummaryInfo entity. Only set if the jvm option was set.
     #[serde(rename = "jvm_summary", skip_serializing_if = "Option::is_none")]
     pub jvm_summary: Option<Box<models::JvmSummaryInfo>>,
 }

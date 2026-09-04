@@ -13,18 +13,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ChangeConfigInfo {
+    /// Whether blame on side by side diff is allowed.
     #[serde(rename = "allow_blame", skip_serializing_if = "Option::is_none")]
     pub allow_blame: Option<bool>,
+    /// Returns true if private changes are disabled.
     #[serde(rename = "disable_private_changes", skip_serializing_if = "Option::is_none")]
     pub disable_private_changes: Option<bool>,
+    /// How often in seconds the web interface should poll for updates to the currently open change.
     #[serde(rename = "update_delay", skip_serializing_if = "Option::is_none")]
     pub update_delay: Option<i32>,
+    /// A configuration if the whole topic is submitted.
     #[serde(rename = "submit_whole_topic", skip_serializing_if = "Option::is_none")]
     pub submit_whole_topic: Option<bool>,
+    /// Value of the configuration parameter that controls whether the mergeability bit in ChangeInfo will never be set and if the bit is indexed.
     #[serde(rename = "mergeability_computation_behavior", skip_serializing_if = "Option::is_none")]
     pub mergeability_computation_behavior: Option<String>,
+    /// Are conflicts enabled?.
     #[serde(rename = "conflicts_predicate_enabled", skip_serializing_if = "Option::is_none")]
     pub conflicts_predicate_enabled: Option<bool>,
+    /// Are markdown base64 images in comments allowed?.
     #[serde(rename = "allow_markdown_base64_images_in_comments", skip_serializing_if = "Option::is_none")]
     pub allow_markdown_base64_images_in_comments: Option<bool>,
 }

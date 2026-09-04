@@ -17,20 +17,27 @@ pub struct GerritInfo {
     pub all_projects: Option<String>,
     #[serde(rename = "all_users", skip_serializing_if = "Option::is_none")]
     pub all_users: Option<String>,
+    /// Whether documentation search is available.
     #[serde(rename = "doc_search", skip_serializing_if = "Option::is_none")]
     pub doc_search: Option<bool>,
+    /// Custom base URL where Gerrit server documentation is located. (Documentation may still be available at /Documentation relative to the Gerrit base path even if this value is unset.)
     #[serde(rename = "doc_url", skip_serializing_if = "Option::is_none")]
     pub doc_url: Option<String>,
+    /// Whether to enable the web UI for editing GPG keys.
     #[serde(rename = "edit_gpg_keys", skip_serializing_if = "Option::is_none")]
     pub edit_gpg_keys: Option<bool>,
+    /// URL to report bugs.
     #[serde(rename = "report_bug_url", skip_serializing_if = "Option::is_none")]
     pub report_bug_url: Option<String>,
     #[serde(rename = "primary_weblink_name", skip_serializing_if = "Option::is_none")]
     pub primary_weblink_name: Option<String>,
+    /// Short identifier for this Gerrit installation.
     #[serde(rename = "instance_id", skip_serializing_if = "Option::is_none")]
     pub instance_id: Option<String>,
+    /// Name of the default branch to use on the project creation.
     #[serde(rename = "default_branch", skip_serializing_if = "Option::is_none")]
     pub default_branch: Option<String>,
+    /// Whether the instance supports filtering projects by state.
     #[serde(rename = "project_state_predicate_enabled", skip_serializing_if = "Option::is_none")]
     pub project_state_predicate_enabled: Option<bool>,
 }

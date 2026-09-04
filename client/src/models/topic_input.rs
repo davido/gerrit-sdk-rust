@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TopicInput {
+    /// The topic. + The topic will be deleted if not set. Topic can't contain quotation marks.
     #[serde(rename = "topic", skip_serializing_if = "Option::is_none")]
     pub topic: Option<String>,
 }

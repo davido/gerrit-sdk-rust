@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SuggestInfo {
+    /// The number of characters that a user must have typed before suggestions are provided.
     #[serde(rename = "from", skip_serializing_if = "Option::is_none")]
     pub from: Option<i32>,
 }

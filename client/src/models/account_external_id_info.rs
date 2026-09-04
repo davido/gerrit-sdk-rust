@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountExternalIdInfo {
+    /// The account external id.
     #[serde(rename = "identity", skip_serializing_if = "Option::is_none")]
     pub identity: Option<String>,
+    /// The email address for the external id.
     #[serde(rename = "email_address", skip_serializing_if = "Option::is_none")]
     pub email_address: Option<String>,
+    /// Whether the external id is trusted.
     #[serde(rename = "trusted", skip_serializing_if = "Option::is_none")]
     pub trusted: Option<bool>,
+    /// Whether the external id can be deleted by the calling user.
     #[serde(rename = "can_delete", skip_serializing_if = "Option::is_none")]
     pub can_delete: Option<bool>,
 }

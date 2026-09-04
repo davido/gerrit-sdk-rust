@@ -15,12 +15,16 @@ use serde::{Deserialize, Serialize};
 pub struct BranchInfo {
     #[serde(rename = "actions", skip_serializing_if = "Option::is_none")]
     pub actions: Option<std::collections::HashMap<String, models::ActionInfo>>,
+    /// Links to the branch in external sites as a list of WebLinkInfo entries.
     #[serde(rename = "web_links", skip_serializing_if = "Option::is_none")]
     pub web_links: Option<Vec<models::WebLinkInfo>>,
+    /// The ref of the branch.
     #[serde(rename = "ref", skip_serializing_if = "Option::is_none")]
     pub r#ref: Option<String>,
+    /// The revision to which the branch points.
     #[serde(rename = "revision", skip_serializing_if = "Option::is_none")]
     pub revision: Option<String>,
+    /// Whether the calling user can delete this branch.
     #[serde(rename = "can_delete", skip_serializing_if = "Option::is_none")]
     pub can_delete: Option<bool>,
 }

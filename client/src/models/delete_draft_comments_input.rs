@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DeleteDraftCommentsInput {
+    /// A change query limiting results to changes matching this query; has:draft is implied and not necessary to list explicitly. If not set, matches all changes with drafts.
     #[serde(rename = "query", skip_serializing_if = "Option::is_none")]
     pub query: Option<String>,
 }

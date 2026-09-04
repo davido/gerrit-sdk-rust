@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountStateInfo {
+    /// The account details as AccountDetailInfo entity.
     #[serde(rename = "account", skip_serializing_if = "Option::is_none")]
     pub account: Option<Box<models::AccountDetailInfo>>,
+    /// The global capabilities of the account as a CapabilityInfo entity. Not set if the permission backend doesn't use default capabilities.
     #[serde(rename = "capabilities", skip_serializing_if = "Option::is_none")]
     pub capabilities: Option<std::collections::HashMap<String, serde_json::Value>>,
+    /// The groups that contain the account as a member as a list of GroupInfo entries.
     #[serde(rename = "groups", skip_serializing_if = "Option::is_none")]
     pub groups: Option<Vec<models::GroupInfo>>,
+    /// The external IDs of the account as a list of AccountExternalIdInfo entities.
     #[serde(rename = "external_ids", skip_serializing_if = "Option::is_none")]
     pub external_ids: Option<Vec<models::AccountExternalIdInfo>>,
+    /// Optional account metadata as a list of MetadataInfo entities. If and which metadata is provided depends on the Gerrit setup.
     #[serde(rename = "metadata", skip_serializing_if = "Option::is_none")]
     pub metadata: Option<Vec<models::MetadataInfo>>,
 }

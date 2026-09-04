@@ -343,7 +343,7 @@ pub fn delete_config_server_tasks_task_id(configuration: &configuration::Configu
 }
 
 /// Lists the caches of the server. Caches defined by plugins are included.
-pub fn get_config_server_caches(configuration: &configuration::Configuration, format: Option<&str>, include_diskstats: Option<bool>) -> Result<models::GetConfigServerCaches200Response, Error<GetConfigServerCachesError>> {
+pub fn get_config_server_caches(configuration: &configuration::Configuration, format: Option<&str>, include_diskstats: Option<bool>) -> Result<serde_json::Value, Error<GetConfigServerCachesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_format = format;
     let p_query_include_diskstats = include_diskstats;
@@ -380,8 +380,8 @@ pub fn get_config_server_caches(configuration: &configuration::Configuration, fo
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetConfigServerCaches200Response`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetConfigServerCaches200Response`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
         }
     } else {
         let content = resp.text()?;
@@ -1230,7 +1230,7 @@ pub fn get_config_server_top_menus(configuration: &configuration::Configuration,
 }
 
 /// Returns the version of the Gerrit server.
-pub fn get_config_server_version(configuration: &configuration::Configuration, verbose: Option<bool>) -> Result<models::GetConfigServerVersion200Response, Error<GetConfigServerVersionError>> {
+pub fn get_config_server_version(configuration: &configuration::Configuration, verbose: Option<bool>) -> Result<serde_json::Value, Error<GetConfigServerVersionError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_verbose = verbose;
 
@@ -1263,8 +1263,8 @@ pub fn get_config_server_version(configuration: &configuration::Configuration, v
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetConfigServerVersion200Response`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetConfigServerVersion200Response`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
         }
     } else {
         let content = resp.text()?;

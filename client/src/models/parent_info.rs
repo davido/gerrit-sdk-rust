@@ -13,18 +13,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ParentInfo {
+    /// Name of the target branch into which the parent commit is merged.
     #[serde(rename = "branch_name", skip_serializing_if = "Option::is_none")]
     pub branch_name: Option<String>,
+    /// The commit SHA-1 of the parent commit, or null if the current commit is root.
     #[serde(rename = "commit_id", skip_serializing_if = "Option::is_none")]
     pub commit_id: Option<String>,
+    /// Set to true if the parent commit is merged into the target branch.
     #[serde(rename = "is_merged_in_target_branch", skip_serializing_if = "Option::is_none")]
     pub is_merged_in_target_branch: Option<bool>,
+    /// If the parent commit is a patch-set of another gerrit change, this field will hold the change ID of the parent change. Otherwise, will be null.
     #[serde(rename = "change_id", skip_serializing_if = "Option::is_none")]
     pub change_id: Option<String>,
+    /// If the parent commit is a patch-set of another gerrit change, this field will hold the change number of the parent change. Otherwise, will be null.
     #[serde(rename = "change_number", skip_serializing_if = "Option::is_none")]
     pub change_number: Option<i32>,
+    /// If the parent commit is a patch-set of another gerrit change, this field will hold the patch-set number of the parent change. Otherwise, will be null.
     #[serde(rename = "patch_set_number", skip_serializing_if = "Option::is_none")]
     pub patch_set_number: Option<i32>,
+    /// If the parent commit is a patch-set of another gerrit change, this field will hold the change status of the parent change. Otherwise, will be null.
     #[serde(rename = "change_status", skip_serializing_if = "Option::is_none")]
     pub change_status: Option<String>,
 }

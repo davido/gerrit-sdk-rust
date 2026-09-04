@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EmailInput {
+    /// The email address. If provided, must match the email address from the URL.
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
+    /// Whether the new email address should become the preferred email address of the user (only supported if no_confirmation is set or if the authentication type is DEVELOPMENT_BECOME_ANY_ACCOUNT).
     #[serde(rename = "preferred", skip_serializing_if = "Option::is_none")]
     pub preferred: Option<bool>,
+    /// Whether the email address should be added without confirmation. In this case no verification email is sent to the user. + Only Gerrit administrators are allowed to add email addresses without confirmation.
     #[serde(rename = "no_confirmation", skip_serializing_if = "Option::is_none")]
     pub no_confirmation: Option<bool>,
 }

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CommitMessageInfo {
+    /// The subject of the change (first line of the commit message).
     #[serde(rename = "subject", skip_serializing_if = "Option::is_none")]
     pub subject: Option<String>,
+    /// Full commit message of the change.
     #[serde(rename = "full_message", skip_serializing_if = "Option::is_none")]
     pub full_message: Option<String>,
+    /// The footers from the commit message as a map of key-value pairs. If there are multiple footers with the same key, only the last footer with that key is returned.
     #[serde(rename = "footers", skip_serializing_if = "Option::is_none")]
     pub footers: Option<std::collections::HashMap<String, String>>,
 }

@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AttentionSetInfo {
+    /// AccountInfo entity.
     #[serde(rename = "account", skip_serializing_if = "Option::is_none")]
     pub account: Option<Box<models::AccountInfo>>,
+    /// The timestamp of the last update.
     #[serde(rename = "last_update", skip_serializing_if = "Option::is_none")]
     pub last_update: Option<String>,
+    /// The reason for adding or removing the user. If the update was caused by another user, that account is represented by account ID in reason as <GERRIT_ACCOUNT_18419> and the corresponding AccountInfo can be found in reason_account field.
     #[serde(rename = "reason", skip_serializing_if = "Option::is_none")]
     pub reason: Option<String>,
+    /// AccountInfo of the user who caused the update.
     #[serde(rename = "reason_account", skip_serializing_if = "Option::is_none")]
     pub reason_account: Option<Box<models::AccountInfo>>,
 }

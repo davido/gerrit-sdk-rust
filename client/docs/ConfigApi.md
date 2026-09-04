@@ -81,7 +81,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_config_server_caches
 
-> models::GetConfigServerCaches200Response get_config_server_caches(format, include_diskstats)
+> serde_json::Value get_config_server_caches(format, include_diskstats)
 List Caches
 
 Lists the caches of the server. Caches defined by plugins are included.
@@ -96,7 +96,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::GetConfigServerCaches200Response**](getConfigServerCaches_200_response.md)
+[**serde_json::Value**](serde_json::Value.md)
 
 ### Authorization
 
@@ -679,7 +679,7 @@ This endpoint does not need any parameter.
 
 ## get_config_server_version
 
-> models::GetConfigServerVersion200Response get_config_server_version(verbose)
+> serde_json::Value get_config_server_version(verbose)
 Get version
 
 Returns the version of the Gerrit server.
@@ -693,7 +693,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::GetConfigServerVersion200Response**](getConfigServerVersion_200_response.md)
+[**serde_json::Value**](serde_json::Value.md)
 
 ### Authorization
 

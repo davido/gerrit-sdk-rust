@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CommentLinkInput {
+    /// A JavaScript regular expression to match positions to be replaced with a hyperlink, as documented in commentlink.name.match.
     #[serde(rename = "match", skip_serializing_if = "Option::is_none")]
     pub r#match: Option<String>,
+    /// The URL to direct the user to whenever the regular expression is matched, as documented in commentlink.name.link.
     #[serde(rename = "link", skip_serializing_if = "Option::is_none")]
     pub link: Option<String>,
+    /// Text inserted before the link.
     #[serde(rename = "prefix", skip_serializing_if = "Option::is_none")]
     pub prefix: Option<String>,
+    /// Text inserted after the link.
     #[serde(rename = "suffix", skip_serializing_if = "Option::is_none")]
     pub suffix: Option<String>,
+    /// Text of the link.
     #[serde(rename = "text", skip_serializing_if = "Option::is_none")]
     pub text: Option<String>,
+    /// Whether the commentlink is enabled, as documented in commentlink.name.enabled. If not set the commentlink is enabled.
     #[serde(rename = "enabled", skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
 }

@@ -13,28 +13,40 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CherryPickInput {
+    /// Commit message for the cherry-pick change. If not set, the commit message of the cherry-picked commit is used.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
+    /// Destination branch
     #[serde(rename = "destination", skip_serializing_if = "Option::is_none")]
     pub destination: Option<String>,
+    /// 40-hex digit SHA-1 of the commit which will be the parent commit of the newly created change. If set, it must be a merged commit or a change revision on the destination branch.
     #[serde(rename = "base", skip_serializing_if = "Option::is_none")]
     pub base: Option<String>,
+    /// Number of the parent relative to which the cherry-pick should be considered.
     #[serde(rename = "parent", skip_serializing_if = "Option::is_none")]
     pub parent: Option<i32>,
+    /// Notify handling that defines to whom email notifications should be sent after the cherry-pick. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL.
     #[serde(rename = "notify", skip_serializing_if = "Option::is_none")]
     pub notify: Option<models::NotifyHandling>,
+    /// Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.
     #[serde(rename = "notify_details", skip_serializing_if = "Option::is_none")]
     pub notify_details: Option<std::collections::HashMap<String, models::NotifyInfo>>,
+    /// If true, carries reviewers and ccs over from original change to newly created one.
     #[serde(rename = "keep_reviewers", skip_serializing_if = "Option::is_none")]
     pub keep_reviewers: Option<bool>,
+    /// If true, the cherry-pick uses content merge and succeeds also if there are conflicts. If there are conflicts the file contents of the created change contain git conflict markers to indicate the conflicts.
     #[serde(rename = "allow_conflicts", skip_serializing_if = "Option::is_none")]
     pub allow_conflicts: Option<bool>,
+    /// The topic of the created cherry-picked change. If not set, the default depends on the source. If the source is a change with a topic, the resulting topic of the cherry-picked change will be {source_change_topic}-{destination_branch}.
     #[serde(rename = "topic", skip_serializing_if = "Option::is_none")]
     pub topic: Option<String>,
+    /// If true, the cherry-pick succeeds also if the created commit will be empty. If false, a cherry-pick that would create an empty commit fails without creating the commit.
     #[serde(rename = "allow_empty", skip_serializing_if = "Option::is_none")]
     pub allow_empty: Option<bool>,
+    /// Map with key-value pairs that are forwarded as options to the commit validation listeners (e.g. can be used to skip certain validations). Which validation options are supported depends on the installed commit validation listeners.
     #[serde(rename = "validation_options", skip_serializing_if = "Option::is_none")]
     pub validation_options: Option<std::collections::HashMap<String, String>>,
+    /// Cherry-pick is committed using this email address. Only the registered emails of the calling user are considered valid. Defaults to source commit's committer email if it is a registered email of the calling user, else defaults to calling user's preferred email.
     #[serde(rename = "committer_email", skip_serializing_if = "Option::is_none")]
     pub committer_email: Option<String>,
 }

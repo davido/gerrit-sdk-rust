@@ -13,18 +13,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MergeableInfo {
+    /// Submit type used for this change, can be MERGE_IF_NECESSARY, FAST_FORWARD_ONLY, REBASE_IF_NECESSARY, REBASE_ALWAYS, MERGE_ALWAYS or CHERRY_PICK.
     #[serde(rename = "submit_type", skip_serializing_if = "Option::is_none")]
     pub submit_type: Option<models::SubmitType>,
+    /// The strategy of the merge, can be recursive, resolve, simple-two-way-in-core, ours or theirs.
     #[serde(rename = "strategy", skip_serializing_if = "Option::is_none")]
     pub strategy: Option<String>,
+    /// true if this change is cleanly mergeable or already merged, false otherwise
     #[serde(rename = "mergeable", skip_serializing_if = "Option::is_none")]
     pub mergeable: Option<bool>,
+    /// true if this change is already merged, false otherwise
     #[serde(rename = "commit_merged", skip_serializing_if = "Option::is_none")]
     pub commit_merged: Option<bool>,
+    /// true if the content of this change is already merged, false otherwise
     #[serde(rename = "content_merged", skip_serializing_if = "Option::is_none")]
     pub content_merged: Option<bool>,
+    /// A list of paths with conflicts
     #[serde(rename = "conflicts", skip_serializing_if = "Option::is_none")]
     pub conflicts: Option<Vec<String>>,
+    /// A list of other branch names where this change could merge cleanly
     #[serde(rename = "mergeable_into", skip_serializing_if = "Option::is_none")]
     pub mergeable_into: Option<Vec<String>>,
 }

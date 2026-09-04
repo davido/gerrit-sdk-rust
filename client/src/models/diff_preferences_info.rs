@@ -13,54 +13,75 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DiffPreferencesInfo {
+    /// The number of lines of context when viewing a patch.
     #[serde(rename = "context", skip_serializing_if = "Option::is_none")]
     pub context: Option<i32>,
+    /// Number of spaces that should be used to display one tab.
     #[serde(rename = "tab_size", skip_serializing_if = "Option::is_none")]
     pub tab_size: Option<i32>,
+    /// Default font size in pixels for change to be displayed in the diff view.
     #[serde(rename = "font_size", skip_serializing_if = "Option::is_none")]
     pub font_size: Option<i32>,
+    /// Number of characters that should be displayed in one line.
     #[serde(rename = "line_length", skip_serializing_if = "Option::is_none")]
     pub line_length: Option<i32>,
+    /// Half-period in milliseconds used for cursor blinking. Setting it to 0 disables cursor blinking.
     #[serde(rename = "cursor_blink_rate", skip_serializing_if = "Option::is_none")]
     pub cursor_blink_rate: Option<i32>,
+    /// Whether all inline comments should be automatically expanded.
     #[serde(rename = "expand_all_comments", skip_serializing_if = "Option::is_none")]
     pub expand_all_comments: Option<bool>,
+    /// Whether intraline differences should be highlighted.
     #[serde(rename = "intraline_difference", skip_serializing_if = "Option::is_none")]
     pub intraline_difference: Option<bool>,
+    /// Whether the 'Reviewed' flag should not be set automatically on a patch when it is viewed.
     #[serde(rename = "manual_review", skip_serializing_if = "Option::is_none")]
     pub manual_review: Option<bool>,
+    /// Whether Windows EOL/Cr-Lf should be displayed as '\\r' in a dotted-line box.
     #[serde(rename = "show_line_endings", skip_serializing_if = "Option::is_none")]
     pub show_line_endings: Option<bool>,
+    /// Whether tabs should be shown.
     #[serde(rename = "show_tabs", skip_serializing_if = "Option::is_none")]
     pub show_tabs: Option<bool>,
+    /// Whether whitespace errors should be shown.
     #[serde(rename = "show_whitespace_errors", skip_serializing_if = "Option::is_none")]
     pub show_whitespace_errors: Option<bool>,
+    /// Whether syntax highlighting should be enabled.
     #[serde(rename = "syntax_highlighting", skip_serializing_if = "Option::is_none")]
     pub syntax_highlighting: Option<bool>,
+    /// If true the top menu header and site header are hidden.
     #[serde(rename = "hide_top_menu", skip_serializing_if = "Option::is_none")]
     pub hide_top_menu: Option<bool>,
+    /// If true the diff table header is automatically hidden when scrolling down more than half of a page.
     #[serde(rename = "auto_hide_diff_table_header", skip_serializing_if = "Option::is_none")]
     pub auto_hide_diff_table_header: Option<bool>,
+    /// If true the line numbers are hidden.
     #[serde(rename = "hide_line_numbers", skip_serializing_if = "Option::is_none")]
     pub hide_line_numbers: Option<bool>,
     #[serde(rename = "render_entire_file", skip_serializing_if = "Option::is_none")]
     pub render_entire_file: Option<bool>,
     #[serde(rename = "hide_empty_pane", skip_serializing_if = "Option::is_none")]
     pub hide_empty_pane: Option<bool>,
+    /// Whether matching brackets should be highlighted.
     #[serde(rename = "match_brackets", skip_serializing_if = "Option::is_none")]
     pub match_brackets: Option<bool>,
+    /// Whether to enable line wrapping or not.
     #[serde(rename = "line_wrapping", skip_serializing_if = "Option::is_none")]
     pub line_wrapping: Option<bool>,
     #[serde(rename = "responsive_mode", skip_serializing_if = "Option::is_none")]
     pub responsive_mode: Option<models::ResponsiveMode>,
+    /// Whether whitespace changes should be ignored and if yes, which whitespace changes should be ignored. + Allowed values are IGNORE_NONE, IGNORE_TRAILING, IGNORE_LEADING_AND_TRAILING, IGNORE_ALL.
     #[serde(rename = "ignore_whitespace", skip_serializing_if = "Option::is_none")]
     pub ignore_whitespace: Option<models::Whitespace>,
+    /// Whether the header that is displayed above the patch (that either shows the commit message, the diff preferences, the patch sets or the files) should be retained on file switch.
     #[serde(rename = "retain_header", skip_serializing_if = "Option::is_none")]
     pub retain_header: Option<bool>,
+    /// Whether deleted files should be skipped on file switch.
     #[serde(rename = "skip_deleted", skip_serializing_if = "Option::is_none")]
     pub skip_deleted: Option<bool>,
     #[serde(rename = "skip_unchanged", skip_serializing_if = "Option::is_none")]
     pub skip_unchanged: Option<bool>,
+    /// Whether uncommented files should be skipped on file switch.
     #[serde(rename = "skip_uncommented", skip_serializing_if = "Option::is_none")]
     pub skip_uncommented: Option<bool>,
 }

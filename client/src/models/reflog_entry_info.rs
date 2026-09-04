@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReflogEntryInfo {
+    /// The old commit ID.
     #[serde(rename = "old_id", skip_serializing_if = "Option::is_none")]
     pub old_id: Option<String>,
+    /// The new commit ID.
     #[serde(rename = "new_id", skip_serializing_if = "Option::is_none")]
     pub new_id: Option<String>,
+    /// The user performing the change as a GitPersonInfo entity.
     #[serde(rename = "who", skip_serializing_if = "Option::is_none")]
     pub who: Option<Box<models::GitPerson>>,
+    /// Comment of the reflog entry.
     #[serde(rename = "comment", skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
 }

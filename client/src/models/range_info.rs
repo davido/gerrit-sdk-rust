@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RangeInfo {
+    /// First index.
     #[serde(rename = "start", skip_serializing_if = "Option::is_none")]
     pub start: Option<i32>,
+    /// Last index.
     #[serde(rename = "end", skip_serializing_if = "Option::is_none")]
     pub end: Option<i32>,
 }

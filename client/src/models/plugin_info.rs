@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PluginInfo {
+    /// The ID of the plugin.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The version of the plugin.
     #[serde(rename = "version", skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
+    /// The version of the Gerrit Api used by the plugin.
     #[serde(rename = "api_version", skip_serializing_if = "Option::is_none")]
     pub api_version: Option<String>,
+    /// URL of the plugin's default page.
     #[serde(rename = "index_url", skip_serializing_if = "Option::is_none")]
     pub index_url: Option<String>,
+    /// The plugin's filename.
     #[serde(rename = "filename", skip_serializing_if = "Option::is_none")]
     pub filename: Option<String>,
+    /// Whether the plugin is disabled.
     #[serde(rename = "disabled", skip_serializing_if = "Option::is_none")]
     pub disabled: Option<bool>,
 }

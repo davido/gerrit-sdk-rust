@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AutoCloseableChangesCheckInput {
+    /// Whether auto-closeable changes should be closed automatically.
     #[serde(rename = "fix", skip_serializing_if = "Option::is_none")]
     pub fix: Option<bool>,
+    /// The branch for which the AutoCloseableChangesCheck should be performed. The 'refs/heads/' prefix for the branch name can be omitted.
     #[serde(rename = "branch", skip_serializing_if = "Option::is_none")]
     pub branch: Option<String>,
+    /// Number of commits that should be skipped when walking the commits of the branch.
     #[serde(rename = "skip_commits", skip_serializing_if = "Option::is_none")]
     pub skip_commits: Option<i32>,
+    /// Maximum number of commits to walk. If not specified this defaults to 10,000 commits. 10,000 is also the maximum that can be set. Auto-closing changes is an expensive operation and the more commits are walked the slower it gets. This is why you should avoid walking too many commits.
     #[serde(rename = "max_commits", skip_serializing_if = "Option::is_none")]
     pub max_commits: Option<i32>,
 }

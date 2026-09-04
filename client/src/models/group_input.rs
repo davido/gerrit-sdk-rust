@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GroupInput {
+    /// The name of the group (not encoded). + If set, must match the group name in the URL.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The UUID of the group.
     #[serde(rename = "uuid", skip_serializing_if = "Option::is_none")]
     pub uuid: Option<String>,
+    /// The description of the group.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// Whether the group is visible to all registered users. + false if not set.
     #[serde(rename = "visible_to_all", skip_serializing_if = "Option::is_none")]
     pub visible_to_all: Option<bool>,
+    /// The URL encoded ID of the owner group. + This can be a group UUID, a legacy numeric group ID or a unique group name. + If not set, the new group will be self-owned.
     #[serde(rename = "owner_id", skip_serializing_if = "Option::is_none")]
     pub owner_id: Option<String>,
+    /// The initial members in a list of + account ids.
     #[serde(rename = "members", skip_serializing_if = "Option::is_none")]
     pub members: Option<Vec<String>>,
 }

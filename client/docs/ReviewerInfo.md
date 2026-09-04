@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**approvals** | Option<**std::collections::HashMap<String, String>**> |  | [optional]
-**_account_id** | Option<**i32**> |  | [optional]
+**approvals** | Option<**std::collections::HashMap<String, String>**> | The approvals of the reviewer as a map that maps the label names to the approval values (\"-2\", \"-1\", \"0\", \"+1\", \"+2\"). | [optional]
+**_account_id** | Option<**i32**> | This field is inherited from AccountInfo but is optional here if an unregistered reviewer was added by email. See add-reviewer for details. | [optional]
 **name** | Option<**String**> |  | [optional]
 **display_name** | Option<**String**> |  | [optional]
 **email** | Option<**String**> |  | [optional]

@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct VotingRangeInfo {
+    /// The minimum voting value.
     #[serde(rename = "min", skip_serializing_if = "Option::is_none")]
     pub min: Option<i32>,
+    /// The maximum voting value.
     #[serde(rename = "max", skip_serializing_if = "Option::is_none")]
     pub max: Option<i32>,
 }

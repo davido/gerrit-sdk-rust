@@ -62,7 +62,7 @@ pub enum DeleteProjectsProjectIdTagsTagIdError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetProjectsError {
-    DefaultResponse(models::GetProjectsDefaultResponse),
+    DefaultResponse(serde_json::Value),
     UnknownValue(serde_json::Value),
 }
 
@@ -727,7 +727,7 @@ pub fn delete_projects_project_id_tags_tag_id(configuration: &configuration::Con
 }
 
 /// Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
-pub fn get_projects(configuration: &configuration::Configuration, all: Option<bool>, description: Option<bool>, format: Option<&str>, has_acl_for: Option<&str>, limit: Option<i32>, r#match: Option<&str>, prefix: Option<&str>, query: Option<&str>, r: Option<&str>, show_branch: Option<Vec<String>>, start: Option<i32>, state: Option<&str>, tree: Option<bool>, r#type: Option<&str>) -> Result<models::GetProjectsDefaultResponse, Error<GetProjectsError>> {
+pub fn get_projects(configuration: &configuration::Configuration, all: Option<bool>, description: Option<bool>, format: Option<&str>, has_acl_for: Option<&str>, limit: Option<i32>, r#match: Option<&str>, prefix: Option<&str>, query: Option<&str>, r: Option<&str>, show_branch: Option<Vec<String>>, start: Option<i32>, state: Option<&str>, tree: Option<bool>, r#type: Option<&str>) -> Result<serde_json::Value, Error<GetProjectsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_all = all;
     let p_query_description = description;
@@ -815,8 +815,8 @@ pub fn get_projects(configuration: &configuration::Configuration, all: Option<bo
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetProjectsDefaultResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetProjectsDefaultResponse`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
         }
     } else {
         let content = resp.text()?;

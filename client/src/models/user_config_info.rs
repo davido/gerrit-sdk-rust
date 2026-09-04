@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UserConfigInfo {
+    /// Username that is displayed in the Gerrit Web UI and in e-mail notifications if the full name of the user is not set.
     #[serde(rename = "anonymous_coward_name", skip_serializing_if = "Option::is_none")]
     pub anonymous_coward_name: Option<String>,
 }

@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReviewerUpdateInfo {
+    /// Timestamp of the update.
     #[serde(rename = "updated", skip_serializing_if = "Option::is_none")]
     pub updated: Option<String>,
+    /// The account which modified state of the reviewer in question as AccountInfo entity.
     #[serde(rename = "updated_by", skip_serializing_if = "Option::is_none")]
     pub updated_by: Option<Box<models::AccountInfo>>,
+    /// The account which actually modified the state of the reviewer in question as AccountInfo entity. This will be different from updated_by in case of impersonation. For example, if Alice impersonates Bob and changes the state of a reviewer, updated_by will be Bob and real_updated_by will be Alice.
     #[serde(rename = "real_updated_by", skip_serializing_if = "Option::is_none")]
     pub real_updated_by: Option<Box<models::AccountInfo>>,
+    /// The reviewer added or removed from the change as an AccountInfo entity. For reviewers by email the AccountInfo doesn't contain an account ID but only the email and optionally a name.
     #[serde(rename = "reviewer", skip_serializing_if = "Option::is_none")]
     pub reviewer: Option<Box<models::AccountInfo>>,
+    /// The reviewer state, one of REVIEWER, CC or REMOVED.
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::ReviewerState>,
 }

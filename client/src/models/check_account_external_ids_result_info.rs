@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CheckAccountExternalIdsResultInfo {
+    /// A list of ConsistencyProblemInfo entities.
     #[serde(rename = "problems", skip_serializing_if = "Option::is_none")]
     pub problems: Option<Vec<models::ConsistencyProblemInfo>>,
 }

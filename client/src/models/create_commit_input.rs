@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateCommitInput {
+    /// The commit message. Must be non-empty.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
+    /// The commit (SHA-1) the target branch is expected to point at: the request is rejected with \"409 Conflict\" if the branch tip is any other commit (optimistic concurrency).
     #[serde(rename = "base_revision", skip_serializing_if = "Option::is_none")]
     pub base_revision: Option<String>,
+    /// A map of file path to FileChange describing the operation to apply at that path. Applied together as one commit.
     #[serde(rename = "files", skip_serializing_if = "Option::is_none")]
     pub files: Option<std::collections::HashMap<String, models::FileChange>>,
+    /// Map with key-value pairs that are forwarded as options to the ref-operation and commit validation listeners (e.g. to skip certain validations). Which options are supported depends on the installed validation listeners; Gerrit core supports none. Unknown options are silently ignored.
     #[serde(rename = "validation_options", skip_serializing_if = "Option::is_none")]
     pub validation_options: Option<std::collections::HashMap<String, String>>,
 }

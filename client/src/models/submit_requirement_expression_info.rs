@@ -13,18 +13,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SubmitRequirementExpressionInfo {
+    /// The submit requirement expression as a string, for example branch:refs/heads/foo and label:verified=+1.
     #[serde(rename = "expression", skip_serializing_if = "Option::is_none")]
     pub expression: Option<String>,
+    /// True if the submit requirement is fulfilled for the change.
     #[serde(rename = "fulfilled", skip_serializing_if = "Option::is_none")]
     pub fulfilled: Option<bool>,
+    /// A string containing the status of evaluating the expression which can be one of the following: + * PASS - expression was evaluated and result is true. + * FAIL - expression was evaluated and result is false. + * ERROR - an error occurred while evaluating the expression.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::SubmitRequirementExpressionInfoStatus>,
+    /// A list of passing atoms as strings. For the above expression, passing_atoms can contain [\"branch:refs/heads/foo\"] if the branch predicate is fulfilled for the change.
     #[serde(rename = "passing_atoms", skip_serializing_if = "Option::is_none")]
     pub passing_atoms: Option<Vec<String>>,
+    /// A list of failing atoms. This is similar to passing_atoms except that it contains the list of predicates that are not fulfilled for the change.
     #[serde(rename = "failing_atoms", skip_serializing_if = "Option::is_none")]
     pub failing_atoms: Option<Vec<String>>,
+    /// A map of atoms (as strings) to strings explaining the result. This field only contains atoms for which the explanation is available.
     #[serde(rename = "atom_explanations", skip_serializing_if = "Option::is_none")]
     pub atom_explanations: Option<std::collections::HashMap<String, String>>,
+    /// If the submit requirement fails during evaluation, this string will contain an error message describing why it failed.
     #[serde(rename = "error_message", skip_serializing_if = "Option::is_none")]
     pub error_message: Option<String>,
 }

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProblemInfo {
+    /// Plaintext message describing the problem with the change.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
+    /// The status of fixing the problem (FIXED, FIX_FAILED). Only set if a fix was attempted.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::ProblemInfoStatus>,
+    /// If status is set, an additional plaintext message describing the outcome of the fix.
     #[serde(rename = "outcome", skip_serializing_if = "Option::is_none")]
     pub outcome: Option<String>,
 }

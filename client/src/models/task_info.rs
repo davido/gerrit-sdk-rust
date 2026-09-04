@@ -13,20 +13,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TaskInfo {
+    /// The ID of the task.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The state of the task, can be DONE, CANCELLED, RUNNING, READY, SLEEPING and OTHER.
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::State>,
+    /// The start time of the task.
     #[serde(rename = "start_time", skip_serializing_if = "Option::is_none")]
     pub start_time: Option<String>,
+    /// The remaining delay of the task.
     #[serde(rename = "delay", skip_serializing_if = "Option::is_none")]
     pub delay: Option<i32>,
+    /// The command of the task.
     #[serde(rename = "command", skip_serializing_if = "Option::is_none")]
     pub command: Option<String>,
+    /// The remote name. May only be set for tasks that are associated with a project.
     #[serde(rename = "remote_name", skip_serializing_if = "Option::is_none")]
     pub remote_name: Option<String>,
+    /// The project the task is associated with.
     #[serde(rename = "project_name", skip_serializing_if = "Option::is_none")]
     pub project_name: Option<String>,
+    /// The work queue the task is associated with.
     #[serde(rename = "queue_name", skip_serializing_if = "Option::is_none")]
     pub queue_name: Option<String>,
 }

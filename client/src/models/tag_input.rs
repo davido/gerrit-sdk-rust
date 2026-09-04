@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TagInput {
+    /// The name of the tag. The leading refs/tags/ is optional.
     #[serde(rename = "ref", skip_serializing_if = "Option::is_none")]
     pub r#ref: Option<String>,
+    /// The revision to which the tag should point. If not specified, the project's HEAD will be used.
     #[serde(rename = "revision", skip_serializing_if = "Option::is_none")]
     pub revision: Option<String>,
+    /// The tag message. When set, the tag will be created as an annotated tag.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
+    /// Creation timestamp for annotated tags. Must not be a date in the future.
     #[serde(rename = "date", skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
 }

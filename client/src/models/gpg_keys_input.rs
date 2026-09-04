@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GpgKeysInput {
+    /// List of ASCII armored public key strings to add.
     #[serde(rename = "add", skip_serializing_if = "Option::is_none")]
     pub add: Option<Vec<String>>,
+    /// List of \\{gpg-key-id\\}s to delete.
     #[serde(rename = "delete", skip_serializing_if = "Option::is_none")]
     pub delete: Option<Vec<String>>,
 }

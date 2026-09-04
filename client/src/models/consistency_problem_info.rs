@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ConsistencyProblemInfo {
+    /// The status of the consistency problem. + Possible values are FATAL, ERROR and WARNING.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::ConsistencyProblemInfoStatus>,
+    /// Message describing the consistency problem.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
 }

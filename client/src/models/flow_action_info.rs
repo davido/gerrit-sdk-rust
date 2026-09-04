@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FlowActionInfo {
+    /// The name of the action. Which actions are supported depends on the flow service implementation.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// Parameters for the action as list of strings. Which parameters are supported and their format depends on the flow service implementation.
     #[serde(rename = "parameters", skip_serializing_if = "Option::is_none")]
     pub parameters: Option<Vec<String>>,
 }

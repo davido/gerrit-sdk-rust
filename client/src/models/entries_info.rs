@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EntriesInfo {
+    /// Number of cache entries that are held in memory.
     #[serde(rename = "mem", skip_serializing_if = "Option::is_none")]
     pub mem: Option<i32>,
+    /// Number of cache entries on the disk. For non-disk caches this value is not set; for disk caches it is only set if there are entries in the cache.
     #[serde(rename = "disk", skip_serializing_if = "Option::is_none")]
     pub disk: Option<i32>,
+    /// The space that is consumed by the cache on disk. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes). Only set for disk caches.
     #[serde(rename = "space", skip_serializing_if = "Option::is_none")]
     pub space: Option<String>,
 }

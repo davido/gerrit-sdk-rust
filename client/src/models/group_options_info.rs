@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GroupOptionsInfo {
+    /// Whether the group is visible to all registered users.
     #[serde(rename = "visible_to_all", skip_serializing_if = "Option::is_none")]
     pub visible_to_all: Option<bool>,
 }

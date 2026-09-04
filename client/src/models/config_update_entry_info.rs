@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ConfigUpdateEntryInfo {
+    /// The config key that contains the value.
     #[serde(rename = "config_key", skip_serializing_if = "Option::is_none")]
     pub config_key: Option<String>,
+    /// The old config value. + Missing if value was not previously configured.
     #[serde(rename = "old_value", skip_serializing_if = "Option::is_none")]
     pub old_value: Option<String>,
+    /// The new config value, picked up after reload.
     #[serde(rename = "new_value", skip_serializing_if = "Option::is_none")]
     pub new_value: Option<String>,
 }

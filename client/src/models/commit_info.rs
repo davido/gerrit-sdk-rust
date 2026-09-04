@@ -13,20 +13,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CommitInfo {
+    /// The commit ID. Not set if included in a RevisionInfo entity that is contained in a map which has the commit ID as key.
     #[serde(rename = "commit", skip_serializing_if = "Option::is_none")]
     pub commit: Option<String>,
+    /// The parent commits of this commit as a list of CommitInfo entities. In each parent only the commit and subject fields are populated.
     #[serde(rename = "parents", skip_serializing_if = "Option::is_none")]
     pub parents: Option<Vec<models::CommitInfo>>,
+    /// The author of the commit as a GitPersonInfo entity.
     #[serde(rename = "author", skip_serializing_if = "Option::is_none")]
     pub author: Option<Box<models::GitPerson>>,
+    /// The committer of the commit as a GitPersonInfo entity.
     #[serde(rename = "committer", skip_serializing_if = "Option::is_none")]
     pub committer: Option<Box<models::GitPerson>>,
+    /// The subject of the commit (header line of the commit message).
     #[serde(rename = "subject", skip_serializing_if = "Option::is_none")]
     pub subject: Option<String>,
+    /// The commit message.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
+    /// Links to the patch set in external sites as a list of WebLinkInfo entities.
     #[serde(rename = "web_links", skip_serializing_if = "Option::is_none")]
     pub web_links: Option<Vec<models::WebLinkInfo>>,
+    /// Links to the commit in external sites for resolving conflicts as a list of WebLinkInfo entities.
     #[serde(rename = "resolve_conflicts_web_links", skip_serializing_if = "Option::is_none")]
     pub resolve_conflicts_web_links: Option<Vec<models::WebLinkInfo>>,
 }

@@ -35,7 +35,7 @@ Method | HTTP request | Description
 [**get_accounts_account_id_preferences_edit**](AccountsApi.md#get_accounts_account_id_preferences_edit) | **GET** /accounts/{account_id}/preferences.edit | Get Edit Preferences
 [**get_accounts_account_id_sshkeys**](AccountsApi.md#get_accounts_account_id_sshkeys) | **GET** /accounts/{account_id}/sshkeys | List SSH Keys
 [**get_accounts_account_id_sshkeys_ssh_key_id**](AccountsApi.md#get_accounts_account_id_sshkeys_ssh_key_id) | **GET** /accounts/{account_id}/sshkeys/{ssh_key_id} | Get SSH Key
-[**get_accounts_account_id_starred_changes**](AccountsApi.md#get_accounts_account_id_starred_changes) | **GET** /accounts/{account_id}/starred.changes | Get Changes With Default Star
+[**get_accounts_account_id_starred_changes**](AccountsApi.md#get_accounts_account_id_starred_changes) | **GET** /accounts/{account_id}/starred.changes | Get changes with default star
 [**get_accounts_account_id_state**](AccountsApi.md#get_accounts_account_id_state) | **GET** /accounts/{account_id}/state | Get Account State
 [**get_accounts_account_id_status**](AccountsApi.md#get_accounts_account_id_status) | **GET** /accounts/{account_id}/status | Get Account Status
 [**get_accounts_account_id_tokens**](AccountsApi.md#get_accounts_account_id_tokens) | **GET** /accounts/{account_id}/tokens | List Authentication Tokens
@@ -1015,10 +1015,10 @@ Name | Type | Description  | Required | Notes
 
 ## get_accounts_account_id_starred_changes
 
-> serde_json::Value get_accounts_account_id_starred_changes(account_id)
-Get Changes With Default Star
+> Vec<models::ChangeInfo> get_accounts_account_id_starred_changes(account_id)
+Get changes with default star
 
-Gets the changes that were starred with the default star by the identified user account. This URL endpoint is functionally identical to the changes query GET /changes/?q=is:starred. The result is a list of ChangeInfo entities.
+Gets the changes that were starred with the default star by the identified user account.
 
 ### Parameters
 
@@ -1029,7 +1029,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**Vec<models::ChangeInfo>**](ChangeInfo.md)
 
 ### Authorization
 

@@ -13,36 +13,52 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RevisionInfo {
+    /// The change kind. Valid values are REWORK, TRIVIAL_REBASE, TRIVIAL_REBASE_WITH_MESSAGE_UPDATE, MERGE_FIRST_PARENT_UPDATE, NO_CODE_CHANGE, and NO_CHANGE.
     #[serde(rename = "kind", skip_serializing_if = "Option::is_none")]
     pub kind: Option<models::ChangeKind>,
+    /// The patch set number, or edit if the patch set is an edit.
     #[serde(rename = "_number", skip_serializing_if = "Option::is_none")]
     pub _number: Option<i32>,
+    /// The timestamp of when the patch set was created.
     #[serde(rename = "created", skip_serializing_if = "Option::is_none")]
     pub created: Option<String>,
+    /// The uploader of the patch set as an AccountInfo entity.
     #[serde(rename = "uploader", skip_serializing_if = "Option::is_none")]
     pub uploader: Option<Box<models::AccountInfo>>,
+    /// The real uploader of the patch set as an AccountInfo entity. + Only set if the upload was done on behalf of another user.
     #[serde(rename = "real_uploader", skip_serializing_if = "Option::is_none")]
     pub real_uploader: Option<Box<models::AccountInfo>>,
+    /// The Git reference for the patch set.
     #[serde(rename = "ref", skip_serializing_if = "Option::is_none")]
     pub r#ref: Option<String>,
+    /// Information about how to fetch this patch set. The fetch information is provided as a map that maps the protocol name (\"git\", \"http\", \"ssh\") to FetchInfo entities. This information is only included if a plugin implementing the download commands interface is installed.
     #[serde(rename = "fetch", skip_serializing_if = "Option::is_none")]
     pub fetch: Option<std::collections::HashMap<String, models::FetchInfo>>,
+    /// The commit of the patch set as CommitInfo entity.
     #[serde(rename = "commit", skip_serializing_if = "Option::is_none")]
     pub commit: Option<Box<models::CommitInfo>>,
+    /// The parent commits of this patch-set commit as a list of ParentInfo entities. In each parent, we include the target branch name if the parent is a merged commit in the target branch. Otherwise, we include the change and patch-set numbers of the parent change. + Only set if the PARENTS option is set.
     #[serde(rename = "parents_data", skip_serializing_if = "Option::is_none")]
     pub parents_data: Option<Vec<models::ParentInfo>>,
+    /// The name of the target branch that this revision is set to be merged into. + Note that if the change is moved with the Move Change endpoint, this field can be different for different patchsets.
     #[serde(rename = "branch", skip_serializing_if = "Option::is_none")]
     pub branch: Option<String>,
+    /// The files of the patch set as a map that maps the file names to FileInfo entities. Only set if CURRENT_FILES or ALL_FILES option is requested.
     #[serde(rename = "files", skip_serializing_if = "Option::is_none")]
     pub files: Option<std::collections::HashMap<String, models::CommonFileInfo>>,
+    /// Actions the caller might be able to perform on this revision. The information is a map of view name to ActionInfo entities.
     #[serde(rename = "actions", skip_serializing_if = "Option::is_none")]
     pub actions: Option<std::collections::HashMap<String, models::ActionInfo>>,
+    /// If the COMMIT_FOOTERS option is requested and this is the current patch set, contains the full commit message with Gerrit-specific commit footers, as if this revision were submitted using the Cherry Pick submit type.
     #[serde(rename = "commit_with_footers", skip_serializing_if = "Option::is_none")]
     pub commit_with_footers: Option<String>,
+    /// If the PUSH_CERTIFICATES option is requested, contains the push certificate provided by the user when uploading this patch set as a PushCertificateInfo entity. This field is always set if the option is requested; if no push certificate was provided, it is set to an empty object.
     #[serde(rename = "push_certificate", skip_serializing_if = "Option::is_none")]
     pub push_certificate: Option<Box<models::PushCertificateInfo>>,
+    /// The description of this patchset, as displayed in the patchset selector menu. May be null if no description is set.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// Information about conflicts in this revision as a ConflictsInfo entity.
     #[serde(rename = "conflicts", skip_serializing_if = "Option::is_none")]
     pub conflicts: Option<Box<models::ConflictsInfo>>,
 }

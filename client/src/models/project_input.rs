@@ -13,42 +13,61 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProjectInput {
+    /// The name of the project (not encoded). + If set, must match the project name in the URL. + If name ends with .git the suffix will be automatically removed.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The name of the parent project. + If not set, the All-Projects project will be the parent project.
     #[serde(rename = "parent", skip_serializing_if = "Option::is_none")]
     pub parent: Option<String>,
+    /// The description of the project.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// Whether a permission-only project should be created.
     #[serde(rename = "permissions_only", skip_serializing_if = "Option::is_none")]
     pub permissions_only: Option<bool>,
+    /// Whether an empty initial commit should be created.
     #[serde(rename = "create_empty_commit", skip_serializing_if = "Option::is_none")]
     pub create_empty_commit: Option<bool>,
+    /// The submit type that should be set for the project (MERGE_IF_NECESSARY, REBASE_IF_NECESSARY, REBASE_ALWAYS, FAST_FORWARD_ONLY, MERGE_ALWAYS, CHERRY_PICK). + If not set, MERGE_IF_NECESSARY is set as submit type unless repository.<name>.defaultSubmitType is set to a different value.
     #[serde(rename = "submit_type", skip_serializing_if = "Option::is_none")]
     pub submit_type: Option<models::SubmitType>,
+    /// A list of branches that should be initially created. + For the branch names the refs/heads/ prefix can be omitted. + The first entry of the list will be the default branch. + If the list is empty, host-level default is used.
     #[serde(rename = "branches", skip_serializing_if = "Option::is_none")]
     pub branches: Option<Vec<String>>,
+    /// A list of groups that should be assigned as project owner. + Each group in the list must be specified as group-id. + If not set, the groups that are configured as default owners are set as project owners.
     #[serde(rename = "owners", skip_serializing_if = "Option::is_none")]
     pub owners: Option<Vec<String>>,
+    /// Whether contributor agreements should be used for the project (TRUE, FALSE, INHERIT).
     #[serde(rename = "use_contributor_agreements", skip_serializing_if = "Option::is_none")]
     pub use_contributor_agreements: Option<models::InheritableBoolean>,
+    /// Whether the usage of 'Signed-Off-By' footers is required for the project (TRUE, FALSE, INHERIT).
     #[serde(rename = "use_signed_off_by", skip_serializing_if = "Option::is_none")]
     pub use_signed_off_by: Option<models::InheritableBoolean>,
+    /// Whether content merge should be enabled for the project (TRUE, FALSE, INHERIT). + FALSE, if the submit_type is FAST_FORWARD_ONLY.
     #[serde(rename = "use_content_merge", skip_serializing_if = "Option::is_none")]
     pub use_content_merge: Option<models::InheritableBoolean>,
+    /// Whether the usage of Change-Ids is required for the project (TRUE, FALSE, INHERIT). This property is deprecated and will be removed in a future release.
     #[serde(rename = "require_change_id", skip_serializing_if = "Option::is_none")]
     pub require_change_id: Option<models::InheritableBoolean>,
+    /// Whether a new change is created for every commit not in target branch for the project (TRUE, FALSE, INHERIT).
     #[serde(rename = "create_new_change_for_all_not_in_target", skip_serializing_if = "Option::is_none")]
     pub create_new_change_for_all_not_in_target: Option<models::InheritableBoolean>,
+    /// Whether empty commits should be rejected when a change is merged (TRUE, FALSE, INHERIT).
     #[serde(rename = "reject_empty_commit", skip_serializing_if = "Option::is_none")]
     pub reject_empty_commit: Option<models::InheritableBoolean>,
+    /// Whether signed push validation is enabled on the project (TRUE, FALSE, INHERIT).
     #[serde(rename = "enable_signed_push", skip_serializing_if = "Option::is_none")]
     pub enable_signed_push: Option<models::InheritableBoolean>,
+    /// Whether signed push validation is required on the project (TRUE, FALSE, INHERIT).
     #[serde(rename = "require_signed_push", skip_serializing_if = "Option::is_none")]
     pub require_signed_push: Option<models::InheritableBoolean>,
+    /// Max allowed Git object size for this project. Common unit suffixes of 'k', 'm', or 'g' are supported.
     #[serde(rename = "max_object_size_limit", skip_serializing_if = "Option::is_none")]
     pub max_object_size_limit: Option<String>,
+    /// Plugin configuration values as map which maps the plugin name to a map of parameter names to values.
     #[serde(rename = "plugin_config_values", skip_serializing_if = "Option::is_none")]
     pub plugin_config_values: Option<std::collections::HashMap<String, std::collections::HashMap<String, models::ConfigValue>>>,
+    /// If set, only the project initialization is being (re-)done and the repository creation is skipped. The project initialization consists out of setting HEAD, creating the project.config file in refs/meta/config and creating initial branches with empty commits.
     #[serde(rename = "init_only", skip_serializing_if = "Option::is_none")]
     pub init_only: Option<bool>,
 }

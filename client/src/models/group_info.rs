@@ -13,28 +13,40 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GroupInfo {
+    /// URL to information about the group. Typically a URL to a web page that permits users to apply to join the group, or manage their membership.
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
+    /// Options of the group
     #[serde(rename = "options", skip_serializing_if = "Option::is_none")]
     pub options: Option<Box<models::GroupOptionsInfo>>,
+    /// The description of the group.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// The numeric ID of the group.
     #[serde(rename = "group_id", skip_serializing_if = "Option::is_none")]
     pub group_id: Option<i32>,
+    /// The name of the owner group.
     #[serde(rename = "owner", skip_serializing_if = "Option::is_none")]
     pub owner: Option<String>,
+    /// The URL encoded UUID of the owner group.
     #[serde(rename = "owner_id", skip_serializing_if = "Option::is_none")]
     pub owner_id: Option<String>,
+    /// The timestamp of when the group was created.
     #[serde(rename = "created_on", skip_serializing_if = "Option::is_none")]
     pub created_on: Option<String>,
+    /// Whether the query would deliver more results if not limited. + Only set on the last group that is returned by a group query.
     #[serde(rename = "_more_groups", skip_serializing_if = "Option::is_none")]
     pub _more_groups: Option<bool>,
+    /// A list of AccountInfo entities describing the direct members. + Only set if members are requested.
     #[serde(rename = "members", skip_serializing_if = "Option::is_none")]
     pub members: Option<Vec<models::AccountInfo>>,
+    /// A list of GroupInfo entities describing the direct subgroups. + Only set if subgroups are requested.
     #[serde(rename = "includes", skip_serializing_if = "Option::is_none")]
     pub includes: Option<Vec<models::GroupInfo>>,
+    /// The URL encoded UUID of the group.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The name of the group. + For external groups the group name is missing if there is no group backend that can resolve the group UUID. E.g. this can happen when a plugin that provided a group backend was uninstalled.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 }

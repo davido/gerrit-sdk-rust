@@ -15,8 +15,10 @@ use serde::{Deserialize, Serialize};
 pub struct FileContentInput {
     #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
     pub content: Option<serde_json::Value>,
+    /// The file content as a base-64 encoded data URI. If no content is provided, an empty is created or if an existing file is updated the file content is removed so that the file becomes empty. The content must be a SHA1 if the file mode is 160000 (gitlink).
     #[serde(rename = "binary_content", skip_serializing_if = "Option::is_none")]
     pub binary_content: Option<String>,
+    /// The file mode in octal format. Supported values are 100644 (regular file), 100755 (executable file), 120000 (symlink) and 160000 (gitlink). If unset, new files are created with file mode 100644 (regular file) and for existing files the existing file mode is kept.
     #[serde(rename = "file_mode", skip_serializing_if = "Option::is_none")]
     pub file_mode: Option<i32>,
 }

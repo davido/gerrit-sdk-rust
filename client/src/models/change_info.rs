@@ -13,120 +13,176 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ChangeInfo {
+    /// The ID of the change. The format is \"'<project>\\~<_number>'\". 'project' and '_number' are URL encoded. The callers must not rely on the format.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The ID of the change in the format \"'<project>\\~<branch>~<Change-Id>'\", where 'project' and 'branch' are URL encoded. For 'branch' the refs/heads/ prefix is omitted.
     #[serde(rename = "triplet_id", skip_serializing_if = "Option::is_none")]
     pub triplet_id: Option<String>,
+    /// The name of the project.
     #[serde(rename = "project", skip_serializing_if = "Option::is_none")]
     pub project: Option<String>,
+    /// The name of the target branch. + The refs/heads/ prefix is omitted.
     #[serde(rename = "branch", skip_serializing_if = "Option::is_none")]
     pub branch: Option<String>,
+    /// The full name of the target branch. + Always starts with refs/.
     #[serde(rename = "full_branch", skip_serializing_if = "Option::is_none")]
     pub full_branch: Option<String>,
+    /// The topic to which this change belongs.
     #[serde(rename = "topic", skip_serializing_if = "Option::is_none")]
     pub topic: Option<String>,
+    /// The map that maps account IDs to AttentionSetInfo of that account. Those are all accounts that are currently in the attention set.
     #[serde(rename = "attention_set", skip_serializing_if = "Option::is_none")]
     pub attention_set: Option<std::collections::HashMap<String, models::AttentionSetInfo>>,
+    /// The map that maps account IDs to AttentionSetInfo of that account. Those are all accounts that were in the attention set but were removed. The AttentionSetInfo is the latest and most recent removal of the account from the attention set.
     #[serde(rename = "removed_from_attention_set", skip_serializing_if = "Option::is_none")]
     pub removed_from_attention_set: Option<std::collections::HashMap<String, models::AttentionSetInfo>>,
+    /// A map that maps custom keys to custom values that are tied to a specific change, both in the form of strings. Only set if custom keyed values are requested.
     #[serde(rename = "custom_keyed_values", skip_serializing_if = "Option::is_none")]
     pub custom_keyed_values: Option<std::collections::HashMap<String, String>>,
+    /// List of hashtags that are set on the change.
     #[serde(rename = "hashtags", skip_serializing_if = "Option::is_none")]
     pub hashtags: Option<Vec<String>>,
+    /// The Change-Id of the change.
     #[serde(rename = "change_id", skip_serializing_if = "Option::is_none")]
     pub change_id: Option<String>,
+    /// The subject of the change (header line of the commit message).
     #[serde(rename = "subject", skip_serializing_if = "Option::is_none")]
     pub subject: Option<String>,
+    /// The status of the change (NEW, MERGED, ABANDONED).
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::ChangeStatus>,
+    /// The timestamp of when the change was created.
     #[serde(rename = "created", skip_serializing_if = "Option::is_none")]
     pub created: Option<String>,
+    /// The timestamp of when the change was last updated.
     #[serde(rename = "updated", skip_serializing_if = "Option::is_none")]
     pub updated: Option<String>,
+    /// The timestamp of when the change was submitted.
     #[serde(rename = "submitted", skip_serializing_if = "Option::is_none")]
     pub submitted: Option<String>,
+    /// The user who submitted the change, as an AccountInfo entity.
     #[serde(rename = "submitter", skip_serializing_if = "Option::is_none")]
     pub submitter: Option<Box<models::AccountInfo>>,
+    /// Whether the calling user has starred this change. Only set if requested.
     #[serde(rename = "starred", skip_serializing_if = "Option::is_none")]
     pub starred: Option<bool>,
     #[serde(rename = "stars", skip_serializing_if = "Option::is_none")]
     pub stars: Option<Vec<String>>,
+    /// Whether the change was reviewed by the calling user. Only set if reviewed is requested.
     #[serde(rename = "reviewed", skip_serializing_if = "Option::is_none")]
     pub reviewed: Option<bool>,
+    /// The submit type of the change. + Not set for merged changes.
     #[serde(rename = "submit_type", skip_serializing_if = "Option::is_none")]
     pub submit_type: Option<models::SubmitType>,
+    /// Whether the change is mergeable. + Only set for open changes if change.mergeabilityComputationBehavior is API_REF_UPDATED_AND_CHANGE_REINDEX.
     #[serde(rename = "mergeable", skip_serializing_if = "Option::is_none")]
     pub mergeable: Option<bool>,
+    /// Whether the change has been approved by the project submit rules. + Only set if requested.
     #[serde(rename = "submittable", skip_serializing_if = "Option::is_none")]
     pub submittable: Option<bool>,
+    /// Number of inserted lines.
     #[serde(rename = "insertions", skip_serializing_if = "Option::is_none")]
     pub insertions: Option<i32>,
+    /// Number of deleted lines.
     #[serde(rename = "deletions", skip_serializing_if = "Option::is_none")]
     pub deletions: Option<i32>,
+    /// Total number of inline comments across all patch sets.
     #[serde(rename = "total_comment_count", skip_serializing_if = "Option::is_none")]
     pub total_comment_count: Option<i32>,
+    /// Number of unresolved inline comment threads across all patch sets.
     #[serde(rename = "unresolved_comment_count", skip_serializing_if = "Option::is_none")]
     pub unresolved_comment_count: Option<i32>,
+    /// When present, change is marked as private.
     #[serde(rename = "is_private", skip_serializing_if = "Option::is_none")]
     pub is_private: Option<bool>,
+    /// When present, change is marked as Work In Progress.
     #[serde(rename = "work_in_progress", skip_serializing_if = "Option::is_none")]
     pub work_in_progress: Option<bool>,
+    /// When present, change has been marked Ready at some point in time.
     #[serde(rename = "has_review_started", skip_serializing_if = "Option::is_none")]
     pub has_review_started: Option<bool>,
+    /// The change number of the change that this change reverts.
     #[serde(rename = "revert_of", skip_serializing_if = "Option::is_none")]
     pub revert_of: Option<i32>,
+    /// ID of the submission of this change. Only set if the status is MERGED. This ID is equal to the change number of the change that triggered the submission. If the change that triggered the submission also has a topic, it will be \"<id>-<topic>\" of the change that triggered the submission.
     #[serde(rename = "submission_id", skip_serializing_if = "Option::is_none")]
     pub submission_id: Option<String>,
+    /// The change number of the change that this change was cherry-picked from. Only set if the cherry-pick has been done through the Gerrit REST API (and not if a cherry-picked commit was pushed).
     #[serde(rename = "cherry_pick_of_change", skip_serializing_if = "Option::is_none")]
     pub cherry_pick_of_change: Option<i32>,
+    /// The patchset number of the change that this change was cherry-picked from. Only set if the cherry-pick has been done through the Gerrit REST API (and not if a cherry-picked commit was pushed).
     #[serde(rename = "cherry_pick_of_patch_set", skip_serializing_if = "Option::is_none")]
     pub cherry_pick_of_patch_set: Option<i32>,
+    /// The SHA-1 of the NoteDb meta ref.
     #[serde(rename = "meta_rev_id", skip_serializing_if = "Option::is_none")]
     pub meta_rev_id: Option<String>,
+    /// Whether the change contains conflicts. + If true, some of the file contents of the change contain git conflict markers to indicate the conflicts. + Only set if this change info is returned in response to a request that creates a new change or patch set and conflicts are allowed.
     #[serde(rename = "contains_git_conflicts", skip_serializing_if = "Option::is_none")]
     pub contains_git_conflicts: Option<bool>,
+    /// The change number. (The underscore is just a relict of a prior attempt to deprecate the change number.)
     #[serde(rename = "_number", skip_serializing_if = "Option::is_none")]
     pub _number: Option<i32>,
+    /// The virtual id number is globally unique. For local changes, it is equal to the _number attribute. For imported changes, the original _number is processed through a function designed to prevent conflicts with local change numbers.
     #[serde(rename = "virtual_id_number", skip_serializing_if = "Option::is_none")]
     pub virtual_id_number: Option<i32>,
+    /// The owner of the change as an AccountInfo entity.
     #[serde(rename = "owner", skip_serializing_if = "Option::is_none")]
     pub owner: Option<Box<models::AccountInfo>>,
+    /// Actions the caller might be able to perform on this revision. The information is a map of view name to ActionInfo entities.
     #[serde(rename = "actions", skip_serializing_if = "Option::is_none")]
     pub actions: Option<std::collections::HashMap<String, models::ActionInfo>>,
+    /// The labels of the change as a map that maps the label names to LabelInfo entries. + Only set if labels or detailed labels are requested.
     #[serde(rename = "labels", skip_serializing_if = "Option::is_none")]
     pub labels: Option<std::collections::HashMap<String, models::LabelInfo>>,
+    /// A map of the permitted labels that maps a label name to the list of values that the current user can vote on. + Only set if detailed labels are requested.
     #[serde(rename = "permitted_labels", skip_serializing_if = "Option::is_none")]
     pub permitted_labels: Option<std::collections::HashMap<String, Vec<String>>>,
+    /// A map of the removable labels that maps a label name to the map of values and reviewers ( AccountInfo entities) that are allowed to be removed from the change. + Only set if labels or detailed labels are requested.
     #[serde(rename = "removable_labels", skip_serializing_if = "Option::is_none")]
     pub removable_labels: Option<std::collections::HashMap<String, std::collections::HashMap<String, Vec<models::AccountInfo>>>>,
+    /// The reviewers that can be removed by the calling user as a list of AccountInfo entities. + Only set if labels or detailed labels are requested.
     #[serde(rename = "removable_reviewers", skip_serializing_if = "Option::is_none")]
     pub removable_reviewers: Option<Vec<models::AccountInfo>>,
+    /// The reviewers as a map that maps a reviewer state to a list of AccountInfo entities. Possible reviewer states are REVIEWER, CC. + REVIEWER: Users with at least one non-zero vote on the change. + CC: Users that were added to the change, but have not voted.
     #[serde(rename = "reviewers", skip_serializing_if = "Option::is_none")]
     pub reviewers: Option<std::collections::HashMap<String, Vec<models::AccountInfo>>>,
+    /// Updates to reviewers that have been made while the change was in the WIP state. Only present on WIP changes and only if there are pending reviewer updates to report. These are reviewers who have not yet been notified about being added to or removed from the change.
     #[serde(rename = "pending_reviewers", skip_serializing_if = "Option::is_none")]
     pub pending_reviewers: Option<std::collections::HashMap<String, Vec<models::AccountInfo>>>,
+    /// Updates to reviewers set for the change as ReviewerUpdateInfo entities. Only set if reviewer updates are requested.
     #[serde(rename = "reviewer_updates", skip_serializing_if = "Option::is_none")]
     pub reviewer_updates: Option<Vec<models::ReviewerUpdateInfo>>,
+    /// Messages associated with the change as a list of ChangeMessageInfo entities. + Only set if messages are requested.
     #[serde(rename = "messages", skip_serializing_if = "Option::is_none")]
     pub messages: Option<Vec<models::ChangeMessageInfo>>,
+    /// The number of the current patch set of this change. +
     #[serde(rename = "current_revision_number", skip_serializing_if = "Option::is_none")]
     pub current_revision_number: Option<i32>,
+    /// The commit ID of the current patch set of this change. + Only set if the current revision is requested or if all revisions are requested.
     #[serde(rename = "current_revision", skip_serializing_if = "Option::is_none")]
     pub current_revision: Option<String>,
+    /// All patch sets of this change as a map that maps the commit ID of the patch set to a RevisionInfo entity. + Only set if the current revision is requested (in which case it will only contain a key for the current revision) or if all revisions are requested.
     #[serde(rename = "revisions", skip_serializing_if = "Option::is_none")]
     pub revisions: Option<std::collections::HashMap<String, models::RevisionInfo>>,
+    /// Whether the query would deliver more results if not limited. + Only set on the last change that is returned.
     #[serde(rename = "_more_changes", skip_serializing_if = "Option::is_none")]
     pub _more_changes: Option<bool>,
+    /// A list of ProblemInfo entities describing potential problems with this change. Only set if CHECK is set.
     #[serde(rename = "problems", skip_serializing_if = "Option::is_none")]
     pub problems: Option<Vec<models::ProblemInfo>>,
     #[serde(rename = "plugins", skip_serializing_if = "Option::is_none")]
     pub plugins: Option<Vec<models::PluginDefinedInfo>>,
+    /// A list of TrackingIdInfo entities describing references to external tracking systems. Only set if tracking ids are requested.
     #[serde(rename = "tracking_ids", skip_serializing_if = "Option::is_none")]
     pub tracking_ids: Option<Vec<models::TrackingIdInfo>>,
+    /// List of the requirements to be met before this change can be submitted. This field is deprecated in favour of submit_requirements. Only set if SUBMIT_REQUIREMENTS is requested.
     #[serde(rename = "requirements", skip_serializing_if = "Option::is_none")]
     pub requirements: Option<Vec<models::LegacySubmitRequirementInfo>>,
+    /// List of the SubmitRecordInfo containing the submit records for the change at the latest patchset. This field is deprecated in favour of submit_requirements. Only set if SUBMIT_REQUIREMENTS is requested.
     #[serde(rename = "submit_records", skip_serializing_if = "Option::is_none")]
     pub submit_records: Option<Vec<models::SubmitRecordInfo>>,
+    /// List of the SubmitRequirementResultInfo containing the evaluated submit requirements for the change. Only set if SUBMIT_REQUIREMENTS is requested.
     #[serde(rename = "submit_requirements", skip_serializing_if = "Option::is_none")]
     pub submit_requirements: Option<Vec<models::SubmitRequirementResultInfo>>,
 }

@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DeletedDraftCommentInfo {
+    /// ChangeInfo entity describing the change on which one or more comments was deleted. Populated with no change list options.
     #[serde(rename = "change", skip_serializing_if = "Option::is_none")]
     pub change: Option<Box<models::ChangeInfo>>,
+    /// List of CommentInfo entities for each comment that was deleted.
     #[serde(rename = "deleted", skip_serializing_if = "Option::is_none")]
     pub deleted: Option<Vec<models::CommentInfo>>,
 }

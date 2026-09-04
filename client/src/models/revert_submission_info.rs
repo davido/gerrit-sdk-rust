@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RevertSubmissionInfo {
+    /// A list of ChangeInfo that describes the revert changes. Each entity in that list is a revert change that was created in that revert submission.
     #[serde(rename = "revert_changes", skip_serializing_if = "Option::is_none")]
     pub revert_changes: Option<Vec<models::ChangeInfo>>,
 }

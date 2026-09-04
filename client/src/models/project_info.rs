@@ -13,22 +13,31 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProjectInfo {
+    /// The URL encoded project name.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The name of the project.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The name of the parent project. + ?-<n> if the parent project is not visible (<n> is a number which is increased for each non-visible project).
     #[serde(rename = "parent", skip_serializing_if = "Option::is_none")]
     pub parent: Option<String>,
+    /// The description of the project.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// ACTIVE, READ_ONLY or HIDDEN.
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::ProjectState>,
+    /// Map of branch names to HEAD revisions.
     #[serde(rename = "branches", skip_serializing_if = "Option::is_none")]
     pub branches: Option<std::collections::HashMap<String, String>>,
+    /// Links to the project in external sites as a list of WebLinkInfo entries.
     #[serde(rename = "web_links", skip_serializing_if = "Option::is_none")]
     pub web_links: Option<Vec<models::WebLinkInfo>>,
+    /// Map of label names to LabelTypeInfo entries. This field is filled for Create Project and Get Project calls.
     #[serde(rename = "labels", skip_serializing_if = "Option::is_none")]
     pub labels: Option<std::collections::HashMap<String, models::LabelTypeInfo>>,
+    /// Whether the query would deliver more results if not limited. + Only set on the last project that is returned.
     #[serde(rename = "_more_projects", skip_serializing_if = "Option::is_none")]
     pub _more_projects: Option<bool>,
 }

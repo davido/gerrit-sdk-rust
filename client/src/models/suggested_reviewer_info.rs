@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SuggestedReviewerInfo {
+    /// An AccountInfo entity, if the suggestion is an account.
     #[serde(rename = "account", skip_serializing_if = "Option::is_none")]
     pub account: Option<Box<models::AccountInfo>>,
+    /// A GroupBaseInfo entity, if the suggestion is a group.
     #[serde(rename = "group", skip_serializing_if = "Option::is_none")]
     pub group: Option<Box<models::GroupBaseInfo>>,
+    /// The total number of accounts in the suggestion. This is 1 if account is present. If group is present, the total number of accounts that are members of the group is returned (this count includes members of nested groups).
     #[serde(rename = "count", skip_serializing_if = "Option::is_none")]
     pub count: Option<i32>,
+    /// True if group is present and count is above the threshold where the confirmed flag must be passed to add the group as a reviewer.
     #[serde(rename = "confirm", skip_serializing_if = "Option::is_none")]
     pub confirm: Option<bool>,
 }

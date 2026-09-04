@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TrackingIdInfo {
+    /// The name of the external tracking system.
     #[serde(rename = "system", skip_serializing_if = "Option::is_none")]
     pub system: Option<String>,
+    /// The tracking id.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
 }

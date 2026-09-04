@@ -13,40 +13,58 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ChangeInput {
+    /// The name of the project.
     #[serde(rename = "project", skip_serializing_if = "Option::is_none")]
     pub project: Option<String>,
+    /// The name of the target branch. + The refs/heads/ prefix is omitted.
     #[serde(rename = "branch", skip_serializing_if = "Option::is_none")]
     pub branch: Option<String>,
+    /// The commit message of the change. Comment lines (beginning with #) will be removed. If the commit message contains a Change-Id (as a \"Change-Id: I...\" footer) that Change-Id will be used for the newly created changed.
     #[serde(rename = "subject", skip_serializing_if = "Option::is_none")]
     pub subject: Option<String>,
+    /// The topic to which this change belongs. Topic can't contain quotation marks.
     #[serde(rename = "topic", skip_serializing_if = "Option::is_none")]
     pub topic: Option<String>,
+    /// The status of the change (only NEW accepted here).
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::ChangeStatus>,
+    /// Whether the new change should be marked as private.
     #[serde(rename = "is_private", skip_serializing_if = "Option::is_none")]
     pub is_private: Option<bool>,
+    /// Whether the new change should be set to work in progress.
     #[serde(rename = "work_in_progress", skip_serializing_if = "Option::is_none")]
     pub work_in_progress: Option<bool>,
+    /// A \\{change-id\\} that identifies the base change for a create change operation. + Mutually exclusive with base_commit. + If neither base_commit nor base_change are set, the target branch tip will be used as the parent commit.
     #[serde(rename = "base_change", skip_serializing_if = "Option::is_none")]
     pub base_change: Option<String>,
+    /// A 40-digit hex SHA-1 of the commit which will be the parent commit of the newly created change. If set, it must be a merged commit on the destination branch. + Mutually exclusive with base_change.
     #[serde(rename = "base_commit", skip_serializing_if = "Option::is_none")]
     pub base_commit: Option<String>,
+    /// Allow creating a new branch when set to true. Using this option is only possible for non-merge commits (if the merge field is not set).
     #[serde(rename = "new_branch", skip_serializing_if = "Option::is_none")]
     pub new_branch: Option<bool>,
+    /// Map with key-value pairs that are forwarded as options to the commit validation listeners (e.g. can be used to skip certain validations). Which validation options are supported depends on the installed commit validation listeners.
     #[serde(rename = "validation_options", skip_serializing_if = "Option::is_none")]
     pub validation_options: Option<std::collections::HashMap<String, String>>,
+    /// Custom keyed values as a map from custom keys to values.
     #[serde(rename = "custom_keyed_values", skip_serializing_if = "Option::is_none")]
     pub custom_keyed_values: Option<std::collections::HashMap<String, String>>,
+    /// The detail of a merge commit as a MergeInput entity. If set, the target branch (see branch field) must exist (it is not possible to create it automatically by setting the new_branch field to true.
     #[serde(rename = "merge", skip_serializing_if = "Option::is_none")]
     pub merge: Option<Box<models::MergeInput>>,
+    /// The detail of a patch to be applied as an ApplyPatchInput entity.
     #[serde(rename = "patch", skip_serializing_if = "Option::is_none")]
     pub patch: Option<Box<models::ApplyPatchInput>>,
+    /// The author of the commit to create. Must be an AccountInput entity with at least the name and email fields set. The caller needs \"Forge Author\" permission when using this field. This field does not affect the owner of the change, which will continue to use the identity of the caller.
     #[serde(rename = "author", skip_serializing_if = "Option::is_none")]
     pub author: Option<Box<models::AccountInput>>,
+    /// List of query options to format the response.
     #[serde(rename = "response_format_options", skip_serializing_if = "Option::is_none")]
     pub response_format_options: Option<Vec<models::ListChangesOption>>,
+    /// Notify handling that defines to whom email notifications should be sent after the change is created. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is OWNER for WIP changes and ALL otherwise.
     #[serde(rename = "notify", skip_serializing_if = "Option::is_none")]
     pub notify: Option<models::NotifyHandling>,
+    /// Additional information about whom to notify about the change creation as a map of recipient type to NotifyInfo entity.
     #[serde(rename = "notify_details", skip_serializing_if = "Option::is_none")]
     pub notify_details: Option<std::collections::HashMap<String, models::NotifyInfo>>,
 }

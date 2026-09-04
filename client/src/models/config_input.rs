@@ -13,22 +13,29 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ConfigInput {
+    /// The new description of the project. + If not set, the description is removed.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// Whether authors must complete a contributor agreement on the site before pushing any commits or changes to this project. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "use_contributor_agreements", skip_serializing_if = "Option::is_none")]
     pub use_contributor_agreements: Option<models::InheritableBoolean>,
+    /// Whether Gerrit will try to perform a 3-way merge of text file content when a file has been modified by both the destination branch and the change being submitted. This option only takes effect if submit type is not FAST_FORWARD_ONLY. + Can be TRUE, FALSE or INHERIT.
     #[serde(rename = "use_content_merge", skip_serializing_if = "Option::is_none")]
     pub use_content_merge: Option<models::InheritableBoolean>,
+    /// Whether each change must contain a Signed-off-by line from either the author or the uploader in the commit message. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "use_signed_off_by", skip_serializing_if = "Option::is_none")]
     pub use_signed_off_by: Option<models::InheritableBoolean>,
+    /// Whether a new change will be created for every commit not in target branch. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "create_new_change_for_all_not_in_target", skip_serializing_if = "Option::is_none")]
     pub create_new_change_for_all_not_in_target: Option<models::InheritableBoolean>,
+    /// Whether a valid Change-Id footer in any commit uploaded for review is required. This does not apply to commits pushed directly to a branch or tag. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated. This property is deprecated and will be removed in a future release.
     #[serde(rename = "require_change_id", skip_serializing_if = "Option::is_none")]
     pub require_change_id: Option<models::InheritableBoolean>,
     #[serde(rename = "enable_signed_push", skip_serializing_if = "Option::is_none")]
     pub enable_signed_push: Option<models::InheritableBoolean>,
     #[serde(rename = "require_signed_push", skip_serializing_if = "Option::is_none")]
     pub require_signed_push: Option<models::InheritableBoolean>,
+    /// Whether a check for implicit merges will be performed when changes are pushed for review or submitted. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "reject_implicit_merges", skip_serializing_if = "Option::is_none")]
     pub reject_implicit_merges: Option<models::InheritableBoolean>,
     #[serde(rename = "private_by_default", skip_serializing_if = "Option::is_none")]
@@ -39,16 +46,21 @@ pub struct ConfigInput {
     pub enable_reviewer_by_email: Option<models::InheritableBoolean>,
     #[serde(rename = "match_author_to_committer_date", skip_serializing_if = "Option::is_none")]
     pub match_author_to_committer_date: Option<models::InheritableBoolean>,
+    /// Whether empty commits should be rejected when a change is merged. Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.
     #[serde(rename = "reject_empty_commit", skip_serializing_if = "Option::is_none")]
     pub reject_empty_commit: Option<models::InheritableBoolean>,
     #[serde(rename = "skip_adding_author_and_committer_as_reviewers", skip_serializing_if = "Option::is_none")]
     pub skip_adding_author_and_committer_as_reviewers: Option<models::InheritableBoolean>,
+    /// The max object size limit of this project as a MaxObjectSizeLimitInfo entity. + If set to 0, the max object size limit is removed. + If not set, this setting is not updated.
     #[serde(rename = "max_object_size_limit", skip_serializing_if = "Option::is_none")]
     pub max_object_size_limit: Option<String>,
+    /// The default submit type of the project, can be MERGE_IF_NECESSARY, FAST_FORWARD_ONLY, REBASE_IF_NECESSARY, REBASE_ALWAYS, MERGE_ALWAYS or CHERRY_PICK. + If not set, the submit type is not updated.
     #[serde(rename = "submit_type", skip_serializing_if = "Option::is_none")]
     pub submit_type: Option<models::SubmitType>,
+    /// The state of the project, can be ACTIVE, READ_ONLY or HIDDEN. + Not set if the project state is ACTIVE. + If not set, the project state is not updated.
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::ProjectState>,
+    /// Plugin configuration values as map which maps the plugin name to a map of parameter names to values.
     #[serde(rename = "plugin_config_values", skip_serializing_if = "Option::is_none")]
     pub plugin_config_values: Option<std::collections::HashMap<String, std::collections::HashMap<String, models::ConfigValue>>>,
     #[serde(rename = "comment_links", skip_serializing_if = "Option::is_none")]

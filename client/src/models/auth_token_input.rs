@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthTokenInput {
+    /// Must be the same as the id used in the URL.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The new token. Only Gerrit administrators may set the token directly.
     #[serde(rename = "token", skip_serializing_if = "Option::is_none")]
     pub token: Option<String>,
+    /// Lifetime of the token. After the given duration the token will be invalid.
     #[serde(rename = "lifetime", skip_serializing_if = "Option::is_none")]
     pub lifetime: Option<String>,
 }

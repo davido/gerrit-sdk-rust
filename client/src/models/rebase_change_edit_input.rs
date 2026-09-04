@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RebaseChangeEditInput {
+    /// If true, the rebase also succeeds if there are conflicts. + If there are conflicts the file contents of the rebased patch set contain git conflict markers to indicate the conflicts.
     #[serde(rename = "allow_conflicts", skip_serializing_if = "Option::is_none")]
     pub allow_conflicts: Option<bool>,
 }

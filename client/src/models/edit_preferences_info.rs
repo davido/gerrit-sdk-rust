@@ -13,32 +13,46 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EditPreferencesInfo {
+    /// Number of spaces that should be used to display one tab.
     #[serde(rename = "tab_size", skip_serializing_if = "Option::is_none")]
     pub tab_size: Option<i32>,
+    /// Number of characters that should be displayed per line.
     #[serde(rename = "line_length", skip_serializing_if = "Option::is_none")]
     pub line_length: Option<i32>,
+    /// Number of spaces that should be used for auto-indent.
     #[serde(rename = "indent_unit", skip_serializing_if = "Option::is_none")]
     pub indent_unit: Option<i32>,
+    /// Half-period in milliseconds used for cursor blinking. Setting it to 0 disables cursor blinking.
     #[serde(rename = "cursor_blink_rate", skip_serializing_if = "Option::is_none")]
     pub cursor_blink_rate: Option<i32>,
+    /// If true the top menu header and site header is hidden.
     #[serde(rename = "hide_top_menu", skip_serializing_if = "Option::is_none")]
     pub hide_top_menu: Option<bool>,
+    /// Whether tabs should be shown.
     #[serde(rename = "show_tabs", skip_serializing_if = "Option::is_none")]
     pub show_tabs: Option<bool>,
+    /// Whether whitespace errors should be shown.
     #[serde(rename = "show_whitespace_errors", skip_serializing_if = "Option::is_none")]
     pub show_whitespace_errors: Option<bool>,
+    /// Whether syntax highlighting should be enabled.
     #[serde(rename = "syntax_highlighting", skip_serializing_if = "Option::is_none")]
     pub syntax_highlighting: Option<bool>,
+    /// Whether line numbers should be hidden.
     #[serde(rename = "hide_line_numbers", skip_serializing_if = "Option::is_none")]
     pub hide_line_numbers: Option<bool>,
+    /// Whether matching brackets should be highlighted.
     #[serde(rename = "match_brackets", skip_serializing_if = "Option::is_none")]
     pub match_brackets: Option<bool>,
+    /// Whether to enable line wrapping or not.
     #[serde(rename = "line_wrapping", skip_serializing_if = "Option::is_none")]
     pub line_wrapping: Option<bool>,
+    /// Whether to indent with tabs or not.
     #[serde(rename = "indent_with_tabs", skip_serializing_if = "Option::is_none")]
     pub indent_with_tabs: Option<bool>,
+    /// Whether brackets and quotes should be auto-closed during typing.
     #[serde(rename = "auto_close_brackets", skip_serializing_if = "Option::is_none")]
     pub auto_close_brackets: Option<bool>,
+    /// Whether to show the inline edit base version or not.
     #[serde(rename = "show_base", skip_serializing_if = "Option::is_none")]
     pub show_base: Option<bool>,
 }

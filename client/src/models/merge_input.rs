@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MergeInput {
+    /// The source to merge from, e.g. a complete or abbreviated commit SHA-1, a complete reference name, a short reference name under refs/heads, refs/tags, or refs/remotes namespace, etc.
     #[serde(rename = "source", skip_serializing_if = "Option::is_none")]
     pub source: Option<String>,
+    /// A branch from which source is reachable. If specified, source is checked for visibility and reachability against only this branch. This speeds up the operation, especially for large repos with many branches.
     #[serde(rename = "source_branch", skip_serializing_if = "Option::is_none")]
     pub source_branch: Option<String>,
+    /// The strategy of the merge, can be recursive, resolve, simple-two-way-in-core, ours or theirs, default will use project settings.
     #[serde(rename = "strategy", skip_serializing_if = "Option::is_none")]
     pub strategy: Option<String>,
+    /// If true, creating the merge succeeds also if there are conflicts. + If there are conflicts the file contents of the created change contain git conflict markers to indicate the conflicts.
     #[serde(rename = "allow_conflicts", skip_serializing_if = "Option::is_none")]
     pub allow_conflicts: Option<bool>,
 }

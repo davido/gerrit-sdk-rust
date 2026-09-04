@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BlameInfo {
+    /// The author of the commit.
     #[serde(rename = "author", skip_serializing_if = "Option::is_none")]
     pub author: Option<String>,
+    /// The id of the commit.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// Commit time.
     #[serde(rename = "time", skip_serializing_if = "Option::is_none")]
     pub time: Option<i32>,
+    /// The commit message.
     #[serde(rename = "commit_msg", skip_serializing_if = "Option::is_none")]
     pub commit_msg: Option<String>,
+    /// The blame row coordinates as RangeInfo entities.
     #[serde(rename = "ranges", skip_serializing_if = "Option::is_none")]
     pub ranges: Option<Vec<models::RangeInfo>>,
 }

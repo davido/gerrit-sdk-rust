@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EvaluateChangeQueryExpressionResultInfo {
+    /// Whether the change matches the change query expression.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<bool>,
+    /// List of passing leaf atoms (atoms that match the change).
     #[serde(rename = "passing_atoms", skip_serializing_if = "Option::is_none")]
     pub passing_atoms: Option<Vec<String>>,
+    /// List of failing leaf atoms (atoms that do not match the change).
     #[serde(rename = "failing_atoms", skip_serializing_if = "Option::is_none")]
     pub failing_atoms: Option<Vec<String>>,
     #[serde(rename = "atom_explanations", skip_serializing_if = "Option::is_none")]

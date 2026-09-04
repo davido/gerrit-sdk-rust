@@ -13,22 +13,31 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DiffInfo {
+    /// Meta information about the file on side A as a DiffFileMetaInfo entity.
     #[serde(rename = "meta_a", skip_serializing_if = "Option::is_none")]
     pub meta_a: Option<Box<models::FileMeta>>,
+    /// Meta information about the file on side B as a DiffFileMetaInfo entity.
     #[serde(rename = "meta_b", skip_serializing_if = "Option::is_none")]
     pub meta_b: Option<Box<models::FileMeta>>,
+    /// Intraline status (OK, ERROR, TIMEOUT).
     #[serde(rename = "intraline_status", skip_serializing_if = "Option::is_none")]
     pub intraline_status: Option<models::IntraLineStatus>,
+    /// The type of change (ADDED, MODIFIED, DELETED, RENAMED COPIED, REWRITE).
     #[serde(rename = "change_type", skip_serializing_if = "Option::is_none")]
     pub change_type: Option<models::ChangeType>,
+    /// A list of strings representing the patch set diff header.
     #[serde(rename = "diff_header", skip_serializing_if = "Option::is_none")]
     pub diff_header: Option<Vec<String>>,
+    /// The content differences in the file as a list of DiffContent entities.
     #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
     pub content: Option<Vec<models::ContentEntry>>,
+    /// Links to the file diff in external sites as a list of DiffWebLinkInfo entries.
     #[serde(rename = "web_links", skip_serializing_if = "Option::is_none")]
     pub web_links: Option<Vec<models::DiffWebLinkInfo>>,
+    /// Links to edit the file in external sites as a list of WebLinkInfo entries.
     #[serde(rename = "edit_web_links", skip_serializing_if = "Option::is_none")]
     pub edit_web_links: Option<Vec<models::WebLinkInfo>>,
+    /// Whether the file is binary.
     #[serde(rename = "binary", skip_serializing_if = "Option::is_none")]
     pub binary: Option<bool>,
 }

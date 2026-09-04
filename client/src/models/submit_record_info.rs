@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SubmitRecordInfo {
+    /// The name of the submit rule that created this submit record. The submit rule is specified in the form of \"$plugin~$rule\" where $plugin is the plugin name and $rule is the name of the class that implemented the submit rule.
     #[serde(rename = "rule_name", skip_serializing_if = "Option::is_none")]
     pub rule_name: Option<String>,
+    /// OK, the change can be submitted. + NOT_READY, additional labels are required before submit. + CLOSED, closed changes cannot be submitted. + FORCED, the change was submitted bypassing the submit rule. + RULE_ERROR, rule code failed with an error.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::SubmitRecordInfoStatus>,
+    /// A list of labels, each containing the following fields. + * label: the label name. + * status: the label status: {OK, REJECT, MAY, NEED, IMPOSSIBLE}. + * appliedBy: the AccountInfo that applied the vote to the label.
     #[serde(rename = "labels", skip_serializing_if = "Option::is_none")]
     pub labels: Option<Vec<models::Label>>,
+    /// List of the requirements to be met before this change can be submitted.
     #[serde(rename = "requirements", skip_serializing_if = "Option::is_none")]
     pub requirements: Option<Vec<models::LegacySubmitRequirementInfo>>,
+    /// When status is RULE_ERROR this message provides some text describing the failure of the rule predicate.
     #[serde(rename = "error_message", skip_serializing_if = "Option::is_none")]
     pub error_message: Option<String>,
 }

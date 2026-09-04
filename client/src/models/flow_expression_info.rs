@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FlowExpressionInfo {
+    /// The condition which must be satisfied for the action to be triggered. Can contain multiple conditions separated by comma. The syntax of the condition depends on the flow service implementation.
     #[serde(rename = "condition", skip_serializing_if = "Option::is_none")]
     pub condition: Option<String>,
+    /// The action that should be triggered when the condition is satisfied as a FlowActionInfo entity.
     #[serde(rename = "action", skip_serializing_if = "Option::is_none")]
     pub action: Option<Box<models::FlowActionInfo>>,
 }

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FixSuggestionInfo {
+    /// The UUID of the suggested fix. It will be generated automatically and hence will be ignored if it's set for input objects.
     #[serde(rename = "fix_id", skip_serializing_if = "Option::is_none")]
     pub fix_id: Option<String>,
+    /// A description of the suggested fix.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// A list of FixReplacementInfo entities indicating how the content of one or several files should be modified. Within a file, they should refer to non-overlapping regions.
     #[serde(rename = "replacements", skip_serializing_if = "Option::is_none")]
     pub replacements: Option<Vec<models::FixReplacementInfo>>,
 }

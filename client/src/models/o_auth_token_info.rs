@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OAuthTokenInfo {
+    /// The owner of the OAuth access token.
     #[serde(rename = "username", skip_serializing_if = "Option::is_none")]
     pub username: Option<String>,
+    /// The host of the Gerrit instance.
     #[serde(rename = "resource_host", skip_serializing_if = "Option::is_none")]
     pub resource_host: Option<String>,
+    /// The actual token value.
     #[serde(rename = "access_token", skip_serializing_if = "Option::is_none")]
     pub access_token: Option<String>,
+    /// The identifier of the OAuth provider in the form plugin-name:provider-name.
     #[serde(rename = "provider_id", skip_serializing_if = "Option::is_none")]
     pub provider_id: Option<String>,
+    /// Time of expiration of this token in milliseconds.
     #[serde(rename = "expires_at", skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<String>,
+    /// The type of the OAuth access token, always bearer.
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<String>,
 }

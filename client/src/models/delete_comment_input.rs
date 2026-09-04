@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DeleteCommentInput {
+    /// The reason why the comment should be deleted. + If set, the comment's message will be replaced with \"Comment removed by: name; Reason: reason\", or just \"Comment removed by: name.\" if not set.
     #[serde(rename = "reason", skip_serializing_if = "Option::is_none")]
     pub reason: Option<String>,
 }

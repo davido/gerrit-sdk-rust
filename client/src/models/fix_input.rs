@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FixInput {
+    /// If true, delete patch sets from the database if they refer to missing commit options.
     #[serde(rename = "delete_patch_set_if_commit_missing", skip_serializing_if = "Option::is_none")]
     pub delete_patch_set_if_commit_missing: Option<bool>,
+    /// If set, check that the change is merged into the destination branch as this exact SHA-1. If not, insert a new patch set referring to this commit.
     #[serde(rename = "expect_merged_as", skip_serializing_if = "Option::is_none")]
     pub expect_merged_as: Option<String>,
 }

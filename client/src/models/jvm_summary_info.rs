@@ -13,24 +13,34 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct JvmSummaryInfo {
+    /// The vendor of the virtual machine.
     #[serde(rename = "vm_vendor", skip_serializing_if = "Option::is_none")]
     pub vm_vendor: Option<String>,
+    /// The name of the virtual machine.
     #[serde(rename = "vm_name", skip_serializing_if = "Option::is_none")]
     pub vm_name: Option<String>,
+    /// The version of the virtual machine.
     #[serde(rename = "vm_version", skip_serializing_if = "Option::is_none")]
     pub vm_version: Option<String>,
+    /// The name of the operating system.
     #[serde(rename = "os_name", skip_serializing_if = "Option::is_none")]
     pub os_name: Option<String>,
+    /// The version of the operating system.
     #[serde(rename = "os_version", skip_serializing_if = "Option::is_none")]
     pub os_version: Option<String>,
+    /// The architecture of the operating system.
     #[serde(rename = "os_arch", skip_serializing_if = "Option::is_none")]
     pub os_arch: Option<String>,
+    /// The user that is running Gerrit.
     #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
     pub user: Option<String>,
+    /// The host on which Gerrit is running.
     #[serde(rename = "host", skip_serializing_if = "Option::is_none")]
     pub host: Option<String>,
+    /// The current working directory.
     #[serde(rename = "current_working_directory", skip_serializing_if = "Option::is_none")]
     pub current_working_directory: Option<String>,
+    /// The path to the review site.
     #[serde(rename = "site", skip_serializing_if = "Option::is_none")]
     pub site: Option<String>,
 }

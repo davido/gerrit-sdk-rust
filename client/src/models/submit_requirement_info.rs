@@ -13,18 +13,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SubmitRequirementInfo {
+    /// The submit requirement name.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// Description of the submit requirement.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// The name of the project in which this submit requirement is defined. Not set for globally defined submit requirements.
     #[serde(rename = "project_name", skip_serializing_if = "Option::is_none")]
     pub project_name: Option<String>,
+    /// Query expression that can be evaluated on any change. If evaluated to true on a change, the submit requirement is then applicable for this change. If not specified, the submit requirement is applicable for all changes.
     #[serde(rename = "applicability_expression", skip_serializing_if = "Option::is_none")]
     pub applicability_expression: Option<String>,
+    /// Query expression that can be evaluated on any change. If evaluated to true on a change, the submit requirement is fulfilled and not blocking change submission.
     #[serde(rename = "submittability_expression", skip_serializing_if = "Option::is_none")]
     pub submittability_expression: Option<String>,
+    /// Query expression that can be evaluated on any change. If evaluated to true on a change, the submit requirement is overridden and not blocking change submission.
     #[serde(rename = "override_expression", skip_serializing_if = "Option::is_none")]
     pub override_expression: Option<String>,
+    /// Whether this submit requirement can be overridden in child projects.
     #[serde(rename = "allow_override_in_child_projects", skip_serializing_if = "Option::is_none")]
     pub allow_override_in_child_projects: Option<bool>,
 }

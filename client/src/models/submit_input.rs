@@ -15,10 +15,13 @@ use serde::{Deserialize, Serialize};
 pub struct SubmitInput {
     #[serde(rename = "wait_for_merge", skip_serializing_if = "Option::is_none")]
     pub wait_for_merge: Option<bool>,
+    /// If set, submit the change on behalf of the given user. The value may take any format accepted by the accounts REST API. Using this option requires Submit (On Behalf Of) permission on the branch.
     #[serde(rename = "on_behalf_of", skip_serializing_if = "Option::is_none")]
     pub on_behalf_of: Option<String>,
+    /// Notify handling that defines to whom email notifications should be sent after the change is submitted. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL. + Ignored if a post approval diff is present (i.e.
     #[serde(rename = "notify", skip_serializing_if = "Option::is_none")]
     pub notify: Option<models::NotifyHandling>,
+    /// Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.
     #[serde(rename = "notify_details", skip_serializing_if = "Option::is_none")]
     pub notify_details: Option<std::collections::HashMap<String, models::NotifyInfo>>,
 }

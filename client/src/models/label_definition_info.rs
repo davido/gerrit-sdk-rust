@@ -13,26 +13,37 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LabelDefinitionInfo {
+    /// The name of the label.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The description of the label.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// The name of the project in which this label is defined. Not set for globally defined labels.
     #[serde(rename = "project_name", skip_serializing_if = "Option::is_none")]
     pub project_name: Option<String>,
+    /// The function of the label (can be MaxWithBlock, AnyWithBlock, MaxNoBlock, NoBlock, NoOp and PatchSetLock.
     #[serde(rename = "function", skip_serializing_if = "Option::is_none")]
     pub function: Option<String>,
+    /// The values of the label as a map of label value to value description. The label values are formatted strings, e.g. \"+1\" instead of \"1\", \" 0\" instead of \"0\".
     #[serde(rename = "values", skip_serializing_if = "Option::is_none")]
     pub values: Option<std::collections::HashMap<String, String>>,
+    /// The default value of the label (as integer).
     #[serde(rename = "default_value", skip_serializing_if = "Option::is_none")]
     pub default_value: Option<i32>,
+    /// A list of branches for which the label applies. A branch can be a ref, a ref pattern or a regular expression. If not set, the label applies for all branches.
     #[serde(rename = "branches", skip_serializing_if = "Option::is_none")]
     pub branches: Option<Vec<String>>,
+    /// Whether this label can be overridden by child projects.
     #[serde(rename = "can_override", skip_serializing_if = "Option::is_none")]
     pub can_override: Option<bool>,
+    /// See copyCondition.
     #[serde(rename = "copy_condition", skip_serializing_if = "Option::is_none")]
     pub copy_condition: Option<String>,
+    /// Whether allowPostSubmit is set on the label.
     #[serde(rename = "allow_post_submit", skip_serializing_if = "Option::is_none")]
     pub allow_post_submit: Option<bool>,
+    /// Whether ignoreSelfApproval is set on the label.
     #[serde(rename = "ignore_self_approval", skip_serializing_if = "Option::is_none")]
     pub ignore_self_approval: Option<bool>,
 }

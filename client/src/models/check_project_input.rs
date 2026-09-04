@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CheckProjectInput {
+    /// Parameters for the AutoCloseableChangesCheck as AutoCloseableChangesCheckInput entity.
     #[serde(rename = "auto_closeable_changes_check", skip_serializing_if = "Option::is_none")]
     pub auto_closeable_changes_check: Option<Box<models::AutoCloseableChangesCheckInput>>,
 }

@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MigrateLabelsReviewInfo {
+    /// The status of the migration. Takes one of the following values: MIGRATED, HAS_PROLOG, PREVIOUSLY_MIGRATED, NO_CHANGE
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::MigrateLabelFunctionsToSubmitRequirementStatus>,
+    /// The change created. It is a ChangeInfo entity and is set only when the status value is MIGRATED.
     #[serde(rename = "change", skip_serializing_if = "Option::is_none")]
     pub change: Option<Box<models::ChangeInfo>>,
 }

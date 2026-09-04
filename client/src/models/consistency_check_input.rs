@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ConsistencyCheckInput {
+    /// Input for the account consistency check as CheckAccountsInput entity.
     #[serde(rename = "check_accounts", skip_serializing_if = "Option::is_none")]
     pub check_accounts: Option<serde_json::Value>,
+    /// Input for the account external ID consistency check as CheckAccountExternalIdsInput entity.
     #[serde(rename = "check_account_external_ids", skip_serializing_if = "Option::is_none")]
     pub check_account_external_ids: Option<serde_json::Value>,
+    /// Input for the group consistency check as CheckGroupsInput entity.
     #[serde(rename = "check_groups", skip_serializing_if = "Option::is_none")]
     pub check_groups: Option<serde_json::Value>,
 }

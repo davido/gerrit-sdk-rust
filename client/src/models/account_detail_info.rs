@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountDetailInfo {
+    /// The timestamp of when the account was registered.
     #[serde(rename = "registered_on", skip_serializing_if = "Option::is_none")]
     pub registered_on: Option<String>,
     #[serde(rename = "_account_id", skip_serializing_if = "Option::is_none")]

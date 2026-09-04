@@ -49,7 +49,7 @@ pub enum DeleteGroupsGroupIdMembersMemberIdError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGroupsError {
-    DefaultResponse(models::GetGroupsDefaultResponse),
+    DefaultResponse(serde_json::Value),
     UnknownValue(serde_json::Value),
 }
 
@@ -403,7 +403,7 @@ pub fn delete_groups_group_id_members_member_id(configuration: &configuration::C
 }
 
 /// Lists the internal groups visible to the caller.
-pub fn get_groups(configuration: &configuration::Configuration, o: Option<&str>, group: Option<Vec<String>>, limit: Option<i32>, r#match: Option<&str>, o2: Option<Vec<String>>, owned: Option<bool>, owned_by: Option<&str>, project: Option<Vec<String>>, query: Option<&str>, regex: Option<&str>, start: Option<i32>, suggest: Option<&str>, user: Option<&str>, visible_to_all: Option<bool>) -> Result<models::GetGroupsDefaultResponse, Error<GetGroupsError>> {
+pub fn get_groups(configuration: &configuration::Configuration, o: Option<&str>, group: Option<Vec<String>>, limit: Option<i32>, r#match: Option<&str>, o2: Option<Vec<String>>, owned: Option<bool>, owned_by: Option<&str>, project: Option<Vec<String>>, query: Option<&str>, regex: Option<&str>, start: Option<i32>, suggest: Option<&str>, user: Option<&str>, visible_to_all: Option<bool>) -> Result<serde_json::Value, Error<GetGroupsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_o = o;
     let p_query_group = group;
@@ -497,8 +497,8 @@ pub fn get_groups(configuration: &configuration::Configuration, o: Option<&str>,
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetGroupsDefaultResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetGroupsDefaultResponse`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
         }
     } else {
         let content = resp.text()?;

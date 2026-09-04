@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GpgKeyInfo {
+    /// The 8-char hex GPG key ID.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The 40-char (plus spaces) hex GPG key fingerprint.
     #[serde(rename = "fingerprint", skip_serializing_if = "Option::is_none")]
     pub fingerprint: Option<String>,
+    /// OpenPGP User IDs,role=external,window=_blank associated with the public key.
     #[serde(rename = "user_ids", skip_serializing_if = "Option::is_none")]
     pub user_ids: Option<Vec<String>>,
+    /// ASCII armored public key material.
     #[serde(rename = "key", skip_serializing_if = "Option::is_none")]
     pub key: Option<String>,
+    /// The result of server-side checks on the key; one of BAD, OK, or TRUSTED. BAD keys have serious problems and should not be used. If a key is OK, inspecting only that key found no problems, but the system does not fully trust the key's origin.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::GpgKeyInfoStatus>,
+    /// A list of human-readable problem strings found in the course of checking whether the key is valid and trusted.
     #[serde(rename = "problems", skip_serializing_if = "Option::is_none")]
     pub problems: Option<Vec<String>>,
 }

@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PermissionInfo {
+    /// The name of the label. Not set if it's not a label permission.
     #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
     pub label: Option<String>,
+    /// Whether this permission is assigned exclusively.
     #[serde(rename = "exclusive", skip_serializing_if = "Option::is_none")]
     pub exclusive: Option<bool>,
+    /// The rules assigned for this permission as a map that maps the UUIDs of the groups for which the permission are assigned to PermissionRuleInfo entities.
     #[serde(rename = "rules", skip_serializing_if = "Option::is_none")]
     pub rules: Option<std::collections::HashMap<String, models::PermissionRuleInfo>>,
 }

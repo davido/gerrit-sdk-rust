@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct HashtagsInput {
+    /// The list of hashtags to be added to the change.
     #[serde(rename = "add", skip_serializing_if = "Option::is_none")]
     pub add: Option<Vec<String>>,
+    /// The list of hashtags to be removed from the change.
     #[serde(rename = "remove", skip_serializing_if = "Option::is_none")]
     pub remove: Option<Vec<String>>,
 }

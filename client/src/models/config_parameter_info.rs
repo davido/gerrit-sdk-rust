@@ -13,26 +13,37 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ConfigParameterInfo {
+    /// The display name of the configuration parameter.
     #[serde(rename = "display_name", skip_serializing_if = "Option::is_none")]
     pub display_name: Option<String>,
+    /// The description of the configuration parameter.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// Warning message for the configuration parameter.
     #[serde(rename = "warning", skip_serializing_if = "Option::is_none")]
     pub warning: Option<String>,
+    /// The type of the configuration parameter. Can be STRING, INT, LONG, BOOLEAN, LIST or ARRAY.
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<models::ProjectConfigEntryType>,
+    /// The value of the configuration parameter as string. If the parameter is inheritable this is the effective value which is deduced from configured_value and inherited_value.
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<String>,
+    /// Whether the value is editable.
     #[serde(rename = "editable", skip_serializing_if = "Option::is_none")]
     pub editable: Option<bool>,
+    /// Whether the configuration parameter can be inherited.
     #[serde(rename = "inheritable", skip_serializing_if = "Option::is_none")]
     pub inheritable: Option<bool>,
+    /// The value of the configuration parameter that is configured on this project, only set if inheritable is true.
     #[serde(rename = "configured_value", skip_serializing_if = "Option::is_none")]
     pub configured_value: Option<String>,
+    /// The inherited value of the configuration parameter, only set if inheritable is true.
     #[serde(rename = "inherited_value", skip_serializing_if = "Option::is_none")]
     pub inherited_value: Option<String>,
+    /// The list of permitted values. Only set if the type is LIST.
     #[serde(rename = "permitted_values", skip_serializing_if = "Option::is_none")]
     pub permitted_values: Option<Vec<String>>,
+    /// The list of values. Only set if the type is ARRAY.
     #[serde(rename = "values", skip_serializing_if = "Option::is_none")]
     pub values: Option<Vec<String>>,
 }

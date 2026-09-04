@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DashboardSectionInfo {
+    /// The title of the section.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The query of the section. + Tokens such as ${project} are not resolved.
     #[serde(rename = "query", skip_serializing_if = "Option::is_none")]
     pub query: Option<String>,
 }

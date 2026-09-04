@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BatchSubmitRequirementInput {
+    /// Message that should be used to commit the submit requirements updates in the project.config file to the refs/meta/config branch.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
+    /// List of submit requirements that should be deleted.
     #[serde(rename = "delete", skip_serializing_if = "Option::is_none")]
     pub delete: Option<Vec<String>>,
+    /// List of SubmitRequirementInput entities that describe submit requirements that should be created.
     #[serde(rename = "create", skip_serializing_if = "Option::is_none")]
     pub create: Option<Vec<models::SubmitRequirementInput>>,
+    /// Map of submit requirement names to SubmitRequirementInput entities that describe the updates that should be done for the submit requirements. The given inputs must set all properties (including those that are not being changed).
     #[serde(rename = "update", skip_serializing_if = "Option::is_none")]
     pub update: Option<std::collections::HashMap<String, models::SubmitRequirementInput>>,
 }

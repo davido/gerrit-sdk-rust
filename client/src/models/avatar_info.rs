@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AvatarInfo {
+    /// The URL to the avatar image.
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
+    /// The height of the avatar image in pixels.
     #[serde(rename = "height", skip_serializing_if = "Option::is_none")]
     pub height: Option<i32>,
 }

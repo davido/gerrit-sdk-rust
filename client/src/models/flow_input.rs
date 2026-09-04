@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FlowInput {
+    /// The expressions for the stages of the flow (sorted by execution order) as a list of FlowExpressionInfo entities.
     #[serde(rename = "stage_expressions", skip_serializing_if = "Option::is_none")]
     pub stage_expressions: Option<Vec<models::FlowExpressionInfo>>,
 }

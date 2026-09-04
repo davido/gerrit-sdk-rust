@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InheritedBooleanInfo {
+    /// The effective boolean value.
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<bool>,
+    /// The configured value, can be TRUE, FALSE or INHERIT.
     #[serde(rename = "configured_value", skip_serializing_if = "Option::is_none")]
     pub configured_value: Option<models::InheritableBoolean>,
+    /// The boolean value inherited from the parent. + Not set if there is no parent.
     #[serde(rename = "inherited_value", skip_serializing_if = "Option::is_none")]
     pub inherited_value: Option<bool>,
 }

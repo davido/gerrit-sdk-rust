@@ -15,28 +15,40 @@ use serde::{Deserialize, Serialize};
 pub struct AuthInfo {
     #[serde(rename = "auth_type", skip_serializing_if = "Option::is_none")]
     pub auth_type: Option<models::AuthType>,
+    /// Whether contributor agreements are required.
     #[serde(rename = "use_contributor_agreements", skip_serializing_if = "Option::is_none")]
     pub use_contributor_agreements: Option<bool>,
+    /// List of contributor agreements as ContributorAgreementInfo entities.
     #[serde(rename = "contributor_agreements", skip_serializing_if = "Option::is_none")]
     pub contributor_agreements: Option<Vec<models::AgreementInfo>>,
+    /// List of account fields that are editable. Possible values are FULL_NAME, USER_NAME and REGISTER_NEW_EMAIL.
     #[serde(rename = "editable_account_fields", skip_serializing_if = "Option::is_none")]
     pub editable_account_fields: Option<Vec<models::AccountFieldName>>,
+    /// The login URL. Only set if authentication type is HTTP or HTTP_LDAP.
     #[serde(rename = "login_url", skip_serializing_if = "Option::is_none")]
     pub login_url: Option<String>,
+    /// The login text. Only set if authentication type is HTTP or HTTP_LDAP.
     #[serde(rename = "login_text", skip_serializing_if = "Option::is_none")]
     pub login_text: Option<String>,
+    /// The URL to switch accounts.
     #[serde(rename = "switch_account_url", skip_serializing_if = "Option::is_none")]
     pub switch_account_url: Option<String>,
+    /// The register URL. Only set if authentication type is LDAP, LDAP_BIND or CUSTOM_EXTENSION.
     #[serde(rename = "register_url", skip_serializing_if = "Option::is_none")]
     pub register_url: Option<String>,
+    /// The register text. Only set if authentication type is LDAP, LDAP_BIND or CUSTOM_EXTENSION.
     #[serde(rename = "register_text", skip_serializing_if = "Option::is_none")]
     pub register_text: Option<String>,
+    /// The URL to edit the full name. Only set if authentication type is LDAP, LDAP_BIND or CUSTOM_EXTENSION.
     #[serde(rename = "edit_full_name_url", skip_serializing_if = "Option::is_none")]
     pub edit_full_name_url: Option<String>,
+    /// The URL to obtain an HTTP password. Only set if authentication type is CUSTOM_EXTENSION.
     #[serde(rename = "http_password_url", skip_serializing_if = "Option::is_none")]
     pub http_password_url: Option<String>,
+    /// The policy to authenticate Git over HTTP and REST API requests when authentication type is LDAP, LDAP_BIND or OAUTH. Can be HTTP, LDAP, HTTP_LDAP or OAUTH.
     #[serde(rename = "git_basic_auth_policy", skip_serializing_if = "Option::is_none")]
     pub git_basic_auth_policy: Option<models::GitBasicAuthPolicy>,
+    /// The maximum lifetime of authentication tokens.
     #[serde(rename = "max_token_lifetime", skip_serializing_if = "Option::is_none")]
     pub max_token_lifetime: Option<i32>,
 }

@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PureRevertInfo {
+    /// Outcome of the check as boolean.
     #[serde(rename = "is_pure_revert", skip_serializing_if = "Option::is_none")]
     pub is_pure_revert: Option<bool>,
 }

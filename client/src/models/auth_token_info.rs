@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AuthTokenInfo {
+    /// The id of the token.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// The token in plain text. Will only be returned once when creating the token.
     #[serde(rename = "token", skip_serializing_if = "Option::is_none")]
     pub token: Option<String>,
+    /// The timestamp at which the token will expire or has been expired. If null, token lifetime is unlimited.
     #[serde(rename = "expiration", skip_serializing_if = "Option::is_none")]
     pub expiration: Option<String>,
 }

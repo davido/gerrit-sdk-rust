@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApplyPatchInput {
+    /// The patch to be applied. Must be compatible with git diff output. For example, Get Patch output. The patch must be provided as UTF-8 text, either directly or base64-encoded.
     #[serde(rename = "patch", skip_serializing_if = "Option::is_none")]
     pub patch: Option<String>,
+    /// If true, tolerate conflicts and add conflict markers where required.
     #[serde(rename = "allow_conflicts", skip_serializing_if = "Option::is_none")]
     pub allow_conflicts: Option<bool>,
 }

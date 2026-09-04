@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CacheInfo {
+    /// The cache name. If the cache is defined by a plugin the cache name includes the plugin name: \"<plugin-name>-<cache-name>\".
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The type of the cache (MEM: in memory cache, DISK: disk cache).
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<models::CacheType>,
+    /// Information about the entries in the cache as a EntriesInfo entity.
     #[serde(rename = "entries", skip_serializing_if = "Option::is_none")]
     pub entries: Option<Box<models::EntriesInfo>>,
+    /// The average duration of getting one entry from the cache. The value is returned with a standard time unit abbreviation (ns: nanoseconds, us: microseconds, ms: milliseconds, s: seconds).
     #[serde(rename = "average_get", skip_serializing_if = "Option::is_none")]
     pub average_get: Option<String>,
+    /// Information about the hit ratio as a HitRatioInfo entity.
     #[serde(rename = "hit_ratio", skip_serializing_if = "Option::is_none")]
     pub hit_ratio: Option<Box<models::HitRatioInfo>>,
 }

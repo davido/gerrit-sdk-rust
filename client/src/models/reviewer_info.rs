@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReviewerInfo {
+    /// The approvals of the reviewer as a map that maps the label names to the approval values (\"-2\", \"-1\", \"0\", \"+1\", \"+2\").
     #[serde(rename = "approvals", skip_serializing_if = "Option::is_none")]
     pub approvals: Option<std::collections::HashMap<String, String>>,
+    /// This field is inherited from AccountInfo but is optional here if an unregistered reviewer was added by email. See add-reviewer for details.
     #[serde(rename = "_account_id", skip_serializing_if = "Option::is_none")]
     pub _account_id: Option<i32>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]

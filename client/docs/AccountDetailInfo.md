@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**registered_on** | Option<**String**> |  | [optional]
+**registered_on** | Option<**String**> | The timestamp of when the account was registered. | [optional]
 **_account_id** | Option<**i32**> |  | [optional]
 **name** | Option<**String**> |  | [optional]
 **display_name** | Option<**String**> |  | [optional]

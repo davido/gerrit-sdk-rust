@@ -13,12 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PermissionRuleInfo {
+    /// The action of this rule. For normal permissions this can be ALLOW, DENY or BLOCK. Special values for global capabilities are INTERACTIVE and BATCH.
     #[serde(rename = "action", skip_serializing_if = "Option::is_none")]
     pub action: Option<models::Action>,
+    /// Whether the force flag is set.
     #[serde(rename = "force", skip_serializing_if = "Option::is_none")]
     pub force: Option<bool>,
+    /// The min value of the permission range.
     #[serde(rename = "min", skip_serializing_if = "Option::is_none")]
     pub min: Option<i32>,
+    /// The max value of the permission range.
     #[serde(rename = "max", skip_serializing_if = "Option::is_none")]
     pub max: Option<i32>,
 }

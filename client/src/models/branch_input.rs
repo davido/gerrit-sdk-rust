@@ -13,14 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BranchInput {
+    /// The base revision of the new branch. + If not set and create_empty_commit is true the branch is created with an empty initial commit. + If not set and create_empty_commit is false or unset HEAD will be used as base revision.
     #[serde(rename = "revision", skip_serializing_if = "Option::is_none")]
     pub revision: Option<String>,
+    /// Whether the branch should be created with an empty initial commit. + Cannot be used in combination with setting a revision. + Can be used to review the initial content of a branch (create the branch with an empty initial commit, make a second commit with the initial content, e.g.
     #[serde(rename = "create_empty_commit", skip_serializing_if = "Option::is_none")]
     pub create_empty_commit: Option<bool>,
+    /// The name of the branch. The prefix refs/heads/ can be omitted. + If set, must match the branch ID in the URL.
     #[serde(rename = "ref", skip_serializing_if = "Option::is_none")]
     pub r#ref: Option<String>,
+    /// The full name of the source ref where revision can be found. + Used when revision is not a ref name in order to check reachability from a specific ref. This ref should be visible to the caller. + If not set, then all visible refs under refs/heads/ and refs/tags/ are searched.
     #[serde(rename = "source_ref", skip_serializing_if = "Option::is_none")]
     pub source_ref: Option<String>,
+    /// Map with key-value pairs that are forwarded as options to the ref operation validation listeners (e.g. can be used to skip certain validations). Which validation options are supported depends on the installed ref operation validation listeners.
     #[serde(rename = "validation_options", skip_serializing_if = "Option::is_none")]
     pub validation_options: Option<std::collections::HashMap<String, String>>,
 }

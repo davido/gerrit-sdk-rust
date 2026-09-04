@@ -161,7 +161,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_groups
 
-> models::GetGroupsDefaultResponse get_groups(o, group, limit, r#match, o2, owned, owned_by, project, query, regex, start, suggest, user, visible_to_all)
+> serde_json::Value get_groups(o, group, limit, r#match, o2, owned, owned_by, project, query, regex, start, suggest, user, visible_to_all)
 List groups
 
 Lists the internal groups visible to the caller.
@@ -188,7 +188,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::GetGroupsDefaultResponse**](getGroups_default_response.md)
+[**serde_json::Value**](serde_json::Value.md)
 
 ### Authorization
 

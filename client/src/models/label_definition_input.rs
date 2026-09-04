@@ -13,28 +13,40 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LabelDefinitionInput {
+    /// The new name of the label.+ For label creation the name is required if this LabelDefinitionInput entity is contained in a BatchLabelInput entity.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// The new description for the label.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// The new function of the label (can be NoOp/NoBlock and PatchSetLock). By default NoOp when creating new labels.
     #[serde(rename = "function", skip_serializing_if = "Option::is_none")]
     pub function: Option<String>,
+    /// The new values of the label as a map of label value to value description. The label values are formatted strings, e.g. \"+1\" instead of \"1\", \" 0\" instead of \"0\".
     #[serde(rename = "values", skip_serializing_if = "Option::is_none")]
     pub values: Option<std::collections::HashMap<String, String>>,
+    /// The new default value of the label (as integer).
     #[serde(rename = "default_value", skip_serializing_if = "Option::is_none")]
     pub default_value: Option<i32>,
+    /// The new branches for which the label applies as a list of branches. A branch can be a ref, a ref pattern or a regular expression. If not set, the label applies for all branches.
     #[serde(rename = "branches", skip_serializing_if = "Option::is_none")]
     pub branches: Option<Vec<String>>,
+    /// Whether this label can be overridden by child projects.
     #[serde(rename = "can_override", skip_serializing_if = "Option::is_none")]
     pub can_override: Option<bool>,
+    /// See copyCondition.
     #[serde(rename = "copy_condition", skip_serializing_if = "Option::is_none")]
     pub copy_condition: Option<String>,
+    /// If true, clears the value stored in copy_condition.
     #[serde(rename = "unset_copy_condition", skip_serializing_if = "Option::is_none")]
     pub unset_copy_condition: Option<bool>,
+    /// Whether allowPostSubmit is set on the label.
     #[serde(rename = "allow_post_submit", skip_serializing_if = "Option::is_none")]
     pub allow_post_submit: Option<bool>,
+    /// Whether ignoreSelfApproval is set on the label.
     #[serde(rename = "ignore_self_approval", skip_serializing_if = "Option::is_none")]
     pub ignore_self_approval: Option<bool>,
+    /// Message that should be used to commit the change of the label in the project.config file to the refs/meta/config branch.+ Must not be set if this LabelDefinitionInput entity is contained in a BatchLabelInput entity.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
 }

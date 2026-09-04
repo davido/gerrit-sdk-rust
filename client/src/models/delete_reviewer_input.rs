@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DeleteReviewerInput {
+    /// Notify handling that defines to whom email notifications should be sent after the reviewer is deleted. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL.
     #[serde(rename = "notify", skip_serializing_if = "Option::is_none")]
     pub notify: Option<models::NotifyHandling>,
+    /// Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.
     #[serde(rename = "notify_details", skip_serializing_if = "Option::is_none")]
     pub notify_details: Option<std::collections::HashMap<String, models::NotifyInfo>>,
 }

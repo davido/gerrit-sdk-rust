@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CustomKeyedValuesInput {
+    /// The map of custom keyed values to be added to the change.
     #[serde(rename = "add", skip_serializing_if = "Option::is_none")]
     pub add: Option<std::collections::HashMap<String, String>>,
+    /// The list of custom keys to be removed from the change.
     #[serde(rename = "remove", skip_serializing_if = "Option::is_none")]
     pub remove: Option<Vec<String>>,
 }

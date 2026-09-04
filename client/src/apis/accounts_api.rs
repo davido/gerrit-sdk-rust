@@ -241,7 +241,6 @@ pub enum GetAccountsAccountIdSshkeysSshKeyIdError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetAccountsAccountIdStarredChangesError {
-    DefaultResponse(serde_json::Value),
     UnknownValue(serde_json::Value),
 }
 
@@ -1740,8 +1739,8 @@ pub fn get_accounts_account_id_sshkeys_ssh_key_id(configuration: &configuration:
     }
 }
 
-/// Gets the changes that were starred with the default star by the identified user account. This URL endpoint is functionally identical to the changes query GET /changes/?q=is:starred. The result is a list of ChangeInfo entities.
-pub fn get_accounts_account_id_starred_changes(configuration: &configuration::Configuration, account_id: &str) -> Result<serde_json::Value, Error<GetAccountsAccountIdStarredChangesError>> {
+/// Gets the changes that were starred with the default star by the identified user account.
+pub fn get_accounts_account_id_starred_changes(configuration: &configuration::Configuration, account_id: &str) -> Result<Vec<models::ChangeInfo>, Error<GetAccountsAccountIdStarredChangesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_account_id = account_id;
 
@@ -1771,8 +1770,8 @@ pub fn get_accounts_account_id_starred_changes(configuration: &configuration::Co
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::ChangeInfo&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `Vec&lt;models::ChangeInfo&gt;`")))),
         }
     } else {
         let content = resp.text()?;

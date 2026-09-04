@@ -13,20 +13,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TagInfo {
+    /// The revision of the object to which the tag points.
     #[serde(rename = "object", skip_serializing_if = "Option::is_none")]
     pub object: Option<String>,
+    /// The tag message. For signed tags, includes the signature.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
+    /// The tagger as a GitPersonInfo entity.
     #[serde(rename = "tagger", skip_serializing_if = "Option::is_none")]
     pub tagger: Option<Box<models::GitPerson>>,
+    /// The timestamp of when the tag was created. For annotated and signed tags, this is the timestamp of the tag object and is the same as the date field in the tagger. For lightweight tags, it is the commit timestamp of the commit to which the tag points, when the object is a commit.
     #[serde(rename = "created", skip_serializing_if = "Option::is_none")]
     pub created: Option<String>,
+    /// Links to the tag in external sites as a list of WebLinkInfo entries.
     #[serde(rename = "web_links", skip_serializing_if = "Option::is_none")]
     pub web_links: Option<Vec<models::WebLinkInfo>>,
+    /// The ref of the tag.
     #[serde(rename = "ref", skip_serializing_if = "Option::is_none")]
     pub r#ref: Option<String>,
+    /// For lightweight tags, the revision of the commit to which the tag points. For annotated tags, the revision of the tag object.
     #[serde(rename = "revision", skip_serializing_if = "Option::is_none")]
     pub revision: Option<String>,
+    /// Whether the calling user can delete this tag.
     #[serde(rename = "can_delete", skip_serializing_if = "Option::is_none")]
     pub can_delete: Option<bool>,
 }

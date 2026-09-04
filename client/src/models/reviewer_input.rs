@@ -13,16 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReviewerInput {
+    /// The ID of one account that should be added/removed as reviewer or the ID of one internal group for which all members should be added as reviewers. + If an ID identifies both an account and a group, only the account is added as reviewer to the change.
     #[serde(rename = "reviewer", skip_serializing_if = "Option::is_none")]
     pub reviewer: Option<String>,
+    /// Whether adding the reviewer is confirmed. + The Gerrit server may be configured to require a confirmation when adding a group as reviewer that has many members.
     #[serde(rename = "confirmed", skip_serializing_if = "Option::is_none")]
     pub confirmed: Option<bool>,
+    /// Add reviewer in this state. Possible reviewer states are REVIEWER, CC and REMOVED. If not given, defaults to REVIEWER.
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::ReviewerState>,
+    /// Notify handling that defines to whom email notifications should be sent after the reviewer is added. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL.
     #[serde(rename = "notify", skip_serializing_if = "Option::is_none")]
     pub notify: Option<models::NotifyHandling>,
+    /// Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.
     #[serde(rename = "notify_details", skip_serializing_if = "Option::is_none")]
     pub notify_details: Option<std::collections::HashMap<String, models::NotifyInfo>>,
+    /// \\{account-id\\} the reviewer should be added on behalf of. To use this option the caller must have been granted RUN_AS permission. + If not set, the default is the caller.
     #[serde(rename = "on_behalf_of", skip_serializing_if = "Option::is_none")]
     pub on_behalf_of: Option<String>,
 }

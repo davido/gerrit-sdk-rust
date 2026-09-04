@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccessSectionInfo {
+    /// The permissions assigned on the ref of this access section as a map that maps the permission names to PermissionInfo entities.
     #[serde(rename = "permissions", skip_serializing_if = "Option::is_none")]
     pub permissions: Option<std::collections::HashMap<String, models::PermissionInfo>>,
 }
