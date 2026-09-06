@@ -10,4 +10,4 @@ publish = false
 # The in-repo SDK crate, by path -- the examples build against the local source, so
 # they run against a live Gerrit with nothing published. External consumers instead
 # pin the git tag (see the README).
-gerrit_client = { path = "../client" }
+gerrit-sdk = { path = "../client" }

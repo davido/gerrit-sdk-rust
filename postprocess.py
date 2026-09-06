@@ -91,5 +91,15 @@ elif '"form", "native-tls"' not in c:
 if '"form", "native-tls"' not in open(cargo).read():
     die("native-tls not added to reqwest")
 
+c2 = open(cargo).read()
+if 'name = "gerrit_client"' not in c2:
+    die("Cargo.toml: [package] name = \"gerrit_client\" anchor missing")
+c2 = c2.replace('name = "gerrit_client"', 'name = "gerrit-sdk"', 1)
+if "[lib]" not in c2:
+    c2 = c2.replace("[dependencies]", '[lib]\nname = "gerrit_client"\n\n[dependencies]', 1)
+open(cargo, "w").write(c2)
+if 'name = "gerrit-sdk"' not in open(cargo).read() or '[lib]' not in open(cargo).read():
+    die("crate rename to gerrit-sdk / [lib] name = gerrit_client not applied")
+
 print(f"post-gen patches applied (perl-free): O/o rename, binary body, "
-      f"XSSI via xssi.rs ({n_text} sites), native-tls")
+      f"XSSI via xssi.rs ({n_text} sites), native-tls, crate=gerrit-sdk/lib=gerrit_client")
