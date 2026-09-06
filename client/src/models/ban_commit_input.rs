@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BanCommitInput {
+    /// List of commits to be banned.
     #[serde(rename = "commits", skip_serializing_if = "Option::is_none")]
     pub commits: Option<Vec<String>>,
+    /// Reason for banning the commits.
     #[serde(rename = "reason", skip_serializing_if = "Option::is_none")]
     pub reason: Option<String>,
 }

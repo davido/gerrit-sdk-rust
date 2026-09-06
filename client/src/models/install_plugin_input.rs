@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InstallPluginInput {
+    /// URL to the plugin jar.
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
+    /// The raw plugin content (the plugin jar) uploaded in the request body, as an alternative to url.
     #[serde(rename = "raw", skip_serializing_if = "Option::is_none")]
     pub raw: Option<serde_json::Value>,
 }

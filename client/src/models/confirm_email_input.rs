@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ConfirmEmailInput {
+    /// The token that was sent by mail to a newly registered email address.
     #[serde(rename = "token", skip_serializing_if = "Option::is_none")]
     pub token: Option<String>,
 }

@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **submitted** | Option<**String**> | The timestamp of when the change was submitted. | [optional]
 **submitter** | Option<[**models::AccountInfo**](AccountInfo.md)> | The user who submitted the change, as an AccountInfo entity. | [optional]
 **starred** | Option<**bool**> | Whether the calling user has starred this change. Only set if requested. | [optional]
-**stars** | Option<**Vec<String>**> |  | [optional]
+**stars** | Option<**Vec<String>**> | List of star labels that are applied by the calling user to this change. | [optional]
 **reviewed** | Option<**bool**> | Whether the change was reviewed by the calling user. Only set if reviewed is requested. | [optional]
 **submit_type** | Option<[**models::SubmitType**](SubmitType.md)> | The submit type of the change. + Not set for merged changes. | [optional]
 **mergeable** | Option<**bool**> | Whether the change is mergeable. + Only set for open changes if change.mergeabilityComputationBehavior is API_REF_UPDATED_AND_CHANGE_REINDEX. | [optional]

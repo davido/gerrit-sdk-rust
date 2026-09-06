@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InputWithCommitMessage {
+    /// The commit message to use.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
 }

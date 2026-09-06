@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ContextLineInfo {
+    /// The line number of the source line.
     #[serde(rename = "line_number", skip_serializing_if = "Option::is_none")]
     pub line_number: Option<i32>,
+    /// The text of the context line.
     #[serde(rename = "context_line", skip_serializing_if = "Option::is_none")]
     pub context_line: Option<String>,
 }

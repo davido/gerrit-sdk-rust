@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReindexIndexVersionInput {
+    /// Whether existing documents may be reused instead of being recomputed while reindexing.
     #[serde(rename = "reuse", skip_serializing_if = "Option::is_none")]
     pub reuse: Option<bool>,
+    /// Whether index listeners should be notified about the reindex progress.
     #[serde(rename = "notify_listeners", skip_serializing_if = "Option::is_none")]
     pub notify_listeners: Option<bool>,
 }

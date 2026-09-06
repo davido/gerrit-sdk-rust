@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LegacySubmitRequirementInfo {
+    /// The status of the submit requirement, for example OK or NOT_READY.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
+    /// A human readable description of the submit requirement.
     #[serde(rename = "fallback_text", skip_serializing_if = "Option::is_none")]
     pub fallback_text: Option<String>,
+    /// The type of the submit requirement.
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<String>,
 }

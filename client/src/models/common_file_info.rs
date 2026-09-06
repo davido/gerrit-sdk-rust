@@ -46,6 +46,7 @@ pub struct CommonFileInfo {
     /// File size in bytes.
     #[serde(rename = "size", skip_serializing_if = "Option::is_none")]
     pub size: Option<i32>,
+    /// Whether the diff of the file is too expensive to compute; when set the diff content is omitted.
     #[serde(rename = "diffs_too_expensive_to_compute", skip_serializing_if = "Option::is_none")]
     pub diffs_too_expensive_to_compute: Option<bool>,
 }

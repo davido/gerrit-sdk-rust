@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InputWithMessage {
+    /// The message to use.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
 }

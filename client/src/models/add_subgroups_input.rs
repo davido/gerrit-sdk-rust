@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AddSubgroupsInput {
+    /// The id of one group that should be included or deleted.
     #[serde(rename = "_one_group", skip_serializing_if = "Option::is_none")]
     pub _one_group: Option<String>,
+    /// A list of group ids that identify the groups that should be included or deleted.
     #[serde(rename = "groups", skip_serializing_if = "Option::is_none")]
     pub groups: Option<Vec<String>>,
 }

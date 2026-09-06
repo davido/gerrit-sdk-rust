@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WorkInProgressOpInput {
+    /// Notify handling that defines to whom email notifications should be sent after the change is set to WorkInProgress/ReadyForReview. Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL.
     #[serde(rename = "notify", skip_serializing_if = "Option::is_none")]
     pub notify: Option<models::NotifyHandling>,
+    /// Message to be added as a review comment to the change being set WorkInProgress/ReadyForReview.
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
 }

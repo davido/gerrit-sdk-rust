@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DeleteChangesInput {
+    /// A list of changes (Change-Id or Change-Number) that identify the changes that should be deleted.
     #[serde(rename = "changes", skip_serializing_if = "Option::is_none")]
     pub changes: Option<Vec<String>>,
 }

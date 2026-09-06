@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct StatusInput {
+    /// The new status of the account. + If not set or if set to an empty string, the account status is deleted.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
 }

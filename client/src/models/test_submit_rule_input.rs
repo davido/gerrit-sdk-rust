@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TestSubmitRuleInput {
+    /// Prolog code to execute instead of the code in refs/meta/config.
     #[serde(rename = "rule", skip_serializing_if = "Option::is_none")]
     pub rule: Option<String>,
+    /// When RUN filter rules in the parent projects are called to post-process the results of the project specific rule. This behavior matches how the rule will execute if installed. + If SKIP the parent filters are not called, allowing the test to return results from the input rule.
     #[serde(rename = "filters", skip_serializing_if = "Option::is_none")]
     pub filters: Option<models::Filters>,
 }

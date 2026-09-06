@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountsInfo {
+    /// Visibility setting for accounts.
     #[serde(rename = "visibility", skip_serializing_if = "Option::is_none")]
     pub visibility: Option<models::AccountVisibility>,
+    /// The default strategy for choosing the display name in the UI, see also gerrit.config.
     #[serde(rename = "default_display_name", skip_serializing_if = "Option::is_none")]
     pub default_display_name: Option<models::AccountDefaultDisplayName>,
 }

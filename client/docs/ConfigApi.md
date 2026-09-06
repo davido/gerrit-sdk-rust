@@ -975,7 +975,7 @@ Name | Type | Description  | Required | Notes
 > serde_json::Value post_config_server_indexes_index_id_versions_index_version_id_reindex(index_id, index_version_id, reindex_index_version_input)
 Reindex an Index Version
 
-This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not.
+This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not. The options are provided in the request body as a ReindexIndexVersion.Input entity.
 
 ### Parameters
 
@@ -1007,7 +1007,7 @@ Name | Type | Description  | Required | Notes
 > serde_json::Value post_config_server_indexes_index_id_versions_index_version_id_snapshot(index_id, index_version_id, snapshot_index_version_input)
 Create Snapshot of one Index Version
 
-This creates a snapshot of one index version of the specified index.
+This creates a snapshot of one index version of the specified index. The snapshot id may be provided in the request body as a SnapshotIndexVersion.Input entity.
 
 ### Parameters
 
@@ -1121,6 +1121,8 @@ This endpoint does not need any parameter.
 
 > serde_json::Value post_config_server_snapshot_indexes(snapshot_indexes_input)
 Create Snapshot of All Indexes
+
+This creates a snapshot of all write index versions. The snapshot id may be provided in the request body as a SnapshotIndexes.Input entity.
 
 ### Parameters
 

@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReduceMaxTokenLifetimeInput {
+    /// The new maximum lifetime that will be applied to authentication tokens.
     #[serde(rename = "lifetime", skip_serializing_if = "Option::is_none")]
     pub lifetime: Option<String>,
 }

@@ -67,6 +67,7 @@ pub struct ChangeInfo {
     /// Whether the calling user has starred this change. Only set if requested.
     #[serde(rename = "starred", skip_serializing_if = "Option::is_none")]
     pub starred: Option<bool>,
+    /// List of star labels that are applied by the calling user to this change.
     #[serde(rename = "stars", skip_serializing_if = "Option::is_none")]
     pub stars: Option<Vec<String>>,
     /// Whether the change was reviewed by the calling user. Only set if reviewed is requested.

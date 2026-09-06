@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MenuEntry {
+    /// Name of the top menu entry.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// List of menu items.
     #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<models::MenuItem>>,
 }

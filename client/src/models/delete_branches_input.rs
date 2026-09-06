@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DeleteBranchesInput {
+    /// A list of branch names that identify the branches that should be deleted.
     #[serde(rename = "branches", skip_serializing_if = "Option::is_none")]
     pub branches: Option<Vec<String>>,
 }

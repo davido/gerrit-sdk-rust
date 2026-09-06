@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ConfigValue {
+    /// The new single value for the configuration parameter.
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<String>,
+    /// The new list of values for a multi-valued configuration parameter.
     #[serde(rename = "values", skip_serializing_if = "Option::is_none")]
     pub values: Option<Vec<String>>,
 }

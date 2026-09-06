@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PostCachesInput {
+    /// The cache operation that should be executed: FLUSH_ALL: Flushes all caches, except the web_sessions cache. FLUSH: Flushes the specified caches.
     #[serde(rename = "operation", skip_serializing_if = "Option::is_none")]
     pub operation: Option<models::Operation>,
+    /// A list of cache names. This list defines the caches on which the specified operation should be executed. Whether this list must be specified depends on the operation being executed.
     #[serde(rename = "caches", skip_serializing_if = "Option::is_none")]
     pub caches: Option<Vec<String>>,
 }

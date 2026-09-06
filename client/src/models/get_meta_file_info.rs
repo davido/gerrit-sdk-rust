@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetMetaFileInfo {
+    /// Links to the file in external sites as a list of DiffWebLinkInfo entities.
     #[serde(rename = "web_links", skip_serializing_if = "Option::is_none")]
     pub web_links: Option<Vec<models::DiffWebLinkInfo>>,
 }

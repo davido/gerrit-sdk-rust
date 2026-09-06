@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GroupsInfo {
+    /// gerrit.config.
     #[serde(rename = "enable_delete_group", skip_serializing_if = "Option::is_none")]
     pub enable_delete_group: Option<bool>,
 }

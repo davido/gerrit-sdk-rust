@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **lines_deleted** | Option<**i32**> | Number of deleted lines. + Not set for binary files or if no lines were deleted. + An empty last line is not included in the count and hence this number can differ by one from details provided in DiffInfo. | [optional]
 **size_delta** | Option<**i32**> | Number of bytes by which the file size increased/decreased. | [optional]
 **size** | Option<**i32**> | File size in bytes. | [optional]
-**diffs_too_expensive_to_compute** | Option<**bool**> |  | [optional]
+**diffs_too_expensive_to_compute** | Option<**bool**> | Whether the diff of the file is too expensive to compute; when set the diff content is omitted. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

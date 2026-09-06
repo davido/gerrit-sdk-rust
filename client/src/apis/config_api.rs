@@ -1641,7 +1641,7 @@ pub fn post_config_server_indexes_index_id_snapshot(configuration: &configuratio
     }
 }
 
-/// This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not.
+/// This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not. The options are provided in the request body as a ReindexIndexVersion.Input entity.
 pub fn post_config_server_indexes_index_id_versions_index_version_id_reindex(configuration: &configuration::Configuration, index_id: &str, index_version_id: &str, reindex_index_version_input: Option<models::ReindexIndexVersionInput>) -> Result<serde_json::Value, Error<PostConfigServerIndexesIndexIdVersionsIndexVersionIdReindexError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_index_id = index_id;
@@ -1686,7 +1686,7 @@ pub fn post_config_server_indexes_index_id_versions_index_version_id_reindex(con
     }
 }
 
-/// This creates a snapshot of one index version of the specified index.
+/// This creates a snapshot of one index version of the specified index. The snapshot id may be provided in the request body as a SnapshotIndexVersion.Input entity.
 pub fn post_config_server_indexes_index_id_versions_index_version_id_snapshot(configuration: &configuration::Configuration, index_id: &str, index_version_id: &str, snapshot_index_version_input: Option<models::SnapshotIndexVersionInput>) -> Result<serde_json::Value, Error<PostConfigServerIndexesIndexIdVersionsIndexVersionIdSnapshotError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_index_id = index_id;
@@ -1855,6 +1855,7 @@ pub fn post_config_server_reload(configuration: &configuration::Configuration, )
     }
 }
 
+/// This creates a snapshot of all write index versions. The snapshot id may be provided in the request body as a SnapshotIndexes.Input entity.
 pub fn post_config_server_snapshot_indexes(configuration: &configuration::Configuration, snapshot_indexes_input: Option<models::SnapshotIndexesInput>) -> Result<serde_json::Value, Error<PostConfigServerSnapshotIndexesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_body_snapshot_indexes_input = snapshot_indexes_input;

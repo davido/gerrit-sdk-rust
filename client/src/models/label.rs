@@ -13,10 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Label {
+    /// The name of the label.
     #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
     pub label: Option<String>,
+    /// The status of the label, one of OK, REJECT, NEED, MAY or IMPOSSIBLE.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<models::LabelStatus>,
+    /// The AccountInfo of the user that applied the vote to the label.
     #[serde(rename = "applied_by", skip_serializing_if = "Option::is_none")]
     pub applied_by: Option<Box<models::AccountInfo>>,
 }

@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SetDashboardInput {
+    /// URL encoded ID of a dashboard to which this dashboard should link to.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// Message that should be used to commit the change of the dashboard.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
 }

@@ -13,6 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MigratePasswordsToTokensInput {
+    /// Lifetime of the migrated token.
     #[serde(rename = "lifetime", skip_serializing_if = "Option::is_none")]
     pub lifetime: Option<String>,
 }

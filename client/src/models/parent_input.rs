@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ParentInput {
+    /// The name of the parent project.
     #[serde(rename = "parent", skip_serializing_if = "Option::is_none")]
     pub parent: Option<String>,
+    /// Message that should be used to commit the change of the project parent in the project.config file to the refs/meta/config branch.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
 }

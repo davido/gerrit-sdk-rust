@@ -13,8 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AddMembersInput {
+    /// The id of one account that should be added or deleted.
     #[serde(rename = "_one_member", skip_serializing_if = "Option::is_none")]
     pub _one_member: Option<String>,
+    /// A list of account ids that identify the accounts that should be added or deleted.
     #[serde(rename = "members", skip_serializing_if = "Option::is_none")]
     pub members: Option<Vec<String>>,
 }
