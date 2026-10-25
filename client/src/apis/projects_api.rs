@@ -283,6 +283,20 @@ pub enum GetProjectsProjectIdSubmitRequirementsSubmitRequirementIdError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`get_projects_project_id_submit_requirements_templates`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetProjectsProjectIdSubmitRequirementsTemplatesError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_projects_project_id_submit_requirements_templates_submit_requirement_template_id`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetProjectsProjectIdSubmitRequirementsTemplatesSubmitRequirementTemplateIdError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`get_projects_project_id_tags`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -1047,6 +1061,7 @@ pub fn get_projects_project_id_branches_branch_id_files_file_id_content(configur
     }
 }
 
+/// Gets the diff for a single file between two commits. The base query parameter is required (same as Diff Between Commits).
 pub fn get_projects_project_id_branches_branch_id_files_file_id_diff(configuration: &configuration::Configuration, project_id: &str, branch_id: &str, file_id: &str, base: Option<&str>, intraline: Option<bool>, whitespace: Option<&str>) -> Result<models::DiffInfo, Error<GetProjectsProjectIdBranchesBranchIdFilesFileIdDiffError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;
@@ -2268,6 +2283,91 @@ pub fn get_projects_project_id_submit_requirements_submit_requirement_id(configu
     }
 }
 
+/// Retrieves submit requirement templates configured in project.config and in its parent projects.
+pub fn get_projects_project_id_submit_requirements_templates(configuration: &configuration::Configuration, project_id: &str) -> Result<Vec<models::SubmitRequirementInfo>, Error<GetProjectsProjectIdSubmitRequirementsTemplatesError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_project_id = project_id;
+
+    let uri_str = format!("{}/projects/{project_id}/submit_requirements_templates", configuration.base_path, project_id=crate::apis::urlencode(p_path_project_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `Vec&lt;models::SubmitRequirementInfo&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `Vec&lt;models::SubmitRequirementInfo&gt;`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetProjectsProjectIdSubmitRequirementsTemplatesError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Retrieves a single effective submit requirement template for a project. The returned template may be defined in the project itself or inherited from one of its parent projects.
+pub fn get_projects_project_id_submit_requirements_templates_submit_requirement_template_id(configuration: &configuration::Configuration, project_id: &str, submit_requirement_template_id: &str) -> Result<models::SubmitRequirementInfo, Error<GetProjectsProjectIdSubmitRequirementsTemplatesSubmitRequirementTemplateIdError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_project_id = project_id;
+    let p_path_submit_requirement_template_id = submit_requirement_template_id;
+
+    let uri_str = format!("{}/projects/{project_id}/submit_requirements_templates/{submit_requirement_template_id}", configuration.base_path, project_id=crate::apis::urlencode(p_path_project_id), submit_requirement_template_id=crate::apis::urlencode(p_path_submit_requirement_template_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::SubmitRequirementInfo`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::SubmitRequirementInfo`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<GetProjectsProjectIdSubmitRequirementsTemplatesSubmitRequirementTemplateIdError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
 /// List the tags of a project.
 pub fn get_projects_project_id_tags(configuration: &configuration::Configuration, project_id: &str, descending: Option<bool>, limit: Option<i32>, r#match: Option<&str>, regex: Option<&str>, sort_by: Option<&str>, start: Option<i32>) -> Result<Vec<models::TagInfo>, Error<GetProjectsProjectIdTagsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
@@ -2542,6 +2642,7 @@ pub fn post_projects_project_id_changes_delete(configuration: &configuration::Co
     }
 }
 
+/// Performs consistency checks on the project.
 pub fn post_projects_project_id_check(configuration: &configuration::Configuration, project_id: &str, check_project_input: Option<models::CheckProjectInput>) -> Result<models::CheckProjectResultInfo, Error<PostProjectsProjectIdCheckError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;
@@ -2630,6 +2731,7 @@ pub fn post_projects_project_id_commits_commit_id_cherrypick(configuration: &con
     }
 }
 
+/// This endpoint is functionally equivalent to create change in the change API, but it has the project name in the URL, which is easier to route in sharded deployments.
 pub fn post_projects_project_id_create_change(configuration: &configuration::Configuration, project_id: &str, change_input: Option<models::ChangeInput>) -> Result<models::ChangeInfo, Error<PostProjectsProjectIdCreateChangeError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;
@@ -2717,6 +2819,7 @@ pub fn post_projects_project_id_gc(configuration: &configuration::Configuration,
     }
 }
 
+/// Adds or updates the current project (and children, if specified) in the secondary index. The indexing task is executed asynchronously in background and this command returns immediately if async is specified in the input.
 pub fn post_projects_project_id_index(configuration: &configuration::Configuration, project_id: &str, index_project_input: Option<models::IndexProjectInput>) -> Result<serde_json::Value, Error<PostProjectsProjectIdIndexError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;
@@ -2760,6 +2863,7 @@ pub fn post_projects_project_id_index(configuration: &configuration::Configurati
     }
 }
 
+/// Adds or updates all the changes belonging to a project in the secondary index. The indexing task is executed asynchronously in background, so this command returns immediately.
 pub fn post_projects_project_id_index_changes(configuration: &configuration::Configuration, project_id: &str) -> Result<serde_json::Value, Error<PostProjectsProjectIdIndexChangesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;
@@ -3137,6 +3241,7 @@ pub fn put_projects_project_id(configuration: &configuration::Configuration, pro
     }
 }
 
+/// Sets access rights for the project using the diff schema provided by ProjectAccessInput
 pub fn put_projects_project_id_access_review(configuration: &configuration::Configuration, project_id: &str, project_access_input: Option<models::ProjectAccessInput>) -> Result<models::ChangeInfo, Error<PutProjectsProjectIdAccessReviewError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;

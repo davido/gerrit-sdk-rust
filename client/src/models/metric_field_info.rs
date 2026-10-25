@@ -12,7 +12,7 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct FieldJson {
+pub struct MetricFieldInfo {
     /// The name of the field.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
@@ -24,9 +24,9 @@ pub struct FieldJson {
     pub description: Option<String>,
 }
 
-impl FieldJson {
-    pub fn new() -> FieldJson {
-        FieldJson {
+impl MetricFieldInfo {
+    pub fn new() -> MetricFieldInfo {
+        MetricFieldInfo {
             name: None,
             r#type: None,
             description: None,

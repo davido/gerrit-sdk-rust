@@ -16,8 +16,8 @@ Method | HTTP request | Description
 [**delete_changes_change_id_revisions_revision_id_comments_comment_id**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_comments_comment_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/comments/{comment_id} | Delete Comment
 [**delete_changes_change_id_revisions_revision_id_drafts_draft_comment_id**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_drafts_draft_comment_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/drafts/{draft_comment_id} | Delete Draft
 [**delete_changes_change_id_revisions_revision_id_files_file_id_reviewed**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_files_file_id_reviewed) | **DELETE** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/reviewed | Delete Reviewed
-[**delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | 
-[**delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes/{vote_id} | 
+[**delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | Delete Reviewer
+[**delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id**](ChangesApi.md#delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes/{vote_id} | Delete Vote
 [**delete_changes_change_id_topic**](ChangesApi.md#delete_changes_change_id_topic) | **DELETE** /changes/{change_id}/topic | Delete Topic
 [**get_changes**](ChangesApi.md#get_changes) | **GET** /changes | Query changes
 [**get_changes_change_id**](ChangesApi.md#get_changes_change_id) | **GET** /changes/{change_id} | Get change
@@ -28,9 +28,9 @@ Method | HTTP request | Description
 [**get_changes_change_id_detail**](ChangesApi.md#get_changes_change_id_detail) | **GET** /changes/{change_id}/detail | Get change detail
 [**get_changes_change_id_drafts**](ChangesApi.md#get_changes_change_id_drafts) | **GET** /changes/{change_id}/drafts | List Change Drafts
 [**get_changes_change_id_edit**](ChangesApi.md#get_changes_change_id_edit) | **GET** /changes/{change_id}/edit | Get change edit
-[**get_changes_change_id_edit_change_edit_id**](ChangesApi.md#get_changes_change_id_edit_change_edit_id) | **GET** /changes/{change_id}/edit/{change_edit_id} | 
-[**get_changes_change_id_edit_change_edit_id_meta**](ChangesApi.md#get_changes_change_id_edit_change_edit_id_meta) | **GET** /changes/{change_id}/edit/{change_edit_id}/meta | 
-[**get_changes_change_id_edit_message**](ChangesApi.md#get_changes_change_id_edit_message) | **GET** /changes/{change_id}/edit:message | 
+[**get_changes_change_id_edit_change_edit_id**](ChangesApi.md#get_changes_change_id_edit_change_edit_id) | **GET** /changes/{change_id}/edit/{change_edit_id} | Retrieve file content from Change Edit
+[**get_changes_change_id_edit_change_edit_id_meta**](ChangesApi.md#get_changes_change_id_edit_change_edit_id_meta) | **GET** /changes/{change_id}/edit/{change_edit_id}/meta | Retrieve meta data of a file from Change Edit
+[**get_changes_change_id_edit_message**](ChangesApi.md#get_changes_change_id_edit_message) | **GET** /changes/{change_id}/edit:message | Retrieve commit message from Change Edit or current patch set of the change
 [**get_changes_change_id_flows**](ChangesApi.md#get_changes_change_id_flows) | **GET** /changes/{change_id}/flows | List Flows
 [**get_changes_change_id_flows_actions**](ChangesApi.md#get_changes_change_id_flows_actions) | **GET** /changes/{change_id}/flows-actions | List Flows Actions
 [**get_changes_change_id_flows_flow_id**](ChangesApi.md#get_changes_change_id_flows_flow_id) | **GET** /changes/{change_id}/flows/{flow_id} | Get Flow
@@ -69,7 +69,7 @@ Method | HTTP request | Description
 [**get_changes_change_id_revisions_revision_id_related**](ChangesApi.md#get_changes_change_id_revisions_revision_id_related) | **GET** /changes/{change_id}/revisions/{revision_id}/related | List related changes
 [**get_changes_change_id_revisions_revision_id_review**](ChangesApi.md#get_changes_change_id_revisions_revision_id_review) | **GET** /changes/{change_id}/revisions/{revision_id}/review | Get review
 [**get_changes_change_id_revisions_revision_id_reviewers**](ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers | List Revision Reviewers
-[**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | 
+[**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | Get Reviewer
 [**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes**](ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes | List Revision Votes
 [**get_changes_change_id_revisions_revision_id_robotcomments**](ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments | List Robot Comments
 [**get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id**](ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments/{robot_comment_id} | Get Robot Comment
@@ -87,7 +87,7 @@ Method | HTTP request | Description
 [**post_changes_change_id_check_submit_requirement**](ChangesApi.md#post_changes_change_id_check_submit_requirement) | **POST** /changes/{change_id}/check.submit_requirement | Check Submit Requirement
 [**post_changes_change_id_custom_keyed_values**](ChangesApi.md#post_changes_change_id_custom_keyed_values) | **POST** /changes/{change_id}/custom_keyed_values | Set Custom Keyed Values
 [**post_changes_change_id_edit**](ChangesApi.md#post_changes_change_id_edit) | **POST** /changes/{change_id}/edit | Restore file content or rename files in Change Edit
-[**post_changes_change_id_edit_publish**](ChangesApi.md#post_changes_change_id_edit_publish) | **POST** /changes/{change_id}/edit:publish | 
+[**post_changes_change_id_edit_publish**](ChangesApi.md#post_changes_change_id_edit_publish) | **POST** /changes/{change_id}/edit:publish | Publish Change Edit
 [**post_changes_change_id_edit_rebase**](ChangesApi.md#post_changes_change_id_edit_rebase) | **POST** /changes/{change_id}/edit:rebase | Rebase Change Edit
 [**post_changes_change_id_flows**](ChangesApi.md#post_changes_change_id_flows) | **POST** /changes/{change_id}/flows | Create Flow
 [**post_changes_change_id_hashtags**](ChangesApi.md#post_changes_change_id_hashtags) | **POST** /changes/{change_id}/hashtags | Set Hashtags
@@ -97,7 +97,7 @@ Method | HTTP request | Description
 [**post_changes_change_id_move**](ChangesApi.md#post_changes_change_id_move) | **POST** /changes/{change_id}/move | Move change
 [**post_changes_change_id_patch_apply**](ChangesApi.md#post_changes_change_id_patch_apply) | **POST** /changes/{change_id}/patch:apply | Create patch-set from patch
 [**post_changes_change_id_private**](ChangesApi.md#post_changes_change_id_private) | **POST** /changes/{change_id}/private | Mark Private
-[**post_changes_change_id_private_delete**](ChangesApi.md#post_changes_change_id_private_delete) | **POST** /changes/{change_id}/private.delete | 
+[**post_changes_change_id_private_delete**](ChangesApi.md#post_changes_change_id_private_delete) | **POST** /changes/{change_id}/private.delete | Unmark Private
 [**post_changes_change_id_ready**](ChangesApi.md#post_changes_change_id_ready) | **POST** /changes/{change_id}/ready | Set Ready-For-Review
 [**post_changes_change_id_rebase**](ChangesApi.md#post_changes_change_id_rebase) | **POST** /changes/{change_id}/rebase | Rebase change
 [**post_changes_change_id_rebase_chain**](ChangesApi.md#post_changes_change_id_rebase_chain) | **POST** /changes/{change_id}/rebase:chain | Rebase Chain
@@ -114,8 +114,8 @@ Method | HTTP request | Description
 [**post_changes_change_id_revisions_revision_id_fixes_fix_id_apply**](ChangesApi.md#post_changes_change_id_revisions_revision_id_fixes_fix_id_apply) | **POST** /changes/{change_id}/revisions/{revision_id}/fixes/{fix_id}/apply | Apply Stored Fix
 [**post_changes_change_id_revisions_revision_id_rebase**](ChangesApi.md#post_changes_change_id_revisions_revision_id_rebase) | **POST** /changes/{change_id}/revisions/{revision_id}/rebase | Rebase revision
 [**post_changes_change_id_revisions_revision_id_review**](ChangesApi.md#post_changes_change_id_revisions_revision_id_review) | **POST** /changes/{change_id}/revisions/{revision_id}/review | Set review
-[**post_changes_change_id_revisions_revision_id_reviewers**](ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers | 
-[**post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete**](ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/delete | 
+[**post_changes_change_id_revisions_revision_id_reviewers**](ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers | Add Reviewer
+[**post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete**](ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/delete | Delete Reviewer
 [**post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id_delete**](ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id_delete) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes/{vote_id}/delete | Delete vote
 [**post_changes_change_id_revisions_revision_id_submit**](ChangesApi.md#post_changes_change_id_revisions_revision_id_submit) | **POST** /changes/{change_id}/revisions/{revision_id}/submit | Submit Revision
 [**post_changes_change_id_revisions_revision_id_test_submit_rule**](ChangesApi.md#post_changes_change_id_revisions_revision_id_test_submit_rule) | **POST** /changes/{change_id}/revisions/{revision_id}/test.submit_rule | Test Submit Rule
@@ -510,7 +510,9 @@ Name | Type | Description  | Required | Notes
 ## delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id
 
 > delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id(change_id, revision_id, reviewer_id)
+Delete Reviewer
 
+'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/delete' --
 
 ### Parameters
 
@@ -540,7 +542,9 @@ Name | Type | Description  | Required | Notes
 ## delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id
 
 > delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id(change_id, revision_id, reviewer_id, vote_id)
+Delete Vote
 
+'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/votes/\\{label-id\\}/delete' --
 
 ### Parameters
 
@@ -890,7 +894,9 @@ Name | Type | Description  | Required | Notes
 ## get_changes_change_id_edit_change_edit_id
 
 > std::path::PathBuf get_changes_change_id_edit_change_edit_id(change_id, change_edit_id, base)
+Retrieve file content from Change Edit
 
+Retrieves content of a file from a change edit.
 
 ### Parameters
 
@@ -920,7 +926,9 @@ Name | Type | Description  | Required | Notes
 ## get_changes_change_id_edit_change_edit_id_meta
 
 > models::GetMetaFileInfo get_changes_change_id_edit_change_edit_id_meta(change_id, change_edit_id)
+Retrieve meta data of a file from Change Edit
 
+Retrieves meta data of a file from a change edit. Currently only web links are returned.
 
 ### Parameters
 
@@ -949,7 +957,9 @@ Name | Type | Description  | Required | Notes
 ## get_changes_change_id_edit_message
 
 > std::path::PathBuf get_changes_change_id_edit_message(change_id, base)
+Retrieve commit message from Change Edit or current patch set of the change
 
+Retrieves commit message from change edit.
 
 ### Parameters
 
@@ -2184,7 +2194,9 @@ Name | Type | Description  | Required | Notes
 ## get_changes_change_id_revisions_revision_id_reviewers_reviewer_id
 
 > Vec<models::ReviewerInfo> get_changes_change_id_revisions_revision_id_reviewers_reviewer_id(change_id, revision_id, reviewer_id)
+Get Reviewer
 
+Retrieves a reviewer of a change.
 
 ### Parameters
 
@@ -2745,7 +2757,9 @@ Name | Type | Description  | Required | Notes
 ## post_changes_change_id_edit_publish
 
 > post_changes_change_id_edit_publish(change_id, publish_change_edit_input)
+Publish Change Edit
 
+Promotes change edit to a regular patch set.
 
 ### Parameters
 
@@ -3053,7 +3067,9 @@ Name | Type | Description  | Required | Notes
 ## post_changes_change_id_private_delete
 
 > post_changes_change_id_private_delete(change_id, input_with_message)
+Unmark Private
 
+Marks the change to be non-private. Note users can only unmark own private changes.
 
 ### Parameters
 
@@ -3589,7 +3605,9 @@ Name | Type | Description  | Required | Notes
 ## post_changes_change_id_revisions_revision_id_reviewers
 
 > models::ReviewerResult post_changes_change_id_revisions_revision_id_reviewers(change_id, revision_id, reviewer_input)
+Add Reviewer
 
+Adds one user or all members of one group as reviewer to the change.
 
 ### Parameters
 
@@ -3619,7 +3637,9 @@ Name | Type | Description  | Required | Notes
 ## post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete
 
 > post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete(change_id, revision_id, reviewer_id, delete_reviewer_input)
+Delete Reviewer
 
+Deletes a reviewer from a change. Deleting a reviewer also removes that user from the attention set.
 
 ### Parameters
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **value** | Option<**i32**> | The vote that the user has given for the label. If present and zero, the user is permitted to vote on the label. If absent, the user is not permitted to vote on that label. | [optional]
 **date** | Option<**String**> | The time and date describing when the approval was made. | [optional]
 **post_submit** | Option<**bool**> | If true, this vote was made after the change was submitted. | [optional]
+**is_ai** | Option<**bool**> | If true, this vote was created by an AI agent. | [optional]
 **permitted_voting_range** | Option<[**models::VotingRangeInfo**](VotingRangeInfo.md)> | The VotingRangeInfo the user is authorized to vote on that label. If present, the user is permitted to vote on the label regarding the range values. If absent, the user is not permitted to vote on that label. | [optional]
 **_account_id** | Option<**i32**> | The numeric ID of the account. | [optional]
 **name** | Option<**String**> | The full name of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries. | [optional]

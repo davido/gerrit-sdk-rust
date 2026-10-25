@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **instance_id** | Option<**String**> | Short identifier for this Gerrit installation. | [optional]
 **default_branch** | Option<**String**> | Name of the default branch to use on the project creation. | [optional]
 **project_state_predicate_enabled** | Option<**bool**> | Whether the instance supports filtering projects by state. | [optional]
+**submit_commit_url** | Option<**String**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OwnerInput {
-    /// The id of the group that should own this group.
+    /// The group id of the group that should own this group. The group can be specified by UUID, legacy numeric ID, or unique name.
     #[serde(rename = "owner", skip_serializing_if = "Option::is_none")]
     pub owner: Option<String>,
 }

@@ -16,7 +16,7 @@ Method | HTTP request | Description
 [**get_projects_project_id_branches**](ProjectsApi.md#get_projects_project_id_branches) | **GET** /projects/{project_id}/branches | List branches
 [**get_projects_project_id_branches_branch_id**](ProjectsApi.md#get_projects_project_id_branches_branch_id) | **GET** /projects/{project_id}/branches/{branch_id} | Get Branch
 [**get_projects_project_id_branches_branch_id_files_file_id_content**](ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_content) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/content | Get Content
-[**get_projects_project_id_branches_branch_id_files_file_id_diff**](ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_diff) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/diff | 
+[**get_projects_project_id_branches_branch_id_files_file_id_diff**](ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_diff) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/diff | Get Diff for File
 [**get_projects_project_id_branches_branch_id_mergeable**](ProjectsApi.md#get_projects_project_id_branches_branch_id_mergeable) | **GET** /projects/{project_id}/branches/{branch_id}/mergeable | Get Mergeable Information
 [**get_projects_project_id_branches_branch_id_reflog**](ProjectsApi.md#get_projects_project_id_branches_branch_id_reflog) | **GET** /projects/{project_id}/branches/{branch_id}/reflog | Get Reflog
 [**get_projects_project_id_branches_branch_id_suggest_reviewers**](ProjectsApi.md#get_projects_project_id_branches_branch_id_suggest_reviewers) | **GET** /projects/{project_id}/branches/{branch_id}/suggest_reviewers | Suggest Reviewers
@@ -42,18 +42,20 @@ Method | HTTP request | Description
 [**get_projects_project_id_statistics_git**](ProjectsApi.md#get_projects_project_id_statistics_git) | **GET** /projects/{project_id}/statistics.git | Get Repository Statistics
 [**get_projects_project_id_submit_requirements**](ProjectsApi.md#get_projects_project_id_submit_requirements) | **GET** /projects/{project_id}/submit_requirements | List Submit Requirements
 [**get_projects_project_id_submit_requirements_submit_requirement_id**](ProjectsApi.md#get_projects_project_id_submit_requirements_submit_requirement_id) | **GET** /projects/{project_id}/submit_requirements/{submit_requirement_id} | Get Submit Requirement
+[**get_projects_project_id_submit_requirements_templates**](ProjectsApi.md#get_projects_project_id_submit_requirements_templates) | **GET** /projects/{project_id}/submit_requirements_templates | Get Submit Requirement Templates
+[**get_projects_project_id_submit_requirements_templates_submit_requirement_template_id**](ProjectsApi.md#get_projects_project_id_submit_requirements_templates_submit_requirement_template_id) | **GET** /projects/{project_id}/submit_requirements_templates/{submit_requirement_template_id} | Get Submit Requirement Template
 [**get_projects_project_id_tags**](ProjectsApi.md#get_projects_project_id_tags) | **GET** /projects/{project_id}/tags | List Tags
 [**get_projects_project_id_tags_tag_id**](ProjectsApi.md#get_projects_project_id_tags_tag_id) | **GET** /projects/{project_id}/tags/{tag_id} | Get Tag
 [**post_projects_project_id_access**](ProjectsApi.md#post_projects_project_id_access) | **POST** /projects/{project_id}/access | Add, Update and Delete Access Rights for Project
 [**post_projects_project_id_branches_branch_id_commit**](ProjectsApi.md#post_projects_project_id_branches_branch_id_commit) | **POST** /projects/{project_id}/branches/{branch_id}/commit | Create Commit
 [**post_projects_project_id_branches_delete**](ProjectsApi.md#post_projects_project_id_branches_delete) | **POST** /projects/{project_id}/branches:delete | Delete Branches
 [**post_projects_project_id_changes_delete**](ProjectsApi.md#post_projects_project_id_changes_delete) | **POST** /projects/{project_id}/changes:delete | Delete Changes
-[**post_projects_project_id_check**](ProjectsApi.md#post_projects_project_id_check) | **POST** /projects/{project_id}/check | 
+[**post_projects_project_id_check**](ProjectsApi.md#post_projects_project_id_check) | **POST** /projects/{project_id}/check | Check project consistency
 [**post_projects_project_id_commits_commit_id_cherrypick**](ProjectsApi.md#post_projects_project_id_commits_commit_id_cherrypick) | **POST** /projects/{project_id}/commits/{commit_id}/cherrypick | Cherry Pick Commit
-[**post_projects_project_id_create_change**](ProjectsApi.md#post_projects_project_id_create_change) | **POST** /projects/{project_id}/create.change | 
+[**post_projects_project_id_create_change**](ProjectsApi.md#post_projects_project_id_create_change) | **POST** /projects/{project_id}/create.change | Create Change for review
 [**post_projects_project_id_gc**](ProjectsApi.md#post_projects_project_id_gc) | **POST** /projects/{project_id}/gc | Run GC
-[**post_projects_project_id_index**](ProjectsApi.md#post_projects_project_id_index) | **POST** /projects/{project_id}/index | 
-[**post_projects_project_id_index_changes**](ProjectsApi.md#post_projects_project_id_index_changes) | **POST** /projects/{project_id}/index.changes | 
+[**post_projects_project_id_index**](ProjectsApi.md#post_projects_project_id_index) | **POST** /projects/{project_id}/index | Index project
+[**post_projects_project_id_index_changes**](ProjectsApi.md#post_projects_project_id_index_changes) | **POST** /projects/{project_id}/index.changes | Index all changes in a project
 [**post_projects_project_id_labels**](ProjectsApi.md#post_projects_project_id_labels) | **POST** /projects/{project_id}/labels | Batch Update Labels
 [**post_projects_project_id_labels_review**](ProjectsApi.md#post_projects_project_id_labels_review) | **POST** /projects/{project_id}/labels:review | Create Labels Change for review
 [**post_projects_project_id_migrate_labels**](ProjectsApi.md#post_projects_project_id_migrate_labels) | **POST** /projects/{project_id}/migrate-labels | Migrate label functions to submit requirements
@@ -62,7 +64,7 @@ Method | HTTP request | Description
 [**post_projects_project_id_submit_requirements_review**](ProjectsApi.md#post_projects_project_id_submit_requirements_review) | **POST** /projects/{project_id}/submit_requirements:review | Create Submit Requirements Change for review
 [**post_projects_project_id_tags_delete**](ProjectsApi.md#post_projects_project_id_tags_delete) | **POST** /projects/{project_id}/tags:delete | Delete Tags
 [**put_projects_project_id**](ProjectsApi.md#put_projects_project_id) | **PUT** /projects/{project_id} | Create project
-[**put_projects_project_id_access_review**](ProjectsApi.md#put_projects_project_id_access_review) | **PUT** /projects/{project_id}/access:review | 
+[**put_projects_project_id_access_review**](ProjectsApi.md#put_projects_project_id_access_review) | **PUT** /projects/{project_id}/access:review | Create Access Rights Change for review
 [**put_projects_project_id_ban**](ProjectsApi.md#put_projects_project_id_ban) | **PUT** /projects/{project_id}/ban | Ban Commit
 [**put_projects_project_id_branches_branch_id**](ProjectsApi.md#put_projects_project_id_branches_branch_id) | **PUT** /projects/{project_id}/branches/{branch_id} | Create Branch
 [**put_projects_project_id_config**](ProjectsApi.md#put_projects_project_id_config) | **PUT** /projects/{project_id}/config | Set Config
@@ -466,7 +468,9 @@ Name | Type | Description  | Required | Notes
 ## get_projects_project_id_branches_branch_id_files_file_id_diff
 
 > models::DiffInfo get_projects_project_id_branches_branch_id_files_file_id_diff(project_id, branch_id, file_id, base, intraline, whitespace)
+Get Diff for File
 
+Gets the diff for a single file between two commits. The base query parameter is required (same as Diff Between Commits).
 
 ### Parameters
 
@@ -1290,6 +1294,67 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
+## get_projects_project_id_submit_requirements_templates
+
+> Vec<models::SubmitRequirementInfo> get_projects_project_id_submit_requirements_templates(project_id)
+Get Submit Requirement Templates
+
+Retrieves submit requirement templates configured in project.config and in its parent projects.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**project_id** | **String** |  | [required] |
+
+### Return type
+
+[**Vec<models::SubmitRequirementInfo>**](SubmitRequirementInfo.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_projects_project_id_submit_requirements_templates_submit_requirement_template_id
+
+> models::SubmitRequirementInfo get_projects_project_id_submit_requirements_templates_submit_requirement_template_id(project_id, submit_requirement_template_id)
+Get Submit Requirement Template
+
+Retrieves a single effective submit requirement template for a project. The returned template may be defined in the project itself or inherited from one of its parent projects.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**project_id** | **String** |  | [required] |
+**submit_requirement_template_id** | **String** |  | [required] |
+
+### Return type
+
+[**models::SubmitRequirementInfo**](SubmitRequirementInfo.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
 ## get_projects_project_id_tags
 
 > Vec<models::TagInfo> get_projects_project_id_tags(project_id, descending, limit, r#match, regex, sort_by, start)
@@ -1485,7 +1550,9 @@ Name | Type | Description  | Required | Notes
 ## post_projects_project_id_check
 
 > models::CheckProjectResultInfo post_projects_project_id_check(project_id, check_project_input)
+Check project consistency
 
+Performs consistency checks on the project.
 
 ### Parameters
 
@@ -1546,7 +1613,9 @@ Name | Type | Description  | Required | Notes
 ## post_projects_project_id_create_change
 
 > models::ChangeInfo post_projects_project_id_create_change(project_id, change_input)
+Create Change for review
 
+This endpoint is functionally equivalent to create change in the change API, but it has the project name in the URL, which is easier to route in sharded deployments.
 
 ### Parameters
 
@@ -1606,7 +1675,9 @@ Name | Type | Description  | Required | Notes
 ## post_projects_project_id_index
 
 > serde_json::Value post_projects_project_id_index(project_id, index_project_input)
+Index project
 
+Adds or updates the current project (and children, if specified) in the secondary index. The indexing task is executed asynchronously in background and this command returns immediately if async is specified in the input.
 
 ### Parameters
 
@@ -1635,7 +1706,9 @@ Name | Type | Description  | Required | Notes
 ## post_projects_project_id_index_changes
 
 > serde_json::Value post_projects_project_id_index_changes(project_id)
+Index all changes in a project
 
+Adds or updates all the changes belonging to a project in the secondary index. The indexing task is executed asynchronously in background, so this command returns immediately.
 
 ### Parameters
 
@@ -1909,7 +1982,9 @@ Name | Type | Description  | Required | Notes
 ## put_projects_project_id_access_review
 
 > models::ChangeInfo put_projects_project_id_access_review(project_id, project_access_input)
+Create Access Rights Change for review
 
+Sets access rights for the project using the diff schema provided by ProjectAccessInput
 
 ### Parameters
 

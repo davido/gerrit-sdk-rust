@@ -76,7 +76,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**put_accounts_account_id_agreements**](docs/AccountsApi.md#put_accounts_account_id_agreements) | **PUT** /accounts/{account_id}/agreements | Sign Contributor Agreement
 *AccountsApi* | [**put_accounts_account_id_displayname**](docs/AccountsApi.md#put_accounts_account_id_displayname) | **PUT** /accounts/{account_id}/displayname | Set Display Name
 *AccountsApi* | [**put_accounts_account_id_emails_email_id**](docs/AccountsApi.md#put_accounts_account_id_emails_email_id) | **PUT** /accounts/{account_id}/emails/{email_id} | Create Account Email
-*AccountsApi* | [**put_accounts_account_id_emails_email_id_avatar**](docs/AccountsApi.md#put_accounts_account_id_emails_email_id_avatar) | **PUT** /accounts/{account_id}/emails/{email_id}/avatar | 
+*AccountsApi* | [**put_accounts_account_id_emails_email_id_avatar**](docs/AccountsApi.md#put_accounts_account_id_emails_email_id_avatar) | **PUT** /accounts/{account_id}/emails/{email_id}/avatar | Set Avatar Email
 *AccountsApi* | [**put_accounts_account_id_emails_email_id_preferred**](docs/AccountsApi.md#put_accounts_account_id_emails_email_id_preferred) | **PUT** /accounts/{account_id}/emails/{email_id}/preferred | Set Preferred Email
 *AccountsApi* | [**put_accounts_account_id_name**](docs/AccountsApi.md#put_accounts_account_id_name) | **PUT** /accounts/{account_id}/name | Set Account Name
 *AccountsApi* | [**put_accounts_account_id_password_http**](docs/AccountsApi.md#put_accounts_account_id_password_http) | **PUT** /accounts/{account_id}/password.http | Set/Generate HTTP Password
@@ -99,8 +99,8 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**delete_changes_change_id_revisions_revision_id_comments_comment_id**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_comments_comment_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/comments/{comment_id} | Delete Comment
 *ChangesApi* | [**delete_changes_change_id_revisions_revision_id_drafts_draft_comment_id**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_drafts_draft_comment_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/drafts/{draft_comment_id} | Delete Draft
 *ChangesApi* | [**delete_changes_change_id_revisions_revision_id_files_file_id_reviewed**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_files_file_id_reviewed) | **DELETE** /changes/{change_id}/revisions/{revision_id}/files/{file_id}/reviewed | Delete Reviewed
-*ChangesApi* | [**delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | 
-*ChangesApi* | [**delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes/{vote_id} | 
+*ChangesApi* | [**delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | Delete Reviewer
+*ChangesApi* | [**delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id**](docs/ChangesApi.md#delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id) | **DELETE** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes/{vote_id} | Delete Vote
 *ChangesApi* | [**delete_changes_change_id_topic**](docs/ChangesApi.md#delete_changes_change_id_topic) | **DELETE** /changes/{change_id}/topic | Delete Topic
 *ChangesApi* | [**get_changes**](docs/ChangesApi.md#get_changes) | **GET** /changes | Query changes
 *ChangesApi* | [**get_changes_change_id**](docs/ChangesApi.md#get_changes_change_id) | **GET** /changes/{change_id} | Get change
@@ -111,9 +111,9 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**get_changes_change_id_detail**](docs/ChangesApi.md#get_changes_change_id_detail) | **GET** /changes/{change_id}/detail | Get change detail
 *ChangesApi* | [**get_changes_change_id_drafts**](docs/ChangesApi.md#get_changes_change_id_drafts) | **GET** /changes/{change_id}/drafts | List Change Drafts
 *ChangesApi* | [**get_changes_change_id_edit**](docs/ChangesApi.md#get_changes_change_id_edit) | **GET** /changes/{change_id}/edit | Get change edit
-*ChangesApi* | [**get_changes_change_id_edit_change_edit_id**](docs/ChangesApi.md#get_changes_change_id_edit_change_edit_id) | **GET** /changes/{change_id}/edit/{change_edit_id} | 
-*ChangesApi* | [**get_changes_change_id_edit_change_edit_id_meta**](docs/ChangesApi.md#get_changes_change_id_edit_change_edit_id_meta) | **GET** /changes/{change_id}/edit/{change_edit_id}/meta | 
-*ChangesApi* | [**get_changes_change_id_edit_message**](docs/ChangesApi.md#get_changes_change_id_edit_message) | **GET** /changes/{change_id}/edit:message | 
+*ChangesApi* | [**get_changes_change_id_edit_change_edit_id**](docs/ChangesApi.md#get_changes_change_id_edit_change_edit_id) | **GET** /changes/{change_id}/edit/{change_edit_id} | Retrieve file content from Change Edit
+*ChangesApi* | [**get_changes_change_id_edit_change_edit_id_meta**](docs/ChangesApi.md#get_changes_change_id_edit_change_edit_id_meta) | **GET** /changes/{change_id}/edit/{change_edit_id}/meta | Retrieve meta data of a file from Change Edit
+*ChangesApi* | [**get_changes_change_id_edit_message**](docs/ChangesApi.md#get_changes_change_id_edit_message) | **GET** /changes/{change_id}/edit:message | Retrieve commit message from Change Edit or current patch set of the change
 *ChangesApi* | [**get_changes_change_id_flows**](docs/ChangesApi.md#get_changes_change_id_flows) | **GET** /changes/{change_id}/flows | List Flows
 *ChangesApi* | [**get_changes_change_id_flows_actions**](docs/ChangesApi.md#get_changes_change_id_flows_actions) | **GET** /changes/{change_id}/flows-actions | List Flows Actions
 *ChangesApi* | [**get_changes_change_id_flows_flow_id**](docs/ChangesApi.md#get_changes_change_id_flows_flow_id) | **GET** /changes/{change_id}/flows/{flow_id} | Get Flow
@@ -152,7 +152,7 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_related**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_related) | **GET** /changes/{change_id}/revisions/{revision_id}/related | List related changes
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_review**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_review) | **GET** /changes/{change_id}/revisions/{revision_id}/review | Get review
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_reviewers**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers | List Revision Reviewers
-*ChangesApi* | [**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | 
+*ChangesApi* | [**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id} | Get Reviewer
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes) | **GET** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes | List Revision Votes
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_robotcomments**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments | List Robot Comments
 *ChangesApi* | [**get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id**](docs/ChangesApi.md#get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id) | **GET** /changes/{change_id}/revisions/{revision_id}/robotcomments/{robot_comment_id} | Get Robot Comment
@@ -170,7 +170,7 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**post_changes_change_id_check_submit_requirement**](docs/ChangesApi.md#post_changes_change_id_check_submit_requirement) | **POST** /changes/{change_id}/check.submit_requirement | Check Submit Requirement
 *ChangesApi* | [**post_changes_change_id_custom_keyed_values**](docs/ChangesApi.md#post_changes_change_id_custom_keyed_values) | **POST** /changes/{change_id}/custom_keyed_values | Set Custom Keyed Values
 *ChangesApi* | [**post_changes_change_id_edit**](docs/ChangesApi.md#post_changes_change_id_edit) | **POST** /changes/{change_id}/edit | Restore file content or rename files in Change Edit
-*ChangesApi* | [**post_changes_change_id_edit_publish**](docs/ChangesApi.md#post_changes_change_id_edit_publish) | **POST** /changes/{change_id}/edit:publish | 
+*ChangesApi* | [**post_changes_change_id_edit_publish**](docs/ChangesApi.md#post_changes_change_id_edit_publish) | **POST** /changes/{change_id}/edit:publish | Publish Change Edit
 *ChangesApi* | [**post_changes_change_id_edit_rebase**](docs/ChangesApi.md#post_changes_change_id_edit_rebase) | **POST** /changes/{change_id}/edit:rebase | Rebase Change Edit
 *ChangesApi* | [**post_changes_change_id_flows**](docs/ChangesApi.md#post_changes_change_id_flows) | **POST** /changes/{change_id}/flows | Create Flow
 *ChangesApi* | [**post_changes_change_id_hashtags**](docs/ChangesApi.md#post_changes_change_id_hashtags) | **POST** /changes/{change_id}/hashtags | Set Hashtags
@@ -180,7 +180,7 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**post_changes_change_id_move**](docs/ChangesApi.md#post_changes_change_id_move) | **POST** /changes/{change_id}/move | Move change
 *ChangesApi* | [**post_changes_change_id_patch_apply**](docs/ChangesApi.md#post_changes_change_id_patch_apply) | **POST** /changes/{change_id}/patch:apply | Create patch-set from patch
 *ChangesApi* | [**post_changes_change_id_private**](docs/ChangesApi.md#post_changes_change_id_private) | **POST** /changes/{change_id}/private | Mark Private
-*ChangesApi* | [**post_changes_change_id_private_delete**](docs/ChangesApi.md#post_changes_change_id_private_delete) | **POST** /changes/{change_id}/private.delete | 
+*ChangesApi* | [**post_changes_change_id_private_delete**](docs/ChangesApi.md#post_changes_change_id_private_delete) | **POST** /changes/{change_id}/private.delete | Unmark Private
 *ChangesApi* | [**post_changes_change_id_ready**](docs/ChangesApi.md#post_changes_change_id_ready) | **POST** /changes/{change_id}/ready | Set Ready-For-Review
 *ChangesApi* | [**post_changes_change_id_rebase**](docs/ChangesApi.md#post_changes_change_id_rebase) | **POST** /changes/{change_id}/rebase | Rebase change
 *ChangesApi* | [**post_changes_change_id_rebase_chain**](docs/ChangesApi.md#post_changes_change_id_rebase_chain) | **POST** /changes/{change_id}/rebase:chain | Rebase Chain
@@ -197,8 +197,8 @@ Class | Method | HTTP request | Description
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_fixes_fix_id_apply**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_fixes_fix_id_apply) | **POST** /changes/{change_id}/revisions/{revision_id}/fixes/{fix_id}/apply | Apply Stored Fix
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_rebase**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_rebase) | **POST** /changes/{change_id}/revisions/{revision_id}/rebase | Rebase revision
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_review**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_review) | **POST** /changes/{change_id}/revisions/{revision_id}/review | Set review
-*ChangesApi* | [**post_changes_change_id_revisions_revision_id_reviewers**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers | 
-*ChangesApi* | [**post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/delete | 
+*ChangesApi* | [**post_changes_change_id_revisions_revision_id_reviewers**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers | Add Reviewer
+*ChangesApi* | [**post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/delete | Delete Reviewer
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id_delete**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id_delete) | **POST** /changes/{change_id}/revisions/{revision_id}/reviewers/{reviewer_id}/votes/{vote_id}/delete | Delete vote
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_submit**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_submit) | **POST** /changes/{change_id}/revisions/{revision_id}/submit | Submit Revision
 *ChangesApi* | [**post_changes_change_id_revisions_revision_id_test_submit_rule**](docs/ChangesApi.md#post_changes_change_id_revisions_revision_id_test_submit_rule) | **POST** /changes/{change_id}/revisions/{revision_id}/test.submit_rule | Test Submit Rule
@@ -219,7 +219,7 @@ Class | Method | HTTP request | Description
 *ConfigApi* | [**get_config_server_caches_cache_id**](docs/ConfigApi.md#get_config_server_caches_cache_id) | **GET** /config/server/caches/{cache_id} | Get Cache
 *ConfigApi* | [**get_config_server_capabilities**](docs/ConfigApi.md#get_config_server_capabilities) | **GET** /config/server/capabilities | List Capabilities
 *ConfigApi* | [**get_config_server_experiments**](docs/ConfigApi.md#get_config_server_experiments) | **GET** /config/server/experiments | List Experiments
-*ConfigApi* | [**get_config_server_experiments_experiment_id**](docs/ConfigApi.md#get_config_server_experiments_experiment_id) | **GET** /config/server/experiments/{experiment_id} | 
+*ConfigApi* | [**get_config_server_experiments_experiment_id**](docs/ConfigApi.md#get_config_server_experiments_experiment_id) | **GET** /config/server/experiments/{experiment_id} | Get Experiment
 *ConfigApi* | [**get_config_server_indexes**](docs/ConfigApi.md#get_config_server_indexes) | **GET** /config/server/indexes | List Indexes
 *ConfigApi* | [**get_config_server_indexes_index_id**](docs/ConfigApi.md#get_config_server_indexes_index_id) | **GET** /config/server/indexes/{index_id} | Get Index
 *ConfigApi* | [**get_config_server_indexes_index_id_versions**](docs/ConfigApi.md#get_config_server_indexes_index_id_versions) | **GET** /config/server/indexes/{index_id}/versions | List Index Versions
@@ -240,16 +240,15 @@ Class | Method | HTTP request | Description
 *ConfigApi* | [**post_config_server_caches**](docs/ConfigApi.md#post_config_server_caches) | **POST** /config/server/caches | Cache Operations
 *ConfigApi* | [**post_config_server_caches_cache_id_flush**](docs/ConfigApi.md#post_config_server_caches_cache_id_flush) | **POST** /config/server/caches/{cache_id}/flush | Flush Cache
 *ConfigApi* | [**post_config_server_check_consistency**](docs/ConfigApi.md#post_config_server_check_consistency) | **POST** /config/server/check.consistency | Check Consistency
-*ConfigApi* | [**post_config_server_cleanup_changes**](docs/ConfigApi.md#post_config_server_cleanup_changes) | **POST** /config/server/cleanup.changes | 
-*ConfigApi* | [**post_config_server_cleanup_draft_comments**](docs/ConfigApi.md#post_config_server_cleanup_draft_comments) | **POST** /config/server/cleanup.draft.comments | 
+*ConfigApi* | [**post_config_server_cleanup_draft_comments**](docs/ConfigApi.md#post_config_server_cleanup_draft_comments) | **POST** /config/server/cleanup.draft.comments | Cleanup of already published draft comments
 *ConfigApi* | [**post_config_server_deactivate_stale_accounts**](docs/ConfigApi.md#post_config_server_deactivate_stale_accounts) | **POST** /config/server/deactivate.stale.accounts | AccountDeactivation
-*ConfigApi* | [**post_config_server_index_changes**](docs/ConfigApi.md#post_config_server_index_changes) | **POST** /config/server/index.changes | 
+*ConfigApi* | [**post_config_server_index_changes**](docs/ConfigApi.md#post_config_server_index_changes) | **POST** /config/server/index.changes | Index a set of changes
 *ConfigApi* | [**post_config_server_indexes_index_id_flush**](docs/ConfigApi.md#post_config_server_indexes_index_id_flush) | **POST** /config/server/indexes/{index_id}/flush | Flush Index
 *ConfigApi* | [**post_config_server_indexes_index_id_snapshot**](docs/ConfigApi.md#post_config_server_indexes_index_id_snapshot) | **POST** /config/server/indexes/{index_id}/snapshot | Create Snapshot of one Index
 *ConfigApi* | [**post_config_server_indexes_index_id_versions_index_version_id_reindex**](docs/ConfigApi.md#post_config_server_indexes_index_id_versions_index_version_id_reindex) | **POST** /config/server/indexes/{index_id}/versions/{index_version_id}/reindex | Reindex an Index Version
 *ConfigApi* | [**post_config_server_indexes_index_id_versions_index_version_id_snapshot**](docs/ConfigApi.md#post_config_server_indexes_index_id_versions_index_version_id_snapshot) | **POST** /config/server/indexes/{index_id}/versions/{index_version_id}/snapshot | Create Snapshot of one Index Version
-*ConfigApi* | [**post_config_server_passwords_to_tokens**](docs/ConfigApi.md#post_config_server_passwords_to_tokens) | **POST** /config/server/passwords.to.tokens | 
-*ConfigApi* | [**post_config_server_reduce_token_lifetime**](docs/ConfigApi.md#post_config_server_reduce_token_lifetime) | **POST** /config/server/reduce.token.lifetime | 
+*ConfigApi* | [**post_config_server_passwords_to_tokens**](docs/ConfigApi.md#post_config_server_passwords_to_tokens) | **POST** /config/server/passwords.to.tokens | Migration of HTTP passwords to authentication tokens
+*ConfigApi* | [**post_config_server_reduce_token_lifetime**](docs/ConfigApi.md#post_config_server_reduce_token_lifetime) | **POST** /config/server/reduce.token.lifetime | Apply maximum lifetime to authentication tokens
 *ConfigApi* | [**post_config_server_reload**](docs/ConfigApi.md#post_config_server_reload) | **POST** /config/server/reload | Reload Config
 *ConfigApi* | [**post_config_server_snapshot_indexes**](docs/ConfigApi.md#post_config_server_snapshot_indexes) | **POST** /config/server/snapshot.indexes | Create Snapshot of All Indexes
 *ConfigApi* | [**put_config_server_email_confirm**](docs/ConfigApi.md#put_config_server_email_confirm) | **PUT** /config/server/email.confirm | Confirm Email
@@ -305,7 +304,7 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**get_projects_project_id_branches**](docs/ProjectsApi.md#get_projects_project_id_branches) | **GET** /projects/{project_id}/branches | List branches
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id) | **GET** /projects/{project_id}/branches/{branch_id} | Get Branch
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id_files_file_id_content**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_content) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/content | Get Content
-*ProjectsApi* | [**get_projects_project_id_branches_branch_id_files_file_id_diff**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_diff) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/diff | 
+*ProjectsApi* | [**get_projects_project_id_branches_branch_id_files_file_id_diff**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_files_file_id_diff) | **GET** /projects/{project_id}/branches/{branch_id}/files/{file_id}/diff | Get Diff for File
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id_mergeable**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_mergeable) | **GET** /projects/{project_id}/branches/{branch_id}/mergeable | Get Mergeable Information
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id_reflog**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_reflog) | **GET** /projects/{project_id}/branches/{branch_id}/reflog | Get Reflog
 *ProjectsApi* | [**get_projects_project_id_branches_branch_id_suggest_reviewers**](docs/ProjectsApi.md#get_projects_project_id_branches_branch_id_suggest_reviewers) | **GET** /projects/{project_id}/branches/{branch_id}/suggest_reviewers | Suggest Reviewers
@@ -331,18 +330,20 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**get_projects_project_id_statistics_git**](docs/ProjectsApi.md#get_projects_project_id_statistics_git) | **GET** /projects/{project_id}/statistics.git | Get Repository Statistics
 *ProjectsApi* | [**get_projects_project_id_submit_requirements**](docs/ProjectsApi.md#get_projects_project_id_submit_requirements) | **GET** /projects/{project_id}/submit_requirements | List Submit Requirements
 *ProjectsApi* | [**get_projects_project_id_submit_requirements_submit_requirement_id**](docs/ProjectsApi.md#get_projects_project_id_submit_requirements_submit_requirement_id) | **GET** /projects/{project_id}/submit_requirements/{submit_requirement_id} | Get Submit Requirement
+*ProjectsApi* | [**get_projects_project_id_submit_requirements_templates**](docs/ProjectsApi.md#get_projects_project_id_submit_requirements_templates) | **GET** /projects/{project_id}/submit_requirements_templates | Get Submit Requirement Templates
+*ProjectsApi* | [**get_projects_project_id_submit_requirements_templates_submit_requirement_template_id**](docs/ProjectsApi.md#get_projects_project_id_submit_requirements_templates_submit_requirement_template_id) | **GET** /projects/{project_id}/submit_requirements_templates/{submit_requirement_template_id} | Get Submit Requirement Template
 *ProjectsApi* | [**get_projects_project_id_tags**](docs/ProjectsApi.md#get_projects_project_id_tags) | **GET** /projects/{project_id}/tags | List Tags
 *ProjectsApi* | [**get_projects_project_id_tags_tag_id**](docs/ProjectsApi.md#get_projects_project_id_tags_tag_id) | **GET** /projects/{project_id}/tags/{tag_id} | Get Tag
 *ProjectsApi* | [**post_projects_project_id_access**](docs/ProjectsApi.md#post_projects_project_id_access) | **POST** /projects/{project_id}/access | Add, Update and Delete Access Rights for Project
 *ProjectsApi* | [**post_projects_project_id_branches_branch_id_commit**](docs/ProjectsApi.md#post_projects_project_id_branches_branch_id_commit) | **POST** /projects/{project_id}/branches/{branch_id}/commit | Create Commit
 *ProjectsApi* | [**post_projects_project_id_branches_delete**](docs/ProjectsApi.md#post_projects_project_id_branches_delete) | **POST** /projects/{project_id}/branches:delete | Delete Branches
 *ProjectsApi* | [**post_projects_project_id_changes_delete**](docs/ProjectsApi.md#post_projects_project_id_changes_delete) | **POST** /projects/{project_id}/changes:delete | Delete Changes
-*ProjectsApi* | [**post_projects_project_id_check**](docs/ProjectsApi.md#post_projects_project_id_check) | **POST** /projects/{project_id}/check | 
+*ProjectsApi* | [**post_projects_project_id_check**](docs/ProjectsApi.md#post_projects_project_id_check) | **POST** /projects/{project_id}/check | Check project consistency
 *ProjectsApi* | [**post_projects_project_id_commits_commit_id_cherrypick**](docs/ProjectsApi.md#post_projects_project_id_commits_commit_id_cherrypick) | **POST** /projects/{project_id}/commits/{commit_id}/cherrypick | Cherry Pick Commit
-*ProjectsApi* | [**post_projects_project_id_create_change**](docs/ProjectsApi.md#post_projects_project_id_create_change) | **POST** /projects/{project_id}/create.change | 
+*ProjectsApi* | [**post_projects_project_id_create_change**](docs/ProjectsApi.md#post_projects_project_id_create_change) | **POST** /projects/{project_id}/create.change | Create Change for review
 *ProjectsApi* | [**post_projects_project_id_gc**](docs/ProjectsApi.md#post_projects_project_id_gc) | **POST** /projects/{project_id}/gc | Run GC
-*ProjectsApi* | [**post_projects_project_id_index**](docs/ProjectsApi.md#post_projects_project_id_index) | **POST** /projects/{project_id}/index | 
-*ProjectsApi* | [**post_projects_project_id_index_changes**](docs/ProjectsApi.md#post_projects_project_id_index_changes) | **POST** /projects/{project_id}/index.changes | 
+*ProjectsApi* | [**post_projects_project_id_index**](docs/ProjectsApi.md#post_projects_project_id_index) | **POST** /projects/{project_id}/index | Index project
+*ProjectsApi* | [**post_projects_project_id_index_changes**](docs/ProjectsApi.md#post_projects_project_id_index_changes) | **POST** /projects/{project_id}/index.changes | Index all changes in a project
 *ProjectsApi* | [**post_projects_project_id_labels**](docs/ProjectsApi.md#post_projects_project_id_labels) | **POST** /projects/{project_id}/labels | Batch Update Labels
 *ProjectsApi* | [**post_projects_project_id_labels_review**](docs/ProjectsApi.md#post_projects_project_id_labels_review) | **POST** /projects/{project_id}/labels:review | Create Labels Change for review
 *ProjectsApi* | [**post_projects_project_id_migrate_labels**](docs/ProjectsApi.md#post_projects_project_id_migrate_labels) | **POST** /projects/{project_id}/migrate-labels | Migrate label functions to submit requirements
@@ -351,7 +352,7 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**post_projects_project_id_submit_requirements_review**](docs/ProjectsApi.md#post_projects_project_id_submit_requirements_review) | **POST** /projects/{project_id}/submit_requirements:review | Create Submit Requirements Change for review
 *ProjectsApi* | [**post_projects_project_id_tags_delete**](docs/ProjectsApi.md#post_projects_project_id_tags_delete) | **POST** /projects/{project_id}/tags:delete | Delete Tags
 *ProjectsApi* | [**put_projects_project_id**](docs/ProjectsApi.md#put_projects_project_id) | **PUT** /projects/{project_id} | Create project
-*ProjectsApi* | [**put_projects_project_id_access_review**](docs/ProjectsApi.md#put_projects_project_id_access_review) | **PUT** /projects/{project_id}/access:review | 
+*ProjectsApi* | [**put_projects_project_id_access_review**](docs/ProjectsApi.md#put_projects_project_id_access_review) | **PUT** /projects/{project_id}/access:review | Create Access Rights Change for review
 *ProjectsApi* | [**put_projects_project_id_ban**](docs/ProjectsApi.md#put_projects_project_id_ban) | **PUT** /projects/{project_id}/ban | Ban Commit
 *ProjectsApi* | [**put_projects_project_id_branches_branch_id**](docs/ProjectsApi.md#put_projects_project_id_branches_branch_id) | **PUT** /projects/{project_id}/branches/{branch_id} | Create Branch
 *ProjectsApi* | [**put_projects_project_id_config**](docs/ProjectsApi.md#put_projects_project_id_config) | **PUT** /projects/{project_id}/config | Set Config
@@ -422,7 +423,6 @@ Class | Method | HTTP request | Description
  - [CheckProjectInput](docs/CheckProjectInput.md)
  - [CheckProjectResultInfo](docs/CheckProjectResultInfo.md)
  - [CherryPickInput](docs/CherryPickInput.md)
- - [CleanupChangesInput](docs/CleanupChangesInput.md)
  - [CommentInfo](docs/CommentInfo.md)
  - [CommentInput](docs/CommentInput.md)
  - [CommentLinkInfo](docs/CommentLinkInfo.md)
@@ -481,7 +481,6 @@ Class | Method | HTTP request | Description
  - [EvaluateChangeQueryExpressionResultInfo](docs/EvaluateChangeQueryExpressionResultInfo.md)
  - [ExperimentInfo](docs/ExperimentInfo.md)
  - [FetchInfo](docs/FetchInfo.md)
- - [FieldJson](docs/FieldJson.md)
  - [FileChange](docs/FileChange.md)
  - [FileContentInput](docs/FileContentInput.md)
  - [FileMeta](docs/FileMeta.md)
@@ -544,7 +543,8 @@ Class | Method | HTTP request | Description
  - [MergePatchSetInput](docs/MergePatchSetInput.md)
  - [MergeableInfo](docs/MergeableInfo.md)
  - [MetadataInfo](docs/MetadataInfo.md)
- - [MetricJson](docs/MetricJson.md)
+ - [MetricFieldInfo](docs/MetricFieldInfo.md)
+ - [MetricInfo](docs/MetricInfo.md)
  - [MigrateLabelFunctionsToSubmitRequirementStatus](docs/MigrateLabelFunctionsToSubmitRequirementStatus.md)
  - [MigrateLabelsInfo](docs/MigrateLabelsInfo.md)
  - [MigrateLabelsReviewInfo](docs/MigrateLabelsReviewInfo.md)

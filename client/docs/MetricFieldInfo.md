@@ -1,4 +1,4 @@
-# FieldJson
+# MetricFieldInfo
 
 ## Properties
 

@@ -1328,6 +1328,7 @@ pub fn delete_changes_change_id_revisions_revision_id_files_file_id_reviewed(con
     }
 }
 
+/// 'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/delete' --
 pub fn delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, reviewer_id: &str) -> Result<(), Error<DeleteChangesChangeIdRevisionsRevisionIdReviewersReviewerIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -1359,6 +1360,7 @@ pub fn delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id(conf
     }
 }
 
+/// 'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/votes/\\{label-id\\}/delete' --
 pub fn delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, reviewer_id: &str, vote_id: &str) -> Result<(), Error<DeleteChangesChangeIdRevisionsRevisionIdReviewersReviewerIdVotesVoteIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -1890,6 +1892,7 @@ pub fn get_changes_change_id_edit(configuration: &configuration::Configuration, 
     }
 }
 
+/// Retrieves content of a file from a change edit.
 pub fn get_changes_change_id_edit_change_edit_id(configuration: &configuration::Configuration, change_id: &str, change_edit_id: &str, base: Option<bool>) -> Result<reqwest::blocking::Response, Error<GetChangesChangeIdEditChangeEditIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -1924,6 +1927,7 @@ pub fn get_changes_change_id_edit_change_edit_id(configuration: &configuration::
     }
 }
 
+/// Retrieves meta data of a file from a change edit. Currently only web links are returned.
 pub fn get_changes_change_id_edit_change_edit_id_meta(configuration: &configuration::Configuration, change_id: &str, change_edit_id: &str) -> Result<models::GetMetaFileInfo, Error<GetChangesChangeIdEditChangeEditIdMetaError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -1966,6 +1970,7 @@ pub fn get_changes_change_id_edit_change_edit_id_meta(configuration: &configurat
     }
 }
 
+/// Retrieves commit message from change edit.
 pub fn get_changes_change_id_edit_message(configuration: &configuration::Configuration, change_id: &str, base: Option<bool>) -> Result<reqwest::blocking::Response, Error<GetChangesChangeIdEditMessageError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -3715,6 +3720,7 @@ pub fn get_changes_change_id_revisions_revision_id_reviewers(configuration: &con
     }
 }
 
+/// Retrieves a reviewer of a change.
 pub fn get_changes_change_id_revisions_revision_id_reviewers_reviewer_id(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, reviewer_id: &str) -> Result<Vec<models::ReviewerInfo>, Error<GetChangesChangeIdRevisionsRevisionIdReviewersReviewerIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -4501,6 +4507,7 @@ pub fn post_changes_change_id_edit(configuration: &configuration::Configuration,
     }
 }
 
+/// Promotes change edit to a regular patch set.
 pub fn post_changes_change_id_edit_publish(configuration: &configuration::Configuration, change_id: &str, publish_change_edit_input: Option<models::PublishChangeEditInput>) -> Result<(), Error<PostChangesChangeIdEditPublishError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -4915,6 +4922,7 @@ pub fn post_changes_change_id_private(configuration: &configuration::Configurati
     }
 }
 
+/// Marks the change to be non-private. Note users can only unmark own private changes.
 pub fn post_changes_change_id_private_delete(configuration: &configuration::Configuration, change_id: &str, input_with_message: Option<models::InputWithMessage>) -> Result<(), Error<PostChangesChangeIdPrivateDeleteError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -5636,6 +5644,7 @@ pub fn post_changes_change_id_revisions_revision_id_review(configuration: &confi
     }
 }
 
+/// Adds one user or all members of one group as reviewer to the change.
 pub fn post_changes_change_id_revisions_revision_id_reviewers(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, reviewer_input: Option<models::ReviewerInput>) -> Result<models::ReviewerResult, Error<PostChangesChangeIdRevisionsRevisionIdReviewersError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;
@@ -5680,6 +5689,7 @@ pub fn post_changes_change_id_revisions_revision_id_reviewers(configuration: &co
     }
 }
 
+/// Deletes a reviewer from a change. Deleting a reviewer also removes that user from the attention set.
 pub fn post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete(configuration: &configuration::Configuration, change_id: &str, revision_id: &str, reviewer_id: &str, delete_reviewer_input: Option<models::DeleteReviewerInput>) -> Result<(), Error<PostChangesChangeIdRevisionsRevisionIdReviewersReviewerIdDeleteError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_change_id = change_id;

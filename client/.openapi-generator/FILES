@@ -60,7 +60,6 @@ docs/CheckGroupsResultInfo.md
 docs/CheckProjectInput.md
 docs/CheckProjectResultInfo.md
 docs/CherryPickInput.md
-docs/CleanupChangesInput.md
 docs/CommentInfo.md
 docs/CommentInput.md
 docs/CommentLinkInfo.md
@@ -120,7 +119,6 @@ docs/EntriesInfo.md
 docs/EvaluateChangeQueryExpressionResultInfo.md
 docs/ExperimentInfo.md
 docs/FetchInfo.md
-docs/FieldJson.md
 docs/FileChange.md
 docs/FileContentInput.md
 docs/FileMeta.md
@@ -184,7 +182,8 @@ docs/MergeInput.md
 docs/MergePatchSetInput.md
 docs/MergeableInfo.md
 docs/MetadataInfo.md
-docs/MetricJson.md
+docs/MetricFieldInfo.md
+docs/MetricInfo.md
 docs/MigrateLabelFunctionsToSubmitRequirementStatus.md
 docs/MigrateLabelsInfo.md
 docs/MigrateLabelsReviewInfo.md
@@ -355,7 +354,6 @@ src/models/check_groups_result_info.rs
 src/models/check_project_input.rs
 src/models/check_project_result_info.rs
 src/models/cherry_pick_input.rs
-src/models/cleanup_changes_input.rs
 src/models/comment_info.rs
 src/models/comment_input.rs
 src/models/comment_link_info.rs
@@ -414,7 +412,6 @@ src/models/entries_info.rs
 src/models/evaluate_change_query_expression_result_info.rs
 src/models/experiment_info.rs
 src/models/fetch_info.rs
-src/models/field_json.rs
 src/models/file_change.rs
 src/models/file_content_input.rs
 src/models/file_meta.rs
@@ -477,7 +474,8 @@ src/models/merge_input.rs
 src/models/merge_patch_set_input.rs
 src/models/mergeable_info.rs
 src/models/metadata_info.rs
-src/models/metric_json.rs
+src/models/metric_field_info.rs
+src/models/metric_info.rs
 src/models/migrate_label_functions_to_submit_requirement_status.rs
 src/models/migrate_labels_info.rs
 src/models/migrate_labels_review_info.rs

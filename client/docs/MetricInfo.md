@@ -1,4 +1,4 @@
-# MetricJson
+# MetricInfo
 
 ## Properties
 
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **max** | Option<**f64**> | The maximum recorded value. | [optional]
 **sum** | Option<**f64**> | The sum of the recorded values. | [optional]
 **std_dev** | Option<**f64**> | The standard deviation of the recorded values. | [optional]
-**fields** | Option<[**Vec<models::FieldJson>**](FieldJson.md)> | The fields of the metric as a list of FieldJson entities. | [optional]
+**fields** | Option<[**Vec<models::MetricFieldInfo>**](MetricFieldInfo.md)> | The fields of the metric as a list of MetricFieldInfo entities. | [optional]
 **buckets** | Option<**std::collections::HashMap<String, serde_json::Value>**> | The per-field-value breakdown of the metric, as a map of field values to the recorded value for that combination. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

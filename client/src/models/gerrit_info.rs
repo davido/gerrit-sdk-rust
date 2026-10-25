@@ -43,6 +43,8 @@ pub struct GerritInfo {
     /// Whether the instance supports filtering projects by state.
     #[serde(rename = "project_state_predicate_enabled", skip_serializing_if = "Option::is_none")]
     pub project_state_predicate_enabled: Option<bool>,
+    #[serde(rename = "submit_commit_url", skip_serializing_if = "Option::is_none")]
+    pub submit_commit_url: Option<String>,
 }
 
 impl GerritInfo {
@@ -58,6 +60,7 @@ impl GerritInfo {
             instance_id: None,
             default_branch: None,
             project_state_predicate_enabled: None,
+            submit_commit_url: None,
         }
     }
 }

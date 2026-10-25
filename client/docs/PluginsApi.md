@@ -114,6 +114,8 @@ Name | Type | Description  | Required | Notes
 > models::PluginInfo post_plugins_plugin_id_gerrit_disable(plugin_id)
 Disable Plugin
 
+Disables a plugin on the Gerrit server.
+
 ### Parameters
 
 

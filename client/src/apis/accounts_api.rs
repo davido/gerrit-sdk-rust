@@ -2480,6 +2480,7 @@ pub fn put_accounts_account_id_emails_email_id(configuration: &configuration::Co
     }
 }
 
+/// Sets an email address as the avatar email address for an account. The avatar email address is used for avatar lookup, e.g. via Gravatar.
 pub fn put_accounts_account_id_emails_email_id_avatar(configuration: &configuration::Configuration, account_id: &str, email_id: &str) -> Result<String, Error<PutAccountsAccountIdEmailsEmailIdAvatarError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_account_id = account_id;

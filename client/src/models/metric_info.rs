@@ -12,7 +12,7 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct MetricJson {
+pub struct MetricInfo {
     /// The description of the metric.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
@@ -82,17 +82,17 @@ pub struct MetricJson {
     /// The standard deviation of the recorded values.
     #[serde(rename = "std_dev", skip_serializing_if = "Option::is_none")]
     pub std_dev: Option<f64>,
-    /// The fields of the metric as a list of FieldJson entities.
+    /// The fields of the metric as a list of MetricFieldInfo entities.
     #[serde(rename = "fields", skip_serializing_if = "Option::is_none")]
-    pub fields: Option<Vec<models::FieldJson>>,
+    pub fields: Option<Vec<models::MetricFieldInfo>>,
     /// The per-field-value breakdown of the metric, as a map of field values to the recorded value for that combination.
     #[serde(rename = "buckets", skip_serializing_if = "Option::is_none")]
     pub buckets: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 
-impl MetricJson {
-    pub fn new() -> MetricJson {
-        MetricJson {
+impl MetricInfo {
+    pub fn new() -> MetricInfo {
+        MetricInfo {
             description: None,
             unit: None,
             constant: None,

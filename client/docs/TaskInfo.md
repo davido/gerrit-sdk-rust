@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | Option<**String**> | The ID of the task. | [optional]
-**state** | Option<[**models::State**](State.md)> | The state of the task, can be DONE, CANCELLED, RUNNING, READY, SLEEPING and OTHER. | [optional]
+**state** | Option<[**models::State**](State.md)> | The state of the task, can be DONE, CANCELLED, STOPPING, RUNNING, STARTING, PARKED, READY, SLEEPING and OTHER. | [optional]
 **start_time** | Option<**String**> | The start time of the task. | [optional]
 **delay** | Option<**i32**> | The remaining delay of the task. | [optional]
 **command** | Option<**String**> | The command of the task. | [optional]

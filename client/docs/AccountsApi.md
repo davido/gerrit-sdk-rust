@@ -53,7 +53,7 @@ Method | HTTP request | Description
 [**put_accounts_account_id_agreements**](AccountsApi.md#put_accounts_account_id_agreements) | **PUT** /accounts/{account_id}/agreements | Sign Contributor Agreement
 [**put_accounts_account_id_displayname**](AccountsApi.md#put_accounts_account_id_displayname) | **PUT** /accounts/{account_id}/displayname | Set Display Name
 [**put_accounts_account_id_emails_email_id**](AccountsApi.md#put_accounts_account_id_emails_email_id) | **PUT** /accounts/{account_id}/emails/{email_id} | Create Account Email
-[**put_accounts_account_id_emails_email_id_avatar**](AccountsApi.md#put_accounts_account_id_emails_email_id_avatar) | **PUT** /accounts/{account_id}/emails/{email_id}/avatar | 
+[**put_accounts_account_id_emails_email_id_avatar**](AccountsApi.md#put_accounts_account_id_emails_email_id_avatar) | **PUT** /accounts/{account_id}/emails/{email_id}/avatar | Set Avatar Email
 [**put_accounts_account_id_emails_email_id_preferred**](AccountsApi.md#put_accounts_account_id_emails_email_id_preferred) | **PUT** /accounts/{account_id}/emails/{email_id}/preferred | Set Preferred Email
 [**put_accounts_account_id_name**](AccountsApi.md#put_accounts_account_id_name) | **PUT** /accounts/{account_id}/name | Set Account Name
 [**put_accounts_account_id_password_http**](AccountsApi.md#put_accounts_account_id_password_http) | **PUT** /accounts/{account_id}/password.http | Set/Generate HTTP Password
@@ -1567,7 +1567,9 @@ Name | Type | Description  | Required | Notes
 ## put_accounts_account_id_emails_email_id_avatar
 
 > String put_accounts_account_id_emails_email_id_avatar(account_id, email_id)
+Set Avatar Email
 
+Sets an email address as the avatar email address for an account. The avatar email address is used for avatar lookup, e.g. via Gravatar.
 
 ### Parameters
 

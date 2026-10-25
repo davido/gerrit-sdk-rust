@@ -25,7 +25,7 @@ pub struct ActionInfo {
     /// If true the action is permitted at this time and the caller is likely allowed to execute it. This may change if state is updated at the server or permissions are modified. Not present if false.
     #[serde(rename = "enabled", skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
-    /// Optional list of enabled options. + See the list of suppported options below.
+    /// Optional list of enabled options. + See the list of supported options below.
     #[serde(rename = "enabled_options", skip_serializing_if = "Option::is_none")]
     pub enabled_options: Option<Vec<String>>,
 }

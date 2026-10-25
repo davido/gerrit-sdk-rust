@@ -25,6 +25,9 @@ pub struct ApprovalInfo {
     /// If true, this vote was made after the change was submitted.
     #[serde(rename = "post_submit", skip_serializing_if = "Option::is_none")]
     pub post_submit: Option<bool>,
+    /// If true, this vote was created by an AI agent.
+    #[serde(rename = "is_ai", skip_serializing_if = "Option::is_none")]
+    pub is_ai: Option<bool>,
     /// The VotingRangeInfo the user is authorized to vote on that label. If present, the user is permitted to vote on the label regarding the range values. If absent, the user is not permitted to vote on that label.
     #[serde(rename = "permitted_voting_range", skip_serializing_if = "Option::is_none")]
     pub permitted_voting_range: Option<Box<models::VotingRangeInfo>>,
@@ -73,6 +76,7 @@ impl ApprovalInfo {
             value: None,
             date: None,
             post_submit: None,
+            is_ai: None,
             permitted_voting_range: None,
             _account_id: None,
             name: None,

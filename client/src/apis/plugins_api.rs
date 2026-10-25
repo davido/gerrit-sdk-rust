@@ -215,6 +215,7 @@ pub fn get_plugins_plugin_id_gerrit_status(configuration: &configuration::Config
     }
 }
 
+/// Disables a plugin on the Gerrit server.
 pub fn post_plugins_plugin_id_gerrit_disable(configuration: &configuration::Configuration, plugin_id: &str) -> Result<models::PluginInfo, Error<PostPluginsPluginIdGerritDisableError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_plugin_id = plugin_id;

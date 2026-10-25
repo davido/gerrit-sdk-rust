@@ -197,13 +197,6 @@ pub enum PostConfigServerCheckConsistencyError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`post_config_server_cleanup_changes`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum PostConfigServerCleanupChangesError {
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`post_config_server_cleanup_draft_comments`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -518,6 +511,7 @@ pub fn get_config_server_experiments(configuration: &configuration::Configuratio
     }
 }
 
+/// Retrieves the details of the experiment with the given name.
 pub fn get_config_server_experiments_experiment_id(configuration: &configuration::Configuration, experiment_id: &str) -> Result<models::ExperimentInfo, Error<GetConfigServerExperimentsExperimentIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_experiment_id = experiment_id;
@@ -766,7 +760,7 @@ pub fn get_config_server_info(configuration: &configuration::Configuration, ) ->
     }
 }
 
-/// Lists the globally defined labels (labels that are added programatically via the LabelType extension point).
+/// Lists the globally defined labels (labels that are added programmatically via the LabelType extension point).
 pub fn get_config_server_labels(configuration: &configuration::Configuration, ) -> Result<Vec<models::LabelDefinitionInfo>, Error<GetConfigServerLabelsError>> {
 
     let uri_str = format!("{}/config/server/labels", configuration.base_path);
@@ -806,8 +800,8 @@ pub fn get_config_server_labels(configuration: &configuration::Configuration, ) 
     }
 }
 
-/// Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
-pub fn get_config_server_metrics(configuration: &configuration::Configuration, data_only: Option<bool>, prefix: Option<Vec<String>>) -> Result<std::collections::HashMap<String, models::MetricJson>, Error<GetConfigServerMetricsError>> {
+/// Lists the metrics of the server, returning a map of metric name to a MetricInfo entity.
+pub fn get_config_server_metrics(configuration: &configuration::Configuration, data_only: Option<bool>, prefix: Option<Vec<String>>) -> Result<std::collections::HashMap<String, models::MetricInfo>, Error<GetConfigServerMetricsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_data_only = data_only;
     let p_query_prefix = prefix;
@@ -847,8 +841,8 @@ pub fn get_config_server_metrics(configuration: &configuration::Configuration, d
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::MetricJson&gt;`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::MetricJson&gt;`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::MetricInfo&gt;`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `std::collections::HashMap&lt;String, models::MetricInfo&gt;`")))),
         }
     } else {
         let content = resp.text()?;
@@ -859,7 +853,7 @@ pub fn get_config_server_metrics(configuration: &configuration::Configuration, d
 }
 
 /// Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
-pub fn get_config_server_metrics_metric_id(configuration: &configuration::Configuration, metric_id: &str, data_only: Option<bool>) -> Result<models::MetricJson, Error<GetConfigServerMetricsMetricIdError>> {
+pub fn get_config_server_metrics_metric_id(configuration: &configuration::Configuration, metric_id: &str, data_only: Option<bool>) -> Result<models::MetricInfo, Error<GetConfigServerMetricsMetricIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_metric_id = metric_id;
     let p_query_data_only = data_only;
@@ -893,8 +887,8 @@ pub fn get_config_server_metrics_metric_id(configuration: &configuration::Config
         let content = crate::xssi::strip(&content).to_string();
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::MetricJson`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::MetricJson`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::MetricInfo`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::MetricInfo`")))),
         }
     } else {
         let content = resp.text()?;
@@ -1024,7 +1018,7 @@ pub fn get_config_server_preferences_edit(configuration: &configuration::Configu
     }
 }
 
-/// Lists the globally defined submit requirements (submit requirements that are added programatically via the SubmitRequirement extension point).
+/// Lists the globally defined submit requirements (submit requirements that are added programmatically via the SubmitRequirement extension point).
 pub fn get_config_server_submit_requirements(configuration: &configuration::Configuration, ) -> Result<Vec<models::SubmitRequirementInfo>, Error<GetConfigServerSubmitRequirementsError>> {
 
     let uri_str = format!("{}/config/server/submit-requirements", configuration.base_path);
@@ -1110,11 +1104,19 @@ pub fn get_config_server_summary(configuration: &configuration::Configuration, j
 }
 
 /// Lists the tasks from the background work queues that the Gerrit daemon is currently performing, or will perform in the near future.
-pub fn get_config_server_tasks(configuration: &configuration::Configuration, ) -> Result<Vec<models::TaskInfo>, Error<GetConfigServerTasksError>> {
+pub fn get_config_server_tasks(configuration: &configuration::Configuration, state: Option<Vec<String>>) -> Result<Vec<models::TaskInfo>, Error<GetConfigServerTasksError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_query_state = state;
 
     let uri_str = format!("{}/config/server/tasks", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_query_state {
+        req_builder = match "multi" {
+            "multi" => req_builder.query(&param_value.into_iter().map(|p| ("state".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => req_builder.query(&[("state", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -1404,48 +1406,7 @@ pub fn post_config_server_check_consistency(configuration: &configuration::Confi
     }
 }
 
-pub fn post_config_server_cleanup_changes(configuration: &configuration::Configuration, cleanup_changes_input: Option<models::CleanupChangesInput>) -> Result<serde_json::Value, Error<PostConfigServerCleanupChangesError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_body_cleanup_changes_input = cleanup_changes_input;
-
-    let uri_str = format!("{}/config/server/cleanup.changes", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref auth_conf) = configuration.basic_auth {
-        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
-    };
-    req_builder = req_builder.json(&p_body_cleanup_changes_input);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req)?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text()?;
-        let content = crate::xssi::strip(&content).to_string();
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
-        }
-    } else {
-        let content = resp.text()?;
-        let content = crate::xssi::strip(&content).to_string();
-        let entity: Option<PostConfigServerCleanupChangesError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
+/// This endpoint allows Gerrit administrators to cleanup already published draft comments that were not deleted.
 pub fn post_config_server_cleanup_draft_comments(configuration: &configuration::Configuration, ) -> Result<serde_json::Value, Error<PostConfigServerCleanupDraftCommentsError>> {
 
     let uri_str = format!("{}/config/server/cleanup.draft.comments", configuration.base_path);
@@ -1525,6 +1486,7 @@ pub fn post_config_server_deactivate_stale_accounts(configuration: &configuratio
     }
 }
 
+/// This endpoint allows Gerrit admins to index a set of changes with one request by providing a IndexChangesInput entity.
 pub fn post_config_server_index_changes(configuration: &configuration::Configuration, index_changes_input: Option<models::IndexChangesInput>) -> Result<String, Error<PostConfigServerIndexChangesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_body_index_changes_input = index_changes_input;
@@ -1731,6 +1693,7 @@ pub fn post_config_server_indexes_index_id_versions_index_version_id_snapshot(co
     }
 }
 
+/// This endpoint allows Gerrit administrators to migrate remaining HTTP passwords to authentication tokens. For the user the migration is invisible, i.e. the same credential is still valid.
 pub fn post_config_server_passwords_to_tokens(configuration: &configuration::Configuration, migrate_passwords_to_tokens_input: Option<models::MigratePasswordsToTokensInput>) -> Result<serde_json::Value, Error<PostConfigServerPasswordsToTokensError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_body_migrate_passwords_to_tokens_input = migrate_passwords_to_tokens_input;
@@ -1773,6 +1736,7 @@ pub fn post_config_server_passwords_to_tokens(configuration: &configuration::Con
     }
 }
 
+/// This endpoint allows Gerrit administrators to apply a shorter maximum lifetime to existing authentication tokens. This is required, when a shorter maximum lifetime is enforced. Changing the configuration will not apply that maximum to existing tokens.
 pub fn post_config_server_reduce_token_lifetime(configuration: &configuration::Configuration, reduce_max_token_lifetime_input: Option<models::ReduceMaxTokenLifetimeInput>) -> Result<serde_json::Value, Error<PostConfigServerReduceTokenLifetimeError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_body_reduce_max_token_lifetime_input = reduce_max_token_lifetime_input;

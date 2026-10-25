@@ -16,7 +16,7 @@ pub struct TaskInfo {
     /// The ID of the task.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    /// The state of the task, can be DONE, CANCELLED, RUNNING, READY, SLEEPING and OTHER.
+    /// The state of the task, can be DONE, CANCELLED, STOPPING, RUNNING, STARTING, PARKED, READY, SLEEPING and OTHER.
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::State>,
     /// The start time of the task.

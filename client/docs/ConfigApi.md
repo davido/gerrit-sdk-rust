@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**get_config_server_caches_cache_id**](ConfigApi.md#get_config_server_caches_cache_id) | **GET** /config/server/caches/{cache_id} | Get Cache
 [**get_config_server_capabilities**](ConfigApi.md#get_config_server_capabilities) | **GET** /config/server/capabilities | List Capabilities
 [**get_config_server_experiments**](ConfigApi.md#get_config_server_experiments) | **GET** /config/server/experiments | List Experiments
-[**get_config_server_experiments_experiment_id**](ConfigApi.md#get_config_server_experiments_experiment_id) | **GET** /config/server/experiments/{experiment_id} | 
+[**get_config_server_experiments_experiment_id**](ConfigApi.md#get_config_server_experiments_experiment_id) | **GET** /config/server/experiments/{experiment_id} | Get Experiment
 [**get_config_server_indexes**](ConfigApi.md#get_config_server_indexes) | **GET** /config/server/indexes | List Indexes
 [**get_config_server_indexes_index_id**](ConfigApi.md#get_config_server_indexes_index_id) | **GET** /config/server/indexes/{index_id} | Get Index
 [**get_config_server_indexes_index_id_versions**](ConfigApi.md#get_config_server_indexes_index_id_versions) | **GET** /config/server/indexes/{index_id}/versions | List Index Versions
@@ -30,16 +30,15 @@ Method | HTTP request | Description
 [**post_config_server_caches**](ConfigApi.md#post_config_server_caches) | **POST** /config/server/caches | Cache Operations
 [**post_config_server_caches_cache_id_flush**](ConfigApi.md#post_config_server_caches_cache_id_flush) | **POST** /config/server/caches/{cache_id}/flush | Flush Cache
 [**post_config_server_check_consistency**](ConfigApi.md#post_config_server_check_consistency) | **POST** /config/server/check.consistency | Check Consistency
-[**post_config_server_cleanup_changes**](ConfigApi.md#post_config_server_cleanup_changes) | **POST** /config/server/cleanup.changes | 
-[**post_config_server_cleanup_draft_comments**](ConfigApi.md#post_config_server_cleanup_draft_comments) | **POST** /config/server/cleanup.draft.comments | 
+[**post_config_server_cleanup_draft_comments**](ConfigApi.md#post_config_server_cleanup_draft_comments) | **POST** /config/server/cleanup.draft.comments | Cleanup of already published draft comments
 [**post_config_server_deactivate_stale_accounts**](ConfigApi.md#post_config_server_deactivate_stale_accounts) | **POST** /config/server/deactivate.stale.accounts | AccountDeactivation
-[**post_config_server_index_changes**](ConfigApi.md#post_config_server_index_changes) | **POST** /config/server/index.changes | 
+[**post_config_server_index_changes**](ConfigApi.md#post_config_server_index_changes) | **POST** /config/server/index.changes | Index a set of changes
 [**post_config_server_indexes_index_id_flush**](ConfigApi.md#post_config_server_indexes_index_id_flush) | **POST** /config/server/indexes/{index_id}/flush | Flush Index
 [**post_config_server_indexes_index_id_snapshot**](ConfigApi.md#post_config_server_indexes_index_id_snapshot) | **POST** /config/server/indexes/{index_id}/snapshot | Create Snapshot of one Index
 [**post_config_server_indexes_index_id_versions_index_version_id_reindex**](ConfigApi.md#post_config_server_indexes_index_id_versions_index_version_id_reindex) | **POST** /config/server/indexes/{index_id}/versions/{index_version_id}/reindex | Reindex an Index Version
 [**post_config_server_indexes_index_id_versions_index_version_id_snapshot**](ConfigApi.md#post_config_server_indexes_index_id_versions_index_version_id_snapshot) | **POST** /config/server/indexes/{index_id}/versions/{index_version_id}/snapshot | Create Snapshot of one Index Version
-[**post_config_server_passwords_to_tokens**](ConfigApi.md#post_config_server_passwords_to_tokens) | **POST** /config/server/passwords.to.tokens | 
-[**post_config_server_reduce_token_lifetime**](ConfigApi.md#post_config_server_reduce_token_lifetime) | **POST** /config/server/reduce.token.lifetime | 
+[**post_config_server_passwords_to_tokens**](ConfigApi.md#post_config_server_passwords_to_tokens) | **POST** /config/server/passwords.to.tokens | Migration of HTTP passwords to authentication tokens
+[**post_config_server_reduce_token_lifetime**](ConfigApi.md#post_config_server_reduce_token_lifetime) | **POST** /config/server/reduce.token.lifetime | Apply maximum lifetime to authentication tokens
 [**post_config_server_reload**](ConfigApi.md#post_config_server_reload) | **POST** /config/server/reload | Reload Config
 [**post_config_server_snapshot_indexes**](ConfigApi.md#post_config_server_snapshot_indexes) | **POST** /config/server/snapshot.indexes | Create Snapshot of All Indexes
 [**put_config_server_email_confirm**](ConfigApi.md#put_config_server_email_confirm) | **PUT** /config/server/email.confirm | Confirm Email
@@ -200,7 +199,9 @@ Name | Type | Description  | Required | Notes
 ## get_config_server_experiments_experiment_id
 
 > models::ExperimentInfo get_config_server_experiments_experiment_id(experiment_id)
+Get Experiment
 
+Retrieves the details of the experiment with the given name.
 
 ### Parameters
 
@@ -375,7 +376,7 @@ This endpoint does not need any parameter.
 > Vec<models::LabelDefinitionInfo> get_config_server_labels()
 List Global Labels
 
-Lists the globally defined labels (labels that are added programatically via the LabelType extension point).
+Lists the globally defined labels (labels that are added programmatically via the LabelType extension point).
 
 ### Parameters
 
@@ -399,10 +400,10 @@ This endpoint does not need any parameter.
 
 ## get_config_server_metrics
 
-> std::collections::HashMap<String, models::MetricJson> get_config_server_metrics(data_only, prefix)
+> std::collections::HashMap<String, models::MetricInfo> get_config_server_metrics(data_only, prefix)
 List Metrics
 
-Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
+Lists the metrics of the server, returning a map of metric name to a MetricInfo entity.
 
 ### Parameters
 
@@ -414,7 +415,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**std::collections::HashMap<String, models::MetricJson>**](MetricJson.md)
+[**std::collections::HashMap<String, models::MetricInfo>**](MetricInfo.md)
 
 ### Authorization
 
@@ -430,7 +431,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_config_server_metrics_metric_id
 
-> models::MetricJson get_config_server_metrics_metric_id(metric_id, data_only)
+> models::MetricInfo get_config_server_metrics_metric_id(metric_id, data_only)
 Get Metric
 
 Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
@@ -445,7 +446,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::MetricJson**](MetricJson.md)
+[**models::MetricInfo**](MetricInfo.md)
 
 ### Authorization
 
@@ -545,7 +546,7 @@ This endpoint does not need any parameter.
 > Vec<models::SubmitRequirementInfo> get_config_server_submit_requirements()
 List Global Submit Requirements
 
-Lists the globally defined submit requirements (submit requirements that are added programatically via the SubmitRequirement extension point).
+Lists the globally defined submit requirements (submit requirements that are added programmatically via the SubmitRequirement extension point).
 
 ### Parameters
 
@@ -599,14 +600,17 @@ Name | Type | Description  | Required | Notes
 
 ## get_config_server_tasks
 
-> Vec<models::TaskInfo> get_config_server_tasks()
+> Vec<models::TaskInfo> get_config_server_tasks(state)
 List Tasks
 
 Lists the tasks from the background work queues that the Gerrit daemon is currently performing, or will perform in the near future.
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**state** | Option<[**Vec<String>**](String.md)> |  |  |
 
 ### Return type
 
@@ -801,38 +805,12 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## post_config_server_cleanup_changes
-
-> serde_json::Value post_config_server_cleanup_changes(cleanup_changes_input)
-
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**cleanup_changes_input** | Option<[**CleanupChangesInput**](CleanupChangesInput.md)> |  |  |
-
-### Return type
-
-[**serde_json::Value**](serde_json::Value.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/x-www-form-urlencoded
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
 ## post_config_server_cleanup_draft_comments
 
 > serde_json::Value post_config_server_cleanup_draft_comments()
+Cleanup of already published draft comments
 
+This endpoint allows Gerrit administrators to cleanup already published draft comments that were not deleted.
 
 ### Parameters
 
@@ -884,7 +862,9 @@ This endpoint does not need any parameter.
 ## post_config_server_index_changes
 
 > String post_config_server_index_changes(index_changes_input)
+Index a set of changes
 
+This endpoint allows Gerrit admins to index a set of changes with one request by providing a IndexChangesInput entity.
 
 ### Parameters
 
@@ -1037,7 +1017,9 @@ Name | Type | Description  | Required | Notes
 ## post_config_server_passwords_to_tokens
 
 > serde_json::Value post_config_server_passwords_to_tokens(migrate_passwords_to_tokens_input)
+Migration of HTTP passwords to authentication tokens
 
+This endpoint allows Gerrit administrators to migrate remaining HTTP passwords to authentication tokens. For the user the migration is invisible, i.e. the same credential is still valid.
 
 ### Parameters
 
@@ -1065,7 +1047,9 @@ Name | Type | Description  | Required | Notes
 ## post_config_server_reduce_token_lifetime
 
 > serde_json::Value post_config_server_reduce_token_lifetime(reduce_max_token_lifetime_input)
+Apply maximum lifetime to authentication tokens
 
+This endpoint allows Gerrit administrators to apply a shorter maximum lifetime to existing authentication tokens. This is required, when a shorter maximum lifetime is enforced. Changing the configuration will not apply that maximum to existing tokens.
 
 ### Parameters
 
