@@ -43,6 +43,7 @@ pub struct GerritInfo {
     /// Whether the instance supports filtering projects by state.
     #[serde(rename = "project_state_predicate_enabled", skip_serializing_if = "Option::is_none")]
     pub project_state_predicate_enabled: Option<bool>,
+    /// URL used to link commit hashes in submit messages.
     #[serde(rename = "submit_commit_url", skip_serializing_if = "Option::is_none")]
     pub submit_commit_url: Option<String>,
 }
