@@ -5,7 +5,7 @@ All URIs are relative to *https://gerrit-review.googlesource.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_plugins_plugin_id**](PluginsApi.md#delete_plugins_plugin_id) | **DELETE** /plugins/{plugin_id} | Disable Plugin
-[**get_plugins**](PluginsApi.md#get_plugins) | **GET** /plugins | List Plugins
+[**get_plugins**](PluginsApi.md#get_plugins) | **GET** /plugins/ | List Plugins
 [**get_plugins_plugin_id_gerrit_status**](PluginsApi.md#get_plugins_plugin_id_gerrit_status) | **GET** /plugins/{plugin_id}/gerrit~status | Get Plugin Status
 [**post_plugins_plugin_id_gerrit_disable**](PluginsApi.md#post_plugins_plugin_id_gerrit_disable) | **POST** /plugins/{plugin_id}/gerrit~disable | Disable Plugin
 [**post_plugins_plugin_id_gerrit_enable**](PluginsApi.md#post_plugins_plugin_id_gerrit_enable) | **POST** /plugins/{plugin_id}/gerrit~enable | Enable Plugin
