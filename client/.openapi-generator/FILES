@@ -1,5 +1,4 @@
 .gitignore
-.travis.yml
 Cargo.toml
 README.md
 docs/AbandonInput.md
@@ -288,7 +287,6 @@ docs/VotingRangeInfo.md
 docs/WebLinkInfo.md
 docs/Whitespace.md
 docs/WorkInProgressOpInput.md
-git_push.sh
 src/apis/access_api.rs
 src/apis/accounts_api.rs
 src/apis/changes_api.rs

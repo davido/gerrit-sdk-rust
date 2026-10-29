@@ -34,14 +34,14 @@ Swagger from OpenApi for REST API").
 
 ## Version
 
-Generated from **Gerrit 3.15.0-SNAPSHOT** and tagged **`v3.15.0-SNAPSHOT`** — the tag
+Generated from **Gerrit 3.16.0-SNAPSHOT** and tagged **`v3.16.0-SNAPSHOT`** — the tag
 mirrors the Gerrit version, so consumers pin the exact server generation they target.
 The git tag, the OpenAPI `info.version`, and the crate version are all aligned.
 
 ## What's in this repo
 
-- `client/` — the `gerrit_client` crate: **341 operations** across **7 API modules**
-  (`apis/`) and **278 generated model types** (`models/`), over a reqwest (blocking)
+- `client/` — the `gerrit_client` crate: **338 operations** across **7 API modules**
+  (`apis/`) and **279 generated model types** (`models/`), over a reqwest (blocking)
   transport. Built with **cargo**.
 - `examples/` — runnable examples (`gerrit-sdk-examples`): `get-change-detail`
   (anonymous GET → colored, Web-UI-style summary) and `post-comment` (authenticated
@@ -122,7 +122,7 @@ Install the example binary straight from the tag, then run it:
 
 ```bash
 cargo install --git https://github.com/davido/gerrit-sdk-rust.git \
-  --tag v3.15.0-SNAPSHOT --bin get-change-detail gerrit-sdk-examples
+  --tag v3.16.0-SNAPSHOT --bin get-change-detail gerrit-sdk-examples
 get-change-detail --change 622261        # installed to ~/.cargo/bin
 ```
 
@@ -135,7 +135,7 @@ A git dependency pinned to the tag (no crates.io):
 
 ```toml
 [dependencies]
-gerrit_client = { git = "https://github.com/davido/gerrit-sdk-rust.git", package = "gerrit_client", tag = "v3.15.0-SNAPSHOT" }
+gerrit_client = { git = "https://github.com/davido/gerrit-sdk-rust.git", package = "gerrit_client", tag = "v3.16.0-SNAPSHOT" }
 ```
 
 ```rust
