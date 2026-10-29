@@ -1,0 +1,43 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # The SDK generator is Java-based and invoked via npx (@openapitools/openapi-generator-cli),
+      # so CI needs Node to run npx and a JDK to run the generator jar.
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      # Regen-drift gate: regenerate the SDK from the committed spec (generate.sh defaults to
+      # the checked-in rest-api-openapi.json -- self-contained, no network fetch), then fail if
+      # the working tree differs from what is committed. Any drift between the committed SDK
+      # (or README version tokens) and a fresh regen trips `git diff --exit-code`.
+      - name: Regenerate SDK from the committed spec
+        run: ./generate.sh
+
+      - name: Fail on regeneration drift
+        run: git diff --exit-code
+
+      # Build + test with this repo's real commands (Cargo workspace: client crate + examples).
+      - name: Build
+        run: cargo build --workspace --verbose
+
+      - name: Test
+        run: cargo test --workspace --verbose

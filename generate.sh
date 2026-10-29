@@ -25,10 +25,13 @@ fi
 echo "1/3 clean previously generated sources (openapi-generator does not delete orphans)"
 rm -rf client/src client/docs
 
-# Derive the crate version from the spec's info.version (the Gerrit release label, e.g.
-# 3.15.0-SNAPSHOT), lowercased for cargo semver -- no hardcoded version to drift.
-PKG_VERSION=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["info"]["version"].lower())' "$SPEC")
-[ -n "$PKG_VERSION" ] || { echo "ERROR: could not read info.version from $SPEC" >&2; exit 1; }
+# Derive the Gerrit release label from the spec's info.version (e.g. 3.16.0-SNAPSHOT) --
+# the single source of truth for every version token, no hardcode to drift. PKG_VERSION is
+# the same value lowercased for cargo semver; GERRIT_VERSION keeps the original case for the
+# README (which displays it as "Gerrit 3.16.0-SNAPSHOT" / tag "v3.16.0-SNAPSHOT").
+GERRIT_VERSION=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["info"]["version"])' "$SPEC")
+[ -n "$GERRIT_VERSION" ] || { echo "ERROR: could not read info.version from $SPEC" >&2; exit 1; }
+PKG_VERSION=$(printf '%s' "$GERRIT_VERSION" | tr '[:upper:]' '[:lower:]')
 
 echo "2/3 generate rust client (crate version $PKG_VERSION from spec info.version)"
 # Pin the CLI wrapper too (the generator jar version is pinned in openapitools.json) for
@@ -40,4 +43,13 @@ npx --yes @openapitools/openapi-generator-cli@2.41.0 generate \
 
 echo "3/3 post-gen patches"
 ./postprocess.sh
-echo "done: client/ regenerated from $SPEC"
+
+# Sync the README's Gerrit-version tokens to the derived version. The README is protected by
+# .openapi-generator-ignore so the generator never rewrites it, which is how the 3.15->3.16
+# drift crept in; this keeps it aligned. The substitution is anchored to the Gerrit-version
+# context only -- "Gerrit X.Y.Z[-suffix]" (the display label) and "vX.Y.Z[-suffix]" (the git
+# tag) -- so it never touches unrelated versions (OpenAPI 3.1, Apache 2.0, crate deps).
+sed -E "s@(Gerrit |v)[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.]+)?@\1${GERRIT_VERSION}@g" \
+  README.md > README.md.tmp && mv README.md.tmp README.md
+
+echo "done: client/ regenerated from $SPEC (README synced to Gerrit $GERRIT_VERSION)"
