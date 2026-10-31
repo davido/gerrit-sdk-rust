@@ -135,7 +135,7 @@ A git dependency pinned to the tag (no crates.io):
 
 ```toml
 [dependencies]
-gerrit_client = { git = "https://github.com/davido/gerrit-sdk-rust.git", package = "gerrit_client", tag = "v3.16.0-SNAPSHOT" }
+gerrit_client = { git = "https://github.com/davido/gerrit-sdk-rust.git", package = "gerrit-sdk", tag = "v3.16.0-SNAPSHOT" }
 ```
 
 ```rust
