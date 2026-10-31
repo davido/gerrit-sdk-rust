@@ -52,4 +52,14 @@ echo "3/3 post-gen patches"
 sed -E "s@(Gerrit |v)[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.]+)?@\1${GERRIT_VERSION}@g" \
   README.md > README.md.tmp && mv README.md.tmp README.md
 
+# Keep the surface counts honest too: the operation count from the spec (generator-agnostic)
+# and the model-type count from the generated crate. Anchored to the "**N operations**" and
+# "**N generated model types**" tokens so only those numbers move -- the surface analogue of
+# the version-token sync above, so a REST-surface change (the 338->339 ref-storage class of
+# drift) cannot silently rot the README.
+OPS=$(python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(sum(1 for p in d["paths"].values() for m in p if m.lower() in ("get","post","put","delete","patch")))' "$SPEC")
+MODELS=$(ls client/src/models/*.rs 2>/dev/null | grep -v '/mod.rs' | wc -l | tr -d ' ')
+sed -E "s@\*\*[0-9]+ operations\*\*@**${OPS} operations**@; s@\*\*[0-9]+ generated model types\*\*@**${MODELS} generated model types**@" \
+  README.md > README.md.tmp && mv README.md.tmp README.md
+
 echo "done: client/ regenerated from $SPEC (README synced to Gerrit $GERRIT_VERSION)"
