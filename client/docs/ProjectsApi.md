@@ -52,6 +52,7 @@ Method | HTTP request | Description
 [**post_projects_project_id_changes_delete**](ProjectsApi.md#post_projects_project_id_changes_delete) | **POST** /projects/{project_id}/changes:delete | Delete Changes
 [**post_projects_project_id_check**](ProjectsApi.md#post_projects_project_id_check) | **POST** /projects/{project_id}/check | Check project consistency
 [**post_projects_project_id_commits_commit_id_cherrypick**](ProjectsApi.md#post_projects_project_id_commits_commit_id_cherrypick) | **POST** /projects/{project_id}/commits/{commit_id}/cherrypick | Cherry Pick Commit
+[**post_projects_project_id_convert_ref_storage**](ProjectsApi.md#post_projects_project_id_convert_ref_storage) | **POST** /projects/{project_id}/convert-ref-storage | Convert Ref Storage
 [**post_projects_project_id_create_change**](ProjectsApi.md#post_projects_project_id_create_change) | **POST** /projects/{project_id}/create.change | Create Change for review
 [**post_projects_project_id_gc**](ProjectsApi.md#post_projects_project_id_gc) | **POST** /projects/{project_id}/gc | Run GC
 [**post_projects_project_id_index**](ProjectsApi.md#post_projects_project_id_index) | **POST** /projects/{project_id}/index | Index project
@@ -1605,6 +1606,37 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## post_projects_project_id_convert_ref_storage
+
+> String post_projects_project_id_convert_ref_storage(project_id, ref_storage_input)
+Convert Ref Storage
+
+Converts the ref storage of a project's repository between FILES and REFTABLE.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**project_id** | **String** |  | [required] |
+**ref_storage_input** | Option<[**RefStorageInput**](RefStorageInput.md)> |  |  |
+
+### Return type
+
+**String**
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded, text/plain
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

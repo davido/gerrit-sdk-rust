@@ -40,8 +40,8 @@ The git tag, the OpenAPI `info.version`, and the crate version are all aligned.
 
 ## What's in this repo
 
-- `client/` — the `gerrit_client` crate: **338 operations** across **7 API modules**
-  (`apis/`) and **279 generated model types** (`models/`), over a reqwest (blocking)
+- `client/` — the `gerrit_client` crate: **339 operations** across **7 API modules**
+  (`apis/`) and **281 generated model types** (`models/`), over a reqwest (blocking)
   transport. Built with **cargo**.
 - `examples/` — runnable examples (`gerrit-sdk-examples`): `get-change-detail`
   (anonymous GET → colored, Web-UI-style summary) and `post-comment` (authenticated

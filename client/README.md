@@ -340,6 +340,7 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**post_projects_project_id_changes_delete**](docs/ProjectsApi.md#post_projects_project_id_changes_delete) | **POST** /projects/{project_id}/changes:delete | Delete Changes
 *ProjectsApi* | [**post_projects_project_id_check**](docs/ProjectsApi.md#post_projects_project_id_check) | **POST** /projects/{project_id}/check | Check project consistency
 *ProjectsApi* | [**post_projects_project_id_commits_commit_id_cherrypick**](docs/ProjectsApi.md#post_projects_project_id_commits_commit_id_cherrypick) | **POST** /projects/{project_id}/commits/{commit_id}/cherrypick | Cherry Pick Commit
+*ProjectsApi* | [**post_projects_project_id_convert_ref_storage**](docs/ProjectsApi.md#post_projects_project_id_convert_ref_storage) | **POST** /projects/{project_id}/convert-ref-storage | Convert Ref Storage
 *ProjectsApi* | [**post_projects_project_id_create_change**](docs/ProjectsApi.md#post_projects_project_id_create_change) | **POST** /projects/{project_id}/create.change | Create Change for review
 *ProjectsApi* | [**post_projects_project_id_gc**](docs/ProjectsApi.md#post_projects_project_id_gc) | **POST** /projects/{project_id}/gc | Run GC
 *ProjectsApi* | [**post_projects_project_id_index**](docs/ProjectsApi.md#post_projects_project_id_index) | **POST** /projects/{project_id}/index | Index project
@@ -586,6 +587,8 @@ Class | Method | HTTP request | Description
  - [RebaseInput](docs/RebaseInput.md)
  - [ReceiveInfo](docs/ReceiveInfo.md)
  - [ReduceMaxTokenLifetimeInput](docs/ReduceMaxTokenLifetimeInput.md)
+ - [RefStorage](docs/RefStorage.md)
+ - [RefStorageInput](docs/RefStorageInput.md)
  - [ReflogEntryInfo](docs/ReflogEntryInfo.md)
  - [ReindexIndexVersionInput](docs/ReindexIndexVersionInput.md)
  - [RelatedChangeAndCommitInfo](docs/RelatedChangeAndCommitInfo.md)

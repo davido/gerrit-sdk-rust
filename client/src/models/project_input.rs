@@ -28,6 +28,9 @@ pub struct ProjectInput {
     /// Whether an empty initial commit should be created.
     #[serde(rename = "create_empty_commit", skip_serializing_if = "Option::is_none")]
     pub create_empty_commit: Option<bool>,
+    /// The ref storage format for the project's repository (FILES, REFTABLE). + If not set, the repository manager selects the format. Local disk storage uses JGit's init defaults, falling back to FILES.
+    #[serde(rename = "ref_storage", skip_serializing_if = "Option::is_none")]
+    pub ref_storage: Option<models::RefStorage>,
     /// The submit type that should be set for the project (MERGE_IF_NECESSARY, REBASE_IF_NECESSARY, REBASE_ALWAYS, FAST_FORWARD_ONLY, MERGE_ALWAYS, CHERRY_PICK). + If not set, MERGE_IF_NECESSARY is set as submit type unless repository.<name>.defaultSubmitType is set to a different value.
     #[serde(rename = "submit_type", skip_serializing_if = "Option::is_none")]
     pub submit_type: Option<models::SubmitType>,
@@ -80,6 +83,7 @@ impl ProjectInput {
             description: None,
             permissions_only: None,
             create_empty_commit: None,
+            ref_storage: None,
             submit_type: None,
             branches: None,
             owners: None,

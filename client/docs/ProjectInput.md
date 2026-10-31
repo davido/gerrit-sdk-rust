@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **description** | Option<**String**> | The description of the project. | [optional]
 **permissions_only** | Option<**bool**> | Whether a permission-only project should be created. | [optional]
 **create_empty_commit** | Option<**bool**> | Whether an empty initial commit should be created. | [optional]
+**ref_storage** | Option<[**models::RefStorage**](RefStorage.md)> | The ref storage format for the project's repository (FILES, REFTABLE). + If not set, the repository manager selects the format. Local disk storage uses JGit's init defaults, falling back to FILES. | [optional]
 **submit_type** | Option<[**models::SubmitType**](SubmitType.md)> | The submit type that should be set for the project (MERGE_IF_NECESSARY, REBASE_IF_NECESSARY, REBASE_ALWAYS, FAST_FORWARD_ONLY, MERGE_ALWAYS, CHERRY_PICK). + If not set, MERGE_IF_NECESSARY is set as submit type unless repository.<name>.defaultSubmitType is set to a different value. | [optional]
 **branches** | Option<**Vec<String>**> | A list of branches that should be initially created. + For the branch names the refs/heads/ prefix can be omitted. + The first entry of the list will be the default branch. + If the list is empty, host-level default is used. | [optional]
 **owners** | Option<**Vec<String>**> | A list of groups that should be assigned as project owner. + Each group in the list must be specified as group-id. + If not set, the groups that are configured as default owners are set as project owners. | [optional]

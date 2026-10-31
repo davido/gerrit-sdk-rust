@@ -70,6 +70,9 @@ pub struct ConfigInfo {
     /// The state of the project, can be ACTIVE, READ_ONLY or HIDDEN. + Not set if the project state is ACTIVE.
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<models::ProjectState>,
+    /// The ref storage format of the project's repository (FILES or REFTABLE). The request fails if the repository cannot be opened.
+    #[serde(rename = "ref_storage", skip_serializing_if = "Option::is_none")]
+    pub ref_storage: Option<models::RefStorage>,
     /// Plugin configuration as map which maps the plugin name to a map of parameter names to ConfigParameterInfo entities. Only filled for users who have read access to refs/meta/config.
     #[serde(rename = "plugin_config", skip_serializing_if = "Option::is_none")]
     pub plugin_config: Option<std::collections::HashMap<String, std::collections::HashMap<String, models::ConfigParameterInfo>>>,
@@ -106,6 +109,7 @@ impl ConfigInfo {
             submit_type: None,
             default_submit_type: None,
             state: None,
+            ref_storage: None,
             plugin_config: None,
             actions: None,
             commentlinks: None,

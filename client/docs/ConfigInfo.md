@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **submit_type** | Option<[**models::SubmitType**](SubmitType.md)> | Deprecated; equivalent to value in default_submit_type. | [optional]
 **default_submit_type** | Option<[**models::SubmitTypeInfo**](SubmitTypeInfo.md)> | SubmitTypeInfo that describes the default submit type of the project, when not overridden at the change level. | [optional]
 **state** | Option<[**models::ProjectState**](ProjectState.md)> | The state of the project, can be ACTIVE, READ_ONLY or HIDDEN. + Not set if the project state is ACTIVE. | [optional]
+**ref_storage** | Option<[**models::RefStorage**](RefStorage.md)> | The ref storage format of the project's repository (FILES or REFTABLE). The request fails if the repository cannot be opened. | [optional]
 **plugin_config** | Option<**std::collections::HashMap<String, std::collections::HashMap<String, models::ConfigParameterInfo>>**> | Plugin configuration as map which maps the plugin name to a map of parameter names to ConfigParameterInfo entities. Only filled for users who have read access to refs/meta/config. | [optional]
 **actions** | Option<[**std::collections::HashMap<String, models::ActionInfo>**](ActionInfo.md)> | Actions the caller might be able to perform on this project. The information is a map of view names to | [optional]
 **commentlinks** | Option<[**std::collections::HashMap<String, models::CommentLinkInfo>**](CommentLinkInfo.md)> | Map with the comment link configurations of the project. The name of the comment link configuration is mapped to a CommentlinkInfo entity. | [optional]

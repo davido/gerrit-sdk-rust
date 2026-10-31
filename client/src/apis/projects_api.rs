@@ -353,6 +353,13 @@ pub enum PostProjectsProjectIdCommitsCommitIdCherrypickError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`post_projects_project_id_convert_ref_storage`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostProjectsProjectIdConvertRefStorageError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`post_projects_project_id_create_change`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -2727,6 +2734,50 @@ pub fn post_projects_project_id_commits_commit_id_cherrypick(configuration: &con
         let content = resp.text()?;
         let content = crate::xssi::strip(&content).to_string();
         let entity: Option<PostProjectsProjectIdCommitsCommitIdCherrypickError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Converts the ref storage of a project's repository between FILES and REFTABLE.
+pub fn post_projects_project_id_convert_ref_storage(configuration: &configuration::Configuration, project_id: &str, ref_storage_input: Option<models::RefStorageInput>) -> Result<String, Error<PostProjectsProjectIdConvertRefStorageError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_project_id = project_id;
+    let p_body_ref_storage_input = ref_storage_input;
+
+    let uri_str = format!("{}/projects/{project_id}/convert-ref-storage", configuration.base_path, project_id=crate::apis::urlencode(p_path_project_id));
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref auth_conf) = configuration.basic_auth {
+        req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
+    };
+    req_builder = req_builder.json(&p_body_ref_storage_input);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req)?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `String`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `String`")))),
+        }
+    } else {
+        let content = resp.text()?;
+        let content = crate::xssi::strip(&content).to_string();
+        let entity: Option<PostProjectsProjectIdConvertRefStorageError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
