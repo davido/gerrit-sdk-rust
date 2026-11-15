@@ -22,9 +22,12 @@ pub struct ChangeConfigInfo {
     /// How often in seconds the web interface should poll for updates to the currently open change.
     #[serde(rename = "update_delay", skip_serializing_if = "Option::is_none")]
     pub update_delay: Option<i32>,
-    /// A configuration if the whole topic is submitted.
+    /// Configuration that enforces the whole topic to be submitted. Deprecated; use enforce_whole_topic_submit.
     #[serde(rename = "submit_whole_topic", skip_serializing_if = "Option::is_none")]
     pub submit_whole_topic: Option<bool>,
+    /// Configuration that enforces the whole topic to be submitted.
+    #[serde(rename = "enforce_whole_topic_submit", skip_serializing_if = "Option::is_none")]
+    pub enforce_whole_topic_submit: Option<bool>,
     /// Value of the configuration parameter that controls whether the mergeability bit in ChangeInfo will never be set and if the bit is indexed.
     #[serde(rename = "mergeability_computation_behavior", skip_serializing_if = "Option::is_none")]
     pub mergeability_computation_behavior: Option<String>,
@@ -43,6 +46,7 @@ impl ChangeConfigInfo {
             disable_private_changes: None,
             update_delay: None,
             submit_whole_topic: None,
+            enforce_whole_topic_submit: None,
             mergeability_computation_behavior: None,
             conflicts_predicate_enabled: None,
             allow_markdown_base64_images_in_comments: None,

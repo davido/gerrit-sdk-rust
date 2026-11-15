@@ -25,6 +25,9 @@ pub struct SubmitInput {
     /// Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.
     #[serde(rename = "notify_details", skip_serializing_if = "Option::is_none")]
     pub notify_details: Option<std::collections::HashMap<String, models::NotifyInfo>>,
+    /// If true, all open changes that share the topic of the submitted change are also submitted together in a single operation. Defaults to false.
+    #[serde(rename = "submit_whole_topic", skip_serializing_if = "Option::is_none")]
+    pub submit_whole_topic: Option<bool>,
 }
 
 impl SubmitInput {
@@ -34,6 +37,7 @@ impl SubmitInput {
             on_behalf_of: None,
             notify: None,
             notify_details: None,
+            submit_whole_topic: None,
         }
     }
 }
