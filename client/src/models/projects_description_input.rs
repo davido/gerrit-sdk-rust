@@ -16,12 +16,16 @@ pub struct ProjectsDescriptionInput {
     /// Message that should be used to commit the change of the project description in the project.config file to the refs/meta/config branch.
     #[serde(rename = "commit_message", skip_serializing_if = "Option::is_none")]
     pub commit_message: Option<String>,
+    /// The project description. + The project description will be deleted if not set.
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
 }
 
 impl ProjectsDescriptionInput {
     pub fn new() -> ProjectsDescriptionInput {
         ProjectsDescriptionInput {
             commit_message: None,
+            description: None,
         }
     }
 }

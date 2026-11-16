@@ -19,16 +19,16 @@ pub struct DiffWebLinkInfo {
     /// Whether the web link should be shown on the unified diff screen.
     #[serde(rename = "show_on_unified_diff_view", skip_serializing_if = "Option::is_none")]
     pub show_on_unified_diff_view: Option<bool>,
-    /// See WebLinkInfo
+    /// The text to be linkified.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    /// See WebLinkInfo
+    /// Tooltip to show when hovering over the link. Using \"Open in $NAME_OF_EXTERNAL_TOOL\" is a good option here.
     #[serde(rename = "tooltip", skip_serializing_if = "Option::is_none")]
     pub tooltip: Option<String>,
-    /// See WebLinkInfo
+    /// URL to the icon of the link.
     #[serde(rename = "image_url", skip_serializing_if = "Option::is_none")]
     pub image_url: Option<String>,
-    /// See WebLinkInfo
+    /// The link URL.
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
 }

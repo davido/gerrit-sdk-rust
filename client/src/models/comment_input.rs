@@ -13,15 +13,67 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CommentInput {
-    /// Whether to include the source lines around the comment as context in the response.
-    #[serde(rename = "enable_context", skip_serializing_if = "Option::is_none")]
-    pub enable_context: Option<bool>,
+    /// Whether or not the comment must be addressed by the user. This value will default to false if the comment is an orphan, or the value of the in_reply_to comment if it is supplied.
+    #[serde(rename = "unresolved", skip_serializing_if = "Option::is_none")]
+    pub unresolved: Option<bool>,
+    /// The patch set number for the comment; only set in contexts where + comments may be returned for multiple patch sets.
+    #[serde(rename = "patch_set", skip_serializing_if = "Option::is_none")]
+    pub patch_set: Option<i32>,
+    /// The URL encoded UUID of the comment if an existing draft comment should be updated.
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
+    /// The file path for which the inline comment should be added. + Doesn't need to be set if contained in a map where the key is the file path.
+    #[serde(rename = "path", skip_serializing_if = "Option::is_none")]
+    pub path: Option<String>,
+    /// The side on which the comment should be added. + Allowed values are REVISION and PARENT. + If not set, the default is REVISION.
+    #[serde(rename = "side", skip_serializing_if = "Option::is_none")]
+    pub side: Option<models::Side>,
+    /// The 1-based parent number. Used only for merge commits when side == PARENT. When not set the comment is for the auto-merge tree.
+    #[serde(rename = "parent", skip_serializing_if = "Option::is_none")]
+    pub parent: Option<i32>,
+    /// The number of the line for which the comment should be added. + 0 if it is a file comment. + If neither line nor range is set, a file comment is added. + If range is set, this value is ignored in favor of the end_line of the range. + When updating a draft without path, the draft keeps its line.
+    #[serde(rename = "line", skip_serializing_if = "Option::is_none")]
+    pub line: Option<i32>,
+    /// The range of the comment as a CommentRange entity.
+    #[serde(rename = "range", skip_serializing_if = "Option::is_none")]
+    pub range: Option<Box<models::Range>>,
+    /// The URL encoded UUID of the comment to which this comment is a reply.
+    #[serde(rename = "in_reply_to", skip_serializing_if = "Option::is_none")]
+    pub in_reply_to: Option<String>,
+    /// The timestamp of this comment. + Accepted but ignored.
+    #[serde(rename = "updated", skip_serializing_if = "Option::is_none")]
+    pub updated: Option<String>,
+    /// The comment message. + If not set and an existing draft comment is updated, the existing draft comment is deleted.
+    #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
+    pub message: Option<String>,
+    /// Hex commit SHA-1 (40 characters string) of the commit of the patchset to which this comment applies.
+    #[serde(rename = "commit_id", skip_serializing_if = "Option::is_none")]
+    pub commit_id: Option<String>,
+    /// Suggested fixes for this comment as a list of FixSuggestionInfo entities.
+    #[serde(rename = "fix_suggestions", skip_serializing_if = "Option::is_none")]
+    pub fix_suggestions: Option<Vec<models::FixSuggestionInfo>>,
+    /// Whether the comment was created by an AI agent. Not set if false.
+    #[serde(rename = "is_ai", skip_serializing_if = "Option::is_none")]
+    pub is_ai: Option<bool>,
 }
 
 impl CommentInput {
     pub fn new() -> CommentInput {
         CommentInput {
-            enable_context: None,
+            unresolved: None,
+            patch_set: None,
+            id: None,
+            path: None,
+            side: None,
+            parent: None,
+            line: None,
+            range: None,
+            in_reply_to: None,
+            updated: None,
+            message: None,
+            commit_id: None,
+            fix_suggestions: None,
+            is_ai: None,
         }
     }
 }
