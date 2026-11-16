@@ -62,4 +62,11 @@ MODELS=$(ls client/src/models/*.rs 2>/dev/null | grep -v '/mod.rs' | wc -l | tr 
 sed -E "s@\*\*[0-9]+ operations\*\*@**${OPS} operations**@; s@\*\*[0-9]+ generated model types\*\*@**${MODELS} generated model types**@" \
   README.md > README.md.tmp && mv README.md.tmp README.md
 
+# Refresh Cargo.lock so the crate's own version entry tracks the regenerated
+# Cargo.toml. Without this the lock keeps the previous release's version and
+# drifts (the 3.15->3.16 class of drift), which trips the drift gate.
+if command -v cargo >/dev/null 2>&1; then
+  cargo update -p gerrit-sdk >/dev/null
+fi
+
 echo "done: client/ regenerated from $SPEC (README synced to Gerrit $GERRIT_VERSION)"
