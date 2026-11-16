@@ -1,22 +1,22 @@
 # gerrit-sdk-rust
 
-A **generated Rust SDK** for the Gerrit Code Review REST API (the `gerrit_client`
-crate), produced from Gerrit's statically generated **OpenAPI 3.1** document. No
-hand-written request/response types: every operation and model comes from the spec,
-so the client never drifts from the server.
+A generated Rust SDK for the Gerrit Code Review REST API (the `gerrit_client`
+crate), produced from Gerrit's statically generated OpenAPI 3.1 document. There
+are no hand-written request/response types. Every operation and model comes from
+the spec, so the client does not drift from the server.
 
 ## The pipeline (end to end)
 
 ```
   gerrit                     gerrit-sdk-rust
   (emit the spec)      -->    (this repo: the SDK + examples/)
-  parse-only OpenAPI          openapi-generator + 4 post-gen patches (cargo);
+  parse-only OpenAPI          openapi-generator + 4 post-gen patches (cargo).
   emitter                     examples/ call a live Gerrit
 ```
 
 1. **gerrit emits the spec.** A parse-only emitter (`java/com/google/gerrit/openapi/**`)
-   reads the server's REST bindings via the javac Compiler Tree API — no running
-   server, no reflection — and writes an OpenAPI 3.1 JSON.
+   reads the server's REST bindings via the javac Compiler Tree API, with no running
+   server and no reflection, and writes an OpenAPI 3.1 JSON.
 2. **This repo pins that spec.** `rest-api-openapi.json` is a checked-in snapshot of
    that emitter's output. Its `info.version` / `info.license` / `servers` come straight
    from the emitter.
@@ -24,30 +24,30 @@ so the client never drifts from the server.
    turns the spec into `client/src/{apis,models}`, then `postprocess.sh` applies four
    narrow patches (below).
 4. **The in-repo `examples/` consume it.** `examples/get-change-detail` (anonymous GET
-   → a colored, Web-UI-style summary) and `examples/post-comment` (authenticated POST)
-   build against the local crate and call a live Gerrit — see [Use it](#use-it).
+   to a colored, Web-UI-style summary) and `examples/post-comment` (authenticated POST)
+   build against the local crate and call a live Gerrit. See [Use it](#use-it).
    External consumers instead pin the git tag.
 
-The whole story demonstrates feasibility for Gerrit issue
+This demonstrates feasibility for Gerrit issue
 [40011133](https://issues.gerritcodereview.com/issues/40011133) ("Consider using
 Swagger from OpenApi for REST API").
 
 ## Version
 
-Generated from **Gerrit 3.16.0-SNAPSHOT** and tagged **`v3.16.0-SNAPSHOT`** — the tag
+Generated from **Gerrit 3.16.0-SNAPSHOT** and tagged **`v3.16.0-SNAPSHOT`**. The tag
 mirrors the Gerrit version, so consumers pin the exact server generation they target.
 The git tag, the OpenAPI `info.version`, and the crate version are all aligned.
 
 ## What's in this repo
 
-- `client/` — the `gerrit_client` crate: **339 operations** across **7 API modules**
+- `client/`: the `gerrit_client` crate. **339 operations** across **7 API modules**
   (`apis/`) and **281 generated model types** (`models/`), over a reqwest (blocking)
-  transport. Built with **cargo**.
-- `examples/` — runnable examples (`gerrit-sdk-examples`): `get-change-detail`
-  (anonymous GET → colored, Web-UI-style summary) and `post-comment` (authenticated
+  transport. Built with cargo.
+- `examples/`: runnable examples (`gerrit-sdk-examples`). `get-change-detail`
+  (anonymous GET to a colored, Web-UI-style summary) and `post-comment` (authenticated
   POST), building against the in-repo crate.
-- `rest-api-openapi.json` — the pinned spec snapshot (step 2 above).
-- `generate.sh`, `postprocess.sh`, `fix-query-collision.py` — the generation pipeline.
+- `rest-api-openapi.json`: the pinned spec snapshot (step 2 above).
+- `generate.sh`, `postprocess.sh`, `fix-query-collision.py`: the generation pipeline.
 
 ## Regenerate
 
@@ -55,7 +55,7 @@ The git tag, the OpenAPI `info.version`, and the crate version are all aligned.
 ./generate.sh [path-or-url]      # default: ./rest-api-openapi.json
 ```
 
-The crate version is derived from the spec's `info.version` — no hardcode. Pass a URL
+The crate version is derived from the spec's `info.version`, not hardcoded. Pass a URL
 to refetch the spec from a running Gerrit before generating (e.g. a plugin's served
 document):
 
@@ -63,9 +63,9 @@ document):
 ./generate.sh https://<host>/plugins/<name>/Documentation/rest-api-openapi.json
 ```
 
-The SDK is never hand-maintained: to track a new Gerrit version, refetch the spec and
-regenerate. The spec is consumed **as-is** — the fidelity bugs the experiment found
-(timestamp format, schema naming) were fixed *upstream* in Gerrit's emitter, not
+The SDK is never hand-maintained. To track a new Gerrit version, refetch the spec and
+regenerate. The spec is consumed as-is. The fidelity bugs the experiment found
+(timestamp format, schema naming) were fixed upstream in Gerrit's emitter, not
 patched here.
 
 ## The post-generation patches (`postprocess.sh`)
@@ -73,26 +73,26 @@ patched here.
 Four narrow fixes over the generator output, each guarded by a match-count assertion
 (a drift in openapi-generator output fails the build):
 
-1. **Case-colliding query params `O` (scalar) and `o` (array)** — openapi-generator
+1. **Case-colliding query params `O` (scalar) and `o` (array).** openapi-generator
    lowers both to one `p_query_o` local, so the array shadows the scalar and both are
-   serialized from the array (wrong requests that still compile). Fix: rename the array
-   binding to `p_query_o2` and repoint the lowercase-`o` block at it, only inside
-   colliding functions (standalone `fix-query-collision.py`); `O` then serializes the
+   serialized from the array (wrong requests that still compile). The fix renames the
+   array binding to `p_query_o2` and repoints the lowercase-`o` block at it, only inside
+   colliding functions (standalone `fix-query-collision.py`). `O` then serializes the
    scalar.
-2. **Binary request body** — one upload body typed `Option<PathBuf>` isn't a reqwest
-   `Body`; now `std::fs::read(p)?` — reads the file and propagates the IO error (not a
-   silent empty upload).
-3. **Gerrit XSSI guard** — every Gerrit JSON body starts with `)]}'` on its own line,
-   stripped before parsing. **Genuinely not expressible in OpenAPI** — the one
-   irreducible Gerrit-specific step.
-4. **reqwest `native-tls`** — openapi-generator emits the reqwest dep with
-   `default-features = false`, which turns off its TLS backend; this re-enables one so
+2. **Binary request body.** One upload body typed `Option<PathBuf>` isn't a reqwest
+   `Body`. It is now `std::fs::read(p)?`, which reads the file and propagates the IO
+   error rather than sending a silent empty upload.
+3. **Gerrit XSSI guard.** Every Gerrit JSON body starts with `)]}'` on its own line,
+   stripped before parsing. This is not expressible in OpenAPI, the one irreducible
+   Gerrit-specific step.
+4. **reqwest `native-tls`.** openapi-generator emits the reqwest dep with
+   `default-features = false`, which turns off its TLS backend. This re-enables one so
    HTTPS requests work.
 
-(1) and (2) are upstream openapi-generator rough edges; (3) is Gerrit protocol; (4) is
-packaging. The metadata that used to need patching — license, version, server order —
+(1) and (2) are upstream openapi-generator rough edges. (3) is Gerrit protocol. (4) is
+packaging. The metadata that used to need patching (license, version, server order)
 now comes straight from the spec's `info.license` / `info.version` / `servers` (fixed
-*upstream* in the emitter), so `postprocess.sh` only **asserts** it landed.
+upstream in the emitter), so `postprocess.sh` only asserts it landed.
 
 ## Build
 
@@ -102,7 +102,7 @@ cd client && cargo build
 
 ## Use it
 
-### Run the examples — local, no publish needed
+### Run the examples (local, no publish needed)
 
 The examples build against the in-repo crate, so they hit a live Gerrit with nothing
 published:
@@ -116,7 +116,7 @@ cargo run -p gerrit-sdk-examples --bin post-comment -- \
   --change 1 --comment "Reviewed via the generated Rust SDK"
 ```
 
-### Run an example from GitHub — no clone
+### Run an example from GitHub (no clone)
 
 Install the example binary straight from the tag, then run it:
 
@@ -126,10 +126,10 @@ cargo install --git https://github.com/davido/gerrit-sdk-rust.git \
 get-change-detail --change 622261        # installed to ~/.cargo/bin
 ```
 
-The first run is a **cold build** (a minute or two): cargo clones the repo and compiles
-the whole generated crate and its dependency tree from source — it is not hung.
+The first run is a cold build (a minute or two). cargo clones the repo and compiles
+the whole generated crate and its dependency tree from source. It is not hung.
 
-### From your own crate — external
+### From your own crate (external)
 
 A git dependency pinned to the tag (no crates.io):
 
